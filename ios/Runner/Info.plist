@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Would find your location</string>
+    <string>The app needs location permission</string>
     <key>UIBackgroundModes</key>
     <string>location</location>
 	<key>CFBundleDevelopmentRegion</key>
