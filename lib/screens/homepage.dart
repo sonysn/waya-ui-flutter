@@ -1,10 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:waya/colorscheme.dart';
-
-import '../mapbox_constant.dart';
+import 'package:waya/screens/drawerpage.dart';
+import '../constants/mapbox constant.dart';
+import 'package:geocode/geocode.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
-    LocationData _locationData;
+    LocationData locationDataSpot;
 
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {
@@ -37,16 +40,63 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    _locationData = await location.getLocation();
+    locationDataSpot = await location.getLocation();
     setState(() {
-      myLocationHome = LatLng(double.parse(_locationData.latitude.toString()),
-          double.parse(_locationData.longitude.toString()));
+      myLocationHome = LatLng(
+          double.parse(locationDataSpot.latitude.toString()),
+          double.parse(locationDataSpot.longitude.toString()));
       mapController.move(myLocationHome, 17);
     });
-    print(_locationData.latitude);
+    print(locationDataSpot.latitude);
+
+    void getAddressLoc() async {
+      GeoCode geoCode = GeoCode();
+
+      try {
+        Address address = await geoCode.reverseGeocoding(
+            latitude: double.parse(locationDataSpot.latitude.toString()),
+            longitude: double.parse(locationDataSpot.longitude.toString()));
+        setState(() {
+          addressLoc = address;
+        });
+        //print(address);
+      } catch (e) {
+        print(e);
+      }
+    }
+
+    getAddressLoc();
+  }
+
+  void locationService() async {
+    Location location = Location();
+    // Request permission to use location
+    location.requestPermission().then((permissionStatus) {
+      if (permissionStatus == PermissionStatus.granted) {
+        // If granted listen to the onLocationChanged stream and emit over our controller
+        location.onLocationChanged.listen((locationData) {
+          setState(() {
+            myLocationHome = LatLng(
+                double.parse(locationData.latitude.toString()),
+                double.parse(locationData.longitude.toString()));
+            //mapController.move(myLocationHome, 17);
+          });
+          print(locationData);
+        });
+      }
+    });
+  }
+
+  void checkNull() async{
+    await Future.delayed(const Duration(seconds: 10));
+      setState(() {
+        addressText = "${addressLoc?.streetNumber}, ${addressLoc?.streetAddress}, ${addressLoc?.city}";
+      });
   }
 
   dynamic myLocationHome = LatLng(51.5090214, -0.1982948);
+  Address? addressLoc;
+  String addressText = "Loading";
   MapController mapController = MapController();
 
   @override
@@ -54,6 +104,8 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     findLoc();
+    locationService();
+    checkNull();
   }
 
   @override
@@ -78,13 +130,27 @@ class _HomePageState extends State<HomePage> {
                   'accessToken': AppConstants.mapBoxAccessToken,
                 },
               ),
+              MarkerLayer(
+                //user current location on map
+                markers: [
+                  Marker(
+                    point: myLocationHome,
+                    width: 40,
+                    height: 40,
+                    builder: (context) => const Icon(Icons.add_circle_outline),
+                  )
+                ],
+              )
             ],
           ),
           Container(
             margin: const EdgeInsets.only(top: 25.0, left: 8.0),
             child: ElevatedButton(
                 onPressed: () {
-                  findLoc();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return const DrawerPage();
+                  }));
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -121,25 +187,38 @@ class _HomePageState extends State<HomePage> {
               bottom: 30,
               height: MediaQuery.of(context).size.height * 0.135,
               child: Center(
-                child: Card(
-                  shape: RoundedRectangleBorder(
+                  child: Card(
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0),
                 ),
-                  child: SizedBox(
-                    width:  MediaQuery.of(context).size.width/1.3,
+                child: SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.3,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
-                        children: const [
-                          Icon(Icons.circle, color: Colors.yellow,),
-                          SizedBox(
+                        children: [
+                          const Icon(
+                            Icons.circle,
+                            color: Colors.yellow,
+                          ),
+                          const SizedBox(
                             width: 10,
                           ),
-                          Text("Where to?", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Where to?",
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
+                              ),
+                              //question marks are adding a null check to addressLoc
+                              Text(addressText)
+                            ],
+                          )
                         ],
                       ),
-                    )
-                  ),
+                    )),
               )))
         ],
       ),
