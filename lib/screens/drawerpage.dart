@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
+import 'package:waya/screens/profilepage.dart';
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({Key? key}) : super(key: key);
@@ -15,20 +16,30 @@ class _DrawerPageState extends State<DrawerPage> {
       body: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const [
-            DrawerHeader(
+          children: [
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: customPurple
               ),
               child: Text("Drawer Header"),
             ),
-            ListTile(
-              title: Text("Profile"),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return const ProfilePage();
+                    }));
+              },
+              child: const ListTile(
+                title: Text("Profile"),
+              ),
             ),
-            ListTile(
+            const Divider(),
+            const ListTile(
               title: Text("Settings"),
             ),
-            ListTile(
+            const Divider(),
+            const ListTile(
               title: Text("Trips"),
             )
           ],

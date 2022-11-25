@@ -6,6 +6,7 @@ import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/drawerpage.dart';
+import 'package:waya/screens/search_locationpage.dart';
 import '../constants/mapbox constant.dart';
 import 'package:geocode/geocode.dart';
 
@@ -76,6 +77,7 @@ class _MapHomePageState extends State<MapHomePage> {
     checkNull();
   }
 
+  //Request for permission, then return continuous location callbacks and setState on the marker myLocationHome
   void locationService() async {
     Location location = Location();
     // Request permission to use location
@@ -97,8 +99,9 @@ class _MapHomePageState extends State<MapHomePage> {
     });
   }
 
+  //waits 10 seconds then sets the address text to addressLoc from homepage.dart
   void checkNull() async {
-    await Future.delayed(const Duration(seconds: 10));
+    await Future.delayed(const Duration(seconds: 5));
     setState(() {
       addressText =
           "${widget.addressLoc?.streetNumber}, ${widget.addressLoc?.streetAddress}, ${widget.addressLoc?.city}";
@@ -234,46 +237,54 @@ class _MapHomePageState extends State<MapHomePage> {
             ),
           ),
           Positioned(
-              left: 0,
-              right: 0,
-              bottom: 25,
-              height: 70,
-              //MediaQuery.of(context).size.height * 0.2,
+            left: 0,
+            right: 0,
+            bottom: 25,
+            height: 70,
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return const SearchLocationPage();
+                    }));
+              },
               child: Center(
-                  child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.3,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.circle,
-                            color: Colors.yellow,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Where to?",
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
-                              ),
-                              //question marks are adding a null check to addressLoc
-                              Text(addressText)
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
-              )))
+                    child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                  child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.3,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.circle,
+                              color: Colors.yellow,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Where to?",
+                                  style: TextStyle(
+                                      fontSize: 30, fontWeight: FontWeight.bold),
+                                ),
+                                //question marks are adding a null check to addressLoc
+                                Text(addressText)
+                              ],
+                            )
+                          ],
+                        ),
+                      )),
+                )),
+            ),
+          )
         ],
       ),
     );

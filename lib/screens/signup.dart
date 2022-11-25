@@ -13,7 +13,7 @@ class _SignUpState extends State<SignUp> {
   //Todo Text editing controller holds the user input for program execution, the names are self explanatory of what they do or hold
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
-  TextEditingController phoneNumber = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController(text: 'phone');
   TextEditingController password = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController homeAddress = TextEditingController();
@@ -161,10 +161,11 @@ class _SignUpState extends State<SignUp> {
                         //TextField for name
                         TextField(
                           controller: phoneNumber,
+                          readOnly: true,
                           cursorColor: customPurple,
                           keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
-                              hintText: 'Enter your First Name',
+                              hintText: 'hint: Phone Number',
                               contentPadding: EdgeInsets.all(15),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
@@ -263,8 +264,8 @@ class _SignUpState extends State<SignUp> {
                           primary: customPurple,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(15),
-                              bottom: Radius.circular(15),
+                              top: Radius.circular(20),
+                              bottom: Radius.circular(20),
                             ),
                           )),
                       child: const SizedBox(

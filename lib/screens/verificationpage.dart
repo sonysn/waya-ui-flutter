@@ -62,117 +62,134 @@ class _VerificationPageState extends State<VerificationPage> {
                               borderSide: BorderSide(color: customPurple))),
                     ),
                   ),
-                  ElevatedButton(onPressed: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                          return const SignUp();
-                        }));
-                  }, child: const Text("Okay"))
-                  // Column(
-                  //   //keypad
-                  //   children: [
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //       children: [
-                  //         TextButton(
-                  //             onPressed: () {
-                  //             },
-                  //             child: const Text(
-                  //               "1",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             )),
-                  //         TextButton(
-                  //             onPressed: () {},
-                  //             child: const Text(
-                  //               "2",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             )),
-                  //         TextButton(
-                  //             onPressed: () {},
-                  //             child: const Text(
-                  //               "3",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             ))
-                  //       ],
-                  //     ),
-                  //     const SizedBox(
-                  //       height: 10,
-                  //     ),
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //       children: [
-                  //         TextButton(
-                  //             onPressed: () {},
-                  //             child: const Text(
-                  //               "4",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             )),
-                  //         TextButton(
-                  //             onPressed: () {},
-                  //             child: const Text(
-                  //               "5",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             )),
-                  //         TextButton(
-                  //             onPressed: () {},
-                  //             child: const Text(
-                  //               "6",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             ))
-                  //       ],
-                  //     ),
-                  //     const SizedBox(
-                  //       height: 10,
-                  //     ),
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //       children: [
-                  //         TextButton(
-                  //             onPressed: () {},
-                  //             child: const Text(
-                  //               "7",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             )),
-                  //         TextButton(
-                  //             onPressed: () {},
-                  //             child: const Text(
-                  //               "8",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             )),
-                  //         TextButton(
-                  //             onPressed: () {},
-                  //             child: const Text(
-                  //               "9",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             ))
-                  //       ],
-                  //     ),
-                  //     const SizedBox(
-                  //       height: 10,
-                  //     ),
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //       children: [
-                  //         TextButton(
-                  //             onPressed: () {},
-                  //             child: const Text(
-                  //               "0",
-                  //               style: TextStyle(
-                  //                   fontSize: 25, color: Colors.black),
-                  //             )),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // )
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: 250,
+                    height: 45,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (BuildContext context) {
+                                return const SignUp();
+                              }));
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: customPurple,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                                bottom: Radius.circular(20),
+                              ),
+                            )),
+                        child: const Text("Okay")),
+                    // Column(
+                    //   //keypad
+                    //   children: [
+                    //     Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //       children: [
+                    //         TextButton(
+                    //             onPressed: () {
+                    //             },
+                    //             child: const Text(
+                    //               "1",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             )),
+                    //         TextButton(
+                    //             onPressed: () {},
+                    //             child: const Text(
+                    //               "2",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             )),
+                    //         TextButton(
+                    //             onPressed: () {},
+                    //             child: const Text(
+                    //               "3",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             ))
+                    //       ],
+                    //     ),
+                    //     const SizedBox(
+                    //       height: 10,
+                    //     ),
+                    //     Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //       children: [
+                    //         TextButton(
+                    //             onPressed: () {},
+                    //             child: const Text(
+                    //               "4",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             )),
+                    //         TextButton(
+                    //             onPressed: () {},
+                    //             child: const Text(
+                    //               "5",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             )),
+                    //         TextButton(
+                    //             onPressed: () {},
+                    //             child: const Text(
+                    //               "6",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             ))
+                    //       ],
+                    //     ),
+                    //     const SizedBox(
+                    //       height: 10,
+                    //     ),
+                    //     Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //       children: [
+                    //         TextButton(
+                    //             onPressed: () {},
+                    //             child: const Text(
+                    //               "7",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             )),
+                    //         TextButton(
+                    //             onPressed: () {},
+                    //             child: const Text(
+                    //               "8",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             )),
+                    //         TextButton(
+                    //             onPressed: () {},
+                    //             child: const Text(
+                    //               "9",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             ))
+                    //       ],
+                    //     ),
+                    //     const SizedBox(
+                    //       height: 10,
+                    //     ),
+                    //     Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //       children: [
+                    //         TextButton(
+                    //             onPressed: () {},
+                    //             child: const Text(
+                    //               "0",
+                    //               style: TextStyle(
+                    //                   fontSize: 25, color: Colors.black),
+                    //             )),
+                    //       ],
+                    //     ),
+                    //   ],
+                    // )
+                  )
                 ],
               ),
             ),
