@@ -266,6 +266,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
+  time_greeting:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: "30c496ea54f937062697449df523e6a6730b9236"
+      url: "https://github.com/sonysn/time-greeting-dart.git"
+    source: git
+    version: "0.0.1"
   tuple:
     dependency: transitive
     description:

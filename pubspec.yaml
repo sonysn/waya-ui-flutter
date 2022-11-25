@@ -34,6 +34,12 @@ dependencies:
   location: ^4.2.0
   flutter_map: ^3.0.0
   geocode: ^1.0.2
+  #Dependency from github
+  time_greeting:
+    git:
+      url: https://github.com/sonysn/time-greeting-dart.git
+      ref: main
+
 
 
   # The following adds the Cupertino Icons font to your application.

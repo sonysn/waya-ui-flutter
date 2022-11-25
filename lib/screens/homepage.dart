@@ -1,13 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:location/location.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/drawerpage.dart';
-import '../constants/mapbox constant.dart';
+import 'package:time_greeting/time_greeting.dart';
+import 'package:location/location.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:geocode/geocode.dart';
+import 'package:waya/screens/maphomepage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,22 +17,22 @@ class _HomePageState extends State<HomePage> {
   void findLoc() async {
     Location location = Location();
 
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
     LocationData locationDataSpot;
 
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
         return;
       }
     }
 
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
         return;
       }
     }
@@ -45,9 +42,9 @@ class _HomePageState extends State<HomePage> {
       myLocationHome = LatLng(
           double.parse(locationDataSpot.latitude.toString()),
           double.parse(locationDataSpot.longitude.toString()));
-      mapController.move(myLocationHome, 17);
+      //mapController.move(myLocationHome, 17);
     });
-    print(locationDataSpot.latitude);
+    print(myLocationHome?.latitude);
 
     void getAddressLoc() async {
       GeoCode geoCode = GeoCode();
@@ -59,167 +56,103 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           addressLoc = address;
         });
-        //print(address);
+        print(addressLoc);
       } catch (e) {
         print(e);
+        getAddressLoc();
       }
     }
 
     getAddressLoc();
   }
-
-  void locationService() async {
-    Location location = Location();
-    // Request permission to use location
-    location.requestPermission().then((permissionStatus) {
-      if (permissionStatus == PermissionStatus.granted) {
-        // If granted listen to the onLocationChanged stream and emit over our controller
-        location.onLocationChanged.listen((locationData) {
-          setState(() {
-            myLocationHome = LatLng(
-                double.parse(locationData.latitude.toString()),
-                double.parse(locationData.longitude.toString()));
-            //mapController.move(myLocationHome, 17);
-          });
-          print(locationData);
-        });
-      }
-    });
-  }
-
-  void checkNull() async{
-    await Future.delayed(const Duration(seconds: 10));
-      setState(() {
-        addressText = "${addressLoc?.streetNumber}, ${addressLoc?.streetAddress}, ${addressLoc?.city}";
-      });
-  }
-
-  dynamic myLocationHome = LatLng(51.5090214, -0.1982948);
+  String? greeting;
+  dynamic myLocationHome;
   Address? addressLoc;
-  String addressText = "Loading";
-  MapController mapController = MapController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    setState(() {
+      greeting = getTimeString();
+    });
     findLoc();
-    locationService();
-    checkNull();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: ListView(
         children: [
-          FlutterMap(
-            options: MapOptions(
-              minZoom: 5,
-              maxZoom: 18,
-              zoom: 15,
-              center: myLocationHome,
-            ),
-            mapController: mapController,
-            children: [
-              TileLayer(
-                urlTemplate:
-                    "https://api.mapbox.com/styles/v1/osioneboss/{mapStyleId}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}",
-                additionalOptions: const {
-                  'mapStyleId': AppConstants.mapBoxStyleId,
-                  'accessToken': AppConstants.mapBoxAccessToken,
-                },
-              ),
-              MarkerLayer(
-                //user current location on map
-                markers: [
-                  Marker(
-                    point: myLocationHome,
-                    width: 40,
-                    height: 40,
-                    builder: (context) => const Icon(Icons.add_circle_outline),
-                  )
-                ],
-              )
-            ],
-          ),
           Container(
-            margin: const EdgeInsets.only(top: 25.0, left: 8.0),
-            child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return const DrawerPage();
-                  }));
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(100),
-                        bottom: Radius.circular(100),
-                      ),
-                    )),
-                child: const Icon(Icons.list_rounded, color: Colors.black)),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 100, right: 40),
-            child: Align(
-              alignment: AlignmentDirectional.bottomEnd,
-              child: ElevatedButton(
-                  onPressed: () {
-                    findLoc();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(100),
-                          bottom: Radius.circular(100),
-                        ),
-                      )),
-                  child: const Icon(Icons.gps_fixed, color: Colors.black)),
-            ),
-          ),
-          Positioned(
-              left: 0,
-              right: 0,
-              bottom: 30,
-              height: MediaQuery.of(context).size.height * 0.135,
-              child: Center(
-                  child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0),
+            padding: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 7),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return const DrawerPage();
+                      }));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(100),
+                            bottom: Radius.circular(100),
+                          ),
+                        )),
+                    child: const Icon(Icons.list_rounded, color: Colors.black)),
+                const Text(
+                  "Hello name",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                 ),
-                child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.3,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.circle,
-                            color: Colors.yellow,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Where to?",
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
-                              ),
-                              //question marks are adding a null check to addressLoc
-                              Text(addressText)
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
-              )))
+                Text(
+                  greeting!,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w300),
+                ),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                          return MapHomePage(
+                            myLocationHome: myLocationHome,
+                            addressLoc: addressLoc
+                          );
+                        }));
+                  },
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height / 6,
+                    child: Card(
+                        elevation: 15,
+                        child: Stack(
+                          children: [
+                            Container(
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          "https://img.freepik.com/premium-vector/taxi-city_1270-526.jpg?w=2000"))),
+                            ),
+                            const Center(
+                                child: Text(
+                              "Join a Car",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold),
+                            ))
+                          ],
+                        )),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

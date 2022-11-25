@@ -3,7 +3,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-void findLoc() async {
+Future findLoc() async {
   Location location = Location();
 
   bool _serviceEnabled;
