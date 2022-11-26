@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:waya/screens/welcomepage.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    home: WApp(),
-  ));
+  WidgetsFlutterBinding.ensureInitialized();
+  //Set app orientation to portrait only
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((value) => runApp(const MaterialApp(
+            home: WApp(),
+          )));
 }
 
 // void findLoc() async{
@@ -45,5 +50,3 @@ class WApp extends StatelessWidget {
     );
   }
 }
-
-

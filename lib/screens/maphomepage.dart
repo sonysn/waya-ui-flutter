@@ -7,7 +7,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/drawerpage.dart';
 import 'package:waya/screens/search_locationpage.dart';
-import '../constants/mapbox constant.dart';
+import '../constants/mapbox_constant.dart';
 import 'package:geocode/geocode.dart';
 
 import 'homepage.dart';
@@ -182,7 +182,7 @@ class _MapHomePageState extends State<MapHomePage> {
             ],
           ),
           Container(
-            margin: const EdgeInsets.only(top: 25.0, left: 8.0),
+            margin: const EdgeInsets.only(top: 30.0, left: 8.0),
             child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
@@ -199,7 +199,7 @@ class _MapHomePageState extends State<MapHomePage> {
           ),
           Container(
             margin: EdgeInsets.only(
-                bottom: 100, //MediaQuery.of(context).size.height / 5.2,
+                bottom: 110, //MediaQuery.of(context).size.height / 5.2,
                 right: MediaQuery.of(context).size.width / 8.3),
             child: Align(
               alignment: AlignmentDirectional.bottomEnd,
@@ -217,7 +217,7 @@ class _MapHomePageState extends State<MapHomePage> {
           ),
           Container(
             margin: EdgeInsets.only(
-                bottom: 100, //MediaQuery.of(context).size.height / 5.2,
+                bottom: 110, //MediaQuery.of(context).size.height / 5.2,
                 right: MediaQuery.of(context).size.width / 1.4),
             child: Align(
               alignment: AlignmentDirectional.bottomEnd,
@@ -240,7 +240,7 @@ class _MapHomePageState extends State<MapHomePage> {
             left: 0,
             right: 0,
             bottom: 25,
-            height: 70,
+            height: MediaQuery.of(context).size.width /5,
             child: GestureDetector(
               onTap: (){
                 Navigator.push(context,
