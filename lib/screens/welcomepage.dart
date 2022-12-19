@@ -28,7 +28,7 @@ class _WelcomePageState extends State<WelcomePage> {
             child: Column(
               children: [
                 const Text(
-                  "Welcome to Waya",
+                  "Welcome to ya",
                   style: TextStyle(fontSize: 30, color: customPurple),
                 ),
                 const SizedBox(
