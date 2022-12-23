@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/release
 
 # miscellenous
-./lib/constants/mapbox_constant.dart
+/lib/constants/mapbox_constant.dart
