@@ -39,6 +39,8 @@ dependencies:
     git:
       url: https://github.com/sonysn/time-greeting-dart.git
       ref: main
+  mapbox_search: ^3.0.1+2
+  socket_io_client: ^2.0.0
 
 
 

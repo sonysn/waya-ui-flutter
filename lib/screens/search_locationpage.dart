@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:waya/constants/mapbox_constant.dart';
 import '../colorscheme.dart';
+import 'package:mapbox_search/mapbox_search.dart';
 
 class SearchLocationPage extends StatefulWidget {
   const SearchLocationPage({Key? key}) : super(key: key);
@@ -10,6 +11,16 @@ class SearchLocationPage extends StatefulWidget {
 }
 
 class _SearchLocationPageState extends State<SearchLocationPage> {
+  var placesSearch = PlacesSearch(
+    apiKey: AppConstants.mapBoxAccessToken,
+    limit: 5
+  );
+
+  void getPlaces() async{
+    var f = await placesSearch.getPlaces("nnamdi azikwe international airport");
+    print(f);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +34,9 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                   children: [
                     //TextField for name
                     TextField(
-                      onTap: (){},
+                      onTap: (){
+                        getPlaces();
+                      },
                       //controller: firstname,
                       cursorColor: customPurple,
                       keyboardType: TextInputType.text,

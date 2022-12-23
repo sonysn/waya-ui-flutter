@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/homepage.dart';
 
 import 'package:waya/screens/profilepage.dart';
@@ -15,8 +16,8 @@ class _BottomNavPageState extends State<BottomNavPage> {
   int _currentIndex = 0;
   static const List<Widget> _childrenPages = <Widget>[
     HomePage(),
-    const Text("Bookings"),
-    const Text("History"),
+    Text("Bookings"),
+    Text("History"),
     ProfilePage()
   ];
 
@@ -35,7 +36,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
         currentIndex: _currentIndex,
         onTap: onItemTapped,
         backgroundColor: Colors.white,
-        selectedItemColor: Colors.white,
+        selectedItemColor: customPurple,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         //type allows you have more than 1 item in bottom navigator
         type: BottomNavigationBarType.fixed,

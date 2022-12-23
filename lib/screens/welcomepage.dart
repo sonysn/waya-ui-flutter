@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
+import 'package:waya/screens/loginpage.dart';
 import 'package:waya/screens/verificationpage.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -93,7 +94,31 @@ class _WelcomePageState extends State<WelcomePage> {
                             ),
                           )),
                       child: const Text("Get Started")),
-                )
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: 250,
+                  height: 45,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        //print(dropdownValue + phoneInput.text);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                              return const LoginPage();
+                            }));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: customPurple,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                              bottom: Radius.circular(20),
+                            ),
+                          )),
+                      child: const Text("Login")),
+                ),
               ],
             ),
           ),

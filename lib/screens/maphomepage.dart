@@ -5,10 +5,12 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:waya/colorscheme.dart';
+import 'package:waya/functions/map%20logic.dart';
 import 'package:waya/screens/drawerpage.dart';
 import 'package:waya/screens/search_locationpage.dart';
 import '../constants/mapbox_constant.dart';
 import 'package:geocode/geocode.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
 import 'homepage.dart';
 
@@ -25,6 +27,22 @@ class MapHomePage extends StatefulWidget {
 }
 
 class _MapHomePageState extends State<MapHomePage> {
+  //socket io related code
+  // void re() async {
+  //   Socket socket = io('http://192.168.216.31:3000',
+  //       OptionBuilder()
+  //           .setTransports(['websocket']) // for Flutter or Dart VM
+  //           .build()
+  //   );
+  //   socket.connect();
+  //   socket.on('connect', (_) => print('connect: ${socket.id}'));
+  //   //dynamic data = 'Hello from flutter app';
+  //   dynamic data = locationAta;
+  //   socket.emit('location', data);
+  //   //socket.on('messages', (msg) => print(msg));
+  //   //socket.emit(event)
+  // }
+
   void findLoc() async {
     Location location = Location();
 
@@ -90,10 +108,17 @@ class _MapHomePageState extends State<MapHomePage> {
               widget.myLocationHome = LatLng(
                   double.parse(locationData.latitude.toString()),
                   double.parse(locationData.longitude.toString()));
-              //mapController.move(myLocationHome, 17);
+              //mapController.move(myLocationHome, 17);d
             });
           }
+          //socket io related code
+          // setState(() {
+          //   locationAta = locationData.toString();
+          //   //locationData = locationAta;
+          // });
           print(locationData);
+          //socket io related code
+          //re();
         });
       }
     });
@@ -112,6 +137,8 @@ class _MapHomePageState extends State<MapHomePage> {
   String addressText = "Loading...";
   //this is for the marker that handles the users tapped location. initializes as users current location
   dynamic tappedLocationD;
+  //socket io related code
+  //dynamic locationAta;
   MapController mapController = MapController();
 
   @override
@@ -125,6 +152,15 @@ class _MapHomePageState extends State<MapHomePage> {
     setState(() {
       tappedLocationD = widget.myLocationHome;
     });
+  }
+  //todo check this dispose out
+  @override
+  void dispose(){
+    locationService();
+    myLocationHome;
+    super.dispose();
+
+
   }
 
   @override

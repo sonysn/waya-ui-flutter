@@ -5,6 +5,9 @@ import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geocode/geocode.dart';
 import 'package:waya/screens/maphomepage.dart';
+import 'package:waya/screens/search_locationpage.dart';
+import 'dart:io';
+import 'package:socket_io_client/socket_io_client.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,6 +17,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //socket io related code do not tamper!
+  void re() async {
+    Socket socket = io('http://192.168.216.31:3000',
+        OptionBuilder()
+            .setTransports(['websocket']) // for Flutter or Dart VM
+            .build()
+    );
+    socket.connect();
+    socket.on('connect', (_) => print('connect: ${socket.id}'));
+    dynamic data = 'Hello from flutter app';
+    socket.emit('location', data);
+    //socket.on('messages', (msg) => print(msg));
+    //socket.emit(event)
+  }
+  
   void findLoc() async {
     Location location = Location();
 
@@ -79,6 +97,16 @@ class _HomePageState extends State<HomePage> {
     findLoc();
   }
 
+  //disposing of mylocationhome variable
+  @override
+  void dispose(){
+    myLocationHome;
+    findLoc();
+    super.dispose();
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +151,9 @@ class _HomePageState extends State<HomePage> {
                             myLocationHome: myLocationHome,
                             addressLoc: addressLoc
                           );
+                          //return const SearchLocationPage();
                         }));
+                    //re();
                   },
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height / 6,
