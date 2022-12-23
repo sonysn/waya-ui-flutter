@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Container(
             padding: const EdgeInsets.only(top: 10),
-            margin: const EdgeInsets.symmetric(horizontal: 7),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
