@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/homepage.dart';
-
+import 'package:waya/screens/historypage.dart';
 import 'package:waya/screens/profilepage.dart';
 
 
 class BottomNavPage extends StatefulWidget {
+
   const BottomNavPage({Key? key}) : super(key: key);
 
   @override
@@ -17,7 +18,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
   static const List<Widget> _childrenPages = <Widget>[
     HomePage(),
     Text("Bookings"),
-    Text("History"),
+    HistoryPage(),
     ProfilePage()
   ];
 

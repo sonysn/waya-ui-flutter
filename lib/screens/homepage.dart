@@ -193,12 +193,102 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: const [
                                 Text("27 rides", style: TextStyle(fontSize: 25),),
-                                Text("Around You", style: TextStyle(fontSize: 20),)
+                                Text("Around You", style: TextStyle(fontSize: 20),),
+                                Text("19 dawudu street, ikeja Lagos.", style: TextStyle(fontSize: 20),)
                               ],
                             )
                         ],
                       ),
-                    ))
+                    ),),
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Card(
+                      color: Colors.black12,
+                      elevation: 0,
+                      borderOnForeground: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(15),
+                          bottom: Radius.circular(15),
+                        ),
+                      ),
+                      child: SizedBox(
+                        height: 70,
+                        width: 350,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.wallet),
+                            Text('Wallet', style: TextStyle(fontSize: 25),)
+                          ],
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height / 6,
+                    child: Card(
+                      color: Colors.white,
+                      elevation: 0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Image.network('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
+                          Column(
+                            children: const [
+                              Text("Your previous ride with Stephen", style: TextStyle(fontSize: 22),),
+                              Text("₦500.00", style: TextStyle(fontSize: 20),),
+                              Text("14 ilimi street, ikeja, Lagos.", style: TextStyle(fontSize: 20),)
+                            ],
+                          )
+                        ],
+                      ),
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Card(
+                      color: Colors.black12,
+                      elevation: 0,
+                      borderOnForeground: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(15),
+                          bottom: Radius.circular(15),
+                        ),
+                      ),
+                      child: SizedBox(
+                        height: 70,
+                        width: 350,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+
+                            Text('promotions', style: TextStyle(fontSize: 15),),
+                            Text('Enjoy free rides for the first three trips', style: TextStyle(fontSize: 12),),
+                            Text('Use Promo Code NEW123', style: TextStyle(fontSize: 12),)
+                          ],
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
               ],
             ),
           )
