@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:waya/screens/drawerpage.dart';
 import 'package:time_greeting/time_greeting.dart';
 import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
@@ -19,11 +18,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //socket io related code do not tamper!
   void re() async {
-    Socket socket = io('http://192.168.216.31:3000',
-        OptionBuilder()
-            .setTransports(['websocket']) // for Flutter or Dart VM
-            .build()
-    );
+    Socket socket = io(
+        'http://192.168.216.31:3000',
+        OptionBuilder().setTransports(['websocket']) // for Flutter or Dart VM
+            .build());
     socket.connect();
     socket.on('connect', (_) => print('connect: ${socket.id}'));
     dynamic data = 'Hello from flutter app';
@@ -31,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     //socket.on('messages', (msg) => print(msg));
     //socket.emit(event)
   }
-  
+
   void findLoc() async {
     Location location = Location();
 
@@ -83,6 +81,7 @@ class _HomePageState extends State<HomePage> {
 
     getAddressLoc();
   }
+
   String? greeting;
   dynamic myLocationHome;
   Address? addressLoc;
@@ -99,12 +98,10 @@ class _HomePageState extends State<HomePage> {
 
   //disposing of mylocationhome variable
   @override
-  void dispose(){
+  void dispose() {
     myLocationHome;
     findLoc();
     super.dispose();
-
-
   }
 
   @override
@@ -118,71 +115,90 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return const DrawerPage();
-                      }));
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(100),
-                            bottom: Radius.circular(100),
-                          ),
-                        )),
-                    child: const Icon(Icons.list_rounded, color: Colors.black)),
+                Text(
+                  "${greeting!},",
+                  style: const TextStyle(
+                      fontSize: 30, fontWeight: FontWeight.w500),
+                ),
                 const Text(
-                  "Hello name",
+                  "FirstName",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                 ),
-                Text(
-                  greeting!,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w300),
+                const SizedBox(
+                  height: 50,
                 ),
-                GestureDetector(
-                  onTap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                          return MapHomePage(
-                            myLocationHome: myLocationHome,
-                            addressLoc: addressLoc
-                          );
-                          //return const SearchLocationPage();
-                        }));
-                    //re();
-                  },
-                  child: SizedBox(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Card(
+                      color: Colors.black12,
+                      elevation: 0,
+                      borderOnForeground: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(15),
+                          bottom: Radius.circular(15),
+                        ),
+                      ),
+                      child: SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.location_on_rounded),
+                            Text('Enter pickup point')
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.black12,
+                      elevation: 0,
+                      borderOnForeground: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(15),
+                          bottom: Radius.circular(15),
+                        ),
+                      ),
+                      child: SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.access_time),
+                            Text('Schedule ride')
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                //todo put picture as asset image, J do the next card.
+                SizedBox(
                     height: MediaQuery.of(context).size.height / 6,
                     child: Card(
-                        elevation: 15,
-                        child: Stack(
-                          children: [
-                            Container(
-                              child: SizedBox(
-                                height: 80,
-                                width: 90,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [Icon(Icons.place), Text('Join a ride')],
-                                ),
-                              ),
-                            ),
-                            const Center(
-                                child: Text(
-                              "Join a Car",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold),
-                            ))
-                          ],
-                        )),
-                  ),
-                )
+                      color: Colors.white,
+                      elevation: 0,
+                      child: Row(
+                        children: [
+                            Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoOHd2UjhVChccZbKLiT1yG2SWUMAfNAgw6A&usqp=CAU'),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text("27 rides", style: TextStyle(fontSize: 25),),
+                                Text("Around You", style: TextStyle(fontSize: 20),)
+                              ],
+                            )
+                        ],
+                      ),
+                    ))
               ],
             ),
           )

@@ -6,7 +6,6 @@ import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/functions/map%20logic.dart';
-import 'package:waya/screens/drawerpage.dart';
 import 'package:waya/screens/search_locationpage.dart';
 import '../constants/mapbox_constant.dart';
 import 'package:geocode/geocode.dart';
@@ -221,10 +220,10 @@ class _MapHomePageState extends State<MapHomePage> {
             margin: const EdgeInsets.only(top: 30.0, left: 8.0),
             child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return const DrawerPage();
-                  }));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (BuildContext context) {
+                  //   return const DrawerPage();
+                  // }));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
