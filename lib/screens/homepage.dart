@@ -182,6 +182,7 @@ class _HomePageState extends State<HomePage> {
                 //todo put picture as asset image, J do the next card.
                 SizedBox(
                     height: MediaQuery.of(context).size.height / 6,
+                    width: MediaQuery.of(context).size.width,
                     child: Card(
                       color: Colors.white,
                       elevation: 0,
@@ -194,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                               children: const [
                                 Text("27 rides", style: TextStyle(fontSize: 25),),
                                 Text("Around You", style: TextStyle(fontSize: 20),),
-                                Text("19 dawudu street, ikeja Lagos.", style: TextStyle(fontSize: 20),)
+                                Text("19 dawudu street, \nikeja Lagos.", style: TextStyle(fontSize: 15),)
                               ],
                             )
                         ],
@@ -203,92 +204,69 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Card(
-                      color: Colors.black12,
-                      elevation: 0,
-                      borderOnForeground: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(15),
-                          bottom: Radius.circular(15),
+                //TODO PLEASE READ TODOS THANKS!
+                // TODO try not to use fitted box unnecessarily, especially with things with no solid dimensions. ALSO ask when that issue with overflowing screen arises
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Card(
+                        color: Colors.black12,
+                        elevation: 0,
+                        borderOnForeground: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(15),
+                            bottom: Radius.circular(15),
+                          ),
+                        ),
+                        child: SizedBox(
+                          height: 70,
+                          width: 350,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(Icons.wallet),
+                              Text('Wallet', style: TextStyle(fontSize: 25),)
+                            ],
+                          ),
                         ),
                       ),
-                      child: SizedBox(
-                        height: 70,
-                        width: 350,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(Icons.wallet),
-                            Text('Wallet', style: TextStyle(fontSize: 25),)
-                          ],
-                        ),
-                      ),
-                    ),
 
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
-                    height: MediaQuery.of(context).size.height / 6,
-                    child: Card(
-                      color: Colors.white,
-                      elevation: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Image.network('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
-                          Column(
-                            children: const [
-                              Text("Your previous ride with Stephen", style: TextStyle(fontSize: 22),),
-                              Text("₦500.00", style: TextStyle(fontSize: 20),),
-                              Text("14 ilimi street, ikeja, Lagos.", style: TextStyle(fontSize: 20),)
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Card(
-                      color: Colors.black12,
-                      elevation: 0,
-                      borderOnForeground: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(15),
-                          bottom: Radius.circular(15),
-                        ),
-                      ),
-                      child: SizedBox(
-                        height: 70,
-                        width: 350,
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 6,
+                      child: Card(
+                        color: Colors.white,
+                        elevation: 0,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
+                            Image.network('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
 
-                            Text('promotions', style: TextStyle(fontSize: 15),),
-                            Text('Enjoy free rides for the first three trips', style: TextStyle(fontSize: 12),),
-                            Text('Use Promo Code NEW123', style: TextStyle(fontSize: 12),)
+                                children: const [
+                                  Text("Your previous ride with Stephen", style: TextStyle(fontSize: 20),),
+                                  Text("₦500.00", style: TextStyle(fontSize: 15),),
+                                  Text("14 ilimi street, ikeja, Lagos.", style: TextStyle(fontSize: 15),)
+                                ],
+                              ),
+                            )
                           ],
                         ),
-                      ),
-                    ),
-
-                  ],
+                      )),
                 ),
+
               ],
             ),
           )
