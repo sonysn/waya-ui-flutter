@@ -162,11 +162,14 @@ class _HomePageState extends State<HomePage> {
                         child: Stack(
                           children: [
                             Container(
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          "https://img.freepik.com/premium-vector/taxi-city_1270-526.jpg?w=2000"))),
+                              child: SizedBox(
+                                height: 80,
+                                width: 90,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [Icon(Icons.place), Text('Join a ride')],
+                                ),
+                              ),
                             ),
                             const Center(
                                 child: Text(
