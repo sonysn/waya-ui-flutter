@@ -7,61 +7,130 @@ class BookingPage extends StatefulWidget {
   State<BookingPage> createState() => _BookingPageState();
 }
 
-class _BookingPageState extends State<BookingPage> {
+class _BookingPageState extends State<BookingPage>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              labelColor: Colors.yellow,
-              indicatorColor: Colors.amberAccent,
-              tabs: [
-                Tab(text: 'Active'),
-                Tab(text: 'Completed'),
-                Tab(text: 'Cancelled'),
-              ],
+      length: 3,
+      child: Scaffold(
+          body: Container(
+        padding: const EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "My Bookings",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
             ),
-            title: Text('My Bookings', style:TextStyle(color: Colors.black),  ) ,
-            backgroundColor: Colors.white,
-          ),
-          body: TabBarView(
-            children: [
-              ActivePage(),
-              CompletedPage(),
-              CancelledPage(),
-            ],
-          ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 45,
+              decoration: const BoxDecoration(
+                  //color: Colors.grey[300],
+                  // border: Border(
+                  //   bottom: BorderSide(width: 3.0, color: Colors.grey)
+                  // ),
+                  ),
+              child: TabBar(
+                indicator: const BoxDecoration(
+                  //color: Colors.yellow[100],
+                  border: Border(
+                      bottom: BorderSide(width: 3.0, color: Colors.yellow)),
+                ),
+                labelColor: Colors.yellow[600],
+                unselectedLabelColor: Colors.black,
+                tabs: const [
+                  Tab(
+                    text: 'Active Now',
+                  ),
+                  Tab(
+                    text: 'Completed',
+                  ),
+                  Tab(
+                    text: 'Cancelled',
+                  ),
+                ],
+              ),
+            ),
+            const Expanded(
+                child: TabBarView(
+              children: [ActivePage(), CompletedPage(), CancelledPage()],
+            ))
+          ],
         ),
-
+      )),
     );
   }
 }
 
 class ActivePage extends StatelessWidget {
+  const ActivePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Active'),
-    );
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.network(
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwxbCTjXKukWVGo0TTWhg2iUHQQ9nmrplLWg&usqp=CAU'),
+        const Text(
+          'You have no Active Bookings',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        )
+      ],
+    ));
   }
 }
 
 class CompletedPage extends StatelessWidget {
+  const CompletedPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Completed'),
-    );
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.network(
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwxbCTjXKukWVGo0TTWhg2iUHQQ9nmrplLWg&usqp=CAU'),
+            const Text(
+              'You have no Completed Bookings',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            )
+          ],
+        ));
   }
 }
 
 class CancelledPage extends StatelessWidget {
+  const CancelledPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Cancelled'),
-    );
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.network(
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwxbCTjXKukWVGo0TTWhg2iUHQQ9nmrplLWg&usqp=CAU'),
+            const Text(
+              'You have no Cancelled Bookings',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            )
+          ],
+        ));
   }
 }

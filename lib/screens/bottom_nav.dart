@@ -37,17 +37,17 @@ class _BottomNavPageState extends State<BottomNavPage> {
         currentIndex: _currentIndex,
         onTap: onItemTapped,
         backgroundColor: Colors.white,
-        selectedItemColor: customPurple,
+        selectedItemColor: Colors.yellow,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         //type allows you have more than 1 item in bottom navigator
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_balance_wallet_rounded),
+              icon: Icon(Icons.bookmark_outlined),
               label: 'Bookings'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.monetization_on), label: 'History'),
+              icon: Icon(Icons.history), label: 'History'),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle), label: 'Profile'),
         ],

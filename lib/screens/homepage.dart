@@ -54,12 +54,17 @@ class _HomePageState extends State<HomePage> {
     }
 
     locationDataSpot = await location.getLocation();
-    setState(() {
-      myLocationHome = LatLng(
-          double.parse(locationDataSpot.latitude.toString()),
-          double.parse(locationDataSpot.longitude.toString()));
-      //mapController.move(myLocationHome, 17);
-    });
+    //check if widget is mounted
+    if(mounted){
+      setState(() {
+        myLocationHome = LatLng(
+            double.parse(locationDataSpot.latitude.toString()),
+            double.parse(locationDataSpot.longitude.toString()));
+        //mapController.move(myLocationHome, 17);
+      });
+    } else{
+      super.dispose();
+    }
     print(myLocationHome?.latitude);
 
     void getAddressLoc() async {
@@ -96,13 +101,13 @@ class _HomePageState extends State<HomePage> {
     findLoc();
   }
 
-  //disposing of mylocationhome variable
-  @override
-  void dispose() {
-    myLocationHome;
-    findLoc();
-    super.dispose();
-  }
+  // //disposing of mylocationhome variable
+  // @override
+  // void dispose() {
+  //   myLocationHome;
+  //   findLoc();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -192,10 +197,10 @@ class _HomePageState extends State<HomePage> {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text("27 rides", style: TextStyle(fontSize: 25),),
-                                  Text("Around You", style: TextStyle(fontSize: 20),),
-                                  Text("19 dawudu street, ikeja Lagos.", style: TextStyle(fontSize: 15),)
+                                children: [
+                                  const Text("27 rides", style: TextStyle(fontSize: 25),),
+                                  const Text("Around You", style: TextStyle(fontSize: 20),),
+                                  Text("${addressLoc?.streetNumber}, ${addressLoc?.streetAddress}, ${addressLoc?.region}.", style: const TextStyle(fontSize: 15),)
                                 ],
                               )
                           ],
