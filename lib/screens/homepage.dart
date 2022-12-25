@@ -180,27 +180,28 @@ class _HomePageState extends State<HomePage> {
                   height: 20,
                 ),
                 //todo put picture as asset image, J do the next card.
-                SizedBox(
-                    height: MediaQuery.of(context).size.height / 6,
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      color: Colors.white,
-                      elevation: 0,
-                      child: Row(
-                        children: [
-                            Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoOHd2UjhVChccZbKLiT1yG2SWUMAfNAgw6A&usqp=CAU'),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text("27 rides", style: TextStyle(fontSize: 25),),
-                                Text("Around You", style: TextStyle(fontSize: 20),),
-                                Text("19 dawudu street, \nikeja Lagos.", style: TextStyle(fontSize: 15),)
-                              ],
-                            )
-                        ],
-                      ),
-                    ),),
+                FittedBox(fit:BoxFit.fitWidth,
+                  child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 6,
+                      child: Card(
+                        color: Colors.white,
+                        elevation: 0,
+                        child: Row(
+                          children: [
+                              Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoOHd2UjhVChccZbKLiT1yG2SWUMAfNAgw6A&usqp=CAU'),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Text("27 rides", style: TextStyle(fontSize: 25),),
+                                  Text("Around You", style: TextStyle(fontSize: 20),),
+                                  Text("19 dawudu street, ikeja Lagos.", style: TextStyle(fontSize: 15),)
+                                ],
+                              )
+                          ],
+                        ),
+                      ),),
+                ),
                 const SizedBox(
                   height: 15,
                 ),
