@@ -3,7 +3,7 @@ import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/homepage.dart';
 import 'package:waya/screens/historypage.dart';
 import 'package:waya/screens/profilepage.dart';
-
+import 'package:waya/screens/bookingpage.dart';
 
 class BottomNavPage extends StatefulWidget {
 
@@ -17,7 +17,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
   int _currentIndex = 0;
   static const List<Widget> _childrenPages = <Widget>[
     HomePage(),
-    Text("Bookings"),
+    BookingPage(),
     HistoryPage(),
     ProfilePage()
   ];
