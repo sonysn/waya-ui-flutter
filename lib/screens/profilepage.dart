@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/editprofilepage.dart';
 
+import 'messagesnotificationpage.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -120,12 +122,20 @@ class _ProfilePageState extends State<ProfilePage> {
                     )
                   ],
                 ),
-                const ListTile(
-                  leading: Icon(
-                    Icons.mail,
-                    color: Colors.black,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                          return const MessagesNotificationPage();
+                        }));
+                  },
+                  child: const ListTile(
+                    leading: Icon(
+                      Icons.mail,
+                      color: Colors.black,
+                    ),
+                    title: Text("Messages"),
                   ),
-                  title: Text("Messages"),
                 ),
                 const ListTile(
                   leading: Icon(
