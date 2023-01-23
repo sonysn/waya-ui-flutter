@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../colorscheme.dart';
 
+
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
 
@@ -39,6 +40,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         borderSide: BorderSide(color: Colors.yellow),
                       )),
                 ),
+
+                SizedBox(height: 20),
                 TextField(
                   //controller: phoneNumber,
                   readOnly: true,
@@ -57,6 +60,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         borderSide: BorderSide(color: Colors.yellow),
                       )),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   //controller: phoneNumber,
                   readOnly: true,
@@ -75,6 +79,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         borderSide: BorderSide(color: Colors.yellow),
                       )),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   //controller: phoneNumber,
                   readOnly: true,
@@ -93,6 +98,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         borderSide: BorderSide(color: Colors.yellow),
                       )),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   //controller: phoneNumber,
                   readOnly: true,
@@ -111,6 +117,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         borderSide: BorderSide(color: Colors.yellow),
                       )),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   //controller: phoneNumber,
                   readOnly: true,
@@ -129,6 +136,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         borderSide: BorderSide(color: Colors.yellow),
                       )),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   //controller: phoneNumber,
                   readOnly: true,
@@ -147,6 +155,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         borderSide: BorderSide(color: Colors.yellow),
                       )),
                 ),
+                SizedBox(height: 20),
+
+
+
               ],
             ),
           )

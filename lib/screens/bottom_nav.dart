@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/homepage.dart';
-import 'package:waya/screens/historypage.dart';
-import 'package:waya/screens/profilepage.dart';
+import 'package:waya/screens/walletpage.dart';
+import 'package:waya/screens/profile/profilepage.dart';
 import 'package:waya/screens/bookingpage.dart';
 
 class BottomNavPage extends StatefulWidget {
@@ -18,7 +18,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
   static const List<Widget> _childrenPages = <Widget>[
     HomePage(),
     BookingPage(),
-    HistoryPage(),
+    WalletPage(),
     ProfilePage()
   ];
 
@@ -47,7 +47,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
               icon: Icon(Icons.bookmark_outlined),
               label: 'Bookings'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.history), label: 'History'),
+              icon: Icon(Icons.wallet), label: 'Wallet'),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle), label: 'Profile'),
         ],

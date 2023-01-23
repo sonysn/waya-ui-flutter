@@ -85,7 +85,7 @@ class ActivePage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.network(
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwxbCTjXKukWVGo0TTWhg2iUHQQ9nmrplLWg&usqp=CAU'),
+            "assets/images/clipjotter.png"),
         const Text(
           'You have no Active Bookings',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -105,7 +105,7 @@ class CompletedPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwxbCTjXKukWVGo0TTWhg2iUHQQ9nmrplLWg&usqp=CAU'),
+                "assets/images/clipjotter.png"),
             const Text(
               'You have no Completed Bookings',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -125,7 +125,7 @@ class CancelledPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwxbCTjXKukWVGo0TTWhg2iUHQQ9nmrplLWg&usqp=CAU'),
+                "assets/images/clipjotter.png"),
             const Text(
               'You have no Cancelled Bookings',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

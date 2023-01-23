@@ -7,15 +7,19 @@ import 'package:waya/screens/maphomepage.dart';
 import 'package:waya/screens/search_locationpage.dart';
 import 'dart:io';
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:waya/screens/editprofilepage.dart';
+import 'package:waya/size_config.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
+
 }
 
 class _HomePageState extends State<HomePage> {
+  String? profileImageUrl;
   //socket io related code do not tamper!
   void re() async {
     Socket socket = io(
@@ -112,14 +116,37 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: ListView(
+
         children: [
+
           Container(
+
             padding: const EdgeInsets.only(top: 10),
             margin: const EdgeInsets.symmetric(horizontal: 10),
+
             child: Column(
+
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
+                Positioned(
+
+                  right: 50,
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage("assets/images/car.png"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
                 Text(
                   "${greeting!},",
                   style: const TextStyle(
@@ -129,9 +156,14 @@ class _HomePageState extends State<HomePage> {
                   "FirstName",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                 ),
+
+
+
+
                 const SizedBox(
                   height: 50,
                 ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -144,6 +176,7 @@ class _HomePageState extends State<HomePage> {
                           top: Radius.circular(15),
                           bottom: Radius.circular(15),
                         ),
+                       // side: BorderSide(color: Colors.yellow, width: 2),
                       ),
                       child: SizedBox(
                         height: 50,
@@ -166,6 +199,7 @@ class _HomePageState extends State<HomePage> {
                           top: Radius.circular(15),
                           bottom: Radius.circular(15),
                         ),
+                      //  side: BorderSide(color: Colors.yellow, width: 2),
                       ),
                       child: SizedBox(
                         height: 50,
@@ -187,19 +221,27 @@ class _HomePageState extends State<HomePage> {
                 //todo put picture as asset image, J do the next card.
                 FittedBox(fit:BoxFit.fitWidth,
                   child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 6,
+                      height: 200,
+
                       child: Card(
-                        color: Colors.white,
+                          color: Colors.black12,
                         elevation: 0,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(10),
+                            bottom: Radius.circular(15),
+                          ),
+                          //  side: BorderSide(color: Colors.yellow, width: 2),
+                        ),
                         child: Row(
                           children: [
-                              Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoOHd2UjhVChccZbKLiT1yG2SWUMAfNAgw6A&usqp=CAU'),
+                              Image.network("assets/images/car.png"),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text("27 rides", style: TextStyle(fontSize: 25),),
-                                  const Text("Around You", style: TextStyle(fontSize: 20),),
+                                  const Text("27 rides", style: TextStyle(fontSize: 30),),
+                                  const Text("Around You", style: TextStyle(fontSize: 25),),
                                   Text("${addressLoc?.streetNumber}, ${addressLoc?.streetAddress}, ${addressLoc?.region}.", style: const TextStyle(fontSize: 15),)
                                 ],
                               )
@@ -226,9 +268,10 @@ class _HomePageState extends State<HomePage> {
                             top: Radius.circular(15),
                             bottom: Radius.circular(15),
                           ),
+                        //  side: BorderSide(color: Colors.yellow, width: 2),
                         ),
                         child: SizedBox(
-                          height: 70,
+                          height: 100,
                           width: 350,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -249,22 +292,41 @@ class _HomePageState extends State<HomePage> {
                 FittedBox(
                   fit: BoxFit.fitWidth,
                   child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 6,
+                      height: 120,
+                      width: 350,
                       child: Card(
-                        color: Colors.white,
+                        color: Colors.black12,
                         elevation: 0,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(15),
+                            bottom: Radius.circular(15),
+                          ),
+                        //   side: BorderSide(color: Colors.black12, width: 8),
+                        ),
                         child: Row(
+
                           children: [
-                            Image.network('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
+
+
+
                             Padding(
                               padding: const EdgeInsets.all(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
 
-                                children: const [
-                                  Text("Your previous ride with Stephen", style: TextStyle(fontSize: 20),),
-                                  Text("₦500.00", style: TextStyle(fontSize: 15),),
-                                  Text("14 ilimi street, ikeja, Lagos.", style: TextStyle(fontSize: 15),)
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+
+                                children:  [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 20),
+                                    child:CircleAvatar(
+                                      backgroundImage:
+                                      NetworkImage("assets/images/car.png"),
+                                    ),
+                                  ),
+                                  Text("Your previous ride with Stephen", style: TextStyle(fontSize: 15),),
+                                  Text("₦500.00", style: TextStyle(fontSize: 10),),
+                                  Text("14 ilimi street, ikeja, Lagos.", style: TextStyle(fontSize: 10),)
                                 ],
                               ),
                             )
