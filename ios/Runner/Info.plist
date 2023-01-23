@@ -5,7 +5,7 @@
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>The app needs location permission</string>
     <key>UIBackgroundModes</key>
-    <string>location</location>
+    <string>location</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
