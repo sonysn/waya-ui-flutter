@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
 
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: NetworkImage("assets/images/car.png"),
+                        image: AssetImage("assets/images/car.png"),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -235,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Row(
                           children: [
-                              Image.network("assets/images/car.png"),
+                              Image.asset("assets/images/car.png"),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -321,7 +321,7 @@ class _HomePageState extends State<HomePage> {
                                     margin: EdgeInsets.only(right: 20),
                                     child:CircleAvatar(
                                       backgroundImage:
-                                      NetworkImage("assets/images/car.png"),
+                                      AssetImage("assets/images/car.png"),
                                     ),
                                   ),
                                   Text("Your previous ride with Stephen", style: TextStyle(fontSize: 15),),

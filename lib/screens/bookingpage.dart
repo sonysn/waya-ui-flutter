@@ -83,9 +83,7 @@ class ActivePage extends StatelessWidget {
     return Center(
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.network(
-            "assets/images/clipjotter.png"),
+      children: [Image.asset("assets/images/clip.png"),
         const Text(
           'You have no Active Bookings',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -104,8 +102,7 @@ class CompletedPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-                "assets/images/clipjotter.png"),
+            Image.asset("assets/images/clip.png"),
             const Text(
               'You have no Completed Bookings',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -124,8 +121,8 @@ class CancelledPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-                "assets/images/clipjotter.png"),
+            Image.asset(
+                "assets/images/clip.png"),
             const Text(
               'You have no Cancelled Bookings',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

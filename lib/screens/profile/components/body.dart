@@ -67,7 +67,8 @@ class _BodyState extends State<Body> {
           ProfileMenu(
             text: "Privacy Policy",
             icon: "assets/icons/Log out.svg",
-            press: () {},
+            press: () {
+            },
           ),
           ProfileMenu(
             text: "Help Center",

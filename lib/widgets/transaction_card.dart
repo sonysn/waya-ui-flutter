@@ -22,8 +22,8 @@ import 'package:flutter/material.dart';
           Row(
             children: [
               Container(
-                height: 60,
-                width: 60,
+                height: 50,
+                width: 50,
                 padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),

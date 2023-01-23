@@ -11,6 +11,7 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  static String routeName = "/EditProfilePage";
   @override
   Widget build(BuildContext context) {
     return Scaffold(

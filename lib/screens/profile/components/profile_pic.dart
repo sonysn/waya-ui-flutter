@@ -20,7 +20,7 @@ class _ProfilePicState extends State<ProfilePic> {
         children: [
           CircleAvatar(
             backgroundImage:
-            NetworkImage("assets/images/car.png"),
+            AssetImage("assets/images/h.png"),
           ),
           Positioned(
             right: -16,

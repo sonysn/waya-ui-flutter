@@ -25,12 +25,12 @@ class _WalletPageState extends State<WalletPage> {
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
   Container(
-  height: 200,
+  height: 180,
   child: ListView.separated(
   physics: ClampingScrollPhysics(),
   separatorBuilder: (context, index) {
   return SizedBox(
-  width: 10,
+  width: 8,
   );
   },
   itemCount: 2,
