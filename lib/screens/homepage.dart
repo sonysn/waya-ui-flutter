@@ -15,11 +15,11 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => _HomePageState();
-
 }
 
 class _HomePageState extends State<HomePage> {
   String? profileImageUrl;
+
   //socket io related code do not tamper!
   void re() async {
     Socket socket = io(
@@ -59,14 +59,14 @@ class _HomePageState extends State<HomePage> {
 
     locationDataSpot = await location.getLocation();
     //check if widget is mounted
-    if(mounted){
+    if (mounted) {
       setState(() {
         myLocationHome = LatLng(
             double.parse(locationDataSpot.latitude.toString()),
             double.parse(locationDataSpot.longitude.toString()));
         //mapController.move(myLocationHome, 17);
       });
-    } else{
+    } else {
       super.dispose();
     }
     print(myLocationHome?.latitude);
@@ -116,34 +116,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: ListView(
-
         children: [
-
           Container(
-
             padding: const EdgeInsets.only(top: 10),
             margin: const EdgeInsets.symmetric(horizontal: 10),
-
             child: Column(
-
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                Positioned(
-
-                  right: 50,
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/car.png"),
-                        fit: BoxFit.cover,
-                      ),
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/car.png"),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -156,9 +144,6 @@ class _HomePageState extends State<HomePage> {
                   "FirstName",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                 ),
-
-
-
 
                 const SizedBox(
                   height: 50,
@@ -176,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                           top: Radius.circular(15),
                           bottom: Radius.circular(15),
                         ),
-                       // side: BorderSide(color: Colors.yellow, width: 2),
+                        // side: BorderSide(color: Colors.yellow, width: 2),
                       ),
                       child: SizedBox(
                         height: 50,
@@ -199,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                           top: Radius.circular(15),
                           bottom: Radius.circular(15),
                         ),
-                      //  side: BorderSide(color: Colors.yellow, width: 2),
+                        //  side: BorderSide(color: Colors.yellow, width: 2),
                       ),
                       child: SizedBox(
                         height: 50,
@@ -219,72 +204,81 @@ class _HomePageState extends State<HomePage> {
                   height: 20,
                 ),
                 //todo put picture as asset image, J do the next card.
-                FittedBox(fit:BoxFit.fitWidth,
+                FittedBox(
+                  fit: BoxFit.fitWidth,
                   child: SizedBox(
-                      height: 200,
-
-                      child: Card(
-                          color: Colors.black12,
-                        elevation: 0,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(10),
-                            bottom: Radius.circular(15),
-                          ),
-                          //  side: BorderSide(color: Colors.yellow, width: 2),
+                    height: 200,
+                    child: Card(
+                      color: Colors.black12,
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(10),
+                          bottom: Radius.circular(15),
                         ),
-                        child: Row(
-                          children: [
-                              Image.asset("assets/images/car.png"),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text("27 rides", style: TextStyle(fontSize: 30),),
-                                  const Text("Around You", style: TextStyle(fontSize: 25),),
-                                  Text("${addressLoc?.streetNumber}, ${addressLoc?.streetAddress}, ${addressLoc?.region}.", style: const TextStyle(fontSize: 15),)
-                                ],
+                        //  side: BorderSide(color: Colors.yellow, width: 2),
+                      ),
+                      child: Row(
+                        children: [
+                          Image.asset("assets/images/car.png"),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "27 rides",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              const Text(
+                                "Around You",
+                                style: TextStyle(fontSize: 25),
+                              ),
+                              Text(
+                                "${addressLoc?.streetNumber}, ${addressLoc?.streetAddress}, ${addressLoc?.region}.",
+                                style: const TextStyle(fontSize: 15),
                               )
-                          ],
-                        ),
-                      ),),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 //TODO PLEASE READ TODOS THANKS!
                 // TODO try not to use fitted box unnecessarily, especially with things with no solid dimensions. ALSO ask when that issue with overflowing screen arises
-                FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Card(
-                        color: Colors.black12,
-                        elevation: 0,
-                        borderOnForeground: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(15),
-                            bottom: Radius.circular(15),
-                          ),
-                        //  side: BorderSide(color: Colors.yellow, width: 2),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      color: Colors.black12,
+                      elevation: 0,
+                      borderOnForeground: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(15),
+                          bottom: Radius.circular(15),
                         ),
-                        child: SizedBox(
-                          height: 100,
-                          width: 350,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.wallet),
-                              Text('Wallet', style: TextStyle(fontSize: 25),)
-                            ],
-                          ),
+                        //  side: BorderSide(color: Colors.yellow, width: 2),
+                      ),
+                      child: SizedBox(
+                        height: 100,
+                        width: 350,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.wallet),
+                            Text(
+                              'Wallet',
+                              style: TextStyle(fontSize: 25),
+                            )
+                          ],
                         ),
                       ),
-
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 20,
@@ -302,31 +296,35 @@ class _HomePageState extends State<HomePage> {
                             top: Radius.circular(15),
                             bottom: Radius.circular(15),
                           ),
-                        //   side: BorderSide(color: Colors.black12, width: 8),
+                          //   side: BorderSide(color: Colors.black12, width: 8),
                         ),
                         child: Row(
-
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-
-
-
                             Padding(
                               padding: const EdgeInsets.all(10),
-
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-
-                                children:  [
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
                                   Container(
-                                    margin: EdgeInsets.only(right: 20),
-                                    child:CircleAvatar(
+                                    margin: const EdgeInsets.only(right: 20),
+                                    child: const CircleAvatar(
                                       backgroundImage:
-                                      AssetImage("assets/images/car.png"),
+                                          AssetImage("assets/images/car.png"),
                                     ),
                                   ),
-                                  Text("Your previous ride with Stephen", style: TextStyle(fontSize: 15),),
-                                  Text("₦500.00", style: TextStyle(fontSize: 10),),
-                                  Text("14 ilimi street, ikeja, Lagos.", style: TextStyle(fontSize: 10),)
+                                  const Text(
+                                    "Your previous ride with Stephen",
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  const Text(
+                                    "₦500.00",
+                                    style: TextStyle(fontSize: 10),
+                                  ),
+                                  const Text(
+                                    "14 Ilimi Street, Ikeja, Lagos.",
+                                    style: TextStyle(fontSize: 10),
+                                  )
                                 ],
                               ),
                             )
@@ -334,7 +332,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       )),
                 ),
-
               ],
             ),
           )
