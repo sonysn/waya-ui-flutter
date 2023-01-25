@@ -9,6 +9,7 @@ import 'dart:io';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:waya/screens/editprofilepage.dart';
 import 'package:waya/size_config.dart';
+import 'package:waya/sockets/sockets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -152,28 +153,37 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Card(
-                      color: Colors.black12,
-                      elevation: 0,
-                      borderOnForeground: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(15),
-                          bottom: Radius.circular(15),
+                    GestureDetector(
+                      child: Card(
+                        color: Colors.black12,
+                        elevation: 0,
+                        borderOnForeground: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(15),
+                            bottom: Radius.circular(15),
+                          ),
+                          // side: BorderSide(color: Colors.yellow, width: 2),
                         ),
-                        // side: BorderSide(color: Colors.yellow, width: 2),
-                      ),
-                      child: SizedBox(
-                        height: 50,
-                        width: 150,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(Icons.location_on_rounded),
-                            Text('Enter pickup point')
-                          ],
+                        child: SizedBox(
+                          height: 50,
+                          width: 150,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(Icons.location_on_rounded),
+                              Text('Enter pickup point')
+                            ],
+                          ),
                         ),
                       ),
+                      onTap: (){
+                        ConnectToServer().connect();
+                        ConnectToServer().listenToDriverLocations();
+                        // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+                        //   return MapHomePage(myLocationHome: myLocationHome, addressLoc: addressLoc);
+                        // }));
+                      },
                     ),
                     Card(
                       color: Colors.black12,

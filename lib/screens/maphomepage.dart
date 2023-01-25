@@ -115,7 +115,7 @@ class _MapHomePageState extends State<MapHomePage> {
           //   locationAta = locationData.toString();
           //   //locationData = locationAta;
           // });
-          print(locationData);
+          //print(locationData);
           //socket io related code
           //re();
         });
@@ -213,7 +213,7 @@ class _MapHomePageState extends State<MapHomePage> {
                     builder: (context) => const Icon(Icons.abc),
                   )
                 ],
-              )
+              ),
             ],
           ),
           Container(
