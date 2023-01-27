@@ -24,15 +24,17 @@ import 'package:flutter/material.dart';
               Container(
                 height: 50,
                 width: 50,
-                padding: EdgeInsets.all(5),
+                padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.red,
                 ),
-                child: Image.asset("assets/icons/user Icon.svg"),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundImage: AssetImage("assets/images/h.jpeg"),
+                ),
               ),
               SizedBox(
-                width: 10,
+                width: 5,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +60,7 @@ import 'package:flutter/material.dart';
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "transaction.balance",
+                    "transaction.balance",style: TextStyle(fontSize: 10),
 
                   ),
 

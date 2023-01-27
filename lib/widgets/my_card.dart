@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:waya/constants.dart';
 
 class MyCard extends StatefulWidget {
   const MyCard({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _MyCardState extends State<MyCard> {
       height: 200,
       width: 350,
       decoration: BoxDecoration(
-        color: Colors.yellow,
+        color: Colors.yellowAccent,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -32,18 +32,13 @@ class _MyCardState extends State<MyCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "CARD NAME",
-
-                  ),
-                  Text(
-                    "card.cardHolderName",
+                    "Andrew Jane", style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.black)
 
                   ),
                 ],
-              ),
-              Text(
-                "card.cardNumber",
-
               ),
               Row(
                 children: [
@@ -51,42 +46,32 @@ class _MyCardState extends State<MyCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "EXP DATE",
+                        "YOUR BALANCE", style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10,
+                          color: Colors.black)
 
                       ),
                       Text(
-                        "card.expDate",
+                        "₦10,000", style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black)
 
                       ),
                     ],
                   ),
-                  SizedBox(width: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "CVV NUMBER",
+                  SizedBox(width: 70),
 
-                      ),
-                      Text(
-                        "card.cvv",
-
-                      ),
-                    ],
-                  )
                 ],
               )
             ],
           ),
+
+
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                child: Image.asset("assets/icons/user Icon.svg"),
-              ),
-            ],
+
           )
         ],
       ),

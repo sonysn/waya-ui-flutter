@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-
 import '../colorscheme.dart';
 
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
+  static String routeName = "/EditProfilePage";
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  static String routeName = "/EditProfilePage";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,6 +157,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       )),
                 ),
                 SizedBox(height: 20),
+
 
 
 

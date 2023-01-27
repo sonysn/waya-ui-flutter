@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/signup.dart';
-
+import '../../../constants.dart';
 class VerificationPage extends StatefulWidget {
   String phoneNumber;
 
@@ -19,7 +19,24 @@ class _VerificationPageState extends State<VerificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: [
+        children: [const SizedBox(
+          height: 20,
+        ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  size: 25,
+                  color: kPrimaryColor,
+                ),
+              ),
+            ],
+          ),
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: Center(
@@ -34,7 +51,7 @@ class _VerificationPageState extends State<VerificationPage> {
                       child: const Icon(
                         Icons.mail_outline,
                         size: 150,
-                        color: Colors.yellow,
+                        color: Colors.black,
                       )),
                   const SizedBox(
                     height: 10,
@@ -83,7 +100,9 @@ class _VerificationPageState extends State<VerificationPage> {
                                 bottom: Radius.circular(20),
                               ),
                             )),
-                        child: const Text("Okay")),
+                        child: const Text("Okay",style: TextStyle(
+
+                            color: kPrimaryColor))),
                     // Column(
                     //   //keypad
                     //   children: [

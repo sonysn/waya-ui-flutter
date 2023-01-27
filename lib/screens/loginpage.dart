@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waya/screens/bottom_nav.dart';
 import '../colorscheme.dart';
 import 'homepage.dart';
-
+import '../../../constants.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -16,8 +16,20 @@ class _LoginPageState extends State<LoginPage> {
   bool val = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return   WillPopScope(
+        onWillPop: () async => false,
+    child: Scaffold(
+    body: Column(
+    children: <Widget>[
+    Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: <Widget>[
+    IconButton(
+    icon: Icon(Icons.arrow_back),
+    onPressed: () => Navigator.pop(context),
+    ),
+    ],
+    ), Container(
         padding: const EdgeInsets.only(top: 10),
         margin: const EdgeInsets.symmetric(horizontal: 7),
         child: Column(
@@ -105,12 +117,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: const SizedBox(
                     width: 260,
                     height: 50,
-                    child: Center(child: Text('Sign Up')),
+                    child: Center(child: Text('Sign Up',style: TextStyle(
+
+                        color: kPrimaryColor),)),
                   )),
             ),
           ],
         ),
       ),
-    );
+    ]) ));
   }
 }

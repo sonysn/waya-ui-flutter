@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/bottom_nav.dart';
-import 'package:waya/screens/homepage.dart';
-import '../../../constants.dart';
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+import 'package:waya/screens/profile/profilepage.dart';
+
+class EditProfile extends StatefulWidget {
+  const EditProfile({Key? key}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<EditProfile> createState() => _EditProfileState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _EditProfileState extends State<EditProfile> {
   //Todo Text editing controller holds the user input for program execution, the names are self explanatory of what they do or hold
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
@@ -36,14 +35,12 @@ class _SignUpState extends State<SignUp> {
               icon: Icon(
                 Icons.arrow_back,
                 size: 25,
-                color: kPrimaryColor,
+                color: Colors.black,
               ),
-            ), Text(
-              'Register',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 27,
-                  color: Colors.black),
+            ),
+            Text(
+              'Edit Profile',
+              style: TextStyle(fontSize: 30),
             ),
           ],
         ),
@@ -164,43 +161,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ],
                   )),
-              const Padding(
-                padding: EdgeInsets.only(left: 12),
-                child: Text(
-                  'Phone Number',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.black),
-                ),
-              ),
-              Container(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    children: [
-                      //TextField for name
-                      TextField(
-                        controller: phoneNumber,
-                        readOnly: true,
-                        cursorColor: customPurple,
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                            hintText: 'hint: Phone Number',
-                            contentPadding: EdgeInsets.all(15),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                            filled: true,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Colors.yellow),
-                            )),
-                      ),
-                    ],
-                  )),
+
               const Padding(
                 padding: EdgeInsets.only(left: 12),
                 child: Text(
@@ -237,42 +198,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ],
                   )),
-              const Padding(
-                padding: EdgeInsets.only(left: 12),
-                child: Text(
-                  'Address',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.black),
-                ),
-              ),
-              Container(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    children: [
-                      //TextField for name
-                      TextField(
-                        controller: homeAddress,
-                        cursorColor: customPurple,
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                            hintText: 'Enter your Address',
-                            contentPadding: EdgeInsets.all(15),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                            filled: true,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Colors.yellow),
-                            )),
-                      ),
-                    ],
-                  )),
+
               const SizedBox(height: 10),
               //sign up button
               Center(
@@ -280,11 +206,11 @@ class _SignUpState extends State<SignUp> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return const BottomNavPage();
+                        return const ProfilePage();
                       }));
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: customPurple,
+                        primary: Colors.yellow,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(20),
@@ -294,9 +220,10 @@ class _SignUpState extends State<SignUp> {
                     child: const SizedBox(
                       width: 260,
                       height: 50,
-                      child: Center(child: Text('Sign Up',style: TextStyle(
+                      child: Center(child: Text('Update', style: TextStyle(
 
-                          color: kPrimaryColor),)),
+                          color: Colors.black),)
+                      ),
                     )),
               ),
               const SizedBox(height: 10)

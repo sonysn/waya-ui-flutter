@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:waya/screens/welcomepage.dart';
 import 'package:flutter/services.dart';
-
+import 'package:waya/routes.dart';
+import 'package:waya/screens/messagesnotificationpage.dart';
+import 'package:waya/screens/editprofilepage.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   //Set app orientation to portrait only
@@ -47,6 +49,7 @@ class WApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: WelcomePage(),
+
     );
   }
 }

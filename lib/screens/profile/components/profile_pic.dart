@@ -20,7 +20,7 @@ class _ProfilePicState extends State<ProfilePic> {
         children: [
           CircleAvatar(
             backgroundImage:
-            AssetImage("assets/images/h.png"),
+            AssetImage("assets/images/h.jpeg"),
           ),
           Positioned(
             right: -16,
@@ -30,7 +30,7 @@ class _ProfilePicState extends State<ProfilePic> {
               width: 46,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
+                  shape: RoundedRectangleBorder( 
                     borderRadius: BorderRadius.circular(50),
                     side: BorderSide(color: Colors.white),
                   ),

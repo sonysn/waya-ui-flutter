@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/loginpage.dart';
 import 'package:waya/screens/verificationpage.dart';
-
+import '../../../constants.dart';
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -30,7 +30,7 @@ class _WelcomePageState extends State<WelcomePage> {
               children: [
                 const Text(
                   "Welcome to Waya",
-                  style: TextStyle(fontSize: 30, color: customPurple),
+                  style: TextStyle(fontSize: 30,color: kPrimaryColor),
                 ),
                 const SizedBox(
                   height: 10,
@@ -93,7 +93,9 @@ class _WelcomePageState extends State<WelcomePage> {
                               bottom: Radius.circular(20),
                             ),
                           )),
-                      child: const Text("Get Started")),
+                      child: const Text("Get Started",style: TextStyle(
+
+                          color: kPrimaryColor))),
                 ),
                 const SizedBox(
                   height: 10,
@@ -117,7 +119,9 @@ class _WelcomePageState extends State<WelcomePage> {
                               bottom: Radius.circular(20),
                             ),
                           )),
-                      child: const Text("Login")),
+                      child: const Text("Login", style: TextStyle(
+
+    color: kPrimaryColor))),
                 ),
               ],
             ),

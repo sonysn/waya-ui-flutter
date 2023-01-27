@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import 'package:waya/widgets/my_card.dart';
 import 'package:waya/widgets/transaction_card.dart';
+import 'package:waya/screens/transactionhistory.dart';
 
 class WalletPage extends StatefulWidget {
   const WalletPage({Key? key}) : super(key: key);
+
 
   @override
   State<WalletPage> createState() => _WalletPageState();
@@ -33,7 +35,7 @@ class _WalletPageState extends State<WalletPage> {
   width: 8,
   );
   },
-  itemCount: 2,
+  itemCount: 1,
   shrinkWrap: true,
   scrollDirection: Axis.horizontal,
   itemBuilder: (context, index) {
@@ -42,13 +44,30 @@ class _WalletPageState extends State<WalletPage> {
   );
   }),
   ),
+
   SizedBox(
   height: 30,
   ),
-  Text(
-  "Recent Transactions",
-  ),
-  SizedBox(
+    Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text("Recent Transactions"),
+        SizedBox(width: 170),
+        InkWell(
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (BuildContext context) {
+                return const TransactionHistory();
+              })),
+          child: Text("View all",style: TextStyle(
+
+              color: kSecondaryColor)),
+        ),
+      ],
+    ),
+
+
+
+    SizedBox(
   height: 15,
   ),
   ListView.separated(
