@@ -207,7 +207,9 @@ class _AddressSettingsState extends State<AddressSettings> {
               )),
         ),
       ]),
-    )
+    ),SizedBox(
+                height: 15,
+              ),
     ],));
   }
 }

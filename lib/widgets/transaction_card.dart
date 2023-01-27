@@ -67,6 +67,8 @@ import 'package:flutter/material.dart';
                 ],
               ),
             ],
+          ),SizedBox(
+            height: 10,
           ),
         ],
       ),

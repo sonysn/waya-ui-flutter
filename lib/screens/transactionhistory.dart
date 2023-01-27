@@ -57,7 +57,9 @@ class _TransactionHistoryState extends State<TransactionHistory> {
 
 
       ]),
-    )
+    ),SizedBox(
+                height: 20,
+              ),
     ],));
   }
 }
