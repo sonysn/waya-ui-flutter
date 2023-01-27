@@ -190,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 21,
                   width:20,
                 ),
                 //todo put picture as asset image, J do the next card.
