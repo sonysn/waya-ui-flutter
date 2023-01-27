@@ -9,6 +9,7 @@ import 'dart:io';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:waya/screens/editprofilepage.dart';
 import 'package:waya/size_config.dart';
+import 'package:waya/sockets/sockets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -141,6 +142,7 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+
                     Card(
                       color: Colors.white,
                       elevation: 0,
