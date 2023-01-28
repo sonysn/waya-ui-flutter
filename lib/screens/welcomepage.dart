@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/loginpage.dart';
 import 'package:waya/screens/verificationpage.dart';
-import '../../../constants.dart';
+import '../constants/constants.dart';
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 

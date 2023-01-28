@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waya/screens/bottom_nav.dart';
 import '../colorscheme.dart';
 import 'homepage.dart';
-import '../../../constants.dart';
+import '../constants/constants.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waya/screens/profile/profilepage.dart';
 import '../../../colorscheme.dart';
-import '../../../constants.dart';
+import '../constants/constants.dart';
 class PasswordSettings extends StatefulWidget {
   const PasswordSettings({Key? key}) : super(key: key);
 
