@@ -122,7 +122,7 @@ class CancelledPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-                "assets/images/cp.png"),
+                "assets/images/cp.png",),
             const Text(
               'You have no Cancelled Bookings',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:waya/colorscheme.dart';
 
 class MyCard extends StatefulWidget {
   const MyCard({Key? key}) : super(key: key);
@@ -16,10 +16,10 @@ class _MyCardState extends State<MyCard> {
       builder: (BuildContext context, BoxConstraints constraints) {
         return Container(
           padding: EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width * 1.0,
+          width: MediaQuery.of(context).size.width * 0.88,
           height: MediaQuery.of(context).size.height * 0.3,
           decoration: BoxDecoration(
-            color: Colors.yellowAccent,
+            color: customPurple,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
@@ -37,7 +37,7 @@ class _MyCardState extends State<MyCard> {
                           "Andrew Jane", style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
-                          color: Colors.black)
+                          color: Colors.white)
                       ),
                     ],
                   ),
@@ -50,13 +50,13 @@ class _MyCardState extends State<MyCard> {
                               "YOUR BALANCE", style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 10,
-                              color: Colors.black)
+                              color: Colors.white)
                           ),
                           Text(
                               "₦10,000", style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
-                              color: Colors.black)
+                              color: Colors.white)
                           ),
                         ],
                       ),

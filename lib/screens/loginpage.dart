@@ -29,8 +29,9 @@ class _LoginPageState extends State<LoginPage> {
     onPressed: () => Navigator.pop(context),
     ),
     ],
-    ), Container(
-        padding: const EdgeInsets.only(top: 10),
+
+    ), Expanded(
+      child:  Container(padding: const EdgeInsets.only(top: 10),
         margin: const EdgeInsets.symmetric(horizontal: 7),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -117,14 +118,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: const SizedBox(
                     width: 260,
                     height: 50,
-                    child: Center(child: Text('Sign Up',style: TextStyle(
+                    child: Center(child: Text('Login',style: TextStyle(
 
-                        color: kPrimaryColor),)),
+                        color: kTextColor),)),
                   )),
             ),
           ],
         ),
       ),
-    ]) ));
+      )],) ,),);
   }
 }

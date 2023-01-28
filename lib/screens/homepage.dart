@@ -9,7 +9,6 @@ import 'dart:io';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:waya/screens/editprofilepage.dart';
 import 'package:waya/size_config.dart';
-import 'package:waya/sockets/sockets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -116,6 +115,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      double width = MediaQuery.of(context).size.width;
+      double height = MediaQuery.of(context).size.height;
+      double padding = width > 600 ? 40 : 20;
+
     return Scaffold(
       body: ListView(
         children: [
@@ -142,17 +147,16 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-
                     Card(
                       color: Colors.white,
-                      elevation: 0,
+                      elevation: 5,
                       borderOnForeground: true,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(15),
                           bottom: Radius.circular(15),
                         ),
-                         side: BorderSide(color: Colors.yellow, width: 1),
+                        // side: BorderSide(color: Colors.white, width: 1),
                       ),
                       child: SizedBox(
                         height: 50,
@@ -168,14 +172,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Card(
                       color: Colors.white,
-                      elevation: 0,
+                      elevation: 5,
                       borderOnForeground: true,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(15),
                           bottom: Radius.circular(15),
                         ),
-                          side: BorderSide(color: Colors.yellow, width: 1),
+                       //   side: BorderSide(color: Colors.yellow, width: 1),
                       ),
                       child: SizedBox(
                         height: 50,
@@ -200,16 +204,16 @@ class _HomePageState extends State<HomePage> {
                   fit: BoxFit.fitWidth,
 
                   child: SizedBox(
-                    height: 200,
+                    height: height * 0.2,
                     child: Card(
                       color: Colors.white,
-                      elevation: 0,
+                      elevation: 5,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(10),
                           bottom: Radius.circular(15),
                         ),
-                         side: BorderSide(color: Colors.yellow, width: 1),
+                    //     side: BorderSide(color: Colors.yellow, width: 1),
                       ),
                       child: Row(
                         children: [
@@ -254,13 +258,13 @@ class _HomePageState extends State<HomePage> {
                       width: 350,
                       child: Card(
                         color: Colors.white,
-                        elevation: 0,
+                        elevation: 5,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(15),
                             bottom: Radius.circular(15),
                           ),
-                          side: BorderSide(color: Colors.yellow, width: 1),
+                    //      side: BorderSide(color: Colors.yellow, width: 1),
                         ),
                         child: Row(
 
@@ -301,13 +305,13 @@ class _HomePageState extends State<HomePage> {
                       width: 350,
                       child: Card(
                         color: Colors.white,
-                        elevation: 0,
+                        elevation: 5,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(15),
                             bottom: Radius.circular(15),
                           ),
-                            side: BorderSide(color: Colors.yellow, width: 1),
+                      //      side: BorderSide(color: Colors.yellow, width: 1),
                         ),
                         child: Row(
 
@@ -351,6 +355,8 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
+    );
+        },
     );
   }
 }

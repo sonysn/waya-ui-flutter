@@ -67,7 +67,7 @@ class _BodyState extends State<Body> {
           ),
           ProfileMenu(
             text: "Help Center",
-            icon: "assets/icons/hp.svg",
+            icon: "assets/icons/hc.svg",
             press: () => Navigator.push(context,
                 MaterialPageRoute(builder: (BuildContext context) {
                   return const HelpCenter();

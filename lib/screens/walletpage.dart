@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../constants.dart';
+import '../../../colorscheme.dart';
 import 'package:waya/widgets/my_card.dart';
 import 'package:waya/widgets/transaction_card.dart';
 import 'package:waya/screens/transactionhistory.dart';
@@ -26,6 +26,9 @@ class _WalletPageState extends State<WalletPage> {
   child: Column(
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
+    const SizedBox(
+      height: 30,
+    ),
   Container(
   height: 180,
   child: ListView.separated(
@@ -45,31 +48,69 @@ class _WalletPageState extends State<WalletPage> {
   }),
   ),
 
-  SizedBox(
-  height: 30,
-  ),
+    SizedBox(
+      height: 30,
+    ),
     Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Recent Transactions"),
-        SizedBox(width: 170),
-        InkWell(
-          onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (BuildContext context) {
-                return const TransactionHistory();
-              })),
-          child: Text("View all",style: TextStyle(
-
-              color: kSecondaryColor)),
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              // navigate to deposit page or function
+            },
+            child: Column(
+              children: [
+                Icon(Icons.money, size: 40),
+                SizedBox(height: 10),
+                Text("Deposit"),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(width: 20),
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              // navigate to withdrawal page or function
+            },
+            child: Column(
+              children: [
+                Icon(Icons.money_off_csred, size: 40),
+                SizedBox(height: 10),
+                Text("Withdraw"),
+              ],
+            ),
+          ),
         ),
       ],
     ),
 
-
-
     SizedBox(
-  height: 15,
-  ),
+      height: 30,
+    ),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text("Recent Transactions"),
+        Flexible(
+            child: Container(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return const TransactionHistory();
+                    })),
+                child: Text("View all",style: TextStyle(
+
+                    color: customPurple)),
+              ),
+            )
+        ),
+      ],
+    ),SizedBox(
+      height: 0,
+    ),
   ListView.separated(
   itemCount: 6,
   shrinkWrap: true,

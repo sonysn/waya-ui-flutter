@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waya/screens/profile/profilepage.dart';
-
+import '../../../colorscheme.dart';
 class AddressSettings extends StatefulWidget {
   const AddressSettings({Key? key}) : super(key: key);
 
@@ -47,7 +47,7 @@ class _AddressSettingsState extends State<AddressSettings> {
         FittedBox(
           fit: BoxFit.fitWidth,
           child: Container(
-            height: 70,
+            height: 80,
             //width: 350,
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
@@ -55,7 +55,7 @@ class _AddressSettingsState extends State<AddressSettings> {
               borderRadius: BorderRadius.all(Radius.circular(20))
             ),
             child: SizedBox(
-              height: 70,
+              height: 80,
               width: 350,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -63,7 +63,7 @@ class _AddressSettingsState extends State<AddressSettings> {
                   const Icon(
                     Icons.location_on_outlined,
                     size: 25.0,
-                    color: Colors.yellow,
+                    color: customPurple,
                   ),
 
 
@@ -81,7 +81,7 @@ class _AddressSettingsState extends State<AddressSettings> {
                       ),
                       Text(
                         '30, ilesanya street ifako lagos',
-                        style: TextStyle(fontSize: 10),
+                        style: TextStyle(fontSize: 15),
                       ),
 
                     ],
@@ -96,7 +96,7 @@ class _AddressSettingsState extends State<AddressSettings> {
                       const Icon(
                         Icons.edit_location_sharp,
                         size: 25.0,
-                        color: Colors.yellow,
+                        color: customPurple,
 
                       ),
 
@@ -115,15 +115,16 @@ class _AddressSettingsState extends State<AddressSettings> {
         FittedBox(
           fit: BoxFit.fitWidth,
           child: Container(
-            height: 70,
+            height: 80,
             //width: 350,
+
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(20))
             ),
             child: SizedBox(
-              height: 70,
+              height: 80,
               width: 350,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -131,7 +132,7 @@ class _AddressSettingsState extends State<AddressSettings> {
                   const Icon(
                     Icons.location_on_outlined,
                     size: 25.0,
-                    color: Colors.yellow,
+                    color: customPurple,
                   ),
 
 
@@ -149,7 +150,7 @@ class _AddressSettingsState extends State<AddressSettings> {
                       ),
                       Text(
                         '30, ilesanya street ifako lagos',
-                        style: TextStyle(fontSize: 10),
+                        style: TextStyle(fontSize: 15),
                       ),
 
                     ],
@@ -164,7 +165,7 @@ class _AddressSettingsState extends State<AddressSettings> {
                       const Icon(
                         Icons.edit_location_sharp,
                         size: 25.0,
-                        color: Colors.yellow,
+                        color: customPurple,
 
                       ),
 
@@ -179,7 +180,7 @@ class _AddressSettingsState extends State<AddressSettings> {
         ),
 
         const SizedBox(
-          height: 350,
+          height: 300,
         ),
         Center(
           child: ElevatedButton(
@@ -190,7 +191,7 @@ class _AddressSettingsState extends State<AddressSettings> {
                     }));
               },
               style: ElevatedButton.styleFrom(
-                  primary: Colors.yellow,
+                  primary: customPurple,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
@@ -202,14 +203,12 @@ class _AddressSettingsState extends State<AddressSettings> {
                 height: 50,
                 child: Center(child: Text('Update', style: TextStyle(
 
-                    color: Colors.black),)
+                    color: Colors.white),)
                 ),
               )),
         ),
       ]),
-    ),SizedBox(
-                height: 15,
-              ),
+    ),
     ],));
   }
 }

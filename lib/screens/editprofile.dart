@@ -210,7 +210,7 @@ class _EditProfileState extends State<EditProfile> {
                       }));
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.yellow,
+                        primary: customPurple,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(20),

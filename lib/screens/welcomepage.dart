@@ -30,7 +30,7 @@ class _WelcomePageState extends State<WelcomePage> {
               children: [
                 const Text(
                   "Welcome to Waya",
-                  style: TextStyle(fontSize: 30,color: kPrimaryColor),
+                  style: TextStyle(fontSize: 30,color: customPurple),
                 ),
                 const SizedBox(
                   height: 10,
@@ -95,7 +95,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           )),
                       child: const Text("Get Started",style: TextStyle(
 
-                          color: kPrimaryColor))),
+                          color: kTextColor))),
                 ),
                 const SizedBox(
                   height: 10,
@@ -121,7 +121,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           )),
                       child: const Text("Login", style: TextStyle(
 
-    color: kPrimaryColor))),
+    color: kTextColor))),
                 ),
               ],
             ),

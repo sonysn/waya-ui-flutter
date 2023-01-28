@@ -16,7 +16,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
     return Scaffold(
         body: ListView(
             children: [const SizedBox(
-              height: 20,
+              height: 10,
             ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -58,7 +58,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
 
       ]),
     ),SizedBox(
-                height: 20,
+                height: 10,
               ),
     ],));
   }
