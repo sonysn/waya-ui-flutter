@@ -160,14 +160,17 @@ class _HomePageState extends State<HomePage> {
                             // side: BorderSide(color: Colors.white, width: 1),
                           ),
                           child: SizedBox(
-                            height: 50,
-                            width: 150,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.location_on_rounded),
-                                Text('Enter pickup point')
-                              ],
+                            height: 60,
+                            width: 170,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(Icons.location_on_rounded),
+                                  Text('Enter pickup point')
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -183,29 +186,32 @@ class _HomePageState extends State<HomePage> {
                             //   side: BorderSide(color: Colors.yellow, width: 1),
                           ),
                           child: SizedBox(
-                            height: 50,
-                            width: 150,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.access_time),
-                                Text('Schedule ride')
-                              ],
+                            height: 60,
+                            width: 170,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(Icons.access_time),
+                                  Text('Schedule ride')
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(
-                      height: 21,
-                      width: 20,
+                      height: 30,
+                      //width: 20,
                     ),
                     //todo put picture as asset image, J do the next card.
                     FittedBox(
                       fit: BoxFit.fitWidth,
                       child: SizedBox(
                         height: height * 0.2,
-                        width: MediaQuery.of(context).size.width,
+                        width: width,
                         child: Card(
                           color: Colors.white,
                           elevation: 5,
@@ -240,8 +246,8 @@ class _HomePageState extends State<HomePage> {
                                       style: TextStyle(fontSize: 25),
                                     ),
                                     Text(
-                                      "${addressLoc?.streetNumber}, ${addressLoc?.streetAddress}, ${addressLoc?.region}.",
-                                      style: const TextStyle(fontSize: 15),
+                                      "${addressLoc?.streetNumber}, ${addressLoc?.streetAddress}, \n${addressLoc?.region}.",
+                                      style: const TextStyle(fontSize: 13),
                                     ),
                                   ],
                                 ),
@@ -255,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     //TODO PLEASE READ TODOS THANKS!
                     // TODO try not to use fitted box unnecessarily, especially with things with no solid dimensions. ALSO ask when that issue with overflowing screen arises
@@ -264,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                       fit: BoxFit.fitWidth,
                       child: SizedBox(
                           height: 80,
-                          width: 350,
+                          width: width,
                           child: Card(
                             color: Colors.white,
                             elevation: 5,
@@ -306,13 +312,13 @@ class _HomePageState extends State<HomePage> {
                           )),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     FittedBox(
                       fit: BoxFit.fitWidth,
                       child: SizedBox(
                           height: 120,
-                          width: 350,
+                          width: width,
                           child: Card(
                             color: Colors.white,
                             elevation: 5,
