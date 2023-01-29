@@ -148,31 +148,41 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Card(
-                          color: Colors.white,
-                          elevation: 5,
-                          borderOnForeground: true,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(15),
-                              bottom: Radius.circular(15),
+                        GestureDetector(
+                          child: Card(
+                            color: Colors.white,
+                            elevation: 5,
+                            borderOnForeground: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(15),
+                                bottom: Radius.circular(15),
+                              ),
+                              // side: BorderSide(color: Colors.white, width: 1),
                             ),
-                            // side: BorderSide(color: Colors.white, width: 1),
-                          ),
-                          child: SizedBox(
-                            height: 60,
-                            width: 170,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(Icons.location_on_rounded),
-                                  Text('Enter pickup point')
-                                ],
+                            child: SizedBox(
+                              height: 60,
+                              width: width / 2.5,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.location_on_rounded),
+                                    Text('Enter pickup point')
+                                  ],
+                                ),
                               ),
                             ),
                           ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return MapHomePage(myLocationHome: myLocationHome, addressLoc: addressLoc);
+                                    }));
+                          },
                         ),
                         Card(
                           color: Colors.white,
@@ -187,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           child: SizedBox(
                             height: 60,
-                            width: 170,
+                            width: width / 2.5,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
@@ -294,7 +304,8 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: const [
                                       Text(
                                         'Your Balance',
@@ -346,7 +357,8 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: const [
                                       Text(
                                         "Your previous ride with Stephen",

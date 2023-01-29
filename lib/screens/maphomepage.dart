@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:waya/api/actions.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/functions/map%20logic.dart';
 import 'package:waya/screens/search_locationpage.dart';
@@ -12,6 +13,8 @@ import 'package:geocode/geocode.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 import 'homepage.dart';
+
+dynamic driverFound;
 
 class MapHomePage extends StatefulWidget {
   dynamic myLocationHome;
@@ -134,8 +137,10 @@ class _MapHomePageState extends State<MapHomePage> {
 
   // dynamic myLocationHome = LatLng(51.5090214, -0.1982948);
   String addressText = "Loading...";
+
   //this is for the marker that handles the users tapped location. initializes as users current location
   dynamic tappedLocationD;
+
   //socket io related code
   //dynamic locationAta;
   MapController mapController = MapController();
@@ -152,14 +157,13 @@ class _MapHomePageState extends State<MapHomePage> {
       tappedLocationD = widget.myLocationHome;
     });
   }
+
   //todo check this dispose out
   @override
-  void dispose(){
+  void dispose() {
     locationService();
     myLocationHome;
     super.dispose();
-
-
   }
 
   @override
@@ -260,8 +264,8 @@ class _MapHomePageState extends State<MapHomePage> {
                   onPressed: () {
                     Navigator.pop(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                          return const HomePage();
-                        }));
+                      return const HomePage();
+                    }));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -275,51 +279,94 @@ class _MapHomePageState extends State<MapHomePage> {
             left: 0,
             right: 0,
             bottom: 25,
-            height: MediaQuery.of(context).size.width /5,
-            child: GestureDetector(
-              onTap: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-                      return const SearchLocationPage();
-                    }));
-              },
-              child: Center(
-                    child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                  child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 1.3,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.circle,
-                              color: Colors.yellow,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "Where to?",
-                                  style: TextStyle(
-                                      fontSize: 30, fontWeight: FontWeight.bold),
-                                ),
-                                //question marks are adding a null check to addressLoc
-                                Text(addressText)
-                              ],
-                            )
-                          ],
-                        ),
-                      )),
-                )),
-            ),
+            height: MediaQuery.of(context).size.width / 5,
+            child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    void _state() async{
+                      driverFound = await requestRide("${widget.addressLoc?.streetNumber}, ${widget.addressLoc?.streetAddress}, \n${widget.addressLoc?.region}.", "6.501871, 3.373521", tappedLocationD);
+                    }
+                    _state();
+                  });
+                  //
+                  showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const BottomDialog();
+                      });
+                  //
+                  print(driverFound);
+                },
+                child: const Text('Request ride')),
+            // child: GestureDetector(
+            //   onTap: (){
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (BuildContext context) {
+            //           return const SearchLocationPage();
+            //         }));
+            //   },
+            //   child: Center(
+            //         child: Card(
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(50.0),
+            //       ),
+            //       child: SizedBox(
+            //           width: MediaQuery.of(context).size.width / 1.3,
+            //           child: Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Row(
+            //               children: [
+            //                 const Icon(
+            //                   Icons.circle,
+            //                   color: Colors.yellow,
+            //                 ),
+            //                 const SizedBox(
+            //                   width: 10,
+            //                 ),
+            //                 Column(
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   mainAxisAlignment: MainAxisAlignment.center,
+            //                   children: [
+            //                     const Text(
+            //                       "Where to?",
+            //                       style: TextStyle(
+            //                           fontSize: 30, fontWeight: FontWeight.bold),
+            //                     ),
+            //                     //question marks are adding a null check to addressLoc
+            //                     Text(addressText)
+            //                   ],
+            //                 )
+            //               ],
+            //             ),
+            //           )),
+            //     )),
+            // ),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class BottomDialog extends StatefulWidget {
+  const BottomDialog({Key? key}) : super(key: key);
+
+  @override
+  State<BottomDialog> createState() => _BottomDialogState();
+}
+
+class _BottomDialogState extends State<BottomDialog> {
+  @override
+  Widget build(BuildContext context) {
+    double mWidth = MediaQuery.of(context).size.width;
+    double mHeight = MediaQuery.of(context).size.height;
+    return Container(
+      height: mHeight * 0.5,
+      width: mWidth,
+      child: Column(
+        children: const [
+          LinearProgressIndicator(),
+          Text('Searching for a driver')
         ],
       ),
     );

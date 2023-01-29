@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:waya/screens/welcomepage.dart';
 import 'package:flutter/services.dart';
-import 'package:waya/routes.dart';
+import 'package:waya/screens/profile/routes.dart';
 import 'package:waya/screens/messagesnotificationpage.dart';
 import 'package:waya/screens/editprofilepage.dart';
 void main() {

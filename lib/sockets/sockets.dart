@@ -9,9 +9,11 @@ class ConnectToServer {
           .build());
 
   //connect to websockets
-  connect(){
+  connect(riderID) {
     //connect to websockets
+    String who = 'riderr';
     socket.connect();
+    socket.emit("identifyWho", who + riderID.toString());
 
     // //handle socket events
     // socket.on('connection', (_) => print('connect: ${socket.id}'));
@@ -19,11 +21,11 @@ class ConnectToServer {
   }
 
   //disconnect from websockets
-  disconnect(){
+  disconnect() {
     socket.disconnect();
   }
 
-  void listenToDriverLocations(){
+  void listenToDriverLocations() {
     socket.on('driverLocation', (data) => print(LatLng(data[0], data[1])));
   }
 }

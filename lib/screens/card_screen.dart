@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:waya/widgets/my_card.dart';
-import '../constants/constants.dart';
+import '../constants/design_constants.dart';
 
   class CardScreen extends StatefulWidget {
   const CardScreen({Key? key}) : super(key: key);

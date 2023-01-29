@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/bottom_nav.dart';
 import 'package:waya/screens/homepage.dart';
-import '../constants/constants.dart';
+import '../constants/design_constants.dart';
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
