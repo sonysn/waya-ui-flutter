@@ -6,9 +6,9 @@ import 'package:waya/screens/passwordsettings.dart';
 
 import 'profile_menu.dart';
 import 'profile_pic.dart';
+
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
-
 
   @override
   State<Body> createState() => _BodyState();
@@ -18,60 +18,58 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          ProfilePic(),
-          SizedBox(height: 20),
-
-
-          ProfileMenu(
-            text: "Edit Profile",
-            icon: "assets/icons/User Icon.svg",
-            press: () => Navigator.push(context,
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return const EditProfile();
-                }))
-
+          const SizedBox(
+            height: 15,
           ),
+          const ProfilePic(),
+          const SizedBox(height: 10),
+          ProfileMenu(
+              text: "Edit Profile",
+              icon: "assets/icons/User Icon.svg",
+              press: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return const EditProfile();
+                  }))),
           ProfileMenu(
             text: "Address",
             icon: "assets/icons/ad.svg",
             press: () => Navigator.push(context,
-              MaterialPageRoute(builder: (BuildContext context) {
-                return const AddressSettings();
-              })),
+                MaterialPageRoute(builder: (BuildContext context) {
+              return const AddressSettings();
+            })),
           ),
           //ProfileMenu(
           //  text: "Notifications",
-            //icon: "assets/icons/Settings.svg",
-           // press: () => Navigator.push(context,
+          //icon: "assets/icons/Settings.svg",
+          // press: () => Navigator.push(context,
 
-        //MaterialPageRoute(builder: (BuildContext context) {
-         //return const CardScreen();
-               // })),
-       //   ),
+          //MaterialPageRoute(builder: (BuildContext context) {
+          //return const CardScreen();
+          // })),
+          //   ),
           ProfileMenu(
             text: "Security",
             icon: "assets/icons/password.svg",
             press: () => Navigator.push(context,
-              MaterialPageRoute(builder: (BuildContext context) {
-                return const PasswordSettings();
-              })),
+                MaterialPageRoute(builder: (BuildContext context) {
+              return const PasswordSettings();
+            })),
           ),
           ProfileMenu(
             text: "Privacy Policy",
             icon: "assets/icons/pp.svg",
-            press: () {
-            },
+            press: () {},
           ),
           ProfileMenu(
             text: "Help Center",
             icon: "assets/icons/hc.svg",
             press: () => Navigator.push(context,
                 MaterialPageRoute(builder: (BuildContext context) {
-                  return const HelpCenter();
-                })),
+              return const HelpCenter();
+            })),
           ),
           ProfileMenu(
             text: "Log Out",

@@ -9,7 +9,7 @@ var baseUri = 'http://192.168.100.43:3000';
 
 //testing code
 Future requestRide(
-    currentLocationAddress, currentLocationPoint, dropOffLocationPoint) async {
+    currentLocationAddress, dropOffLocationAddress, currentLocationPoint, dropOffLocationPoint) async {
   final http.Response response =
       await http.post(Uri.parse('$baseUri${ApiConstants.requestRideEndpoint}'),
           headers: {
@@ -19,7 +19,7 @@ Future requestRide(
           body: jsonEncode({
             "userId": 59,
             "pickupLocation": currentLocationAddress,
-            "dropoffLocation": "Ajah",
+            "dropoffLocation": dropOffLocationAddress,
             "estFare": 500,
             "surge": 0,
             "pickupLocationPosition": currentLocationPoint,
@@ -27,6 +27,6 @@ Future requestRide(
             "status": "ONGOING"
           }));
   final data = await jsonDecode(response.body);
-  //print(data);
+  print(data);
   return data;
 }

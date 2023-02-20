@@ -3,6 +3,7 @@ import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/bottom_nav.dart';
 import 'package:waya/screens/homepage.dart';
 import '../constants/design_constants.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -23,9 +24,10 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      children: [const SizedBox(
-        height: 20,
-      ),
+      children: [
+        const SizedBox(
+          height: 15,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -38,7 +40,8 @@ class _SignUpState extends State<SignUp> {
                 size: 25,
                 color: kPrimaryColor,
               ),
-            ), Text(
+            ),
+            Text(
               'Register',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -294,9 +297,11 @@ class _SignUpState extends State<SignUp> {
                     child: const SizedBox(
                       width: 260,
                       height: 50,
-                      child: Center(child: Text('Sign Up',style: TextStyle(
-
-                          color: kPrimaryColor),)),
+                      child: Center(
+                          child: Text(
+                        'Sign Up',
+                        style: TextStyle(color: kPrimaryColor),
+                      )),
                     )),
               ),
               const SizedBox(height: 10)

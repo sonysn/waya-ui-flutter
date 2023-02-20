@@ -4,6 +4,7 @@ import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geocode/geocode.dart';
 import 'package:waya/screens/maphomepage.dart';
+import 'package:waya/screens/mapspage.dart';
 import 'package:waya/screens/search_locationpage.dart';
 import 'dart:io';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -180,7 +181,9 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) {
-                                      return MapHomePage(myLocationHome: myLocationHome, addressLoc: addressLoc);
+                                      return MapsPage(
+                                        addressLoc: addressLoc
+                                      );
                                     }));
                           },
                         ),

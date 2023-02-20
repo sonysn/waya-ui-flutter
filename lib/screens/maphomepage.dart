@@ -284,7 +284,7 @@ class _MapHomePageState extends State<MapHomePage> {
                 onPressed: () {
                   setState(() {
                     void _state() async{
-                      driverFound = await requestRide("${widget.addressLoc?.streetNumber}, ${widget.addressLoc?.streetAddress}, \n${widget.addressLoc?.region}.", "6.501871, 3.373521", tappedLocationD);
+                      //driverFound = await requestRide("${widget.addressLoc?.streetNumber}, ${widget.addressLoc?.streetAddress}, \n${widget.addressLoc?.region}.", "6.501871, 3.373521", tappedLocationD);
                     }
                     _state();
                   });
