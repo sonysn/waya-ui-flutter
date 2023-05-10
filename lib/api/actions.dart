@@ -9,12 +9,12 @@ var baseUri = 'http://192.168.100.43:3000';
 
 //testing code
 Future requestRide(
-    currentLocationAddress, dropOffLocationAddress, currentLocationPoint, dropOffLocationPoint) async {
+    currentLocationAddress, dropOffLocationAddress, currentLocationPoint, dropOffLocationPoint, authBearer) async {
   final http.Response response =
       await http.post(Uri.parse('$baseUri${ApiConstants.requestRideEndpoint}'),
           headers: {
             "Content-Type": "application/json",
-            "Authorization": 'Bearer eyJhbGciOiJIUzI1NiJ9.KzIzNDkwNTkxODIwODU1OQ.VEMOKAI45gu8It-J1R1eV7RpinfMzaEi0NhRpaIM-OI'
+            "Authorization": 'Bearer $authBearer'
           },
           body: jsonEncode({
             "userId": 59,
@@ -29,4 +29,34 @@ Future requestRide(
   final data = await jsonDecode(response.body);
   print(data);
   return data;
+}
+
+Future getRidePrice({required dynamic currentLocationPoint, required dynamic dropOffLocationPoint}) async {
+  final http.Response response =
+  await http.post(Uri.parse('$baseUri${ApiConstants.getRidePrice}'),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jsonEncode({
+        "pickupLocationPosition": currentLocationPoint,
+        "dropoffLocationPostion": dropOffLocationPoint
+      }));
+  final data = await jsonDecode(response.body);
+  print(data);
+  return data;
+}
+
+Future getBalance(id, phone) async {
+  final http.Response response =
+  await http.post(Uri.parse('$baseUri${ApiConstants.getBalanceEndpoint}'),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: json.encode({
+        'id': id,
+        'phoneNumber': phone,
+      }));
+  final data = json.decode(response.body);
+  final d = data['balance'].toString();
+  return d;
 }

@@ -3,9 +3,9 @@ import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/signup.dart';
 import '../constants/design_constants.dart';
 class VerificationPage extends StatefulWidget {
-  String phoneNumber;
+  final dynamic phoneNumber;
 
-  VerificationPage({Key? key, required this.phoneNumber}) : super(key: key);
+  const VerificationPage({Key? key, required this.phoneNumber}) : super(key: key);
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
@@ -64,7 +64,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     height: 10,
                   ),
                   Text(
-                    "Type in the verification code sent to ${widget.phoneNumber}",
+                    "Type in the verification code sent to \n${widget.phoneNumber}",
                     style: const TextStyle(fontSize: 13),
                   ),
                   SizedBox(
@@ -89,7 +89,9 @@ class _VerificationPageState extends State<VerificationPage> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (BuildContext context) {
-                                return const SignUp();
+                                return SignUp(
+                                  phoneNumber: widget.phoneNumber
+                                );
                               }));
                         },
                         style: ElevatedButton.styleFrom(

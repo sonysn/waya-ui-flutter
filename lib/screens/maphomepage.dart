@@ -264,7 +264,7 @@ class _MapHomePageState extends State<MapHomePage> {
                   onPressed: () {
                     Navigator.pop(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return const HomePage();
+                      return HomePage();
                     }));
                   },
                   style: ElevatedButton.styleFrom(

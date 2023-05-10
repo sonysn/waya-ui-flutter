@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:waya/screens/welcomepage.dart';
@@ -5,8 +7,21 @@ import 'package:flutter/services.dart';
 import 'package:waya/screens/profile/routes.dart';
 import 'package:waya/screens/messagesnotificationpage.dart';
 import 'package:waya/screens/editprofilepage.dart';
-void main() {
+
+import 'firebase_options.dart';
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // Get the device's FCM registration token
+  FirebaseMessaging.instance.getToken().then((token) {
+    print('FCM Token: $token');
+  }).catchError((err) {
+    print('Failed to get token: $err');
+  });
+
   //Set app orientation to portrait only
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
@@ -15,32 +30,6 @@ void main() {
           )));
 }
 
-// void findLoc() async{
-//   Location location = Location();
-//
-//   bool _serviceEnabled;
-//   PermissionStatus _permissionGranted;
-//   LocationData _locationData;
-//
-//   _serviceEnabled = await location.serviceEnabled();
-//   if (!_serviceEnabled) {
-//     _serviceEnabled = await location.requestService();
-//     if (!_serviceEnabled) {
-//       return;
-//     }
-//   }
-//
-//   _permissionGranted = await location.hasPermission();
-//   if (_permissionGranted == PermissionStatus.denied) {
-//     _permissionGranted = await location.requestPermission();
-//     if (_permissionGranted != PermissionStatus.granted) {
-//       return;
-//     }
-//   }
-//
-//   _locationData = await location.getLocation();
-//   print(_locationData);
-// }
 
 class WApp extends StatelessWidget {
   const WApp({Key? key}) : super(key: key);

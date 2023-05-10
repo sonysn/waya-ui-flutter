@@ -4,5 +4,8 @@ class ApiConstants {
   static String signInEndpoint = '/signin';
   static String signUpEndpoint = '/signup';
   static String requestRideEndpoint = '/requestride';
+  static String getRidePrice = '/getRidePrice';
   static String getRidesHistory = '/:userId/getridehistory';
+  static String getBalanceEndpoint = '/getbalance';
+  static String logoutEndpoint = '/logoutuser';
 }

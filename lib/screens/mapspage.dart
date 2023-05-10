@@ -5,9 +5,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:waya/api/actions.dart';
 
+import '../sockets/sockets.dart';
+
 class MapsPage extends StatefulWidget {
-  dynamic addressLoc;
-  MapsPage({Key? key, this.addressLoc}) : super(key: key);
+  final dynamic addressLoc;
+  final dynamic data;
+  const MapsPage({Key? key, this.addressLoc, this.data}) : super(key: key);
 
   @override
   State<MapsPage> createState() => _MapsPageState();
@@ -70,6 +73,13 @@ class _MapsPageState extends State<MapsPage> {
     super.initState();
     findLoc();
     print(widget.addressLoc);
+    ConnectToServer().connect(widget.data.id, context);
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    ConnectToServer().disconnect();
   }
 
   @override
@@ -146,7 +156,7 @@ class _MapsPageState extends State<MapsPage> {
                             alignment: AlignmentDirectional.bottomCenter,
                             child: ElevatedButton(
                                 onPressed: () {
-                                    requestRide("${widget.addressLoc.streetAddress} ${widget.addressLoc.region}", _dropOffLocationAddress, _currentLocation, _dropOffLocation);
+                                    requestRide("${widget.addressLoc.streetAddress} ${widget.addressLoc.region}", _dropOffLocationAddress, _currentLocation, _dropOffLocation, widget.data.token);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,

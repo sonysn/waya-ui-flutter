@@ -26,13 +26,13 @@ class _PasswordSettingsState extends State<PasswordSettings> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     size: 25,
                     color: kPrimaryColor,
                   ),
                 ),
-                Text(
+                const Text(
                     'Security',
                   style: TextStyle(fontSize: 30),
                 ),
@@ -47,7 +47,7 @@ class _PasswordSettingsState extends State<PasswordSettings> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
-                      return const ProfilePage();
+                      return ProfilePage();
                     }));
               },
               style: ElevatedButton.styleFrom(
@@ -74,7 +74,7 @@ class _PasswordSettingsState extends State<PasswordSettings> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                          return const ProfilePage();
+                          return ProfilePage();
                         }));
                   },
                   style: ElevatedButton.styleFrom(

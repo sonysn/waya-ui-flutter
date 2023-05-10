@@ -17,6 +17,11 @@ class _WelcomePageState extends State<WelcomePage> {
   var items = ['+234', '+233', '+235'];
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         //backgroundColor: Colors.orange,
@@ -81,7 +86,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
                               return VerificationPage(
-                                phoneNumber: dropdownValue + phoneInput.text
+                                  phoneNumber: dropdownValue + phoneInput.text
                               );
                             }));
                       },
@@ -93,9 +98,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               bottom: Radius.circular(20),
                             ),
                           )),
-                      child: const Text("Get Started",style: TextStyle(
-
-                          color: kTextColor))),
+                      child: const Text("Get Started")),
                 ),
                 const SizedBox(
                   height: 10,
@@ -108,7 +111,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         //print(dropdownValue + phoneInput.text);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return const LoginPage();
+                              return LoginPage();
                             }));
                       },
                       style: ElevatedButton.styleFrom(
@@ -119,9 +122,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               bottom: Radius.circular(20),
                             ),
                           )),
-                      child: const Text("Login", style: TextStyle(
-
-    color: kTextColor))),
+                      child: const Text("Login")),
                 ),
               ],
             ),

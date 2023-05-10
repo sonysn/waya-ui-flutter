@@ -35,7 +35,7 @@ dependencies:
   flutter_map: ^3.0.0
   geocode: ^1.0.2
 
-  flutter_svg: ^0.22.0 # help us to use SVG in our app
+  #flutter_svg: ^0.22.0 # help us to use SVG in our app
   provider: ^6.0.0 # for State management
   #Dependency from github
   time_greeting:
@@ -47,6 +47,12 @@ dependencies:
   http: ^0.13.5
   google_maps_flutter: ^2.2.3
   image_picker: ^0.8.6+2
+  shared_preferences: ^2.1.0
+  intl: ^0.18.1
+  flutter_local_notifications: ^14.0.0
+  flutter_inappwebview: ^5.7.2+3
+  firebase_core: ^2.10.0
+  firebase_messaging: ^14.4.1
 
 
 

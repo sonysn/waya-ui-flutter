@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/design_constants.dart';
 
@@ -29,7 +28,7 @@ class ProfileMenu extends StatelessWidget {
         onPressed: press,
         child: Row(
           children: [
-            SvgPicture.asset(
+            Image.asset(
               icon,
               color: kPrimaryColor,
               width: 20,

@@ -6,8 +6,8 @@ import 'package:waya/screens/profile/profilepage.dart';
 import 'package:waya/screens/bookingpage.dart';
 
 class BottomNavPage extends StatefulWidget {
-
-  const BottomNavPage({Key? key}) : super(key: key);
+  dynamic data;
+  BottomNavPage({Key? key, this.data}) : super(key: key);
 
   @override
   State<BottomNavPage> createState() => _BottomNavPageState();
@@ -15,17 +15,33 @@ class BottomNavPage extends StatefulWidget {
 
 class _BottomNavPageState extends State<BottomNavPage> {
   int _currentIndex = 0;
-  static const List<Widget> _childrenPages = <Widget>[
-    HomePage(),
-    BookingPage(),
-    WalletPage(),
-    ProfilePage()
+  dynamic data;
+  late final List<Widget> _childrenPages = <Widget>[
+    HomePage(
+      data: data
+    ),
+    BookingPage(
+      data: data
+    ),
+    WalletPage(
+      data: data
+    ),
+    ProfilePage(
+      data: data
+    )
   ];
 
   void onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    data = widget.data;
   }
 
   @override

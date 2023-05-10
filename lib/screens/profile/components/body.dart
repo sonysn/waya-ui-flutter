@@ -1,20 +1,36 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waya/screens/editprofile.dart';
 import 'package:waya/screens/helpcenter.dart';
 import 'package:waya/screens/addresssettings.dart';
 import 'package:waya/screens/passwordsettings.dart';
 
+import '../../../api/auth.dart';
+import '../../welcomepage.dart';
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  dynamic data;
+  Body({Key? key, this.data}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
 }
 
 class _BodyState extends State<Body> {
+  dynamic data;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    data = widget.data;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -31,7 +47,9 @@ class _BodyState extends State<Body> {
               icon: "assets/icons/User Icon.svg",
               press: () => Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return const EditProfile();
+                    return EditProfile(
+                      data: data
+                    );
                   }))),
           ProfileMenu(
             text: "Address",
@@ -74,9 +92,51 @@ class _BodyState extends State<Body> {
           ProfileMenu(
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
-            press: () {},
+            press: () async{
+              SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+
+              //define functions
+              void nav(){
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const WelcomePage()),
+                );
+              }
+
+              void showSnackBar(String message) {
+                final snackBar = SnackBar(
+                  content: Text(message),
+                  duration: const Duration(seconds: 3),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+
+              logout() async{
+                try {
+                  final response = await logOut(widget.data.id);
+                  if (response == 'logout success'){
+                    // Remove the content of emailOrPhone and password
+                    prefs.remove('emailOrPhone');
+                    prefs.remove('password');
+                    prefs.remove('deviceID');
+                    nav();
+                  }
+                } on SocketException catch (e) {
+                  print(e);
+                  showSnackBar('Logout failed. Please check your internet connection.');
+                } on TimeoutException catch (e) {
+                  print(e);
+                  showSnackBar('Request timed out. Please try again later.');
+                } catch (e) {
+                  print(e);
+                }
+              }
+              logout();
+            },
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
         ],
       ),
     );

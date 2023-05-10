@@ -5,7 +5,8 @@ import 'package:waya/screens/homepage.dart';
 import '../constants/design_constants.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+  final dynamic phoneNumber;
+  const SignUp({Key? key, required this.phoneNumber}) : super(key: key);
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -15,7 +16,7 @@ class _SignUpState extends State<SignUp> {
   //Todo Text editing controller holds the user input for program execution, the names are self explanatory of what they do or hold
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
-  TextEditingController phoneNumber = TextEditingController(text: 'phone');
+  TextEditingController phoneNumber = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController homeAddress = TextEditingController();
@@ -35,13 +36,13 @@ class _SignUpState extends State<SignUp> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 size: 25,
                 color: kPrimaryColor,
               ),
             ),
-            Text(
+            const Text(
               'Register',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -115,7 +116,7 @@ class _SignUpState extends State<SignUp> {
                         cursorColor: customPurple,
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
-                            hintText: 'Enter your First Name',
+                            hintText: 'Enter your Last Name',
                             contentPadding: EdgeInsets.all(15),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
@@ -151,7 +152,7 @@ class _SignUpState extends State<SignUp> {
                         cursorColor: customPurple,
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
-                            hintText: 'Enter your First Name',
+                            hintText: 'Enter your password',
                             contentPadding: EdgeInsets.all(15),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
@@ -187,19 +188,21 @@ class _SignUpState extends State<SignUp> {
                         readOnly: true,
                         cursorColor: customPurple,
                         keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                            hintText: 'hint: Phone Number',
-                            contentPadding: EdgeInsets.all(15),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Colors.black),
+                        decoration: InputDecoration(
+                            hintText: widget.phoneNumber,
+                            contentPadding: const EdgeInsets.all(15),
+                            enabledBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(15)),
+                              borderSide:
+                              BorderSide(color: Colors.black),
                             ),
                             filled: true,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Colors.yellow),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(15)),
+                              borderSide:
+                              BorderSide(color: Colors.yellow),
                             )),
                       ),
                     ],
@@ -224,18 +227,20 @@ class _SignUpState extends State<SignUp> {
                         cursorColor: customPurple,
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
-                            hintText: 'Enter your First Name',
+                            hintText: 'Enter your Email',
                             contentPadding: EdgeInsets.all(15),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(15)),
+                              borderSide:
+                              BorderSide(color: Colors.black),
                             ),
                             filled: true,
                             focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Colors.yellow),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(15)),
+                              borderSide:
+                              BorderSide(color: Colors.yellow),
                             )),
                       ),
                     ],
@@ -283,7 +288,7 @@ class _SignUpState extends State<SignUp> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return const BottomNavPage();
+                        return BottomNavPage();
                       }));
                     },
                     style: ElevatedButton.styleFrom(
@@ -300,7 +305,7 @@ class _SignUpState extends State<SignUp> {
                       child: Center(
                           child: Text(
                         'Sign Up',
-                        style: TextStyle(color: kPrimaryColor),
+                        style: TextStyle(color: Colors.white),
                       )),
                     )),
               ),

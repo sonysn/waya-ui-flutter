@@ -25,13 +25,13 @@ class _AddressSettingsState extends State<AddressSettings> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     size: 25,
                     color: Colors.black,
                   ),
                 ),
-                Text(
+                const Text(
                     'Address',
                   style: TextStyle(fontSize: 30),
                 ),
@@ -92,8 +92,8 @@ class _AddressSettingsState extends State<AddressSettings> {
 
 
 
-                    children: [
-                      const Icon(
+                    children: const [
+                      Icon(
                         Icons.edit_location_sharp,
                         size: 25.0,
                         color: customPurple,
@@ -161,8 +161,8 @@ class _AddressSettingsState extends State<AddressSettings> {
 
 
 
-                    children: [
-                      const Icon(
+                    children: const [
+                      Icon(
                         Icons.edit_location_sharp,
                         size: 25.0,
                         color: customPurple,
@@ -187,7 +187,7 @@ class _AddressSettingsState extends State<AddressSettings> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
-                      return const ProfilePage();
+                      return ProfilePage();
                     }));
               },
               style: ElevatedButton.styleFrom(

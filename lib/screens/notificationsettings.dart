@@ -131,8 +131,8 @@ class _NotificationSettingsState extends State<NotificationSettings> {
 
 
 
-                    children: [
-                      const Icon(
+                    children: const [
+                      Icon(
                         Icons.edit_location_sharp,
                         size: 25.0,
                         color: Colors.yellow,
@@ -157,7 +157,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
-                      return const ProfilePage();
+                      return ProfilePage();
                     }));
               },
               style: ElevatedButton.styleFrom(

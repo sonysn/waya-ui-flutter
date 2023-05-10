@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 class ProfilePic extends StatefulWidget {
@@ -21,6 +21,7 @@ class _ProfilePicState extends State<ProfilePic> {
       imageFile = image;
       file = File(imageFile.path);
     });
+    print(file);
   }
 
   dynamic imageFile;
@@ -59,7 +60,7 @@ class _ProfilePicState extends State<ProfilePic> {
                 onPressed: () {
                   pickProfilePic();
                 },
-                child: SvgPicture.asset("assets/icons/Camera Icon.svg"),
+                child: Image.asset("assets/icons/Camera Icon.svg"),
               ),
             ),
           )
