@@ -25,9 +25,12 @@ void main() async{
   //Set app orientation to portrait only
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-      .then((value) => runApp(const MaterialApp(
-            home: WApp(),
-          )));
+      .then((value) => runApp(
+    const RootRestorationScope(restorationId: 'root', child: MaterialApp(
+      restorationScopeId: 'app',
+      home: WApp(),
+    ))
+  ));
 }
 
 
