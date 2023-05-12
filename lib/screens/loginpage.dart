@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waya/screens/bottom_nav.dart';
 import '../api/auth.dart';
@@ -112,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isLoading ? const Center(child: CircularProgressIndicator(color: Colors.black,)) : Container(
+      body: _isLoading ? Center(child: LoadingAnimationWidget.waveDots(color: Colors.black, size: 70)) : Container(
         padding: const EdgeInsets.only(top: 10),
         margin: const EdgeInsets.symmetric(horizontal: 7),
         child: Column(
