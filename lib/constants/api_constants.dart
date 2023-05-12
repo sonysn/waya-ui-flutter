@@ -8,4 +8,5 @@ class ApiConstants {
   static String getRidesHistory = '/:userId/getridehistory';
   static String getBalanceEndpoint = '/getbalance';
   static String logoutEndpoint = '/logoutuser';
+  static String chargeEndpoint = '/charge';
 }

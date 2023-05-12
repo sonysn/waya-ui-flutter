@@ -7,6 +7,7 @@ import 'package:waya/widgets/transaction_card.dart';
 import 'package:waya/screens/transactionhistory.dart';
 
 import '../api/actions.dart';
+import 'cash_deposit_page.dart';
 
 class WalletPage extends StatefulWidget {
   final dynamic data;
@@ -22,7 +23,7 @@ class _WalletPageState extends State<WalletPage> {
 
   Stream<String> get stream => _streamController.stream;
 
-  Future _getAccountBalance() async{
+  Future _getAccountBalance() async {
     final response = await getBalance(widget.data.id, widget.data.phoneNumber);
     print(response);
     _streamController.add(response);
@@ -69,10 +70,7 @@ class _WalletPageState extends State<WalletPage> {
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return MyCard(
-                            data: widget.data,
-                            stream: stream
-                        );
+                        return MyCard(data: widget.data, stream: stream);
                       }),
                 ),
                 SizedBox(
@@ -84,13 +82,14 @@ class _WalletPageState extends State<WalletPage> {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          // navigate to withdrawal page or function
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (BuildContext context) {
-                          //       // return CashDepositPage(
-                          //       //     email: widget.data.email
-                          //       // );
-                          //     }));
+                          //navigate to withdrawal page or function
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return CashDepositPage(
+                                id: widget.data.id,
+                                phone: widget.data.phoneNumber,
+                                email: widget.data.email);
+                          }));
                         },
                         child: Column(
                           children: const [
