@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 import '../constants/api_constants.dart';
@@ -8,8 +9,15 @@ import '../constants/api_constants.dart';
 var baseUri = 'http://192.168.100.43:3000';
 
 //testing code
-Future requestRide(
-    currentLocationAddress, dropOffLocationAddress, currentLocationPoint, dropOffLocationPoint, authBearer) async {
+Future requestRide({
+  required int userID,
+  required String currentLocationAddress,
+  required String dropOffLocationAddress,
+  required int fare,
+  required dynamic currentLocationPoint,
+  required dynamic dropOffLocationPoint,
+  required String authBearer,
+}) async {
   final http.Response response =
       await http.post(Uri.parse('$baseUri${ApiConstants.requestRideEndpoint}'),
           headers: {
@@ -17,17 +25,16 @@ Future requestRide(
             "Authorization": 'Bearer $authBearer'
           },
           body: jsonEncode({
-            "userId": 59,
+            "userId": userID,
             "pickupLocation": currentLocationAddress,
             "dropoffLocation": dropOffLocationAddress,
-            "estFare": 500,
-            "surge": 0,
+            "estFare": fare,
             "pickupLocationPosition": currentLocationPoint,
             "dropoffLocationPostion": dropOffLocationPoint,
             "status": "ONGOING"
           }));
   final data = await jsonDecode(response.body);
-  print(data);
+  // print(data);
   return data;
 }
 
