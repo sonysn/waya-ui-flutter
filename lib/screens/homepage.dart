@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:waya/screens/editprofilepage.dart';
 import 'package:waya/size_config.dart';
+import 'package:geocoding/geocoding.dart' as locationGeocodingPackage;
 
 class HomePage extends StatefulWidget {
   final dynamic data;
@@ -61,20 +62,17 @@ class _HomePageState extends State<HomePage> {
     print(myLocationHome?.latitude);
 
     void getAddressLoc() async {
-      GeoCode geoCode = GeoCode();
+      List placeMarks = await locationGeocodingPackage.placemarkFromCoordinates(
+          double.parse(locationDataSpot.latitude.toString()), double.parse(locationDataSpot.longitude.toString()));
 
       try {
-        Address address = await geoCode.reverseGeocoding(
-            latitude: double.parse(locationDataSpot.latitude.toString()),
-            longitude: double.parse(locationDataSpot.longitude.toString()));
+        locationGeocodingPackage.Placemark place = placeMarks[0];
         setState(() {
-          addressLoc = address;
+          addressLoc = "${place.street}, ${place.subAdministrativeArea}, ${place.administrativeArea}";
         });
         print(addressLoc);
       } catch (e) {
         print(e);
-        await Future.delayed(const Duration(milliseconds: 500));
-        getAddressLoc();
       }
     }
 
@@ -83,7 +81,7 @@ class _HomePageState extends State<HomePage> {
 
   String? greeting;
   dynamic myLocationHome;
-  Address? addressLoc;
+  String? addressLoc;
 
   @override
   void initState() {
@@ -171,8 +169,8 @@ class _HomePageState extends State<HomePage> {
                                     Navigator.push(context, MaterialPageRoute(
                                         builder: (BuildContext context) {
                                       return MapsPage(
-                                          data: widget.data,
-                                          addressLoc: addressLoc);
+                                          data: widget.data
+                                      );
                                     }));
                                   },
                                 ),
@@ -252,7 +250,7 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                             Flexible(
                                               child: Text(
-                                                "${addressLoc?.streetNumber}, ${addressLoc?.streetAddress}, \n${addressLoc?.region}.",
+                                                addressLoc!,
                                                 overflow: TextOverflow.visible,
                                                 style:
                                                     const TextStyle(fontSize: 10),
