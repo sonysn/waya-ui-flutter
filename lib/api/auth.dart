@@ -4,8 +4,8 @@ import '../constants/api_constants.dart';
 import '../models/auth.dart';
 
 //todo base uri value here
-var baseUri = 'http://192.168.100.43:3000';
-//var baseUri = 'https://waya-api.onrender.com';
+// var baseUri = 'http://192.168.100.43:3000';
+var baseUri = 'https://waya-api.onrender.com';
 
 Future signIn(emailOrPhone, password, deviceID) async {
   final http.Response response = await http.post(

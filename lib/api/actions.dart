@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 import '../constants/api_constants.dart';
 
 //todo base uri value here
-var baseUri = 'http://192.168.100.43:3000';
+// var baseUri = 'http://192.168.100.43:3000';
+var baseUri = 'https://waya-api.onrender.com';
 
 //testing code
 Future requestRide({

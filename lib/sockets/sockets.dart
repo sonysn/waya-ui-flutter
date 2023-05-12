@@ -31,11 +31,12 @@ class ConnectToServer {
             showModalBottomSheet<void>(
               context: context,
               builder: (BuildContext context) {
-                return const AcceptedRideCard(
-                    name: 'John Doe',
-                    pickupLocation: '123 Main St.',
-                    dropoffLocation: '456 Oak Ave.',
-                    fare: 25.00
+                return AcceptedRideCard(
+                  imageUrl: data['driverPhoto'],
+                  vehicleName: data['vehicleName'],
+                  vehicleColour: data['vehicleColour'],
+                  vehiclePlateNumber: data['vehiclePlateNumber'],
+                  driverPhone: data['driverPhone'],
                 );
               },
             );
@@ -65,23 +66,25 @@ class ConnectToServer {
 }
 
 class AcceptedRideCard extends StatelessWidget {
-  final String name;
-  final String pickupLocation;
-  final String dropoffLocation;
-  final double fare;
+  final String imageUrl;
+  final String vehicleName;
+  final String vehiclePlateNumber;
+  final String vehicleColour;
+  final String driverPhone;
 
   const AcceptedRideCard({
     Key? key,
-    required this.name,
-    required this.pickupLocation,
-    required this.dropoffLocation,
-    required this.fare,
+    required this.imageUrl,
+    required this.vehicleName,
+    required this.vehiclePlateNumber,
+    required this.vehicleColour,
+    required this.driverPhone,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 220,
+      height: 300,
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -99,86 +102,42 @@ class AcceptedRideCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                'Hello, $name is requesting a ride',
-                style: const TextStyle(
+              const Text(
+                'Hello, a driver accepted your request',
+                style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
-                    child: Text(
-                      'From: $pickupLocation',
-                      overflow: TextOverflow.visible,
-                    ),
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: NetworkImage(imageUrl),
                   ),
-                  Flexible(
-                    child: Text(
-                      'To: $dropoffLocation',
-                      overflow: TextOverflow.visible,
-                    ),
-                  ),
+                  const SizedBox(height: 5),
                 ],
               ),
-
               const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Fare: ₦${fare.toStringAsFixed(2)}',
+                    '$vehicleName - $vehiclePlateNumber',
                     style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 10,
-                          ),
-                        ),
-                        child: const Text(
-                          'Cancel',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 10,
-                          ),
-                        ),
-                        child: const Text(
-                          'Accept',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    'Color: $vehicleColour',
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
                 ],
-              ),
+              )
             ],
           ),
         ),

@@ -27,6 +27,7 @@ bool showButtonWidget = false;
 class _MapsPageState extends State<MapsPage> {
   late GoogleMapController mapController;
   late final LatLng _center = _currentLocation;
+  LatLng? carPosition;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -71,8 +72,6 @@ class _MapsPageState extends State<MapsPage> {
     print(_currentLocation);
   }
 
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -85,6 +84,8 @@ class _MapsPageState extends State<MapsPage> {
   void dispose() {
     super.dispose();
     ConnectToServer().disconnect();
+    _currentLocation == null;
+    _dropOffLocation == null;
   }
 
   @override
@@ -100,6 +101,13 @@ class _MapsPageState extends State<MapsPage> {
                         markerId: const MarkerId("1"),
                         position: _center,
                       ),
+                      if (carPosition != null)
+                        Marker(
+                          markerId: const MarkerId("car"),
+                          position: carPosition!,
+                          icon: BitmapDescriptor.defaultMarkerWithHue(
+                              BitmapDescriptor.hueBlue),
+                        ),
                     },
                     onMapCreated: _onMapCreated,
                     initialCameraPosition: CameraPosition(
@@ -142,34 +150,49 @@ class _MapsPageState extends State<MapsPage> {
                             child: Visibility(
                               visible: showButtonWidget,
                               child: ElevatedButton(
-                                  onPressed: () async{
+                                  onPressed: () async {
+                                    final res = await getRidePrice(
+                                        currentLocationPoint: _currentLocation,
+                                        dropOffLocationPoint: _dropOffLocation);
 
-                                    final res = await getRidePrice(currentLocationPoint: _currentLocation, dropOffLocationPoint: _dropOffLocation);
-
-                                    if(res != null){
-                                      void request(){
+                                    if (res != null) {
+                                      void request() {
                                         requestRide(
                                             userID: widget.data.id,
-                                            currentLocationAddress: _currentLocationAddress,
-                                            dropOffLocationAddress: _dropOffLocationAddress,
-                                            fare: double.parse(res.toString()).ceil(),
-                                            currentLocationPoint: _currentLocation,
-                                            dropOffLocationPoint:  _dropOffLocation,
-                                            authBearer:  widget.data.token);
+                                            currentLocationAddress:
+                                                _currentLocationAddress,
+                                            dropOffLocationAddress:
+                                                _dropOffLocationAddress,
+                                            fare: double.parse(res.toString())
+                                                .ceil(),
+                                            currentLocationPoint:
+                                                _currentLocation,
+                                            dropOffLocationPoint:
+                                                _dropOffLocation,
+                                            authBearer: widget.data.token);
                                       }
+
                                       try {
                                         showModalBottomSheet<void>(
                                           context: context,
                                           builder: (BuildContext context) {
                                             //rounds up the price to larger whole number
-                                            return CheckPrice(price: double.parse(res.toString()).ceil(), buttonPress: request);
+                                            return CheckPrice(
+                                              price:
+                                                  double.parse(res.toString())
+                                                      .ceil(),
+                                              buttonPress: request,
+                                              startLocation:
+                                                  _currentLocationAddress,
+                                              destinationLocation:
+                                                  _dropOffLocationAddress,
+                                            );
                                           },
                                         );
                                       } catch (e) {
                                         print('Error showing bottom sheet: $e');
                                       }
                                     }
-
                                   },
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.white,
@@ -279,7 +302,8 @@ class _MySearchBarState extends State<MySearchBar> {
     _locationController.text =
         "${place.street}, ${place.subAdministrativeArea}, ${place.administrativeArea}";
     setState(() {
-      _currentLocationAddress = "${place.street}, ${place.subAdministrativeArea}, ${place.administrativeArea}";
+      _currentLocationAddress =
+          "${place.street}, ${place.subAdministrativeArea}, ${place.administrativeArea}";
     });
   }
 
@@ -343,14 +367,22 @@ class _MySearchBarState extends State<MySearchBar> {
 //TODO DESIGN THIS
 class CheckPrice extends StatelessWidget {
   final int price;
+  final String startLocation;
+  final String destinationLocation;
   final Function buttonPress;
 
-  const CheckPrice({Key? key, required this.price, required this.buttonPress}) : super(key: key);
+  const CheckPrice(
+      {Key? key,
+      required this.price,
+      required this.buttonPress,
+      required this.startLocation,
+      required this.destinationLocation})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 220,
+        height: 250,
         child: Card(
           child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -372,9 +404,30 @@ class CheckPrice extends StatelessWidget {
                       child: Text("Your Trip will cost ₦$price"),
                     ),
                     const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            'From: $startLocation',
+                            overflow: TextOverflow.visible,
+                          ),
+                        ),
+                        const Icon(Icons.arrow_forward),
+                        Flexible(
+                          child: Text(
+                            'To: $destinationLocation',
+                            overflow: TextOverflow.visible,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
                     Center(
                       child: ElevatedButton(
-                          onPressed: () async { buttonPress(); },
+                          onPressed: () async {
+                            buttonPress();
+                          },
                           style: ElevatedButton.styleFrom(
                               primary: customPurple,
                               shape: const RoundedRectangleBorder(
@@ -392,7 +445,9 @@ class CheckPrice extends StatelessWidget {
                     const SizedBox(height: 10),
                     Center(
                       child: ElevatedButton(
-                          onPressed: () async { Navigator.pop(context); },
+                          onPressed: () async {
+                            Navigator.pop(context);
+                          },
                           style: ElevatedButton.styleFrom(
                               primary: customPurple,
                               shape: const RoundedRectangleBorder(
