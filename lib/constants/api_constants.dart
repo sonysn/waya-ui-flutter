@@ -9,4 +9,5 @@ class ApiConstants {
   static String getBalanceEndpoint = '/getbalance';
   static String logoutEndpoint = '/logoutuser';
   static String chargeEndpoint = '/charge';
+  static String driverCountEndpoint = '/driverCount';
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 import '../constants/api_constants.dart';
@@ -49,7 +49,17 @@ Future getRidePrice({required dynamic currentLocationPoint, required dynamic dro
         "dropoffLocationPostion": dropOffLocationPoint
       }));
   final data = await jsonDecode(response.body);
-  print(data);
+  // print(data);
+  return data;
+}
+
+Future driverCount(location) async{
+  final http.Response response =
+  await http.get(Uri.parse('$baseUri/$location${ApiConstants.driverCountEndpoint}'),
+      headers: {
+        "Content-Type": "application/json",
+      });
+  final data = json.decode(response.body);
   return data;
 }
 

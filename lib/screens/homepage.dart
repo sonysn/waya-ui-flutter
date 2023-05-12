@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:time_greeting/time_greeting.dart';
 import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geocode/geocode.dart';
+import 'package:waya/api/actions.dart';
 import 'package:waya/screens/maphomepage.dart';
 import 'package:waya/screens/mapspage.dart';
 import 'package:waya/screens/search_locationpage.dart';
@@ -77,11 +79,24 @@ class _HomePageState extends State<HomePage> {
     }
 
     getAddressLoc();
+    Future<void> updateDriverCount() async {
+      // Get driver count and wait for the result to complete
+      final count = await driverCount(
+          "${double.parse(locationDataSpot.latitude.toString())}, ${double.parse(locationDataSpot.longitude.toString())}"
+      );
+
+      // Update state with the driver count
+      setState(() {
+        driverCounter = count;
+      });
+    }
+    updateDriverCount();
   }
 
   String? greeting;
   dynamic myLocationHome;
   String? addressLoc;
+  dynamic driverCounter;
 
   @override
   void initState() {
@@ -110,7 +125,7 @@ class _HomePageState extends State<HomePage> {
         final double padding = width > 600 ? 40 : 20;
 
         return Scaffold(
-            body: addressLoc != null
+            body: addressLoc != null && driverCounter != null
                 ? ListView(
                     children: [
                       Container(
@@ -240,10 +255,15 @@ class _HomePageState extends State<HomePage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const Text(
-                                              "27 rides",
-                                              style: TextStyle(fontSize: 30),
+                                            Text(
+                                              driverCounter == 1
+                                                  ? "$driverCounter ride"
+                                                  : driverCounter == 0
+                                                  ? "No rides"
+                                                  : "$driverCounter rides",
+                                              style: const TextStyle(fontSize: 30),
                                             ),
+
                                             const Text(
                                               "Around You",
                                               style: TextStyle(fontSize: 25),
@@ -304,14 +324,14 @@ class _HomePageState extends State<HomePage> {
                                                 MainAxisAlignment.center,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
-                                            children: const [
-                                              Text(
+                                            children: [
+                                              const Text(
                                                 'Your Balance',
                                                 style: TextStyle(fontSize: 18),
                                               ),
                                               Text(
-                                                "₦10,000.00",
-                                                style: TextStyle(fontSize: 15),
+                                                "₦${widget.data.accountBalance}",
+                                                style: const TextStyle(fontSize: 15),
                                               ),
                                             ],
                                           )
@@ -383,8 +403,8 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   )
-                : const Center(
-                    child: CircularProgressIndicator(),
+                : Center(
+                    child: LoadingAnimationWidget.waveDots(color: Colors.black, size: 70),
                   ));
       },
     );
