@@ -65,12 +65,14 @@ class _HomePageState extends State<HomePage> {
 
     void getAddressLoc() async {
       List placeMarks = await locationGeocodingPackage.placemarkFromCoordinates(
-          double.parse(locationDataSpot.latitude.toString()), double.parse(locationDataSpot.longitude.toString()));
+          double.parse(locationDataSpot.latitude.toString()),
+          double.parse(locationDataSpot.longitude.toString()));
 
       try {
         locationGeocodingPackage.Placemark place = placeMarks[0];
         setState(() {
-          addressLoc = "${place.street}, ${place.subAdministrativeArea}, ${place.administrativeArea}";
+          addressLoc =
+              "${place.street}, ${place.subAdministrativeArea}, ${place.administrativeArea}";
         });
         print(addressLoc);
       } catch (e) {
@@ -82,14 +84,14 @@ class _HomePageState extends State<HomePage> {
     Future<void> updateDriverCount() async {
       // Get driver count and wait for the result to complete
       final count = await driverCount(
-          "${double.parse(locationDataSpot.latitude.toString())}, ${double.parse(locationDataSpot.longitude.toString())}"
-      );
+          "${double.parse(locationDataSpot.latitude.toString())}, ${double.parse(locationDataSpot.longitude.toString())}");
 
       // Update state with the driver count
       setState(() {
         driverCounter = count;
       });
     }
+
     updateDriverCount();
   }
 
@@ -125,7 +127,7 @@ class _HomePageState extends State<HomePage> {
         final double padding = width > 600 ? 40 : 20;
 
         return Scaffold(
-            body: addressLoc != null && driverCounter != null
+            body: addressLoc != null
                 ? ListView(
                     children: [
                       Container(
@@ -183,9 +185,7 @@ class _HomePageState extends State<HomePage> {
                                   onTap: () {
                                     Navigator.push(context, MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                      return MapsPage(
-                                          data: widget.data
-                                      );
+                                      return MapsPage(data: widget.data);
                                     }));
                                   },
                                 ),
@@ -255,15 +255,20 @@ class _HomePageState extends State<HomePage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              driverCounter == 1
-                                                  ? "$driverCounter ride"
-                                                  : driverCounter == 0
-                                                  ? "No rides"
-                                                  : "$driverCounter rides",
-                                              style: const TextStyle(fontSize: 30),
-                                            ),
-
+                                            driverCounter != null
+                                                ? Text(
+                                                    driverCounter == 1
+                                                        ? "$driverCounter ride"
+                                                        : driverCounter == 0
+                                                            ? "No rides"
+                                                            : "$driverCounter rides",
+                                                    style: const TextStyle(
+                                                        fontSize: 30),
+                                                  )
+                                                : const CircularProgressIndicator(
+                                                    color: Colors.black,
+                                                    strokeWidth: 2,
+                                                  ),
                                             const Text(
                                               "Around You",
                                               style: TextStyle(fontSize: 25),
@@ -272,8 +277,8 @@ class _HomePageState extends State<HomePage> {
                                               child: Text(
                                                 addressLoc!,
                                                 overflow: TextOverflow.visible,
-                                                style:
-                                                    const TextStyle(fontSize: 10),
+                                                style: const TextStyle(
+                                                    fontSize: 10),
                                               ),
                                             ),
                                           ],
@@ -331,7 +336,8 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                               Text(
                                                 "₦${widget.data.accountBalance}",
-                                                style: const TextStyle(fontSize: 15),
+                                                style: const TextStyle(
+                                                    fontSize: 15),
                                               ),
                                             ],
                                           )
@@ -404,7 +410,8 @@ class _HomePageState extends State<HomePage> {
                     ],
                   )
                 : Center(
-                    child: LoadingAnimationWidget.waveDots(color: Colors.black, size: 70),
+                    child: LoadingAnimationWidget.waveDots(
+                        color: Colors.black, size: 70),
                   ));
       },
     );
