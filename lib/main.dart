@@ -14,6 +14,7 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  //git test//
 
   // Get the device's FCM registration token
   FirebaseMessaging.instance.getToken().then((token) {
