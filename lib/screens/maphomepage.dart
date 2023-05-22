@@ -276,28 +276,35 @@ class _MapHomePageState extends State<MapHomePage> {
             ),
           ),
           Positioned(
-            left: 0,
-            right: 0,
-            bottom: 25,
+           
             height: MediaQuery.of(context).size.width / 5,
             child: ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    void _state() async{
-                      //driverFound = await requestRide("${widget.addressLoc?.streetNumber}, ${widget.addressLoc?.streetAddress}, \n${widget.addressLoc?.region}.", "6.501871, 3.373521", tappedLocationD);
-                    }
-                    _state();
+                void _state() async{
+                  //driverFound = await requestRide("${widget.addressLoc?.streetNumber}, ${widget.addressLoc?.streetAddress}, \n${widget.addressLoc?.region}.", "6.501871, 3.373521", tappedLocationD);
+                }
+                _state();
+              });
+              //
+              showModalBottomSheet<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const BottomDialog();
                   });
-                  //
-                  showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const BottomDialog();
-                      });
-                  //
-                  print(driverFound);
-                },
-                child: const Text('Request ride')),
+              //
+              print(driverFound);
+            },
+                //style: ElevatedButton.styleFrom(
+               //     backgroundColor: customPurple,
+                //    shape: const RoundedRectangleBorder(
+                //      borderRadius: BorderRadius.vertical(
+                 //       top: Radius.circular(10),
+                   //     bottom: Radius.circular(10),
+                  //    ),
+                  //  )),
+                child: const Text("Reqt ride")),
+
             // child: GestureDetector(
             //   onTap: (){
             //     Navigator.push(context,

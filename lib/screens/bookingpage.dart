@@ -21,7 +21,7 @@ class _BookingPageState extends State<BookingPage>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 1,
       child: Scaffold(
           body: Container(
         padding: const EdgeInsets.only(top: 40),
@@ -54,20 +54,15 @@ class _BookingPageState extends State<BookingPage>
                 unselectedLabelColor: Colors.black,
                 tabs: const [
                   Tab(
-                    text: 'Active Now',
+                    text: 'Ride History',
                   ),
-                  Tab(
-                    text: 'Completed',
-                  ),
-                  Tab(
-                    text: 'Cancelled',
-                  ),
+
                 ],
               ),
             ),
             const Expanded(
                 child: TabBarView(
-              children: [ActivePage(), CompletedPage(), CancelledPage()],
+              children: [ CompletedPage()],
             ))
           ],
         ),
@@ -76,59 +71,47 @@ class _BookingPageState extends State<BookingPage>
   }
 }
 
-class ActivePage extends StatelessWidget {
-  const ActivePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [Image.asset("assets/images/cp.png"),
-        const Text(
-          'You have no Active Bookings',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        )
-      ],
-    ));
-  }
-}
-
 class CompletedPage extends StatelessWidget {
-  const CompletedPage({super.key});
+  const CompletedPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset("assets/images/cp.png"),
-            const Text(
-              'You have no Completed Bookings',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            )
-          ],
-        ));
-  }
-}
+    // TODO: Replace this with the actual booking data
+    final List<dynamic> bookings = [];
 
-class CancelledPage extends StatelessWidget {
-  const CancelledPage({super.key});
+    if (bookings.isEmpty) {
+      return SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset("assets/images/cp.png"),
+              const SizedBox(height: 20),
+              const Text(
+                'You have no Completed Bookings',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-                "assets/images/cp.png",),
-            const Text(
-              'You have no Cancelled Bookings',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            )
-          ],
-        ));
+    return ListView.builder(
+      itemCount: bookings.length,
+      itemBuilder: (context, index) {
+        final booking = bookings[index];
+
+        return Card(
+          // TODO: Customize card styling as per your design
+          child: ListTile(
+            // TODO: Display booking information
+            title: Text('Booking ID: ${booking.id}'),
+            subtitle: Text('Date: ${booking.date}'),
+            trailing: Text('Status: ${booking.status}'),
+          ),
+        );
+      },
+    );
   }
 }

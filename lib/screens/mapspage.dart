@@ -327,7 +327,7 @@ class _MySearchBarState extends State<MySearchBar> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white70,
-      margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 450),
+      margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 400),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         children: [
@@ -381,88 +381,151 @@ class CheckPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: 250,
-        child: Card(
-          child: Padding(
-              padding: const EdgeInsets.all(8.0),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Container(
+          height: constraints.maxHeight,
+          child: Card(
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Card(
-                        elevation: 0,
-                        color: Colors.black,
-                        child: SizedBox(
-                          height: 7,
-                          width: MediaQuery.of(context).size.width / 2.5,
-                        ),
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: 7,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  SizedBox(height: 24),
+                  Text(
+                    "Your Trip Cost",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "₦$price",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 10),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'From: ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Flexible(
+                            child: Text(
+                              '$startLocation',
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 3),
+                      Center(
+                        child: Icon(Icons.keyboard_arrow_down),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 3),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'To: ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Flexible(
+                            child: Text(
+                              '$destinationLocation',
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 1),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  ElevatedButton(
+                    onPressed: () async {
+                      buttonPress();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: customPurple,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: Text(
+                      'Request Ride',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Center(
-                      child: Text("Your Trip will cost ₦$price"),
+                  ),
+                  SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 16),
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            'From: $startLocation',
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                        const Icon(Icons.arrow_forward),
-                        Flexible(
-                          child: Text(
-                            'To: $destinationLocation',
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SizedBox(height: 10),
-                    Center(
-                      child: ElevatedButton(
-                          onPressed: () async {
-                            buttonPress();
-                          },
-                          style: ElevatedButton.styleFrom(
-                              primary: customPurple,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(20),
-                                  bottom: Radius.circular(20),
-                                ),
-                              )),
-                          child: const SizedBox(
-                            width: 260,
-                            height: 50,
-                            child: Center(child: Text('Request Ride')),
-                          )),
-                    ),
-                    const SizedBox(height: 10),
-                    Center(
-                      child: ElevatedButton(
-                          onPressed: () async {
-                            Navigator.pop(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                              primary: customPurple,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(20),
-                                  bottom: Radius.circular(20),
-                                ),
-                              )),
-                          child: const SizedBox(
-                            width: 260,
-                            height: 50,
-                            child: Center(child: Text('Cancel')),
-                          )),
-                    ),
-                  ])),
-        ));
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
+
 }
