@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilePic extends StatefulWidget {
@@ -12,8 +12,7 @@ class ProfilePic extends StatefulWidget {
 }
 
 class _ProfilePicState extends State<ProfilePic> {
-
-  void pickProfilePic() async{
+  void pickProfilePic() async {
     final ImagePicker picker = ImagePicker();
     // Pick an image
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -35,13 +34,13 @@ class _ProfilePicState extends State<ProfilePic> {
       child: Stack(
         fit: StackFit.expand,
         clipBehavior: Clip.none,
-        children: [ imageFile == null
-         ? const CircleAvatar(
-            backgroundImage: AssetImage("assets/images/h.jpeg")
-          ) :
-            CircleAvatar(
-              backgroundImage: FileImage(file!),
-            ),
+        children: [
+          imageFile == null
+              ? const CircleAvatar(
+                  backgroundImage: AssetImage("assets/images/h.jpeg"))
+              : CircleAvatar(
+                  backgroundImage: FileImage(file!),
+                ),
           Positioned(
             right: -16,
             bottom: 0,
@@ -50,7 +49,7 @@ class _ProfilePicState extends State<ProfilePic> {
               width: 46,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder( 
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
                     side: const BorderSide(color: Colors.white),
                   ),
@@ -60,7 +59,7 @@ class _ProfilePicState extends State<ProfilePic> {
                 onPressed: () {
                   pickProfilePic();
                 },
-                child: Image.asset("assets/icons/Camera Icon.svg"),
+                child: SvgPicture.asset("assets/icons/Camera Icon.svg"),
               ),
             ),
           )
