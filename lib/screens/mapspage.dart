@@ -74,7 +74,6 @@ class _MapsPageState extends State<MapsPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     findLoc();
     ConnectToServer().connect(widget.data.id, context);
@@ -96,6 +95,8 @@ class _MapsPageState extends State<MapsPage> {
             ? SafeArea(
                 child: Stack(children: [
                   GoogleMap(
+                    zoomControlsEnabled: false,
+                    trafficEnabled: true,
                     markers: <Marker>{
                       Marker(
                         markerId: const MarkerId("1"),
@@ -195,12 +196,22 @@ class _MapsPageState extends State<MapsPage> {
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      padding: const EdgeInsets.all(18),
-                                      disabledBackgroundColor: Colors.grey),
-                                  child: const Text(
-                                    'Request ride',
-                                    style: TextStyle(color: Colors.black),
+                                      primary: customPurple,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(20),
+                                          bottom: Radius.circular(20),
+                                        ),
+                                      )),
+                                  child: const SizedBox(
+                                    width: 200,
+                                    height: 50,
+                                    child: Center(
+                                      child: Text(
+                                        'Request ride',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
                                   )),
                             ),
                           ),
@@ -383,149 +394,202 @@ class CheckPrice extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        return Container(
+        return SizedBox(
           height: constraints.maxHeight,
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    height: 7,
-                    decoration: BoxDecoration(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Center(
+                  child: Card(
+                    elevation: 0,
+                    color: Colors.black,
+                    child: SizedBox(
+                      height: 7,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  "Your Trip Cost",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  "₦$price",
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'From: ',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            startLocation,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                    const Center(
+                      child: Icon(Icons.keyboard_arrow_down),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 3),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'To: ',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            destinationLocation,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 1),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                ElevatedButton(
+                  onPressed: () async {
+                    buttonPress();
+                    //TODO JOHN WATCH THIS1
+                    Navigator.pop(context);
+                    showCustomDialog(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: customPurple,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text(
+                    'Request Ride',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                       color: Colors.black,
-                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  SizedBox(height: 24),
-                  Text(
-                    "Your Trip Cost",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "₦$price",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 10),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'From: ',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Flexible(
-                            child: Text(
-                              '$startLocation',
-                              style: TextStyle(
-                                fontSize: 14,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 3),
-                      Center(
-                        child: Icon(Icons.keyboard_arrow_down),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 3),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'To: ',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Flexible(
-                            child: Text(
-                              '$destinationLocation',
-                              style: TextStyle(
-                                fontSize: 14,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 1),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  ElevatedButton(
-                    onPressed: () async {
-                      buttonPress();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: customPurple,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    child: Text(
-                      'Request Ride',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[300],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );
       },
     );
   }
+}
 
+class CustomDialogWidget extends StatefulWidget {
+  const CustomDialogWidget({super.key});
+
+  @override
+  State<CustomDialogWidget> createState() => _CustomDialogWidgetState();
+}
+
+class _CustomDialogWidgetState extends State<CustomDialogWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: SizedBox(
+        width: 300,
+        child: SizedBox(
+          height: 150,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const LinearProgressIndicator(
+                color: Colors.black,
+                backgroundColor: Colors.white,
+              ),
+              const Center(
+                child: Text('Searching for a Driver'),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    dismissCustomDialog(context);
+                  },
+                  child: const Text("data"))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+void dismissCustomDialog(BuildContext context) {
+  Navigator.of(context).pop();
+}
+
+void showCustomDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    barrierColor: Colors.black54.withOpacity(0.8),
+    builder: (context) {
+      return const CustomDialogWidget();
+    },
+  );
 }
