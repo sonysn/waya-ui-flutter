@@ -1,17 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../../../colorscheme.dart';
-import 'package:waya/widgets/my_card.dart';
-import 'package:waya/widgets/transaction_card.dart';
-import 'package:waya/screens/transactionhistory.dart';
+import 'package:waya/api/actions.dart';
+import 'package:waya/api/payments.dart';
+import 'package:waya/screens/cash_deposit_page.dart';
 import 'package:waya/screens/transfers.dart';
-import '../api/actions.dart';
-import 'cash_deposit_page.dart';
+import '../../../colorscheme.dart';
+import 'package:waya/screens/widgets/transaction_card.dart';
+import 'package:waya/screens/transactionhistory.dart';
+import 'package:waya/screens/widgets/my_card.dart';
+
 
 class WalletPage extends StatefulWidget {
   final dynamic data;
-
   const WalletPage({Key? key, this.data}) : super(key: key);
 
   @override
@@ -22,18 +23,34 @@ class _WalletPageState extends State<WalletPage> {
   final _streamController = StreamController<String>.broadcast();
 
   Stream<String> get stream => _streamController.stream;
+  List earnings = [];
+  //bring the most recent from the server on reqest
+  List reversedEarnings = [];
+  List transactions = [];
+  List reversedTransactions = [];
 
   Future _getAccountBalance() async {
     final response = await getBalance(widget.data.id, widget.data.phoneNumber);
-    print(response);
+    debugPrint(response);
     _streamController.add(response);
   }
 
+
+  //TODO BY STEPHEN
+  //Future _getDepositTransactions() async {
+  //  final response = await getDepositHistory(userID: widget.data.id);
+    //print(response);
+   // setState(() {
+    //  transactions.addAll(response);
+    //  reversedTransactions = transactions.reversed.toList();
+   // });
+ // }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getAccountBalance();
+    //_getDepositTransactions();  TODO BY STEPHEN
   }
 
   @override
@@ -57,23 +74,24 @@ class _WalletPageState extends State<WalletPage> {
                 const SizedBox(
                   height: 30,
                 ),
-                Container(
+                SizedBox(
                   height: 180,
                   child: ListView.separated(
-                      physics: const ClampingScrollPhysics(),
-                      separatorBuilder: (context, index) {
-                        return SizedBox(
-                          width: 8,
-                        );
-                      },
-                      itemCount: 1,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return MyCard(data: widget.data, stream: stream);
-                      }),
+                    physics: const ClampingScrollPhysics(),
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        width: 8,
+                      );
+                    },
+                    itemCount: 1,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return MyCard(data: widget.data, stream: stream);
+                    },
+                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Row(
@@ -114,7 +132,8 @@ class _WalletPageState extends State<WalletPage> {
                             context,
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return TransferPage(phoneNumber: widget.data.phoneNumber);
+                                return TransferPage(
+                                    phoneNumber: widget.data.phoneNumber);
                               },
                             ),
                           );
@@ -130,42 +149,75 @@ class _WalletPageState extends State<WalletPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
+                ),
+                const SizedBox(
+                  height: 0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Recent Transactions"),
+                    const Text("Recent Transactions"),
                     Flexible(
-                        child: Container(
-                      alignment: Alignment.centerRight,
-                      child: InkWell(
-                        onTap: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return const TransactionHistory();
-                        })),
-                        child: Text("View all",
-                            style: TextStyle(color: customPurple)),
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: InkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return TransactionHistory(
+                                  data: widget.data,
+                                  transactions: transactions,
+                                );
+                              },
+                            ),
+                          ),
+                          child: const Text(
+                            "View all",
+                            style: TextStyle(color: customPurple),
+                          ),
+                        ),
                       ),
-                    )),
+                    ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 0,
                 ),
-                ListView.separated(
-                    itemCount: 6,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        height: 10,
-                      );
-                    },
-                    itemBuilder: (context, index) {
-                      return TransactionCard();
-                    })
+                transactions.isNotEmpty
+                    ? ListView.separated(
+                  itemCount: transactions.length > 3 ? 3 : transactions.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                  itemBuilder: (context, index) {
+                    return TransactionCard(
+                      data: widget.data,
+                      depositAmount:
+                      reversedTransactions[index]['data']['amount'] / 100,
+                      depositDate: reversedTransactions[index]['data']['paid_at'],
+                    );
+                  },
+                )
+                    : Center(
+                  child: Container(
+                    margin: const EdgeInsets.all(45),
+                    child: const Text(
+                      'No Transactions Yet',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 10,
+                ),
               ],
             ),
           ),
