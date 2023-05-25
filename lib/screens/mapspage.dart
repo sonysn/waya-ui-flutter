@@ -491,10 +491,18 @@ class CheckPrice extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () async {
                     buttonPress();
-                    //TODO JOHN WATCH THIS1
+                    //TODO stephen WATCH THIS1
                     Navigator.pop(context);
                     showCustomDialog(context);
-                  },
+                //    await Future.delayed(Duration(seconds: 5));
+
+                 //   dismissCustomDialog(context);
+                 //   Navigator.push(
+                 //     context,
+                 //     MaterialPageRoute(builder: (BuildContext context) => ()),
+                //    );
+
+         },
                   style: ElevatedButton.styleFrom(
                     primary: customPurple,
                     shape: RoundedRectangleBorder(
@@ -569,7 +577,20 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
                   onPressed: () {
                     dismissCustomDialog(context);
                   },
-                  child: const Text("data"))
+                style: ElevatedButton.styleFrom(
+                  primary: customPurple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),)
             ],
           ),
         ),

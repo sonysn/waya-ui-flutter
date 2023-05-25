@@ -4,6 +4,7 @@ class TransferPage extends StatefulWidget {
   final dynamic phoneNumber;
 
   const TransferPage({Key? key, required this.phoneNumber}) : super(key: key);
+
   @override
   _TransferPageState createState() => _TransferPageState();
 }
@@ -11,6 +12,7 @@ class TransferPage extends StatefulWidget {
 class _TransferPageState extends State<TransferPage> {
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _recipientController = TextEditingController();
+  bool _transferToDriver = false; // Indicates whether the transfer is to a driver or another user
 
   void _transferFunds() {
     // Perform the fund transfer logic here
@@ -23,9 +25,14 @@ class _TransferPageState extends State<TransferPage> {
       return;
     }
 
-    // Perform the transfer operation
-    // Replace the code below with your actual transfer logic
-    // ...
+    // Perform the transfer operation based on the transferToDriver value
+    if (_transferToDriver) {
+      // Transfer to a driver
+      // Perform the transfer logic for transferring to a driver
+    } else {
+      // Transfer to another user
+      // Perform the transfer logic for transferring to another user
+    }
 
     // Show a success message
     _showSuccessSnackBar('Funds transferred successfully');
@@ -113,7 +120,7 @@ class _TransferPageState extends State<TransferPage> {
               ),
               SizedBox(height: 16.0),
               Text(
-                'Recipient ',
+                'Recipient',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -131,13 +138,54 @@ class _TransferPageState extends State<TransferPage> {
                   ),
                 ),
               ),
+              SizedBox(height: 16.0),
+              Text(
+                'Transfer To:',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ListTile(
+                      title: Text('Driver'),
+                      leading: Radio(
+                        value: true,
+                        groupValue: _transferToDriver,
+                        onChanged: (value) {
+                          setState(() {
+                            _transferToDriver = value as bool;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListTile(
+                      title: Text('User'),
+                      leading: Radio(
+                        value: false,
+                        groupValue: _transferToDriver,
+                        onChanged: (value) {
+                          setState(() {
+                            _transferToDriver = value as bool;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 32.0),
               Center(
                 child: ElevatedButton(
                   onPressed: _transferFunds,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 32.0),
+                      vertical: 16.0,
+                      horizontal: 32.0,
+                    ),
                     child: Text(
                       'Transfer Funds',
                       style: TextStyle(

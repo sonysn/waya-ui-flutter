@@ -303,7 +303,7 @@ class _MapHomePageState extends State<MapHomePage> {
                    //     bottom: Radius.circular(10),
                   //    ),
                   //  )),
-                child: const Text("Reqt ride")),
+                child: const Text("Request ride")),
 
             // child: GestureDetector(
             //   onTap: (){
