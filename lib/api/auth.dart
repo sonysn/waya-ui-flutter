@@ -9,10 +9,11 @@ import '../models/auth.dart';
 var baseUri = 'https://waya-api.onrender.com';
 
 class SignUpResponse {
-  final dynamic body;
+  final Data? data;
   final int? statusCode;
+  final dynamic body;
 
-  SignUpResponse(this.body, this.statusCode);
+  SignUpResponse(this.data, this.statusCode, this.body);
 }
 
 Future signUp(
@@ -38,10 +39,10 @@ Future signUp(
 
   if (response.statusCode == 200) {
     debugPrint('Data submitted successfully!');
-    return SignUpResponse(null, 200);
+    return SignUpResponse(null, 200, null);
   } else {
     debugPrint('Error submitting data.');
-    return SignUpResponse(jsonDecode(response.body), response.statusCode);
+    return SignUpResponse(null, response.statusCode, jsonDecode(response.body));
   }
 }
 
@@ -57,10 +58,13 @@ Future signIn(emailOrPhone, password, deviceID) async {
           }));
   if (response.statusCode == 200) {
     //print(Data.fromJson(json.decode(response.body)).email);
-    return Data.fromJson(json.decode(response.body));
+    //return Data.fromJson(json.decode(response.body));
+    final data = Data.fromJson(json.decode(response.body));
+    return SignUpResponse(data, response.statusCode, null);
     //return json.decode(response.body);
   } else {
-    throw Exception('Login Failed');
+    return SignUpResponse(null, response.statusCode, jsonDecode(response.body));
+    //throw Exception('Login Failed');
   }
 }
 

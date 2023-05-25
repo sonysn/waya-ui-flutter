@@ -34,7 +34,7 @@ class _OnboardingState extends State<Onboarding> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: PageView.builder(
               controller: _controller,
@@ -54,19 +54,19 @@ class _OnboardingState extends State<Onboarding> {
                         contents[i].image,
                         height: 200,
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                         contents[i].title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                         contents[i].description,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.grey,
                         ),
@@ -78,34 +78,31 @@ class _OnboardingState extends State<Onboarding> {
             ),
           ),
           Container(
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 contents.length,
-                    (index) => buildDot(index, context),
+                (index) => buildDot(index, context),
               ),
             ),
           ),
           Container(
             height: 60,
             width: double.infinity,
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             child: TextButton(
-              child: Text(
-                currentIndex == contents.length - 1 ? "Continue" : "Next",
-              ),
               onPressed: () {
                 if (currentIndex == contents.length - 1) {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => WelcomePage(),
+                      builder: (_) => const WelcomePage(),
                     ),
                   );
                 }
                 _controller.nextPage(
-                  duration: Duration(milliseconds: 100),
+                  duration: const Duration(milliseconds: 100),
                   curve: Curves.bounceIn,
                 );
               },
@@ -118,6 +115,9 @@ class _OnboardingState extends State<Onboarding> {
                   ),
                 ),
               ),
+              child: Text(
+                currentIndex == contents.length - 1 ? "Continue" : "Next",
+              ),
             ),
           ),
         ],
@@ -129,10 +129,10 @@ class _OnboardingState extends State<Onboarding> {
     return Container(
       height: 10,
       width: currentIndex == index ? 25 : 10,
-      margin: EdgeInsets.only(right: 5),
+      margin: const EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Theme.of(context).primaryColor,
+        color: Colors.orangeAccent,
       ),
     );
   }

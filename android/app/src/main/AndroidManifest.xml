@@ -7,7 +7,7 @@
    <application
         android:label="waya"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/app_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyBhDflq5iJrXIcKpeq0IzLQPQpOboX91lY"/>
         <activity

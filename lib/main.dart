@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:waya/screens/splash_screen.dart';
 import 'package:waya/screens/welcomepage.dart';
 import 'package:flutter/services.dart';
 import 'package:waya/screens/profile/routes.dart';
@@ -46,7 +47,7 @@ class WApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Onboarding(),
+      body: SplashScreen(),
     );
   }
 }

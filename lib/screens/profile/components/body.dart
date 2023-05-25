@@ -47,9 +47,7 @@ class _BodyState extends State<Body> {
               icon: "assets/icons/User Icon.svg",
               press: () => Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return EditProfile(
-                      data: data
-                    );
+                    return EditProfile(data: data);
                   }))),
           ProfileMenu(
             text: "Address",
@@ -92,16 +90,14 @@ class _BodyState extends State<Body> {
           ProfileMenu(
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
-            press: () async{
-              SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
+            press: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
 
               //define functions
-              void nav(){
+              void nav() {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const WelcomePage()),
+                  MaterialPageRoute(builder: (context) => const WelcomePage()),
                 );
               }
 
@@ -113,10 +109,10 @@ class _BodyState extends State<Body> {
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
 
-              logout() async{
+              logout() async {
                 try {
                   final response = await logOut(widget.data.id);
-                  if (response == 'logout success'){
+                  if (response == 'logout success') {
                     // Remove the content of emailOrPhone and password
                     prefs.remove('emailOrPhone');
                     prefs.remove('password');
@@ -124,15 +120,17 @@ class _BodyState extends State<Body> {
                     nav();
                   }
                 } on SocketException catch (e) {
-                  print(e);
-                  showSnackBar('Logout failed. Please check your internet connection.');
+                  debugPrint(e.toString());
+                  showSnackBar(
+                      'Logout failed. Please check your internet connection.');
                 } on TimeoutException catch (e) {
-                  print(e);
+                  debugPrint(e.toString());
                   showSnackBar('Request timed out. Please try again later.');
                 } catch (e) {
-                  print(e);
+                  debugPrint(e.toString());
                 }
               }
+
               logout();
             },
           ),
