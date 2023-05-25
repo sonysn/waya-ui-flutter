@@ -7,14 +7,15 @@ import 'package:flutter/services.dart';
 import 'package:waya/screens/profile/routes.dart';
 import 'package:waya/screens/messagesnotificationpage.dart';
 import 'package:waya/screens/editprofilepage.dart';
+import 'package:waya/screens/onboarding.dart';
 
 import 'firebase_options.dart';
-void main() async{
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  //git test//
 
   // Get the device's FCM registration token
   FirebaseMessaging.instance.getToken().then((token) {
@@ -23,17 +24,21 @@ void main() async{
     print('Failed to get token: $err');
   });
 
-  //Set app orientation to portrait only
+  // Set app orientation to portrait only
   SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-      .then((value) => runApp(
-    const RootRestorationScope(restorationId: 'root', child: MaterialApp(
-      restorationScopeId: 'app',
-      home: WApp(),
-    ))
-  ));
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  ).then((value) {
+    runApp(
+      const RootRestorationScope(
+        restorationId: 'root',
+        child: MaterialApp(
+          restorationScopeId: 'app',
+          home: WApp(),
+        ),
+      ),
+    );
+  });
 }
-
 
 class WApp extends StatelessWidget {
   const WApp({Key? key}) : super(key: key);
@@ -41,8 +46,7 @@ class WApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: WelcomePage(),
-
+      body: Onboarding(),
     );
   }
 }

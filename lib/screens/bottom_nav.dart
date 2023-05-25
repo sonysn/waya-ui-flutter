@@ -46,7 +46,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
         currentIndex: _currentIndex,
         onTap: onItemTapped,
         backgroundColor: Colors.white,
-        selectedItemColor: Colors.yellow,
+        selectedItemColor: customPurple,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         //type allows you have more than 1 item in bottom navigator
         type: BottomNavigationBarType.fixed,
@@ -57,7 +57,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
               icon: Icon(CupertinoIcons.bookmark), label: 'Bookings'),
           BottomNavigationBarItem(icon: Icon(Icons.wallet), label: 'Wallet'),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.cube_fill), label: 'Profile'),
+              icon: Icon(CupertinoIcons.profile_circled), label: 'Profile'),
         ],
       ),
     );

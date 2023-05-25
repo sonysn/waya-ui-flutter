@@ -145,6 +145,7 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.only(top: 15),
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
+
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -314,52 +315,79 @@ class _HomePageState extends State<HomePage> {
                               FittedBox(
                                 fit: BoxFit.fitWidth,
                                 child: SizedBox(
-                                    height: 80,
-                                    width: width,
-                                    child: Card(
-                                      color: Colors.white,
-                                      elevation: 5,
-                                      shape: const RoundedRectangleBorder(
+                                  height: 80,
+                                  width: width,
+                                  child: Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(15),
+                                        bottom: Radius.circular(15),
+                                      ),
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [customPurple, Colors.orangeAccent],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        ),
                                         borderRadius: BorderRadius.vertical(
                                           top: Radius.circular(15),
                                           bottom: Radius.circular(15),
                                         ),
-                                        //      side: BorderSide(color: Colors.yellow, width: 1),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
                                           children: [
-                                            const SizedBox(
-                                              width: 5,
+                                            Container(
+                                              width: 4,
+                                              color: Colors.white,
                                             ),
-                                            const Icon(Icons.wallet),
-                                            const SizedBox(
-                                              width: 75,
+                                            SizedBox(width: 10),
+                                            Icon(
+                                              Icons.wallet,
+                                              color: Colors.white,
                                             ),
+                                            SizedBox(width: 15),
                                             Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                const Text(
+                                                Text(
                                                   'Your Balance',
-                                                  style:
-                                                      TextStyle(fontSize: 18),
+                                                  style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
                                                 Text(
                                                   "₦${widget.data.accountBalance}",
-                                                  style: const TextStyle(
-                                                      fontSize: 15),
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                                 ),
                                               ],
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    )),
-                              ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                              ,
                               const SizedBox(
                                 height: 20,
                               ),

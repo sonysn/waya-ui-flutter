@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../../colorscheme.dart';
 class BookingPage extends StatefulWidget {
   final dynamic data;
   const BookingPage({Key? key, this.data}) : super(key: key);
@@ -48,9 +48,9 @@ class _BookingPageState extends State<BookingPage>
                 indicator: const BoxDecoration(
                   //color: Colors.yellow[100],
                   border: Border(
-                      bottom: BorderSide(width: 3.0, color: Colors.yellow)),
+                      bottom: BorderSide(width: 3.0, color: customPurple)),
                 ),
-                labelColor: Colors.yellow[600],
+                labelColor: customPurple,
                 unselectedLabelColor: Colors.black,
                 tabs: const [
                   Tab(
