@@ -7,7 +7,11 @@ import 'package:waya/constants/api_constants.dart';
 var baseUri = 'https://waya-api.onrender.com';
 // var baseUri = 'https://789d-102-216-201-31.ngrok-free.app';
 
-Future paystackDeposit({required int id,required dynamic phone,required String email, required int amount}) async {
+Future paystackDeposit(
+    {required int id,
+    required dynamic phone,
+    required String email,
+    required int amount}) async {
   try {
     final http.Response response = await http.post(
       Uri.parse('$baseUri${ApiConstants.chargeEndpoint}'),
@@ -28,5 +32,83 @@ Future paystackDeposit({required int id,required dynamic phone,required String e
     }
   } catch (e) {
     throw Exception('An error occurred while processing your payment.');
+  }
+}
+
+Future transferToDrivers(
+    {required double amountToBeTransferred,
+    required String driverPhoneNumber,
+    required String userPhoneNumber}) async {
+  try {
+    final http.Response response = await http.post(
+        Uri.parse('$baseUri${ApiConstants.transferToDriversEndpoint}'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'amountToBeTransferred': amountToBeTransferred,
+          'driverPhoneNumber': driverPhoneNumber,
+          'userPhoneNumber': userPhoneNumber
+        }));
+    return response;
+  } catch (e) {
+    throw Exception('An error occurred while processing your transfer.');
+  }
+}
+
+Future transferToUsers(
+    {required double amountToBeTransferred,
+    required String userReceivingPhoneNumber,
+    required String userSendingPhoneNumber}) async {
+  try {
+    final http.Response response = await http.post(
+        Uri.parse('$baseUri${ApiConstants.transferToUsersEndpoint}'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'amountToBeTransferred': amountToBeTransferred,
+          'userReceivingPhoneNumber': userReceivingPhoneNumber,
+          'userSendingPhoneNumber': userSendingPhoneNumber
+        }));
+    return response;
+  } catch (e) {
+    throw Exception('An error occurred while processing your transfer.');
+  }
+}
+
+Future getRiderPaystackDepositTransactions({required int userID}) async {
+  try {
+    final http.Response response = await http.get(Uri.parse(
+        '$baseUri/$userID${ApiConstants.getRiderPaystackDepositTransactions}'));
+    return json.decode(response.body);
+  } catch (e) {
+    throw Exception('An error occurred');
+  }
+}
+
+Future getUserToUserTransactions({required int userID}) async {
+  try {
+    final http.Response response = await http.get(
+        Uri.parse('$baseUri/$userID${ApiConstants.getUserToUserTransactions}'));
+    return jsonEncode(response.body);
+  } catch (e) {
+    throw Exception('An error occurred');
+  }
+}
+
+Future getUserToDriverTransactions({required int userID}) async {
+  try {
+    final http.Response response = await http.get(Uri.parse(
+        '$baseUri/$userID${ApiConstants.getUserToDriverTransactions}'));
+    return json.decode(response.body);
+  } catch (e) {
+    throw Exception('An error occurred');
+  }
+}
+
+Future getUserToUserTransactionsForReceiver({required int userID}) async {
+  try {
+    final http.Response response = await http.get(Uri.parse(
+        '$baseUri/$userID${ApiConstants.getUserToUserTransactionsForReceiver}'));
+    return json.decode(response.body);
+  } catch (e) {
+    throw Exception('An error occurred');
   }
 }

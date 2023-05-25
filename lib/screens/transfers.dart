@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:waya/api/payments.dart';
 
 class TransferPage extends StatefulWidget {
   final dynamic phoneNumber;
@@ -6,36 +9,76 @@ class TransferPage extends StatefulWidget {
   const TransferPage({Key? key, required this.phoneNumber}) : super(key: key);
 
   @override
-  _TransferPageState createState() => _TransferPageState();
+  TransferPageState createState() => TransferPageState();
 }
 
-class _TransferPageState extends State<TransferPage> {
+class TransferPageState extends State<TransferPage> {
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _recipientController = TextEditingController();
-  bool _transferToDriver = false; // Indicates whether the transfer is to a driver or another user
+  bool _transferToWho =
+      true; // Indicates whether the transfer is to a driver or another user
+  //true defaults to the driver
 
-  void _transferFunds() {
+  void _checkWho() async {
+    _recipientController.addListener(() {
+      if (_recipientController.text.length > 12) {
+        print(_recipientController.text);
+      }
+    });
+  }
+
+  void _transferFunds() async {
     // Perform the fund transfer logic here
     String amount = _amountController.text;
     String recipient = _recipientController.text;
+    double? amountDouble;
+
+    if (amount.isNotEmpty) {
+      amountDouble = double.tryParse(amount);
+    }
 
     // Validate the entered data
-    if (amount.isEmpty || recipient.isEmpty) {
-      _showErrorSnackBar('Please enter transfer amount and recipient phone number');
+    if (amountDouble == null || recipient.isEmpty) {
+      _showErrorSnackBar(
+          'Please enter transfer amount and recipient phone number');
       return;
     }
 
     // Perform the transfer operation based on the transferToDriver value
-    if (_transferToDriver) {
+    if (_transferToWho) {
       // Transfer to a driver
       // Perform the transfer logic for transferring to a driver
+      final response = await transferToDrivers(
+          amountToBeTransferred: amountDouble,
+          driverPhoneNumber: recipient,
+          userPhoneNumber: widget.phoneNumber);
+
+      if (response.statusCode == 200) {
+        var message = json.decode(response.body);
+        _showSuccessSnackBar(message['message']);
+      } else {
+        var message = json.decode(response.body);
+        _showErrorSnackBar(message['message']);
+      }
     } else {
       // Transfer to another user
       // Perform the transfer logic for transferring to another user
+      final response = await transferToUsers(
+          amountToBeTransferred: amountDouble,
+          userReceivingPhoneNumber: recipient,
+          userSendingPhoneNumber: widget.phoneNumber);
+
+      if (response.statusCode == 200) {
+        var message = json.decode(response.body);
+        _showSuccessSnackBar(message['message']);
+      } else {
+        var message = json.decode(response.body);
+        _showErrorSnackBar(message['message']);
+      }
     }
 
     // Show a success message
-    _showSuccessSnackBar('Funds transferred successfully');
+    //_showSuccessSnackBar('Funds transferred successfully');
 
     // Clear the input fields
     _amountController.clear();
@@ -58,6 +101,12 @@ class _TransferPageState extends State<TransferPage> {
         backgroundColor: Colors.green,
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _checkWho();
   }
 
   @override
@@ -151,11 +200,12 @@ class _TransferPageState extends State<TransferPage> {
                     child: ListTile(
                       title: Text('Driver'),
                       leading: Radio(
+                        activeColor: Colors.orangeAccent,
                         value: true,
-                        groupValue: _transferToDriver,
+                        groupValue: _transferToWho,
                         onChanged: (value) {
                           setState(() {
-                            _transferToDriver = value as bool;
+                            _transferToWho = value as bool;
                           });
                         },
                       ),
@@ -165,12 +215,14 @@ class _TransferPageState extends State<TransferPage> {
                     child: ListTile(
                       title: Text('User'),
                       leading: Radio(
+                        activeColor: Colors.orangeAccent,
                         value: false,
-                        groupValue: _transferToDriver,
+                        groupValue: _transferToWho,
                         onChanged: (value) {
                           setState(() {
-                            _transferToDriver = value as bool;
+                            _transferToWho = value as bool;
                           });
+                          //debugPrint(_transferToWho.toString());
                         },
                       ),
                     ),

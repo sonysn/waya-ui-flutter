@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/homepage.dart';
@@ -17,18 +18,10 @@ class _BottomNavPageState extends State<BottomNavPage> {
   int _currentIndex = 0;
   dynamic data;
   late final List<Widget> _childrenPages = <Widget>[
-    HomePage(
-      data: data
-    ),
-    BookingPage(
-      data: data
-    ),
-    WalletPage(
-      data: data
-    ),
-    ProfilePage(
-      data: data
-    )
+    HomePage(data: data),
+    BookingPage(data: data),
+    WalletPage(data: data),
+    ProfilePage(data: data)
   ];
 
   void onItemTapped(int index) {
@@ -58,14 +51,13 @@ class _BottomNavPageState extends State<BottomNavPage> {
         //type allows you have more than 1 item in bottom navigator
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark_outlined),
-              label: 'Bookings'),
+              icon: Icon(CupertinoIcons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.wallet), label: 'Wallet'),
+              icon: Icon(CupertinoIcons.bookmark), label: 'Bookings'),
+          BottomNavigationBarItem(icon: Icon(Icons.wallet), label: 'Wallet'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), label: 'Profile'),
+              icon: Icon(CupertinoIcons.cube_fill), label: 'Profile'),
         ],
       ),
     );
