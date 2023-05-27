@@ -10,7 +10,6 @@ import 'package:waya/screens/widgets/transaction_card.dart';
 import 'package:waya/screens/transactionhistory.dart';
 import 'package:waya/screens/widgets/my_card.dart';
 
-
 class WalletPage extends StatefulWidget {
   final dynamic data;
   const WalletPage({Key? key, this.data}) : super(key: key);
@@ -24,33 +23,30 @@ class _WalletPageState extends State<WalletPage> {
 
   Stream<String> get stream => _streamController.stream;
   List earnings = [];
-  //bring the most recent from the server on reqest
   List reversedEarnings = [];
   List transactions = [];
   List reversedTransactions = [];
 
-  Future _getAccountBalance() async {
+  Future<void> _getAccountBalance() async {
     final response = await getBalance(widget.data.id, widget.data.phoneNumber);
     debugPrint(response);
     _streamController.add(response);
   }
 
-
-  //TODO BY STEPHEN
-  //Future _getDepositTransactions() async {
-  //  final response = await getDepositHistory(userID: widget.data.id);
+  Future _getDepositTransactions() async {
+    final response = await getDepositHistory(userID: widget.data.id);
     //print(response);
-   // setState(() {
-    //  transactions.addAll(response);
-    //  reversedTransactions = transactions.reversed.toList();
-   // });
- // }
+    setState(() {
+      transactions.addAll(response);
+      reversedTransactions = transactions.reversed.toList();
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _getAccountBalance();
-    //_getDepositTransactions();  TODO BY STEPHEN
+    _getDepositTransactions();
   }
 
   @override
@@ -63,7 +59,13 @@ class _WalletPageState extends State<WalletPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator(
-        onRefresh: _getAccountBalance,
+        color: Colors.orangeAccent,
+        backgroundColor: customPurple,
+
+        onRefresh: () async {
+          await _getAccountBalance();
+          await _getDepositTransactions();
+        },
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Padding(
@@ -123,7 +125,6 @@ class _WalletPageState extends State<WalletPage> {
                         ),
                       ),
                     ),
-
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -133,7 +134,8 @@ class _WalletPageState extends State<WalletPage> {
                             MaterialPageRoute(
                               builder: (BuildContext context) {
                                 return TransferPage(
-                                    phoneNumber: widget.data.phoneNumber);
+                                  phoneNumber: widget.data.phoneNumber,
+                                );
                               },
                             ),
                           );

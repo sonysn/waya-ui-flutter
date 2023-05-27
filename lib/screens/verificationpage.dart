@@ -59,10 +59,11 @@ class _VerificationPageState extends State<VerificationPage> {
               ),
               SizedBox(height: 10),
               Icon(
-                Icons.verified_user,
+                Icons.lock,
                 size: 50,
                 color: customPurple,
               ),
+
               SizedBox(height: 10),
               Text(
                 'Verification',
@@ -132,10 +133,10 @@ class _VerificationPageState extends State<VerificationPage> {
                   ),
                   itemCount: 11,
                   itemBuilder: (BuildContext context, int index) {
-                    if (index == 9) {
+                    if (index == 10) {
                       // Render the '0' button
                       return buildKeyboardButton('0');
-                    } else if (index == 10) {
+                    } else if (index == 9) {
                       // Render the delete button
                       return buildDeleteButton();
                     } else {
@@ -159,14 +160,15 @@ class _VerificationPageState extends State<VerificationPage> {
                       },
                     ),
                   );
-                },     style: ElevatedButton.styleFrom(
-              backgroundColor: customPurple,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(20),
-                  bottom: Radius.circular(20),
-                ),
-              )),
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: customPurple,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                        bottom: Radius.circular(20),
+                      ),
+                    )),
                 child: Text(
                   'Verify',
                   style: TextStyle(
@@ -177,7 +179,7 @@ class _VerificationPageState extends State<VerificationPage> {
                 ),
               ),
         ),  SizedBox(height: 15),
-         ],
+            ],
           ),
         ),
       ),
@@ -211,7 +213,7 @@ class _VerificationPageState extends State<VerificationPage> {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.grey[200],
+
           borderRadius: BorderRadius.circular(10),
         ),
         child: Icon(

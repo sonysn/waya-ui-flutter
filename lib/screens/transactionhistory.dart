@@ -5,13 +5,15 @@ class TransactionHistory extends StatefulWidget {
   final dynamic data;
   final List transactions;
 
-  const TransactionHistory({Key? key, this.data, required this.transactions}) : super(key: key);
+  const TransactionHistory({Key? key, this.data, required this.transactions})
+      : super(key: key);
 
   @override
   State<TransactionHistory> createState() => _TransactionHistoryState();
 }
 
-class _TransactionHistoryState extends State<TransactionHistory> with SingleTickerProviderStateMixin {
+class _TransactionHistoryState extends State<TransactionHistory>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   List reversedTransactions = [];
 
@@ -28,6 +30,17 @@ class _TransactionHistoryState extends State<TransactionHistory> with SingleTick
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  Future<void> _refreshData() async {
+    // Implement your refresh logic here
+    // For example, fetch updated transaction data from an API
+    // Once you have the updated data, update the 'transactions' list and call 'setState'
+    await Future.delayed(Duration(seconds: 2)); // Simulating a delay
+
+    setState(() {
+      // Update 'transactions' list with new data
+    });
   }
 
   @override
@@ -64,44 +77,100 @@ class _TransactionHistoryState extends State<TransactionHistory> with SingleTick
             ],
           ),
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(top: 40),
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  widget.transactions.isEmpty
-                      ? const Center(
-                    child: Text(
-                      'No transactions',
-                      style: TextStyle(fontSize: 20),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            // Implement your refresh logic here
+            // For example, fetch updated transaction data from an API
+            // Once you have the updated data, update the 'reversedTransactions' list and call 'setState'
+            await Future.delayed(Duration(seconds: 2)); // Simulating a delay
+
+            setState(() {
+              reversedTransactions = widget.transactions.reversed.toList();
+            });
+          },
+          color: Colors.orange, // Set the refresh indicator color to orange
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              // First Tab: Deposit History
+              Container(
+                padding: const EdgeInsets.only(top: 40),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    widget.transactions.isEmpty
+                        ? const Center(
+                      child: Text(
+                        'No transactions',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    )
+                        : ListView.separated(
+                      itemCount: widget.transactions.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      },
+                      itemBuilder: (context, index) {
+                        return TransactionCard(
+                          data: widget.data,
+                          depositAmount: reversedTransactions[index]['data']['amount'] / 100,
+                          depositDate: reversedTransactions[index]['data']['paid_at'],
+                        );
+                      },
                     ),
-                  )
-                      : ListView.separated(
-                    itemCount: widget.transactions.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        height: 10,
-                      );
-                    },
-                    itemBuilder: (context, index) {
-                      return TransactionCard(
-                        data: widget.data,
-                        depositAmount: reversedTransactions[index]['data']['amount'] / 100,
-                        depositDate: reversedTransactions[index]['data']['paid_at'],
-                      );
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            // Add other TabBarView children here for the remaining tabs
-          ],
+              // Second Tab: User Transfer History
+              Container(
+                  padding: const EdgeInsets.only(top: 40),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      widget.transactions.isEmpty
+                          ? const Center(
+                        child: Text(
+                          'No transactions',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      )
+                          : ListView.separated(
+                        itemCount: widget.transactions.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 10,
+                          );
+                        },
+                        itemBuilder: (context, index) {
+                          return TransactionCard(
+                            data: widget.data,
+                            depositAmount: reversedTransactions[index]['data']['amount'] / 100,
+                            depositDate: reversedTransactions[index]['data']['paid_at'],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+
+              ),
+              // Third Tab: Driver Transfer History
+              Container(
+                // Replace with your driver transfer history implementation
+              ),
+              // Fourth Tab: Money Received History
+              Container(
+                // Replace with your money received history implementation
+              ),
+            ],
+          ),
         ),
       ),
     );
