@@ -54,6 +54,7 @@ dependencies:
   firebase_core: ^2.10.0
   firebase_messaging: ^14.4.1
   geocoding: ^2.0.0
+  pin_code_fields: ^7.4.0
   loading_animation_widget:
   flutter_svg:
   flutter_google_places:

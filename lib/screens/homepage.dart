@@ -11,7 +11,6 @@ import 'package:waya/screens/mapspage.dart';
 import 'package:waya/screens/search_locationpage.dart';
 import 'dart:io';
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:waya/screens/editprofilepage.dart';
 import 'package:waya/size_config.dart';
 import 'package:geocoding/geocoding.dart' as locationGeocodingPackage;
 

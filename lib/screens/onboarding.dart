@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:waya/screens/welcomepage.dart';
-import 'package:waya/screens/content_model.dart';
+import 'package:waya/constants/content_model.dart';
 import 'package:waya/colorscheme.dart';
 
 class Onboarding extends StatefulWidget {
@@ -88,8 +88,8 @@ class _OnboardingState extends State<Onboarding> {
             ),
           ),
           Container(
-            height: 60,
-            width: double.infinity,
+            height: 45,
+            width: 250,
             margin: const EdgeInsets.all(20),
             child: TextButton(
               onPressed: () {
