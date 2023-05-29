@@ -12,6 +12,7 @@ var baseUri = 'https://waya-api.onrender.com';
 //testing code
 Future requestRide({
   required int userID,
+  required String phoneNumber,
   required String currentLocationAddress,
   required String dropOffLocationAddress,
   required int fare,
@@ -19,44 +20,47 @@ Future requestRide({
   required dynamic dropOffLocationPoint,
   required String authBearer,
 }) async {
-  final http.Response response =
-      await http.post(Uri.parse('$baseUri${ApiConstants.requestRideEndpoint}'),
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": 'Bearer $authBearer'
-          },
-          body: jsonEncode({
-            "userId": userID,
-            "pickupLocation": currentLocationAddress,
-            "dropoffLocation": dropOffLocationAddress,
-            "estFare": fare,
-            "pickupLocationPosition": currentLocationPoint,
-            "dropoffLocationPostion": dropOffLocationPoint,
-            "status": "ONGOING"
-          }));
-  final data = await jsonDecode(response.body);
-  // print(data);
-  return data;
-}
-
-Future getRidePrice({required dynamic currentLocationPoint, required dynamic dropOffLocationPoint}) async {
-  final http.Response response =
-  await http.post(Uri.parse('$baseUri${ApiConstants.getRidePrice}'),
+  final http.Response response = await http.post(
+      Uri.parse('$baseUri${ApiConstants.requestRideEndpoint}'),
       headers: {
         "Content-Type": "application/json",
+        "Authorization": 'Bearer $authBearer'
       },
       body: jsonEncode({
+        "userId": userID,
+        "riderPhone": phoneNumber,
+        "pickupLocation": currentLocationAddress,
+        "dropoffLocation": dropOffLocationAddress,
+        "estFare": fare,
         "pickupLocationPosition": currentLocationPoint,
-        "dropoffLocationPostion": dropOffLocationPoint
+        "dropoffLocationPostion": dropOffLocationPoint,
+        "status": "ONGOING"
       }));
   final data = await jsonDecode(response.body);
   // print(data);
   return data;
 }
 
-Future driverCount(location) async{
+Future getRidePrice(
+    {required dynamic currentLocationPoint,
+    required dynamic dropOffLocationPoint}) async {
   final http.Response response =
-  await http.get(Uri.parse('$baseUri/$location${ApiConstants.driverCountEndpoint}'),
+      await http.post(Uri.parse('$baseUri${ApiConstants.getRidePrice}'),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: jsonEncode({
+            "pickupLocationPosition": currentLocationPoint,
+            "dropoffLocationPostion": dropOffLocationPoint
+          }));
+  final data = await jsonDecode(response.body);
+  // print(data);
+  return data;
+}
+
+Future driverCount(location) async {
+  final http.Response response = await http.get(
+      Uri.parse('$baseUri/$location${ApiConstants.driverCountEndpoint}'),
       headers: {
         "Content-Type": "application/json",
       });
@@ -66,15 +70,27 @@ Future driverCount(location) async{
 
 Future getBalance(id, phone) async {
   final http.Response response =
-  await http.post(Uri.parse('$baseUri${ApiConstants.getBalanceEndpoint}'),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: json.encode({
-        'id': id,
-        'phoneNumber': phone,
-      }));
+      await http.post(Uri.parse('$baseUri${ApiConstants.getBalanceEndpoint}'),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: json.encode({
+            'id': id,
+            'phoneNumber': phone,
+          }));
   final data = json.decode(response.body);
   final d = data['balance'].toString();
   return d;
+}
+
+Future getCurrentRide({required int userID}) async {
+  final http.Response response = await http.get(
+      Uri.parse('$baseUri/$userID${ApiConstants.getCurrentRideEndpoint}'),
+      headers: {
+        "Content-Type": "application/json",
+      });
+
+  final data = json.decode(response.body);
+  // print(data);
+  return data;
 }

@@ -20,4 +20,5 @@ class ApiConstants {
   static String getUserToDriverTransactions = '/getUserToDriverTransactions';
   static String getUserToUserTransactionsForReceiver =
       '/getUserToUserTransactionsForReceiver';
+  static String getCurrentRideEndpoint = '/getCurrentRide';
 }

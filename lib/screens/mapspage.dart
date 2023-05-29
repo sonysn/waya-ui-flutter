@@ -160,6 +160,8 @@ class _MapsPageState extends State<MapsPage> {
                                       void request() {
                                         requestRide(
                                             userID: widget.data.id,
+                                            phoneNumber:
+                                                widget.data.phoneNumber,
                                             currentLocationAddress:
                                                 _currentLocationAddress,
                                             dropOffLocationAddress:
@@ -494,15 +496,14 @@ class CheckPrice extends StatelessWidget {
                     //TODO stephen WATCH THIS1
                     Navigator.pop(context);
                     showCustomDialog(context);
-                //    await Future.delayed(Duration(seconds: 5));
+                    //    await Future.delayed(Duration(seconds: 5));
 
-                 //   dismissCustomDialog(context);
-                 //   Navigator.push(
-                 //     context,
-                 //     MaterialPageRoute(builder: (BuildContext context) => ()),
-                //    );
-
-         },
+                    //   dismissCustomDialog(context);
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(builder: (BuildContext context) => ()),
+                    //    );
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: customPurple,
                     shape: RoundedRectangleBorder(
@@ -574,9 +575,9 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
                 child: Text('Searching for a Driver'),
               ),
               ElevatedButton(
-                  onPressed: () {
-                    dismissCustomDialog(context);
-                  },
+                onPressed: () {
+                  dismissCustomDialog(context);
+                },
                 style: ElevatedButton.styleFrom(
                   primary: customPurple,
                   shape: RoundedRectangleBorder(
@@ -590,7 +591,8 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
-                ),)
+                ),
+              )
             ],
           ),
         ),

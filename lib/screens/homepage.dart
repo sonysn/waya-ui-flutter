@@ -95,10 +95,48 @@ class _HomePageState extends State<HomePage> {
     updateDriverCount();
   }
 
+  Future getCurrentTripDetails() async {
+    final response = await getCurrentRide(userID: widget.data.id);
+    //print(response);
+    if (response == null) {
+      setState(() {
+        driverPhoto = null;
+        driverVehicleName = null;
+        driverVehiclePlateNumber = null;
+        vehicleColour = null;
+        driverPhoneNumber = null;
+        pickUpLocation = null;
+        destination = null;
+        fare = null;
+      });
+    } else {
+      setState(() {
+        driverPhoto = response['driverPhoto'];
+        driverVehicleName = response['vehicleName'];
+        driverVehiclePlateNumber = response['vehiclePlateNumber'];
+        vehicleColour = response['vehicleColour'];
+        driverPhoneNumber = response['driverPhone'];
+        pickUpLocation = response['pickUpLocation'];
+        destination = response['destinationLocation'];
+        fare = response['fare'];
+      });
+    }
+  }
+
   String? greeting;
   dynamic myLocationHome;
   String? addressLoc;
   dynamic driverCounter;
+
+  //CURRENT TRIP DETAILS
+  String? driverPhoto;
+  String? driverVehicleName;
+  String? driverVehiclePlateNumber;
+  String? vehicleColour;
+  String? driverPhoneNumber;
+  String? pickUpLocation;
+  String? destination;
+  int? fare;
 
   @override
   void initState() {
@@ -107,6 +145,7 @@ class _HomePageState extends State<HomePage> {
       greeting = getTimeString();
     });
     findLoc();
+    getCurrentTripDetails();
   }
 
   Future _refreshItems() async {
@@ -114,6 +153,7 @@ class _HomePageState extends State<HomePage> {
       greeting = getTimeString();
     });
     findLoc();
+    getCurrentTripDetails();
   }
 
   // //disposing of mylocationhome variable
@@ -144,30 +184,66 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.only(top: 15),
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${greeting!},",
+                                  style: const TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  widget.data.firstName,
+                                  style: const TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w500),
+                                ),
 
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${greeting!},",
-                                style: const TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.w500),
-                              ),
-                              Text(
-                                widget.data.firstName,
-                                style: const TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.w500),
-                              ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
 
-                              const SizedBox(
-                                height: 30,
-                              ),
-
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  GestureDetector(
-                                    child: Card(
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    GestureDetector(
+                                      child: Card(
+                                        color: Colors.white,
+                                        elevation: 5,
+                                        borderOnForeground: true,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(15),
+                                            bottom: Radius.circular(15),
+                                          ),
+                                          // side: BorderSide(color: Colors.white, width: 1),
+                                        ),
+                                        child: SizedBox(
+                                          height: 60,
+                                          width: width / 2.2,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: const [
+                                                Icon(Icons.location_on_rounded),
+                                                Text('Enter pickup point')
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(builder:
+                                                (BuildContext context) {
+                                          return MapsPage(data: widget.data);
+                                        }));
+                                      },
+                                    ),
+                                    Card(
                                       color: Colors.white,
                                       elevation: 5,
                                       borderOnForeground: true,
@@ -176,246 +252,53 @@ class _HomePageState extends State<HomePage> {
                                           top: Radius.circular(15),
                                           bottom: Radius.circular(15),
                                         ),
-                                        // side: BorderSide(color: Colors.white, width: 1),
+                                        //   side: BorderSide(color: Colors.yellow, width: 1),
                                       ),
                                       child: SizedBox(
                                         height: 60,
-                                        width: width / 2.2,
+                                        width: width / 2.5,
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: const [
-                                              Icon(Icons.location_on_rounded),
-                                              Text('Enter pickup point')
+                                              Icon(Icons.access_time),
+                                              Text('Schedule ride')
                                             ],
                                           ),
                                         ),
                                       ),
                                     ),
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(
-                                          builder: (BuildContext context) {
-                                        return MapsPage(data: widget.data);
-                                      }));
-                                    },
-                                  ),
-                                  Card(
-                                    color: Colors.white,
-                                    elevation: 5,
-                                    borderOnForeground: true,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(15),
-                                        bottom: Radius.circular(15),
-                                      ),
-                                      //   side: BorderSide(color: Colors.yellow, width: 1),
-                                    ),
-                                    child: SizedBox(
-                                      height: 60,
-                                      width: width / 2.5,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: const [
-                                            Icon(Icons.access_time),
-                                            Text('Schedule ride')
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                                //width: 20,
-                              ),
-                              //todo put picture as asset image, J do the next card.
-                              FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: SizedBox(
-                                  height: height * 0.2,
-                                  width: width,
-                                  child: Card(
-                                    color: Colors.white,
-                                    elevation: 5,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(10),
-                                        bottom: Radius.circular(15),
-                                      ),
-                                      //     side: BorderSide(color: Colors.yellow, width: 1),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/bcar.jpeg",
-                                            fit: BoxFit.fill,
-                                          ),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              driverCounter != null
-                                                  ? Text(
-                                                      driverCounter == 1
-                                                          ? "$driverCounter ride"
-                                                          : driverCounter == 0
-                                                              ? "No rides"
-                                                              : "$driverCounter rides",
-                                                      style: const TextStyle(
-                                                          fontSize: 30),
-                                                    )
-                                                  : const CircularProgressIndicator(
-                                                      color: Colors.black,
-                                                      strokeWidth: 2,
-                                                    ),
-                                              const Text(
-                                                "Around You",
-                                                style: TextStyle(fontSize: 25),
-                                              ),
-                                              Flexible(
-                                                child: Text(
-                                                  addressLoc!,
-                                                  overflow:
-                                                      TextOverflow.visible,
-                                                  style: const TextStyle(
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            width: 20,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  ],
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              //TODO PLEASE READ TODOS THANKS!
-                              // TODO try not to use fitted box unnecessarily, especially with things with no solid dimensions. ALSO ask when that issue with overflowing screen arises
-
-                              FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: SizedBox(
-                                  height: 80,
-                                  width: width,
-                                  child: Card(
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(15),
-                                        bottom: Radius.circular(15),
-                                      ),
-                                    ),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [customPurple, Colors.orangeAccent],
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                        ),
-                                        borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(15),
-                                          bottom: Radius.circular(15),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(0.1),
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 4,
-                                              color: Colors.white,
-                                            ),
-                                            SizedBox(width: 10),
-                                            Icon(
-                                              Icons.wallet,
-                                              color: Colors.white,
-                                            ),
-                                            SizedBox(width: 15),
-                                            Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Your Balance',
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "₦${widget.data.accountBalance}",
-                                                  style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                const SizedBox(
+                                  height: 30,
+                                  //width: 20,
                                 ),
-                              )
-                              ,
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: SizedBox(
-                                    height: 120,
+                                //todo put picture as asset image, J do the next card.
+                                FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: SizedBox(
+                                    height: height * 0.2,
                                     width: width,
                                     child: Card(
                                       color: Colors.white,
                                       elevation: 5,
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(15),
+                                          top: Radius.circular(10),
                                           bottom: Radius.circular(15),
                                         ),
-                                        //      side: BorderSide(color: Colors.yellow, width: 1),
+                                        //     side: BorderSide(color: Colors.yellow, width: 1),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
                                           children: [
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            const CircleAvatar(
-                                              radius: 30,
-                                              backgroundImage: AssetImage(
-                                                  "assets/images/h.jpeg"),
+                                            Image.asset(
+                                              "assets/images/bcar.jpeg",
+                                              fit: BoxFit.fill,
                                             ),
                                             const SizedBox(
                                               width: 15,
@@ -425,32 +308,278 @@ class _HomePageState extends State<HomePage> {
                                                   MainAxisAlignment.center,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
-                                              children: const [
-                                                Text(
-                                                  "Your previous ride with Stephen",
+                                              children: [
+                                                driverCounter != null
+                                                    ? Text(
+                                                        driverCounter == 1
+                                                            ? "$driverCounter ride"
+                                                            : driverCounter == 0
+                                                                ? "No rides"
+                                                                : "$driverCounter rides",
+                                                        style: const TextStyle(
+                                                            fontSize: 30),
+                                                      )
+                                                    : const CircularProgressIndicator(
+                                                        color: Colors.black,
+                                                        strokeWidth: 2,
+                                                      ),
+                                                const Text(
+                                                  "Around You",
                                                   style:
-                                                      TextStyle(fontSize: 18),
+                                                      TextStyle(fontSize: 25),
                                                 ),
-                                                Text(
-                                                  "₦500.00",
-                                                  style:
-                                                      TextStyle(fontSize: 15),
-                                                ),
-                                                Text(
-                                                  "14 Ilimi Street, Ikeja, Lagos.",
-                                                  style:
-                                                      TextStyle(fontSize: 15),
+                                                Flexible(
+                                                  child: Text(
+                                                    addressLoc!,
+                                                    overflow:
+                                                        TextOverflow.visible,
+                                                    style: const TextStyle(
+                                                        fontSize: 10),
+                                                  ),
                                                 ),
                                               ],
-                                            )
+                                            ),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    )),
-                              ),
-                            ],
-                          ),
-                        )
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                //TODO PLEASE READ TODOS THANKS!
+                                // TODO try not to use fitted box unnecessarily, especially with things with no solid dimensions. ALSO ask when that issue with overflowing screen arises
+
+                                FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: SizedBox(
+                                    height: 80,
+                                    width: width,
+                                    child: Card(
+                                      elevation: 5,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(15),
+                                          bottom: Radius.circular(15),
+                                        ),
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              customPurple,
+                                              Colors.orangeAccent
+                                            ],
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                          ),
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(15),
+                                            bottom: Radius.circular(15),
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.1),
+                                              blurRadius: 5,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                width: 4,
+                                                color: Colors.white,
+                                              ),
+                                              SizedBox(width: 10),
+                                              Icon(
+                                                Icons.wallet,
+                                                color: Colors.white,
+                                              ),
+                                              SizedBox(width: 15),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Your Balance',
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "₦${widget.data.accountBalance}",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: SizedBox(
+                                      height: 120,
+                                      width: width,
+                                      child: Card(
+                                        color: Colors.white,
+                                        elevation: 5,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(15),
+                                            bottom: Radius.circular(15),
+                                          ),
+                                          //      side: BorderSide(color: Colors.yellow, width: 1),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              const CircleAvatar(
+                                                radius: 30,
+                                                backgroundImage: AssetImage(
+                                                    "assets/images/h.jpeg"),
+                                              ),
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: const [
+                                                  Text(
+                                                    "Your previous ride with Stephen",
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                  Text(
+                                                    "₦500.00",
+                                                    style:
+                                                        TextStyle(fontSize: 15),
+                                                  ),
+                                                  Text(
+                                                    "14 Ilimi Street, Ikeja, Lagos.",
+                                                    style:
+                                                        TextStyle(fontSize: 15),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      )),
+                                ),
+                              ]),
+                        ),
+                        if (driverVehicleName != null)
+                          FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: SizedBox(
+                                height: 200,
+                                width: width,
+                                child: Card(
+                                  color: Colors.white,
+                                  elevation: 5,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(15),
+                                      bottom: Radius.circular(15),
+                                    ),
+                                    //      side: BorderSide(color: Colors.yellow, width: 1),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        CircleAvatar(
+                                          radius: 30,
+                                          backgroundImage:
+                                              NetworkImage(driverPhoto!),
+                                        ),
+                                        const SizedBox(
+                                          width: 15,
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Text(
+                                              "Current TRip",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            Text(
+                                              "₦${fare.toString()}",
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                            Text(
+                                              driverVehicleName!,
+                                              style:
+                                                  const TextStyle(fontSize: 15),
+                                            ),
+                                            Text(
+                                              driverVehiclePlateNumber!,
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                            Text(
+                                              driverPhoneNumber!,
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                            Text(
+                                              pickUpLocation!,
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                            Text(
+                                              destination!,
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )),
+                          )
+                        else
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text('No Active Rides'),
+                            ),
+                          )
                       ],
                     )
                   : Center(
