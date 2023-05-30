@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:waya/widgets/my_card.dart';
+import 'package:waya/screens/widgets/my_card.dart';
 import '../constants/design_constants.dart';
 
   class CardScreen extends StatefulWidget {

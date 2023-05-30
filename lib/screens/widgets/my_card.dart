@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../colorscheme.dart';
-import '../../api/actions.dart';
 import 'package:intl/intl.dart';
+import 'package:waya/colorscheme.dart';
 
 class MyCard extends StatefulWidget {
   final dynamic data;
@@ -10,13 +9,10 @@ class MyCard extends StatefulWidget {
   const MyCard({Key? key, this.stream, this.data}) : super(key: key);
 
   @override
-  State<MyCard> createState() => MyCardState();
+  State<MyCard> createState() => _MyCardState();
 }
 
-class MyCardState extends State<MyCard> {
-  void getAccountBalance() async {
-    final response = getBalance(widget.data.id, widget.data.phoneNumber);
-  }
+class _MyCardState extends State<MyCard> {
 
   dynamic accountBalance;
 
