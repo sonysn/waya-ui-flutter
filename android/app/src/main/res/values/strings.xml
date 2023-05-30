@@ -1,0 +1,4 @@
+<resources>
+<!--    this is defined in notification_service.dart file-->
+    <string name="default_notification_channel_id">New Notification</string>
+</resources>

@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:waya/functions/notification_service.dart';
 import 'package:waya/screens/splash_screen.dart';
 import 'package:waya/screens/welcomepage.dart';
 import 'package:flutter/services.dart';
 
 import 'firebase_options.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -19,6 +20,9 @@ void main() async {
   }).catchError((err) {
     print('Failed to get token: $err');
   });
+
+  final NotificationService notificationService = NotificationService();
+  await notificationService.initialize();
 
   // Set app orientation to portrait only
   SystemChrome.setPreferredOrientations(

@@ -1,6 +1,8 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:time_greeting/time_greeting.dart';
+import 'package:waya/functions/notification_service.dart';
 import 'package:waya/screens/widgets/activeride.dart';
 import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
@@ -148,6 +150,17 @@ class _HomePageState extends State<HomePage> {
     });
     findLoc();
     getCurrentTripDetails();
+
+    // Request permission for receiving push notifications (only for iOS)
+    FirebaseMessaging.instance.requestPermission();
+
+    // Configure Firebase Messaging & Show Notification
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Received message: ${message.notification?.title}');
+      NotificationService().showNotification(
+          dataTitle: '${message.notification?.title}',
+          dataBody: '${message.notification?.body}');
+    });
   }
 
   Future _refreshItems() async {
@@ -502,9 +515,9 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ]),
                         ),
-           DriverWidget(
-          data: widget.data,
-        ),
+                        DriverWidget(
+                          data: widget.data,
+                        ),
                       ],
                     )
                   : Center(
