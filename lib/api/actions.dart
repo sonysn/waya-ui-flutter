@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 import '../constants/api_constants.dart';
 
 //todo base uri value here
-// var baseUri = 'http://192.168.100.43:3000';
-var baseUri = 'https://waya-api.onrender.com';
+var baseUri = 'http://192.168.100.43:3000';
+// var baseUri = 'https://waya-api.onrender.com';
 
 //testing code
 Future requestRide({
@@ -92,5 +92,18 @@ Future getCurrentRide({required int userID}) async {
 
   final data = json.decode(response.body);
   // print(data);
+  return data;
+}
+
+Future onRiderCancelRide({required int riderID, required int driverID}) async {
+  final http.Response response = await http.post(
+      Uri.parse('$baseUri/$riderID${ApiConstants.onRiderCancelledRide}'),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: json.encode({
+        'driverID': driverID,
+      }));
+  final data = response.statusCode.toString();
   return data;
 }

@@ -515,8 +515,8 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ]),
                         ),
-                        DriverWidget(
-                          data: widget.data,
+                        ActiveRide(
+                          userID: widget.data.id,
                         ),
                       ],
                     )
