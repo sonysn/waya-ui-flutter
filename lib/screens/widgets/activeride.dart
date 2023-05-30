@@ -40,9 +40,6 @@ class _DriverWidgetState extends State<DriverWidget> {
     }
   }
 
-
-
-
   //CURRENT TRIP DETAILS
   String? driverPhoto;
   String? driverVehicleName;
@@ -52,12 +49,14 @@ class _DriverWidgetState extends State<DriverWidget> {
   String? pickUpLocation;
   String? destination;
   int? fare;
+  double? rating;
 
   @override
   void initState() {
     super.initState();
     findLoc();
     getCurrentTripDetails();
+    rating = 0;
   }
 
   Future _refreshItems() async {
@@ -67,6 +66,11 @@ class _DriverWidgetState extends State<DriverWidget> {
 
   void findLoc() {
     // Implement the logic for finding location here
+  }
+
+  void _submitRating() {
+    // Implement the logic to submit the rating
+    print('Rating: $rating');
   }
 
   @override
@@ -249,7 +253,25 @@ class _DriverWidgetState extends State<DriverWidget> {
                   ),
                 ],
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(5, (index) {
+                  return IconButton(
+                    onPressed: () {
+                      setState(() {
+                        rating = index + 1.toDouble();
+                      });
+                    },
+                    icon: Icon(
+                      Icons.star,
+                      color: rating != null && index < rating! ? Colors.yellow : Colors.grey,
+                      size: 40,
+                    ),
+                  );
+                }),
+              ),
+              const SizedBox(height: 15),
               Container(
                 width: double.infinity,
                 height: 45,
