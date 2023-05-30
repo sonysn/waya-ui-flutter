@@ -34,6 +34,7 @@ dependencies:
   location: ^4.2.0
   flutter_map: ^3.0.0
   geocode: ^1.0.2
+  url_launcher: ^6.0.9
 
   #flutter_svg: ^0.22.0 # help us to use SVG in our app
   provider: ^6.0.0 # for State management

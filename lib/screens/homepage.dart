@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:time_greeting/time_greeting.dart';
+import 'package:waya/screens/widgets/activeride.dart';
 import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:geocode/geocode.dart';
 import 'package:waya/api/actions.dart';
 import 'package:waya/colorscheme.dart';
@@ -500,86 +502,9 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ]),
                         ),
-                        if (driverVehicleName != null)
-                          FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: SizedBox(
-                                height: 200,
-                                width: width,
-                                child: Card(
-                                  color: Colors.white,
-                                  elevation: 5,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(15),
-                                      bottom: Radius.circular(15),
-                                    ),
-                                    //      side: BorderSide(color: Colors.yellow, width: 1),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        CircleAvatar(
-                                          radius: 30,
-                                          backgroundImage:
-                                              NetworkImage(driverPhoto!),
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              "Current TRip",
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                            Text(
-                                              "₦${fare.toString()}",
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            Text(
-                                              driverVehicleName!,
-                                              style:
-                                                  const TextStyle(fontSize: 15),
-                                            ),
-                                            Text(
-                                              driverVehiclePlateNumber!,
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            Text(
-                                              driverPhoneNumber!,
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            Text(
-                                              pickUpLocation!,
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            Text(
-                                              destination!,
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )),
-                          )
-                        else
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text('No Active Rides'),
-                            ),
-                          )
+           DriverWidget(
+          data: widget.data,
+        ),
                       ],
                     )
                   : Center(

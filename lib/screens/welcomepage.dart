@@ -31,6 +31,7 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Container(
             //margin: const EdgeInsets.only(top: 350),
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 1.7),
+
             child: Column(
               children: [
                 const Text(
