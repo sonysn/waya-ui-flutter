@@ -312,6 +312,7 @@ class _ActiveRideState extends State<ActiveRide> {
                       setState(() {
                         rating = index + 1.toDouble();
                       });
+                      //print(rating);
                     },
                     icon: Icon(
                       Icons.star,
