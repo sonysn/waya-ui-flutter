@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:waya/api/actions.dart';
 import 'package:waya/colorscheme.dart';
-
-
-class ActiveRide extends StatefulWidget {
-  final dynamic userID;
-  const ActiveRide({Key? key, this.userID}) : super(key: key);
+import 'package:waya/screens/loginpage.dart';
+class DriverWidget extends StatefulWidget {
+  final dynamic data;
+  const DriverWidget({Key? key, this.data}) : super(key: key);
 
   @override
-  State<ActiveRide> createState() => _ActiveRideState();
+  State<DriverWidget> createState() => _DriverWidgetState();
 }
 
-class _ActiveRideState extends State<ActiveRide> {
+class _DriverWidgetState extends State<DriverWidget> {
   Future getCurrentTripDetails() async {
-    final response = await getCurrentRide(userID: widget.userID);
+    final response = await getCurrentRide(userID: widget.data.id);
     //print(response);
     if (response == null) {
       setState(() {
@@ -26,7 +25,6 @@ class _ActiveRideState extends State<ActiveRide> {
         pickUpLocation = null;
         destination = null;
         fare = null;
-        driverID = null;
       });
     } else {
       setState(() {
@@ -38,55 +36,8 @@ class _ActiveRideState extends State<ActiveRide> {
         pickUpLocation = response['pickUpLocation'];
         destination = response['destinationLocation'];
         fare = response['fare'];
-        driverID = response['driverID'];
       });
     }
-  }
-
-  Future riderCancelTrip() async {
-    final response =
-    await onRiderCancelRide(riderID: widget.userID, driverID: driverID!);
-    if (response == 200) {
-      setState(() {
-        driverPhoto = null;
-        driverVehicleName = null;
-        driverVehiclePlateNumber = null;
-        vehicleColour = null;
-        driverPhoneNumber = null;
-        pickUpLocation = null;
-        destination = null;
-        fare = null;
-        driverID = null;
-      });
-    }
-  }
-
-  void dialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Cancel Ride'),
-          content: const Text('Are you sure you want to cancel the ride?'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-            ),
-            TextButton(
-              child: const Text('Yes'),
-              onPressed: () {
-                // Perform cancel ride operation here
-                Navigator.of(context).pop(); // Close the dialog
-                riderCancelTrip();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   //CURRENT TRIP DETAILS
@@ -98,7 +49,6 @@ class _ActiveRideState extends State<ActiveRide> {
   String? pickUpLocation;
   String? destination;
   int? fare;
-  int? driverID;
   double? rating;
 
   @override
@@ -150,7 +100,7 @@ class _ActiveRideState extends State<ActiveRide> {
                   Container(
                     width: 110,
                     height: 110,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(
                         colors: [customPurple, Colors.orangeAccent],
@@ -169,7 +119,7 @@ class _ActiveRideState extends State<ActiveRide> {
                 children: [
                   Text(
                     driverVehicleName!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -178,7 +128,7 @@ class _ActiveRideState extends State<ActiveRide> {
                   const SizedBox(height: 4),
                   Text(
                     driverVehiclePlateNumber!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       color: customPurple,
                     ),
@@ -193,7 +143,7 @@ class _ActiveRideState extends State<ActiveRide> {
                           shape: BoxShape.circle,
                           color: customPurple.withOpacity(0.1),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.phone,
                           color: customPurple,
                           size: 28,
@@ -206,7 +156,7 @@ class _ActiveRideState extends State<ActiveRide> {
                   ),
                 ],
               ),
-              const Divider(
+              Divider(
                 color: Colors.grey,
                 thickness: 3,
               ),
@@ -220,17 +170,17 @@ class _ActiveRideState extends State<ActiveRide> {
                       Container(
                         width: 30,
                         height: 30,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.black,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.directions_car,
                           color: Colors.white,
                         ),
                       ),
                       const SizedBox(width: 8),
-                      const Text(
+                      Text(
                         "Your Trip",
                         style: TextStyle(
                           fontSize: 22,
@@ -243,7 +193,7 @@ class _ActiveRideState extends State<ActiveRide> {
                         padding: const EdgeInsets.only(right: 18.0),
                         child: Text(
                           "₦${fare.toString()}",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: customPurple,
@@ -256,7 +206,7 @@ class _ActiveRideState extends State<ActiveRide> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.location_on,
                         color: Colors.black,
                         size: 16,
@@ -265,7 +215,7 @@ class _ActiveRideState extends State<ActiveRide> {
                       Expanded(
                         child: Text(
                           pickUpLocation!,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                           ),
@@ -284,7 +234,7 @@ class _ActiveRideState extends State<ActiveRide> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.location_on,
                         color: Colors.black,
                         size: 18,
@@ -293,7 +243,7 @@ class _ActiveRideState extends State<ActiveRide> {
                       Expanded(
                         child: Text(
                           destination!,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
                           ),
@@ -312,13 +262,10 @@ class _ActiveRideState extends State<ActiveRide> {
                       setState(() {
                         rating = index + 1.toDouble();
                       });
-                      //print(rating);
                     },
                     icon: Icon(
                       Icons.star,
-                      color: rating != null && index < rating!
-                          ? Colors.yellow
-                          : Colors.grey,
+                      color: rating != null && index < rating! ? Colors.yellow : Colors.grey,
                       size: 40,
                     ),
                   );
@@ -330,8 +277,21 @@ class _ActiveRideState extends State<ActiveRide> {
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Implement the functionality to cancel the trip here
-                    dialog();
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                        transitionDuration: Duration(milliseconds: 500),
+                        pageBuilder: (BuildContext context, Animation<double> animation,
+                            Animation<double> secondaryAnimation) {
+                          return SlideTransition(
+                            position: Tween<Offset>(
+                              begin: Offset(1.0, 0.0),
+                              end: Offset.zero,
+                            ).animate(animation),
+                            child: LoginPage(),
+                          );
+                        },
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: customPurple,
@@ -339,7 +299,7 @@ class _ActiveRideState extends State<ActiveRide> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Cancel",
                     style: TextStyle(
                       fontSize: 18,
@@ -354,7 +314,7 @@ class _ActiveRideState extends State<ActiveRide> {
         ),
       );
     } else {
-      return const Padding(
+      return Padding(
         padding: EdgeInsets.all(8.0),
         child: Center(
           child: Text('No Active Rides'),
