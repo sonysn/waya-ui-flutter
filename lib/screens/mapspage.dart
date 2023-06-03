@@ -550,7 +550,7 @@ class CheckPrice extends StatelessWidget {
 }
 
 class CustomDialogWidget extends StatefulWidget {
-  const CustomDialogWidget({super.key});
+  const CustomDialogWidget({Key? key}) : super(key: key);
 
   @override
   State<CustomDialogWidget> createState() => _CustomDialogWidgetState();
@@ -592,7 +592,7 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -612,7 +612,11 @@ void showCustomDialog(BuildContext context) {
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     barrierColor: Colors.black54.withOpacity(0.8),
     builder: (context) {
-      return const CustomDialogWidget();
+      return CustomDialogWidget();
     },
-  );
+  ).then((_) {
+    // Do something when the dialog is dismissed
+    // For example, close the current screen
+    Navigator.of(context).pop();
+  });
 }

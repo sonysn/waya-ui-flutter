@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:waya/api/actions.dart';
 import 'package:waya/colorscheme.dart';
-
+import 'package:waya/screens/loginpage.dart';
 class DriverWidget extends StatefulWidget {
   final dynamic data;
   const DriverWidget({Key? key, this.data}) : super(key: key);
@@ -277,7 +277,21 @@ class _DriverWidgetState extends State<DriverWidget> {
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Implement the functionality to cancel the trip here
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                        transitionDuration: Duration(milliseconds: 500),
+                        pageBuilder: (BuildContext context, Animation<double> animation,
+                            Animation<double> secondaryAnimation) {
+                          return SlideTransition(
+                            position: Tween<Offset>(
+                              begin: Offset(1.0, 0.0),
+                              end: Offset.zero,
+                            ).animate(animation),
+                            child: LoginPage(),
+                          );
+                        },
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: customPurple,
@@ -303,7 +317,7 @@ class _DriverWidgetState extends State<DriverWidget> {
       return Padding(
         padding: EdgeInsets.all(8.0),
         child: Center(
-          child: Text('No Active Rides'),
+          child: Text(""),
         ),
       );
     }

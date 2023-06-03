@@ -1,4 +1,4 @@
-// import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -6,19 +6,20 @@ import 'package:latlong2/latlong.dart';
 import 'package:waya/constants/api_constants.dart';
 
 class ConnectToServer {
-  //configure socket transport
+  // configure socket transport
   Socket socket = io(
-      ApiConstants.baseUrl,
-      OptionBuilder()
-          .setTransports(['websocket'])
-          .disableAutoConnect() // for Flutter or Dart VM
-          .build());
+    ApiConstants.baseUrl,
+    OptionBuilder()
+        .setTransports(['websocket'])
+        .disableAutoConnect() // for Flutter or Dart VM
+        .build(),
+  );
 
-  //connect to websockets
+  // connect to websockets
   connect(riderID, BuildContext context) {
-    //connect to websockets
+    // connect to websockets
     if (!socket.connected) {
-      //connect to websockets
+      // connect to websockets
       String who = 'Rider';
       socket.connect();
       socket.emit("identifyWho", who + riderID.toString());
@@ -50,12 +51,12 @@ class ConnectToServer {
       myFunction(context);
     }
 
-    // // //handle socket events
+    // handle socket events
     socket.on('connect', (_) => print('connect: ${socket.id}'));
     socket.on('disconnect', (_) => print('disconnect'));
   }
 
-  //disconnect from websockets
+  // disconnect from websockets
   disconnect() {
     socket.dispose();
   }
@@ -66,7 +67,6 @@ class ConnectToServer {
 }
 
 class AcceptedRideCard extends StatelessWidget {
-
   final String imageUrl;
   final String vehicleName;
   final String vehiclePlateNumber;
@@ -81,113 +81,86 @@ class AcceptedRideCard extends StatelessWidget {
     required this.vehicleColour,
     required this.driverPhone,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [Center(
+        child: Card(
+          elevation: 0,
+          color: Colors.black,
+          child: SizedBox(
+            height: 7,
+            width: MediaQuery.of(context).size.width / 2.5,
+          ),
+        ),
+      ),
+        SizedBox(height: 12),
+        Text(
+          'Great news!',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 16),
+        Column(
           children: [
-            Center(
-              child: Card(
-                elevation: 0,
-                color: Colors.black,
-                child: SizedBox(
-                  height: 7,
-                  width: MediaQuery.of(context).size.width / 2.5,
-                ),
-              ),
+            CircleAvatar(
+              radius: 60,
+              backgroundImage: NetworkImage(imageUrl),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 12),
             Text(
-              'Great news!',
+              'Driver Information',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
-              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 10),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundImage: NetworkImage(imageUrl),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 3),
-                const Center(),
-              ],
+            SizedBox(height: 4),
+            Text(
+              'Phone: $driverPhone',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[600],
+              ),
             ),
-            const SizedBox(height: 3),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Driver Information',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '$driverPhone',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            SizedBox(height: 16),
+            Text(
+              'Vehicle Information',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
-            const SizedBox(height: 2),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Vehicle Information',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            SizedBox(height: 4),
+            Text(
+              '$vehicleName - $vehiclePlateNumber',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[600],
+              ),
             ),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '$vehicleName - $vehiclePlateNumber',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Color: $vehicleColour',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            SizedBox(height: 4),
+            Text(
+              'Color: $vehicleColour',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[600],
+              ),
             ),
-            const SizedBox(height: 5),
+            SizedBox(height: 16),
           ],
-        );
-      },
-    );}}
+        ),
+      ],
+    );
+  }
+}
