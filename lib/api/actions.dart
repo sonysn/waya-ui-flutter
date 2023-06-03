@@ -94,3 +94,30 @@ Future getCurrentRide({required int userID}) async {
   // print(data);
   return data;
 }
+
+Future onRiderCancelRide({required int riderID, required int driverID}) async {
+  final http.Response response = await http.post(
+      Uri.parse('$baseUri/$riderID${ApiConstants.onRiderCancelledRide}'),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: json.encode({
+        'driverID': driverID,
+      }));
+  final data = response.statusCode.toString();
+  return data;
+}
+
+//TODO: Add this functionality to work
+Future rateDriver(
+    {required int riderID,
+    required int driverID,
+    required double rating}) async {
+  final http.Response response =
+      await http.post(Uri.parse('$baseUri/$riderID/rateDriver'),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: json.encode({'driverID': driverID, 'rating': rating}));
+  return response;
+}

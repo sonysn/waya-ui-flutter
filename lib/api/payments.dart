@@ -112,6 +112,7 @@ Future getUserToUserTransactionsForReceiver({required int userID}) async {
     throw Exception('An error occurred');
   }
 }
+
 Future getDepositHistory({required int userID}) async {
   try {
     final http.Response response = await http.get(Uri.parse(

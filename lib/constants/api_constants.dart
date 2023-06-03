@@ -21,4 +21,5 @@ class ApiConstants {
   static String getUserToUserTransactionsForReceiver =
       '/getUserToUserTransactionsForReceiver';
   static String getCurrentRideEndpoint = '/getCurrentRide';
+  static String onRiderCancelledRide = '/onRiderCancelledRide';
 }
