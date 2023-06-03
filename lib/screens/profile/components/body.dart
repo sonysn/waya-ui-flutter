@@ -49,14 +49,7 @@ class _BodyState extends State<Body> {
                       MaterialPageRoute(builder: (BuildContext context) {
                     return EditProfile(data: data);
                   }))),
-          ProfileMenu(
-            text: "Address",
-            icon: "assets/icons/ad.svg",
-            press: () => Navigator.push(context,
-                MaterialPageRoute(builder: (BuildContext context) {
-              return const AddressSettings();
-            })),
-          ),
+
           //ProfileMenu(
           //  text: "Notifications",
           //icon: "assets/icons/Settings.svg",

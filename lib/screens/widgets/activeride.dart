@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:waya/api/actions.dart';
 import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/loginpage.dart';
-class DriverWidget extends StatefulWidget {
-  final dynamic data;
-  const DriverWidget({Key? key, this.data}) : super(key: key);
+
+
+class ActiveRide extends StatefulWidget {
+  final dynamic userID;
+  const ActiveRide({Key? key, this.userID}) : super(key: key);
 
   @override
-  State<DriverWidget> createState() => _DriverWidgetState();
+  State<ActiveRide> createState() => _ActiveRideState();
 }
 
-class _DriverWidgetState extends State<DriverWidget> {
+class _ActiveRideState extends State<ActiveRide> {
   Future getCurrentTripDetails() async {
-    final response = await getCurrentRide(userID: widget.data.id);
+    final response = await getCurrentRide(userID: widget.userID);
     //print(response);
     if (response == null) {
       setState(() {
@@ -25,6 +26,7 @@ class _DriverWidgetState extends State<DriverWidget> {
         pickUpLocation = null;
         destination = null;
         fare = null;
+        driverID = null;
       });
     } else {
       setState(() {
@@ -36,8 +38,55 @@ class _DriverWidgetState extends State<DriverWidget> {
         pickUpLocation = response['pickUpLocation'];
         destination = response['destinationLocation'];
         fare = response['fare'];
+        driverID = response['driverID'];
       });
     }
+  }
+
+  Future riderCancelTrip() async {
+    final response =
+    await onRiderCancelRide(riderID: widget.userID, driverID: driverID!);
+    if (response == 200) {
+      setState(() {
+        driverPhoto = null;
+        driverVehicleName = null;
+        driverVehiclePlateNumber = null;
+        vehicleColour = null;
+        driverPhoneNumber = null;
+        pickUpLocation = null;
+        destination = null;
+        fare = null;
+        driverID = null;
+      });
+    }
+  }
+
+  void dialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Cancel Ride'),
+          content: const Text('Are you sure you want to cancel the ride?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () {
+                // Perform cancel ride operation here
+                Navigator.of(context).pop(); // Close the dialog
+                riderCancelTrip();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   //CURRENT TRIP DETAILS
@@ -49,6 +98,7 @@ class _DriverWidgetState extends State<DriverWidget> {
   String? pickUpLocation;
   String? destination;
   int? fare;
+  int? driverID;
   double? rating;
 
   @override
@@ -100,7 +150,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                   Container(
                     width: 110,
                     height: 110,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(
                         colors: [customPurple, Colors.orangeAccent],
@@ -119,7 +169,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                 children: [
                   Text(
                     driverVehicleName!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -128,7 +178,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                   const SizedBox(height: 4),
                   Text(
                     driverVehiclePlateNumber!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       color: customPurple,
                     ),
@@ -143,7 +193,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                           shape: BoxShape.circle,
                           color: customPurple.withOpacity(0.1),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.phone,
                           color: customPurple,
                           size: 28,
@@ -156,7 +206,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                   ),
                 ],
               ),
-              Divider(
+              const Divider(
                 color: Colors.grey,
                 thickness: 3,
               ),
@@ -170,17 +220,17 @@ class _DriverWidgetState extends State<DriverWidget> {
                       Container(
                         width: 30,
                         height: 30,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.black,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.directions_car,
                           color: Colors.white,
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Text(
+                      const Text(
                         "Your Trip",
                         style: TextStyle(
                           fontSize: 22,
@@ -193,7 +243,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                         padding: const EdgeInsets.only(right: 18.0),
                         child: Text(
                           "₦${fare.toString()}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: customPurple,
@@ -206,7 +256,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_on,
                         color: Colors.black,
                         size: 16,
@@ -215,7 +265,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                       Expanded(
                         child: Text(
                           pickUpLocation!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                           ),
@@ -234,7 +284,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_on,
                         color: Colors.black,
                         size: 18,
@@ -243,7 +293,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                       Expanded(
                         child: Text(
                           destination!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black,
                           ),
@@ -262,10 +312,13 @@ class _DriverWidgetState extends State<DriverWidget> {
                       setState(() {
                         rating = index + 1.toDouble();
                       });
+                      //print(rating);
                     },
                     icon: Icon(
                       Icons.star,
-                      color: rating != null && index < rating! ? Colors.yellow : Colors.grey,
+                      color: rating != null && index < rating!
+                          ? Colors.yellow
+                          : Colors.grey,
                       size: 40,
                     ),
                   );
@@ -277,21 +330,8 @@ class _DriverWidgetState extends State<DriverWidget> {
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      PageRouteBuilder(
-                        transitionDuration: Duration(milliseconds: 500),
-                        pageBuilder: (BuildContext context, Animation<double> animation,
-                            Animation<double> secondaryAnimation) {
-                          return SlideTransition(
-                            position: Tween<Offset>(
-                              begin: Offset(1.0, 0.0),
-                              end: Offset.zero,
-                            ).animate(animation),
-                            child: LoginPage(),
-                          );
-                        },
-                      ),
-                    );
+                    // Implement the functionality to cancel the trip here
+                    dialog();
                   },
                   style: ElevatedButton.styleFrom(
                     primary: customPurple,
@@ -299,7 +339,7 @@ class _DriverWidgetState extends State<DriverWidget> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Cancel",
                     style: TextStyle(
                       fontSize: 18,
@@ -314,10 +354,10 @@ class _DriverWidgetState extends State<DriverWidget> {
         ),
       );
     } else {
-      return Padding(
+      return const Padding(
         padding: EdgeInsets.all(8.0),
         child: Center(
-          child: Text('No Active Rides'),
+          child: Text(''),
         ),
       );
     }
