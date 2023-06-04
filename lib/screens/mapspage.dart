@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geocode/src/model/address.dart';
@@ -6,7 +8,7 @@ import 'package:location/location.dart';
 import 'package:waya/api/actions.dart';
 import 'package:geocoding/geocoding.dart' as locationGeocodingPackage;
 import 'package:waya/screens/trip_search_page.dart';
-
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import '../colorscheme.dart';
 import '../sockets/sockets.dart';
 
@@ -28,12 +30,26 @@ bool showButtonWidget = false;
 class _MapsPageState extends State<MapsPage> {
   late GoogleMapController mapController;
   late final LatLng _center = _currentLocation;
-  LatLng? carPosition;
+  LatLng? destinationPointOnTheMap;
   dynamic currentLocationPointRequest;
   dynamic destinationLocationPointRequest;
+  Set<Polyline> polylines = {}; // Set to hold the polyline overlay
+  String? mapApiKey;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+
+  Future<void> getApikey() async {
+    const url = 'https://sea-lion-app-m46xn.ondigitalocean.app/getAPIKEY';
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        mapApiKey = data['KEY'];
+      });
+      // print(data['KEY']);
+    }
   }
 
   void findLoc() async {
@@ -91,14 +107,84 @@ class _MapsPageState extends State<MapsPage> {
         },
       ),
     );
-    print(data.locData);
+    //print(data.locData);
     setState(() {
       showButtonWidget = data.status;
       currentLocationPointRequest = data.locData;
       destinationLocationPointRequest = data.desData;
       _currentLocationAddress = data.locationAdress;
       _dropOffLocationAddress = data.destinationAdress;
-      carPosition = LatLng(data.desData[0], data.desData[1]);
+      destinationPointOnTheMap = LatLng(data.desData[0], data.desData[1]);
+    });
+
+    /**
+     * This code calculates the minimum and maximum latitude and longitude values between two sets of coordinates: currentLocationPointRequest and destinationPointOnTheMap. Here's how it works:
+        minLat: It compares the latitude values of currentLocationPointRequest[0] and destinationPointOnTheMap!.latitude. If the latitude of currentLocationPointRequest[0] is less than destinationPointOnTheMap!.latitude, it assigns currentLocationPointRequest[0] to minLat, otherwise it assigns destinationPointOnTheMap!.latitude to minLat.
+        minLng: Similar to minLat, but it compares the longitude values of currentLocationPointRequest[1] and destinationPointOnTheMap!.longitude.
+        maxLat: It compares the latitude values of currentLocationPointRequest[0] and destinationPointOnTheMap!.latitude. If the latitude of currentLocationPointRequest[0] is greater than destinationPointOnTheMap!.latitude, it assigns currentLocationPointRequest[0] to maxLat, otherwise it assigns destinationPointOnTheMap!.latitude to maxLat.
+        maxLng: Similar to maxLat, but it compares the longitude values of currentLocationPointRequest[1] and destinationPointOnTheMap!.longitude.
+    */
+    //!NOTE: [0] is Latitude and [1] is Longitude
+    // Determine the southwest and northeast coordinates
+    double minLat =
+        currentLocationPointRequest[0] < destinationPointOnTheMap!.latitude
+            ? currentLocationPointRequest[0]
+            : destinationPointOnTheMap!.latitude;
+    double minLng =
+        currentLocationPointRequest[1] < destinationPointOnTheMap!.longitude
+            ? currentLocationPointRequest[1]
+            : destinationPointOnTheMap!.longitude;
+    double maxLat =
+        currentLocationPointRequest[0] > destinationPointOnTheMap!.latitude
+            ? currentLocationPointRequest[0]
+            : destinationPointOnTheMap!.latitude;
+    double maxLng =
+        currentLocationPointRequest[1] > destinationPointOnTheMap!.longitude
+            ? currentLocationPointRequest[1]
+            : destinationPointOnTheMap!.longitude;
+
+    // Create LatLngBounds object with the determined coordinates
+    LatLngBounds bounds = LatLngBounds(
+      southwest: LatLng(minLat, minLng),
+      northeast: LatLng(maxLat, maxLng),
+    );
+
+    // Animate the camera to include both points
+    mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 100));
+
+    PolylinePoints polylinePoints = PolylinePoints();
+    PointLatLng origin = PointLatLng(
+        currentLocationPointRequest[0], currentLocationPointRequest[1]);
+    PointLatLng destination = PointLatLng(destinationPointOnTheMap!.latitude,
+        destinationPointOnTheMap!.longitude);
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      mapApiKey!,
+      origin,
+      destination,
+      travelMode: TravelMode.driving,
+    );
+    //print(result.points);
+    List<LatLng> polylineCoordinates = [];
+    // Check if the result status is OK
+    if (result.status == 'OK') {
+      print('polygon status OK');
+      // Create a list of LatLng coordinates from the result
+      for (PointLatLng point in result.points) {
+        //defined above
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      }
+    }
+
+    // Create a Polyline instance with coordinates
+    Polyline polyline = Polyline(
+        polylineId: const PolylineId('route'), // Unique ID for the polyline
+        color: Colors.blue, // Color of the polyline
+        width: 4, // Width of the polyline
+        points: polylineCoordinates // Coordinates of the polyline
+        );
+
+    setState(() {
+      polylines.add(polyline); // Add the polyline to the set
     });
   }
 
@@ -111,6 +197,7 @@ class _MapsPageState extends State<MapsPage> {
     });
     findLoc();
     ConnectToServer().connect(widget.data.id, context);
+    getApikey();
   }
 
   @override
@@ -119,6 +206,7 @@ class _MapsPageState extends State<MapsPage> {
     ConnectToServer().disconnect();
     _currentLocation == null;
     _dropOffLocation == null;
+    mapController.dispose();
   }
 
   @override
@@ -129,6 +217,7 @@ class _MapsPageState extends State<MapsPage> {
             ? SafeArea(
                 child: Stack(children: [
                   GoogleMap(
+                    polylines: polylines,
                     zoomControlsEnabled: false,
                     trafficEnabled: true,
                     markers: <Marker>{
@@ -136,10 +225,10 @@ class _MapsPageState extends State<MapsPage> {
                         markerId: const MarkerId("1"),
                         position: _center,
                       ),
-                      if (carPosition != null)
+                      if (destinationPointOnTheMap != null)
                         Marker(
                           markerId: const MarkerId("2"),
-                          position: carPosition!,
+                          position: destinationPointOnTheMap!,
                           icon: BitmapDescriptor.defaultMarkerWithHue(
                               BitmapDescriptor.hueBlue),
                         ),
@@ -177,12 +266,12 @@ class _MapsPageState extends State<MapsPage> {
                                           14));
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: customPurple,
                                   shape: const CircleBorder(),
                                   padding: const EdgeInsets.all(8),
                                 ),
                                 child: const Icon(Icons.gps_fixed,
-                                    color: Colors.black)),
+                                    color: Colors.orangeAccent)),
                           ),
                           Align(
                             alignment: AlignmentDirectional.bottomCenter,
@@ -251,7 +340,8 @@ class _MapsPageState extends State<MapsPage> {
                                     child: Center(
                                       child: Text(
                                         'Request ride',
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(
+                                            color: Colors.orangeAccent),
                                       ),
                                     ),
                                   )),

@@ -56,6 +56,7 @@ dependencies:
   firebase_messaging: ^14.4.1
   geocoding: ^2.0.0
   pin_code_fields: ^7.4.0
+  flutter_polyline_points: ^1.0.0
   loading_animation_widget:
   flutter_svg:
 
