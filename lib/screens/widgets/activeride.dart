@@ -3,7 +3,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:waya/api/actions.dart';
 import 'package:waya/colorscheme.dart';
 
-
 class ActiveRide extends StatefulWidget {
   final dynamic userID;
   const ActiveRide({Key? key, this.userID}) : super(key: key);
@@ -27,6 +26,7 @@ class _ActiveRideState extends State<ActiveRide> {
         destination = null;
         fare = null;
         driverID = null;
+        dbObjectID = null;
       });
     } else {
       setState(() {
@@ -39,13 +39,14 @@ class _ActiveRideState extends State<ActiveRide> {
         destination = response['destinationLocation'];
         fare = response['fare'];
         driverID = response['driverID'];
+        dbObjectID = response['objectId'];
       });
     }
   }
 
   Future riderCancelTrip() async {
-    final response =
-    await onRiderCancelRide(riderID: widget.userID, driverID: driverID!);
+    final response = await onRiderCancelRide(
+        riderID: widget.userID, driverID: driverID!, dbObjectID: dbObjectID!);
     if (response == 200) {
       setState(() {
         driverPhoto = null;
@@ -100,6 +101,7 @@ class _ActiveRideState extends State<ActiveRide> {
   int? fare;
   int? driverID;
   double? rating;
+  String? dbObjectID;
 
   @override
   void initState() {

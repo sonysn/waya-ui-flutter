@@ -95,15 +95,16 @@ Future getCurrentRide({required int userID}) async {
   return data;
 }
 
-Future onRiderCancelRide({required int riderID, required int driverID}) async {
+Future onRiderCancelRide(
+    {required int riderID,
+    required int driverID,
+    required String dbObjectID}) async {
   final http.Response response = await http.post(
       Uri.parse('$baseUri/$riderID${ApiConstants.onRiderCancelledRide}'),
       headers: {
         "Content-Type": "application/json",
       },
-      body: json.encode({
-        'driverID': driverID,
-      }));
+      body: json.encode({'driverID': driverID, 'objectID': dbObjectID}));
   final data = response.statusCode.toString();
   return data;
 }
@@ -119,5 +120,13 @@ Future rateDriver(
             "Content-Type": "application/json",
           },
           body: json.encode({'driverID': driverID, 'rating': rating}));
+  return response;
+}
+
+Future getRideHistory({required int riderID}) async {
+  final http.Response response =
+      await http.get(Uri.parse('$baseUri/$riderID/getRiderTripHistory'));
+  //final data = json.decode(response.body);
+  //print(data);
   return response;
 }
