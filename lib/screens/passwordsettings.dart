@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:waya/screens/profile/profilepage.dart';
+import 'package:waya/screens/passwordchange.dart';
 import '../../../colorscheme.dart';
 import '../constants/design_constants.dart';
 class PasswordSettings extends StatefulWidget {
@@ -42,39 +42,13 @@ class _PasswordSettingsState extends State<PasswordSettings> {
         const SizedBox(
           height: 20,
         ),
-        Center(
-          child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-                      return ProfilePage();
-                    }));
-              },
-              style: ElevatedButton.styleFrom(
-                  primary: customPurple,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                      bottom: Radius.circular(20),
-                    ),
-                  )),
-              child: const SizedBox(
-                width: 260,
-                height: 50,
-                child: Center(child: Text('Change Pin', style: TextStyle(
 
-                    color: kTextColor),)
-                ),
-              )),
-        ), const SizedBox(
-                height: 20,
-              ),
             Center(
               child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                          return ProfilePage();
+                          return ChangePasswordPage();
                         }));
                   },
                   style: ElevatedButton.styleFrom(

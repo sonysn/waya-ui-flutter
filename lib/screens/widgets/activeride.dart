@@ -40,7 +40,7 @@ class _ActiveRideState extends State<ActiveRide> {
         fare = response['fare'];
         driverID = response['driverID'];
         dbObjectID = response['objectId'];
-      });
+      }); _refreshItems(); // Refresh the page
     }
   }
 
@@ -68,21 +68,49 @@ class _ActiveRideState extends State<ActiveRide> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Cancel Ride'),
-          content: const Text('Are you sure you want to cancel the ride?'),
-          actions: <Widget>[
+          content: const Text(
+            'Are you sure you want to cancel the trip?',
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          actions: [
             TextButton(
-              child: const Text('No'),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
+                // Perform the cancel trip action
+               riderCancelTrip();
               },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                backgroundColor: Colors.orangeAccent,
+              ),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
             TextButton(
-              child: const Text('Yes'),
               onPressed: () {
-                // Perform cancel ride operation here
                 Navigator.of(context).pop(); // Close the dialog
-                riderCancelTrip();
+                _refreshItems();
               },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                backgroundColor: Colors.grey,
+              ),
+              child: const Text(
+                'No',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         );
