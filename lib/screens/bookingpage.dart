@@ -7,6 +7,7 @@ import '../../../colorscheme.dart';
 
 class BookingPage extends StatefulWidget {
   final dynamic data;
+
   const BookingPage({Key? key, this.data}) : super(key: key);
 
   @override
@@ -16,7 +17,7 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  dynamic ridesArray = [];
+  List<dynamic> ridesArray = [];
 
   Color getStatusColor(String status) {
     switch (status) {
@@ -27,12 +28,11 @@ class _BookingPageState extends State<BookingPage>
       case 'Completed':
         return Colors.orangeAccent;
       default:
-        return Colors
-            .transparent; // Default color if status doesn't match any case
+        return Colors.transparent; // Default color if status doesn't match any case
     }
   }
 
-  Future getRides() async {
+  Future<void> getRides() async {
     final response = await getRideHistory(riderID: widget.data.id);
 
     if (response.statusCode == 200) {
@@ -40,11 +40,10 @@ class _BookingPageState extends State<BookingPage>
       setState(() {
         ridesArray = data.reversed.toList();
       });
-      //print(ridesArray);
     }
   }
 
-  Future _refreshItems() async {
+  Future<void> _refreshItems() async {
     await getRides();
   }
 
@@ -56,6 +55,12 @@ class _BookingPageState extends State<BookingPage>
   }
 
   @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       color: Colors.orangeAccent,
@@ -64,112 +69,160 @@ class _BookingPageState extends State<BookingPage>
       child: DefaultTabController(
         length: 1,
         child: Scaffold(
-            body: Container(
-          padding: const EdgeInsets.only(top: 40),
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "My Bookings",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 45,
-                decoration: const BoxDecoration(
-                    //color: Colors.grey[300],
-                    // border: Border(
-                    //   bottom: BorderSide(width: 3.0, color: Colors.grey)
-                    // ),
-                    ),
-                child: const TabBar(
-                  indicator: BoxDecoration(
-                    //color: Colors.yellow[100],
-                    border: Border(
-                        bottom: BorderSide(width: 3.0, color: customPurple)),
-                  ),
-                  labelColor: customPurple,
-                  unselectedLabelColor: Colors.black,
-                  tabs: [
-                    Tab(
-                      text: 'Ride History',
-                    ),
-                  ],
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 40),
+                const Text(
+                  "My Bookings",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                 ),
-              ),
-              ridesArray == []
-                  ? Expanded(
-                      child: TabBarView(
-                      children: [
-                        SingleChildScrollView(
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/images/cp.png"),
-                                const SizedBox(height: 20),
-                                const Text(
-                                  'You have no Completed Bookings',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ))
-                  : Expanded(
-                      child: ListView.builder(
-                        itemCount: ridesArray.length,
-                        itemBuilder: (context, index) {
-                          Map<String, dynamic> rideData = ridesArray[index];
-
-                          // Extract the data from the rideData map
-                          String requestDate = rideData['REQUEST_DATE'];
-                          String pickupLocation = rideData['PICKUP_LOCATION'];
-                          String dropoffLocation = rideData['DROPOFF_LOCATION'];
-                          int fare = rideData['FARE'];
-                          String status = rideData['STATUS'];
-
-                          // Format the date
-                          DateTime date = DateTime.parse(requestDate);
-
-                          String formattedDate =
-                              DateFormat('MMM dd, yyyy').format(date);
-
-                          return ListTile(
-                            title: const Text(
-                              'Ride Details',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Request Date: $formattedDate'),
-                                Text('Pickup Location: $pickupLocation'),
-                                Text('Dropoff Location: $dropoffLocation'),
-                                Text('Fare: $fare'),
-                                Text(
-                                  'Status: $status',
-                                  style: TextStyle(
-                                    // Call a function to get the color based on the status
-                                    color: getStatusColor(status),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
+                const SizedBox(height: 20),
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(),
+                  child: TabBar(
+                    indicator: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 3.0, color: customPurple),
                       ),
-                    )
-            ],
+                    ),
+                    labelColor: customPurple,
+                    unselectedLabelColor: Colors.black,
+                    tabs: [
+                      Tab(
+                        text: 'Ride History',
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      ridesArray.isEmpty
+                          ? SingleChildScrollView(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/images/cp.png"),
+                              const SizedBox(height: 20),
+                              const Text(
+                                'You have no Completed Bookings',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+          : ListView.builder(
+          itemCount: ridesArray.length,
+          itemBuilder: (context, index) {
+            Map<String, dynamic> rideData = ridesArray[index];
+
+            // Extract the data from the rideData map
+            String requestDate = rideData['REQUEST_DATE'];
+            String pickupLocation = rideData['PICKUP_LOCATION'];
+            String dropoffLocation = rideData['DROPOFF_LOCATION'];
+            int fare = rideData['FARE'];
+            String status = rideData['STATUS'];
+
+            // Format the date
+            DateTime date = DateTime.parse(requestDate);
+            String formattedDate = DateFormat('MMM dd, yyyy').format(date);
+
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Ride Details',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  SizedBox(height: 3),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(
+                      'Request Date',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      formattedDate,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(
+                      'Pickup Location',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      pickupLocation,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(
+                      'Dropoff Location',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      dropoffLocation,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(
+                      'Fare',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      '₦$fare',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(
+                      'Status',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      status,
+                      style: TextStyle(
+                        color: getStatusColor(status),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        )
+
+        ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        )),
+        ),
       ),
     );
   }
@@ -180,8 +233,7 @@ class CompletedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Replace this with the actual booking data
-    final List<dynamic> bookings = [];
+    final List<dynamic> bookings = []; // TODO: Replace this with the actual booking data
 
     if (bookings.isEmpty) {
       return SingleChildScrollView(
@@ -207,9 +259,7 @@ class CompletedPage extends StatelessWidget {
         final booking = bookings[index];
 
         return Card(
-          // TODO: Customize card styling as per your design
           child: ListTile(
-            // TODO: Display booking information
             title: Text('Booking ID: ${booking.id}'),
             subtitle: Text('Date: ${booking.date}'),
             trailing: Text('Status: ${booking.status}'),

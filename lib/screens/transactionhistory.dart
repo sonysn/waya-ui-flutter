@@ -92,45 +92,106 @@ class _TransactionHistoryState extends State<TransactionHistory>
           child: TabBarView(
             controller: _tabController,
             children: [
-              Container(
-                padding: const EdgeInsets.only(top: 40),
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    widget.transactions.isEmpty
-                        ? const Center(
-                      child: Text(
-                        'No transactions',
-                        style: TextStyle(fontSize: 20),
+              SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.only(top: 40),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      widget.transactions.isEmpty
+                          ? const Center(
+                        child: Text(
+                          'No transactions',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      )
+                          : ListView.separated(
+                        itemCount: widget.transactions.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 10,
+                          );
+                        },
+                        itemBuilder: (context, index) {
+                          return TransactionCard(
+                            data: widget.data,
+                            depositAmount:
+                            reversedTransactions[index]['data']
+                            ['amount'] /
+                                100,
+                            depositDate:
+                            reversedTransactions[index]['data']
+                            ['paid_at'],
+                          );
+                        },
                       ),
-                    )
-                        : ListView.separated(
-                      itemCount: widget.transactions.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 10,
-                        );
-                      },
-                      itemBuilder: (context, index) {
-                        return TransactionCard(
-                          data: widget.data,
-                          depositAmount:
-                          reversedTransactions[index]['data']
-                          ['amount'] /
-                              100,
-                          depositDate:
-                          reversedTransactions[index]['data']
-                          ['paid_at'],
-                        );
-                      },
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              // Add other TabBarView children here for the remaining tabs
+              // User Transfer History Tab
+              SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.only(top: 40),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // TODO: Implement the UI for User Transfer History tab
+                      // Replace the following placeholder widget
+                      const Center(
+                        child: Text(
+                          'User Transfer History',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Driver Transfer History Tab
+              SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.only(top: 40),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // TODO: Implement the UI for Driver Transfer History tab
+                      // Replace the following placeholder widget
+                      const Center(
+                        child: Text(
+                          'Driver Transfer History',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Money Received History Tab
+              SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.only(top: 40),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // TODO: Implement the UI for Money Received History tab
+                      // Replace the following placeholder widget
+                      const Center(
+                        child: Text(
+                          'Money Received History',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

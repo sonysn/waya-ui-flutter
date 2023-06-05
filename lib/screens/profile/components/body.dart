@@ -7,7 +7,7 @@ import 'package:waya/screens/editprofile.dart';
 import 'package:waya/screens/helpcenter.dart';
 import 'package:waya/screens/addresssettings.dart';
 import 'package:waya/screens/passwordsettings.dart';
-
+import 'package:waya/screens/privacypolicy.dart';
 import '../../../api/auth.dart';
 import '../../welcomepage.dart';
 import 'profile_menu.dart';
@@ -70,14 +70,17 @@ class _BodyState extends State<Body> {
           ProfileMenu(
             text: "Privacy Policy",
             icon: "assets/icons/pp.svg",
-            press: () {},
+            press: () => Navigator.push(context,
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return const PrivacyPolicyPage();
+                })),
           ),
           ProfileMenu(
             text: "Help Center",
             icon: "assets/icons/hc.svg",
             press: () => Navigator.push(context,
                 MaterialPageRoute(builder: (BuildContext context) {
-              return const HelpCenter();
+              return const HelpCenterPage();
             })),
           ),
           ProfileMenu(

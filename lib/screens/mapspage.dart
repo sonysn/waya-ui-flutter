@@ -242,13 +242,48 @@ class _MapsPageState extends State<MapsPage> {
                       print(position);
                     },
                   ),
-                  IconButton(
-                      onPressed: () {
-                        moveToSearchTripPage();
-                      },
-                      icon: const Icon(Icons.search_rounded)),
+            GestureDetector(
+              onTap: () {
+                moveToSearchTripPage();
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 12.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                      color: Colors.orangeAccent,
+                      width: 2.0,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 8.0),
+                        child: Icon(
+                          Icons.search_rounded,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Expanded(
+                        child: TextField(
+                          enabled: false,
+                          style: TextStyle(fontSize: 16.0),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Enter location',
+                            hintStyle: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
                   Container(
-                      margin: EdgeInsets.only(
+            margin: EdgeInsets.only(
                           bottom:
                               20, //MediaQuery.of(context).size.height / 5.2,
                           right: MediaQuery.of(context).size.width / 250),
@@ -529,154 +564,156 @@ class CheckPrice extends StatelessWidget {
           height: constraints.maxHeight,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Center(
-                  child: Card(
-                    elevation: 0,
-                    color: Colors.black,
-                    child: SizedBox(
-                      height: 7,
-                      width: MediaQuery.of(context).size.width / 2.5,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  "Your Trip Cost",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  "₦$price",
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orangeAccent,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'From: ',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Flexible(
-                          child: Text(
-                            startLocation,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 3),
-                    const Center(
-                      child: Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 3),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'To: ',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Flexible(
-                          child: Text(
-                            destinationLocation,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 1),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                ElevatedButton(
-                  onPressed: () async {
-                    buttonPress();
-                    //TODO stephen WATCH THIS1
-                    Navigator.pop(context);
-                    showCustomDialog(context);
-                    //    await Future.delayed(Duration(seconds: 5));
-
-                    //   dismissCustomDialog(context);
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(builder: (BuildContext context) => ()),
-                    //    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: customPurple,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: const Text(
-                    'Request Ride',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () async {
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Center(
+                    child: Card(
+                      elevation: 0,
                       color: Colors.black,
+                      child: SizedBox(
+                        height: 7,
+                        width: MediaQuery.of(context).size.width / 2.5,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 24),
+                  const Text(
+                    "Your Trip Cost",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "₦$price",
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orangeAccent,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'From: ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Flexible(
+                            child: Text(
+                              startLocation,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                              overflow: TextOverflow.visible,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 3),
+                      const Center(
+                        child: Icon(Icons.keyboard_arrow_down),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 3),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'To: ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Flexible(
+                            child: Text(
+                              destinationLocation,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                              overflow: TextOverflow.visible,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 1),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  ElevatedButton(
+                    onPressed: () async {
+                      buttonPress();
+                      //TODO stephen WATCH THIS1
+                      Navigator.pop(context);
+                      showCustomDialog(context);
+                      //    await Future.delayed(Duration(seconds: 5));
+
+                      //   dismissCustomDialog(context);
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(builder: (BuildContext context) => ()),
+                      //    );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: customPurple,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: const Text(
+                      'Request Ride',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
       },
     );
-  }
-}
+  }  }
+
 
 class CustomDialogWidget extends StatefulWidget {
   const CustomDialogWidget({Key? key}) : super(key: key);

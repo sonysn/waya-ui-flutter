@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         child: SizedBox(
                                           height: 60,
-                                          width: width / 2.2,
+                                          width: width / 1.1,
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Row(
@@ -258,33 +258,7 @@ class _HomePageState extends State<HomePage> {
                                         }));
                                       },
                                     ),
-                                    Card(
-                                      color: Colors.white,
-                                      elevation: 5,
-                                      borderOnForeground: true,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(15),
-                                          bottom: Radius.circular(15),
-                                        ),
-                                        //   side: BorderSide(color: Colors.yellow, width: 1),
-                                      ),
-                                      child: SizedBox(
-                                        height: 60,
-                                        width: width / 2.5,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: const [
-                                              Icon(Icons.access_time),
-                                              Text('Schedule ride')
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+
                                   ],
                                 ),
                                 const SizedBox(
