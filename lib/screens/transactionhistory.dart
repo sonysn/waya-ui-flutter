@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:waya/screens/widgets/transaction_card.dart';
-
+import 'package:waya/screens/widgets/debit_card.dart';
 class TransactionHistory extends StatefulWidget {
   final dynamic data;
   final List transactions;
-
-  const TransactionHistory({Key? key, this.data, required this.transactions})
+  final List debits;
+  const TransactionHistory({Key? key, this.data, required this.transactions,required this.debits})
       : super(key: key);
 
   @override
@@ -140,13 +140,29 @@ class _TransactionHistoryState extends State<TransactionHistory>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // TODO: Implement the UI for User Transfer History tab
-                      // Replace the following placeholder widget
-                      const Center(
+                      widget.debits.isEmpty
+                          ? const Center(
                         child: Text(
-                          'User Transfer History',
+                          'No transactions',
                           style: TextStyle(fontSize: 20),
                         ),
+                      )
+                          : ListView.separated(
+                        itemCount: widget.debits.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 10,
+                          );
+                        },
+                        itemBuilder: (context, index) {
+                          return DebitCard(
+
+                            amountTransferred: reversedTransactions[index]['amountTransferred'],
+                            dateTransferred: reversedTransactions[index]['datePaid'],
+                          );
+                        },
                       ),
                     ],
                   ),

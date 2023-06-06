@@ -3,9 +3,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:waya/functions/notification_service.dart';
 import 'package:waya/screens/splash_screen.dart';
-import 'package:waya/screens/welcomepage.dart';
+import 'package:waya/screens/homepage.dart';
 import 'package:flutter/services.dart';
-
+import 'package:waya/screens/WalletPage.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -40,8 +40,54 @@ Future<void> main() async {
   });
 }
 
-class WApp extends StatelessWidget {
+class WApp extends StatefulWidget {
   const WApp({Key? key}) : super(key: key);
+
+  @override
+  State<WApp> createState() => _WAppState();
+}
+
+class _WAppState extends State<WApp> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _configureFirebaseMessaging();
+  }
+
+  void _configureFirebaseMessaging() {
+    _firebaseMessaging.requestPermission();
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      // Handle notification click here
+      navigateToScreenBasedOnPayload(message.data);
+    });
+  }
+
+  void navigateToScreenBasedOnPayload(Map<String, dynamic> data) {
+    // Extract the necessary data from the payload and navigate to the appropriate screen
+    if (data.containsKey('screen')) {
+      String screen = data['screen'];
+
+      // Navigate to the specified screen
+      if (screen == 'homepage') {
+        // Extract additional data if needed and pass it to the screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(data: data),
+          ),
+        );
+      }else if (screen == 'walletpage') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WalletPage(data: data),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

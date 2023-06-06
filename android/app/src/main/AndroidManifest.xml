@@ -10,7 +10,11 @@
         android:label="waya"
         android:name="${applicationName}"
         android:icon="@drawable/app_icon">
-        <meta-data android:name="com.google.android.geo.API_KEY"
+       <meta-data
+           android:name="com.google.firebase.messaging.default_notification_icon"
+           android:resource="@drawable/notificationicon" />
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyBhDflq5iJrXIcKpeq0IzLQPQpOboX91lY"/>
 <!--        this comes from strings.xml android/app/src/main/res/values directory.-->
         <meta-data

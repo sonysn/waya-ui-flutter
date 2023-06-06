@@ -8,6 +8,8 @@ import 'package:waya/screens/transfers.dart';
 import '../../../colorscheme.dart';
 import 'package:waya/screens/widgets/transaction_card.dart';
 import 'package:waya/screens/transactionhistory.dart';
+import 'package:waya/screens/widgets/debit_card.dart';
+import 'package:waya/screens/debithistory.dart';
 import 'package:waya/screens/widgets/my_card.dart';
 
 class WalletPage extends StatefulWidget {
@@ -22,8 +24,8 @@ class _WalletPageState extends State<WalletPage> {
   final _streamController = StreamController<String>.broadcast();
 
   Stream<String> get stream => _streamController.stream;
-  List earnings = [];
-  List reversedEarnings = [];
+  List debits = [];
+  List reversedDebits = [];
   List transactions = [];
   List reversedTransactions = [];
 
@@ -41,12 +43,18 @@ class _WalletPageState extends State<WalletPage> {
       reversedTransactions = transactions.reversed.toList();
     });
   }
+  Future _getUserToDriverTransactions() async {
+    final response = await getUserToDriverTransactions(userID: widget.data.id);
+    print(response);
+
+  }
 
   @override
   void initState() {
     super.initState();
     _getAccountBalance();
     _getDepositTransactions();
+    _getUserToDriverTransactions();
   }
 
   @override
@@ -171,7 +179,7 @@ class _WalletPageState extends State<WalletPage> {
                               builder: (BuildContext context) {
                                 return TransactionHistory(
                                   data: widget.data,
-                                  transactions: transactions,
+                                  transactions: transactions,debits: debits,
                                 );
                               },
                             ),

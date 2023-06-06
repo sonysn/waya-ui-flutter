@@ -12,8 +12,8 @@ class OnboardingContent {
 
 List<OnboardingContent> contents = [
   OnboardingContent(
-    title: 'Waya App',
-    image: 'assets/images/imag.jpg',
+    title: 'Qunot',
+    image: 'assets/images/onboard1.jpg',
     description: "Welcome to Waya, the smart transportation app that simplifies your travel experience. With Waya, you can enjoy convenient and reliable rides at your fingertips, making commuting a breeze.",
   ),
   OnboardingContent(

@@ -119,12 +119,13 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-
+        alignment: Alignment.center,
         child: _isLoading
             ? Center(
-          child: LoadingAnimationWidget.waveDots(
-              color: Colors.black, size: 70),
-        )
+            child: LoadingAnimationWidget.waveDots(
+              color: Colors.black,
+              size: 70,
+            ))
             : SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(24),
@@ -133,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const SizedBox(height: 60),
                 const Text(
-                  'Login to your account',
+                  'Welcome Back',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 27,
@@ -150,18 +151,19 @@ class _LoginPageState extends State<LoginPage> {
                     // Disallow whitespace
                   ],
                   decoration: InputDecoration(
-                    hintText: 'Email or Phone',
+                    hintText: 'Email or Phone Number',
                     contentPadding: const EdgeInsets.all(15),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide(color: Colors.white),
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.yellow),
+                      borderSide: BorderSide(color: Colors.orangeAccent),
                     ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    prefixIcon: Icon(Icons.account_circle_outlined, color: Colors.black87,),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -177,12 +179,13 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide(color: Colors.white),
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.yellow),
+                      borderSide: BorderSide(color: Colors.orangeAccent),
                     ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    prefixIcon: Icon(Icons.lock,color: Colors.black87,),
                     suffixIcon: IconButton(
                       icon: Icon(
                         _passwordVisible
