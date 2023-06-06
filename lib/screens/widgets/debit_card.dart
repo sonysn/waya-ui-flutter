@@ -31,7 +31,7 @@ class _EarningCardState extends State<EarningCard> {
   @override
   void initState() {
     super.initState();
-    formatDate(widget.dateTransferred);
+
   }
 
   @override
