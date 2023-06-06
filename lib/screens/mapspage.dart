@@ -219,7 +219,6 @@ class _MapsPageState extends State<MapsPage> {
                   GoogleMap(
                     polylines: polylines,
                     zoomControlsEnabled: false,
-                    trafficEnabled: true,
                     markers: <Marker>{
                       Marker(
                         markerId: const MarkerId("1"),
@@ -242,48 +241,48 @@ class _MapsPageState extends State<MapsPage> {
                       print(position);
                     },
                   ),
-            GestureDetector(
-              onTap: () {
-                moveToSearchTripPage();
-              },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 12.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                      color: Colors.orangeAccent,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Icon(
-                          Icons.search_rounded,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          enabled: false,
-                          style: TextStyle(fontSize: 16.0),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Enter location',
-                            hintStyle: TextStyle(color: Colors.grey),
+                  GestureDetector(
+                    onTap: () {
+                      moveToSearchTripPage();
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 12.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(10.0),
+                          border: Border.all(
+                            color: Colors.orangeAccent,
+                            width: 2.0,
                           ),
                         ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.0),
+                              child: Icon(
+                                Icons.search_rounded,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            Expanded(
+                              child: TextField(
+                                enabled: false,
+                                style: TextStyle(fontSize: 16.0),
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Enter location',
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ),
                   Container(
-            margin: EdgeInsets.only(
+                      margin: EdgeInsets.only(
                           bottom:
                               20, //MediaQuery.of(context).size.height / 5.2,
                           right: MediaQuery.of(context).size.width / 250),
@@ -712,8 +711,8 @@ class CheckPrice extends StatelessWidget {
         );
       },
     );
-  }  }
-
+  }
+}
 
 class CustomDialogWidget extends StatefulWidget {
   const CustomDialogWidget({Key? key}) : super(key: key);
