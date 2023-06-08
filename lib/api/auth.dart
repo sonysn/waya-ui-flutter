@@ -79,3 +79,13 @@ Future logOut(id) async {
     return 'logout failed';
   }
 }
+
+Future forgotPassword({required String emailOrphoneNumber}) async {
+  final http.Response response = await http.post(
+    Uri.parse('$baseUri/forgotPassword'),
+    headers: {"Content-Type": "application/json"},
+    body: jsonEncode(
+        {"email": emailOrphoneNumber, "phoneNumber": emailOrphoneNumber}),
+  );
+  return response;
+}
