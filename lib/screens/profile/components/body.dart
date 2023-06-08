@@ -64,7 +64,7 @@ class _BodyState extends State<Body> {
             icon: "assets/icons/password.svg",
             press: () => Navigator.push(context,
                 MaterialPageRoute(builder: (BuildContext context) {
-              return const PasswordSettings();
+              return PasswordSettings(userId: widget.data.id);
             })),
           ),
           ProfileMenu(
@@ -72,8 +72,8 @@ class _BodyState extends State<Body> {
             icon: "assets/icons/pp.svg",
             press: () => Navigator.push(context,
                 MaterialPageRoute(builder: (BuildContext context) {
-                  return const PrivacyPolicyPage();
-                })),
+              return const PrivacyPolicyPage();
+            })),
           ),
           ProfileMenu(
             text: "Help Center",

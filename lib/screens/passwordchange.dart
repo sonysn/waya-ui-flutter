@@ -1,45 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:waya/api/auth.dart';
 import '../../../colorscheme.dart';
+
 class ChangePasswordPage extends StatefulWidget {
+  final int id;
+  const ChangePasswordPage({super.key, required this.id});
+
   @override
   ChangePasswordPageState createState() => ChangePasswordPageState();
 }
 
 class ChangePasswordPageState extends State<ChangePasswordPage> {
-  TextEditingController _currentPasswordController = TextEditingController();
-  TextEditingController _newPasswordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _currentPasswordController =
+      TextEditingController();
+  final TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  Future changePasswordinPage() async {
+    final response = await changePassword(
+        id: widget.id,
+        newPassword: _newPasswordController.text,
+        oldPassword: _currentPasswordController.text);
+
+    switch (response.statusCode) {
+      case 200:
+        _showSnackBar('Password changed successfully!');
+        break;
+      case 401:
+        _showSnackBar('Incorrect current password!');
+        break;
+      case 500:
+        _showSnackBar('Something went wrong!');
+        break;
+      default:
+        _showSnackBar('Something went wrong!');
+    }
+  }
+
+  void _showSnackBar(String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: customPurple,
-        title: Text('Change Password'),
+        title: const Text('Change Password'),
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 32.0),
-              Text(
+              const SizedBox(height: 32.0),
+              const Text(
                 'Change Your Password',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 32.0),
+              const SizedBox(height: 32.0),
               TextFormField(
                 controller: _currentPasswordController,
                 decoration: InputDecoration(
                   labelText: 'Current Password',
-                  labelStyle: TextStyle(
+                  labelStyle: const TextStyle(
                     color: customPurple,
                   ),
-                  prefixIcon: Icon(Icons.lock, color: Colors.orangeAccent),
+                  prefixIcon:
+                      const Icon(Icons.lock, color: Colors.orangeAccent),
                   filled: true,
                   fillColor: Colors.grey[200],
                   border: OutlineInputBorder(
@@ -49,22 +83,23 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                 ),
                 obscureText: true,
                 cursorColor: Colors.orangeAccent,
-                style: TextStyle(color: Colors.orangeAccent),
+                style: const TextStyle(color: Colors.orangeAccent),
                 onTap: () {
                   setState(() {
                     _currentPasswordController.text = '';
                   });
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
                 controller: _newPasswordController,
                 decoration: InputDecoration(
                   labelText: 'New Password',
-                  labelStyle: TextStyle(
+                  labelStyle: const TextStyle(
                     color: customPurple,
                   ),
-                  prefixIcon: Icon(Icons.lock, color: Colors.orangeAccent),
+                  prefixIcon:
+                      const Icon(Icons.lock, color: Colors.orangeAccent),
                   filled: true,
                   fillColor: Colors.grey[200],
                   border: OutlineInputBorder(
@@ -74,22 +109,23 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                 ),
                 obscureText: true,
                 cursorColor: Colors.orangeAccent,
-                style: TextStyle(color: Colors.orangeAccent),
+                style: const TextStyle(color: Colors.orangeAccent),
                 onTap: () {
                   setState(() {
                     _newPasswordController.text = '';
                   });
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
                 controller: _confirmPasswordController,
                 decoration: InputDecoration(
                   labelText: 'Confirm Password',
-                  labelStyle: TextStyle(
+                  labelStyle: const TextStyle(
                     color: customPurple,
                   ),
-                  prefixIcon: Icon(Icons.lock, color: Colors.orangeAccent),
+                  prefixIcon:
+                      const Icon(Icons.lock, color: Colors.orangeAccent),
                   filled: true,
                   fillColor: Colors.grey[200],
                   border: OutlineInputBorder(
@@ -111,7 +147,19 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Perform password change logic
+                    if (_newPasswordController.text !=
+                        _confirmPasswordController.text) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Passwords do not match'),
+                      ));
+                    } else {
+                      changePasswordinPage();
+                      setState(() {
+                        _confirmPasswordController.clear();
+                        _newPasswordController.clear();
+                        _currentPasswordController.clear();
+                      });
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: customPurple,

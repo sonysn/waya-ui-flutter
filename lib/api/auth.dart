@@ -89,3 +89,16 @@ Future forgotPassword({required String emailOrphoneNumber}) async {
   );
   return response;
 }
+
+Future changePassword(
+    {required int id,
+    required String newPassword,
+    required String oldPassword}) async {
+  final http.Response response = await http.post(
+    Uri.parse('$baseUri/userchangepassword'),
+    headers: {"Content-Type": "application/json"},
+    body: jsonEncode(
+        {"userId": id, "newPassword": newPassword, "oldPassword": oldPassword}),
+  );
+  return response;
+}
