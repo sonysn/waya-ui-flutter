@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waya/api/auth.dart';
 import 'package:waya/colorscheme.dart';
+import 'package:waya/screens/resetpasswordcode.dart';
 import '../constants/design_constants.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -116,7 +117,30 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        // Navigate to the forgot password page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return ResetPasswordCodePage();
+                            },
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'I have a code',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       if (emailOrPhoneTextController.text.isNotEmpty) {
