@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:waya/constants/api_constants.dart';
-
+import 'package:waya/colorscheme.dart';
+import 'package:waya/screens/bottom_nav.dart';
 class ConnectToServer {
   // configure socket transport
   Socket socket = io(
@@ -84,83 +85,120 @@ class AcceptedRideCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [Center(
-        child: Card(
-          elevation: 0,
-          color: Colors.black,
-          child: SizedBox(
-            height: 7,
-            width: MediaQuery.of(context).size.width / 2.5,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Card(
+              elevation: 0,
+              color: Colors.black,
+              child: SizedBox(
+                height: 7,
+                width: MediaQuery.of(context).size.width / 2.5,
+              ),
+            ),
           ),
-        ),
+          SizedBox(height: 12),
+          Text(
+            'Great news!',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 16),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircleAvatar(
+                radius: 60,
+                backgroundImage: NetworkImage(imageUrl),
+              ),
+              SizedBox(height: 12),
+              Text(
+                'Driver Information',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 4),
+              Text(
+                'Phone: $driverPhone',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey[600],
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Vehicle Information',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 4),
+              Text(
+                '$vehicleName - $vehiclePlateNumber',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[600],
+                ),
+              ),
+              SizedBox(height: 4),
+              Text(
+                'Color: $vehicleColour',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[600],
+                ),
+              ),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return BottomNavPage();
+                        },
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: customPurple,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                        bottom: Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                  child: SizedBox(
+                    width: 260,
+                    height: 50,
+                    child: Center(
+                      child: Text(
+                        'Done',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+            ],
+          ),
+        ],
       ),
-        SizedBox(height: 12),
-        Text(
-          'Great news!',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(height: 16),
-        Column(
-          children: [
-            CircleAvatar(
-              radius: 60,
-              backgroundImage: NetworkImage(imageUrl),
-            ),
-            SizedBox(height: 12),
-            Text(
-              'Driver Information',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              'Phone: $driverPhone',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-              ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Vehicle Information',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              '$vehicleName - $vehiclePlateNumber',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[600],
-              ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              'Color: $vehicleColour',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[600],
-              ),
-            ),
-            SizedBox(height: 16),
-          ],
-        ),
-      ],
     );
   }
 }

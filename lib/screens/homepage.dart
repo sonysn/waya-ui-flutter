@@ -208,10 +208,11 @@ class _HomePageState extends State<HomePage> {
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Text(
-                                  widget.data.firstName,
+                                  widget.data?.firstName ?? '',
                                   style: const TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w500),
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
 
                                 const SizedBox(
@@ -409,7 +410,7 @@ class _HomePageState extends State<HomePage> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    "₦${widget.data.accountBalance}",
+                                                    "₦${widget.data?.accountBalance ?? ''}",
                                                     style: const TextStyle(
                                                       fontSize: 15,
                                                       color: Colors.white,
@@ -490,7 +491,8 @@ class _HomePageState extends State<HomePage> {
                               ]),
                         ),
                         ActiveRide(
-                          userID: widget.data.id,
+                          userID: widget.data?.id ?? ''
+                          ,
                         ),
                       ],
                     )

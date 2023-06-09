@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:waya/api/actions.dart';
-import 'package:waya/colorscheme.dart';
+
 import 'package:waya/functions/map_logic.dart';
 import 'package:waya/screens/search_locationpage.dart';
 import '../constants/mapbox_constant.dart';
