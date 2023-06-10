@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/newpassword.dart';
+
 class ResetPasswordCodePage extends StatefulWidget {
-  const ResetPasswordCodePage({Key? key}) : super(key: key);
+  final String emailorPhone;
+  const ResetPasswordCodePage({Key? key, required this.emailorPhone})
+      : super(key: key);
 
   @override
   State<ResetPasswordCodePage> createState() => _ResetPasswordCodePageState();
@@ -40,13 +43,13 @@ class _ResetPasswordCodePageState extends State<ResetPasswordCodePage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   size: 25,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Icon(
                 Icons.lock,
                 size: 50,
@@ -67,7 +70,7 @@ class _ResetPasswordCodePageState extends State<ResetPasswordCodePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   4,
-                      (index) => VerificationCodeBox(
+                  (index) => VerificationCodeBox(
                     value: code[index],
                     onDigitEntered: (digit) => updateCode(index, digit),
                     onDeletePressed: () => deleteCode(index),
@@ -109,14 +112,16 @@ class _ResetPasswordCodePageState extends State<ResetPasswordCodePage> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return NewPasswordPage();
+                          return NewPasswordPage(
+                              code: code.join(),
+                              emailorPhone: widget.emailorPhone);
                         },
                       ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: customPurple,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(20),
                         bottom: Radius.circular(20),
@@ -124,7 +129,7 @@ class _ResetPasswordCodePageState extends State<ResetPasswordCodePage> {
                     ),
                   ),
                   child: Text(
-                    'Verify',
+                    'Next',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -198,10 +203,7 @@ class _ResetPasswordCodePageState extends State<ResetPasswordCodePage> {
       }
     }
   }
-
-
-
-  }
+}
 
 class VerificationCodeBox extends StatelessWidget {
   final String value;
@@ -236,7 +238,6 @@ class VerificationCodeBox extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
     );

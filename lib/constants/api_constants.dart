@@ -22,4 +22,9 @@ class ApiConstants {
       '/getUserToUserTransactionsForReceiver';
   static String getCurrentRideEndpoint = '/getCurrentRide';
   static String onRiderCancelledRide = '/onRiderCancelledRide';
+  static String getRiderTripHistoryEndpoint = '/getRiderTripHistory';
+  static String forgotPasswordEndpoint = '/forgotPassword';
+  static String changePasswordEndpoint = '/userchangepassword';
+  static String verifyForgotPasswordChangeEndpoint =
+      '/verifyForgotPasswordChange';
 }

@@ -124,8 +124,8 @@ Future rateDriver(
 }
 
 Future getRideHistory({required int riderID}) async {
-  final http.Response response =
-      await http.get(Uri.parse('$baseUri/$riderID/getRiderTripHistory'));
+  final http.Response response = await http.get(Uri.parse(
+      '$baseUri/$riderID${ApiConstants.getRiderTripHistoryEndpoint}'));
   //final data = json.decode(response.body);
   //print(data);
   return response;

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:waya/api/auth.dart';
 import 'package:waya/colorscheme.dart';
 import '../constants/design_constants.dart';
 import 'package:waya/screens/loginpage.dart';
 
 class NewPasswordPage extends StatefulWidget {
-  const NewPasswordPage({Key? key}) : super(key: key);
+  final String code;
+  final String emailorPhone;
+  const NewPasswordPage(
+      {Key? key, required this.code, required this.emailorPhone})
+      : super(key: key);
 
   @override
   State<NewPasswordPage> createState() => NewPasswordPageState();
@@ -12,9 +17,27 @@ class NewPasswordPage extends StatefulWidget {
 
 class NewPasswordPageState extends State<NewPasswordPage> {
   final TextEditingController newPasswordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
-  void _resetPassword() {
+  void _nav() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
+      ),
+    );
+  }
+
+  void _showSnackBar(String message) {
+    final snackBar = SnackBar(
+      content: Text(message),
+      duration: const Duration(seconds: 3),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void _resetPassword() async {
     // Implement the logic to reset the password
     String newPassword = newPasswordController.text;
     String confirmPassword = confirmPasswordController.text;
@@ -22,7 +45,27 @@ class NewPasswordPageState extends State<NewPasswordPage> {
     // Check if the passwords match and perform the password reset action
     if (newPassword == confirmPassword) {
       // Perform the password reset action
-      // TODO: Add your password reset logic here
+      final response = await resetPasswordFromForgotPassword(
+          emailOrphoneNumber: widget.emailorPhone,
+          userToken: widget.code,
+          newPassword: newPassword);
+      switch (response.statusCode) {
+        case 200:
+          _showSnackBar('Password Reset Successful');
+          _nav();
+          break;
+        case 401:
+          _showSnackBar('Invalid Token');
+          break;
+        case 404:
+          _showSnackBar('User Not Found');
+          break;
+        case 500:
+          _showSnackBar('Something went wrong');
+          break;
+        default:
+          _showSnackBar('Something went wrong');
+      }
       print('Password Reset Successful');
     } else {
       // Passwords do not match, show an error message
@@ -35,7 +78,8 @@ class NewPasswordPageState extends State<NewPasswordPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('New Password'),
-        backgroundColor: customPurple, // Set the app bar background color to custom purple
+        backgroundColor:
+            customPurple, // Set the app bar background color to custom purple
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -43,7 +87,8 @@ class NewPasswordPageState extends State<NewPasswordPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 40),Text(
+              const SizedBox(height: 40),
+              Text(
                 'Set New Password',
                 style: TextStyle(
                   fontSize: 24,
@@ -66,7 +111,8 @@ class NewPasswordPageState extends State<NewPasswordPage> {
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: customPurple, // Set the border color to custom purple when focused
+                      color:
+                          customPurple, // Set the border color to custom purple when focused
                       width: 2,
                     ),
                   ),
@@ -81,12 +127,14 @@ class NewPasswordPageState extends State<NewPasswordPage> {
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: customPurple, // Set the border color to custom purple when focused
+                      color:
+                          customPurple, // Set the border color to custom purple when focused
                       width: 2,
                     ),
                   ),
                 ),
-              ),Align(
+              ),
+              Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waya/api/auth.dart';
 import 'package:waya/colorscheme.dart';
+import 'package:waya/screens/newpassword.dart';
 import 'package:waya/screens/resetpasswordcode.dart';
 import '../constants/design_constants.dart';
 
@@ -29,6 +30,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  void _nav({required String emailorPhone}) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResetPasswordCodePage(emailorPhone: emailorPhone),
+      ),
+    );
+  }
+
   void _resetPassword() async {
     setState(() {
       _isLoading = true;
@@ -48,6 +58,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         setState(() {
           _isLoading = false;
         });
+        _nav(emailorPhone: emailOrPhoneTextController.text);
         break;
       case 404:
         _showSnackBar('User not found!');
@@ -117,7 +128,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       ),
                     ),
                   ),
-
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -127,7 +137,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           context,
                           MaterialPageRoute(
                             builder: (BuildContext context) {
-                              return ResetPasswordCodePage();
+                              return ResetPasswordCodePage(
+                                  emailorPhone:
+                                      emailOrPhoneTextController.text);
                             },
                           ),
                         );
@@ -145,6 +157,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     onPressed: () {
                       if (emailOrPhoneTextController.text.isNotEmpty) {
                         _resetPassword();
+                      } else {
+                        _showSnackBar(
+                            'Please enter your email or phone number');
                       }
                     },
                     style: ElevatedButton.styleFrom(
