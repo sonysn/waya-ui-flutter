@@ -5,7 +5,7 @@ import 'package:waya/functions/notification_service.dart';
 import 'package:waya/screens/splash_screen.dart';
 import 'package:waya/screens/homepage.dart';
 import 'package:flutter/services.dart';
-import 'package:waya/screens/walletPage.dart';
+import 'package:waya/screens/walletpage.dart';
 import 'package:waya/firebase_options.dart';
 
 Future<void> main() async {
