@@ -6,6 +6,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:waya/constants/api_constants.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/bottom_nav.dart';
+
 class ConnectToServer {
   // configure socket transport
   Socket socket = io(
@@ -99,9 +100,9 @@ class AcceptedRideCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 12),
-          Text(
-            'Great news!',
+          const SizedBox(height: 12),
+          const Text(
+            'Your Ride Has Been Accepted!',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -109,7 +110,7 @@ class AcceptedRideCard extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -117,8 +118,8 @@ class AcceptedRideCard extends StatelessWidget {
                 radius: 60,
                 backgroundImage: NetworkImage(imageUrl),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 'Driver Information',
                 style: TextStyle(
                   fontSize: 16,
@@ -126,7 +127,7 @@ class AcceptedRideCard extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 'Phone: $driverPhone',
                 style: TextStyle(
@@ -135,7 +136,7 @@ class AcceptedRideCard extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-              Text(
+              const Text(
                 'Vehicle Information',
                 style: TextStyle(
                   fontSize: 16,
@@ -164,14 +165,15 @@ class AcceptedRideCard extends StatelessWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return BottomNavPage();
-                        },
-                      ),
-                    );
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) {
+                    //       return BottomNavPage();
+                    //     },
+                    //   ),
+                    // );
+                    //TODO: IMPLEMENT THE HOMEPAGE NAVIGATION
                   },
                   style: ElevatedButton.styleFrom(
                     primary: customPurple,
@@ -182,19 +184,19 @@ class AcceptedRideCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  child: SizedBox(
+                  child: const SizedBox(
                     width: 260,
                     height: 50,
                     child: Center(
                       child: Text(
-                        'Done',
+                        'OK',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
             ],
           ),
         ],

@@ -7,8 +7,8 @@ import 'package:waya/screens/profile/profilepage.dart';
 import 'package:waya/screens/bookingpage.dart';
 
 class BottomNavPage extends StatefulWidget {
-  dynamic data;
-  BottomNavPage({Key? key, this.data}) : super(key: key);
+  final dynamic data;
+  const BottomNavPage({Key? key, required this.data}) : super(key: key);
 
   @override
   State<BottomNavPage> createState() => _BottomNavPageState();

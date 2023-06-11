@@ -40,7 +40,7 @@ class _ActiveRideState extends State<ActiveRide> {
         fare = response['fare'];
         driverID = response['driverID'];
         dbObjectID = response['objectId'];
-      }); _refreshItems(); // Refresh the page
+      }); //TODO: YOUR ERROR CAUSING LINE OF CODE_refreshItems(); // Refresh the page
     }
   }
 
@@ -79,7 +79,7 @@ class _ActiveRideState extends State<ActiveRide> {
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
                 // Perform the cancel trip action
-               riderCancelTrip();
+                riderCancelTrip();
               },
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),

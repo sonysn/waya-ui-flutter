@@ -174,8 +174,7 @@ class _HomePageState extends State<HomePage> {
   // //disposing of mylocationhome variable
   // @override
   // void dispose() {
-  //   myLocationHome;
-  //   findLoc();
+  //   myLocationHome.dispose();
   //   super.dispose();
   // }
 
@@ -491,8 +490,7 @@ class _HomePageState extends State<HomePage> {
                               ]),
                         ),
                         ActiveRide(
-                          userID: widget.data?.id ?? ''
-                          ,
+                          userID: widget.data.id,
                         ),
                       ],
                     )
