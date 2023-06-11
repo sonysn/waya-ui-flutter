@@ -30,17 +30,17 @@ jobs:
           output=$(flutter analyze)
           echo "::set-output name=analysis_result::$output"
 
-      - name: Comment lint results
+      - name: Comment on lint result on commit
         uses: actions/github-script@v4
-        if: ${{ steps.analyze.outputs.analysis_result != '' }}
         with:
+          github-token: ${{ secrets.TOKEN }}
           script: |
-            const results = `${{ steps.analyze.outputs.analysis_result }}`;
-            github.rest.pulls.createReview({
+            const output = `${{ steps.analyze.outputs.analysis_result }}`;
+            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+            const context = github.context;
+            await octokit.rest.repos.createCommitComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.issue.number,
-              commit_id: context.sha,
-              body: results,
-              event: 'COMMENT'
+              commit_sha: context.sha,
+              body: output
             });
