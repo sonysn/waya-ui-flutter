@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waya/screens/onboarding.dart';
-import 'package:waya/screens/welcomepage.dart';
-import '../api/auth.dart';
-import 'bottom_nav.dart';
+import 'package:waya/api/auth.dart';
+import 'package:waya/screens/bottom_nav.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

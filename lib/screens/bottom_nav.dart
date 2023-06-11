@@ -32,7 +32,6 @@ class _BottomNavPageState extends State<BottomNavPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     data = widget.data;
   }

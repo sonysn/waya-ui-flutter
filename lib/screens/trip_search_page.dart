@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
+// ignore: library_prefixes
 import 'package:geocoding/geocoding.dart' as locationGeocodingPackage;
 import 'package:location/location.dart';
 import 'dart:convert';
@@ -141,77 +142,77 @@ class TripSearchPageState extends State<TripSearchPage> {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Column(
                   children: [
-                    Container(
-                      child: TextFormField(
-                        onTap: () {
-                          setState(() {
-                            isTyping = true;
-                          });
-                        },
-                        controller: _locationController,
-                        onChanged: _fetchSuggestions,
-                        textInputAction: TextInputAction.search,
-                        decoration: InputDecoration(
-                          hintText: 'Enter Your Location',
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12.0),
-                            child: SizedBox(
-                              width: 12.0,
-                              height: 24.0,
-                              child: SvgPicture.asset(
-                                'assets/icons/location.svg',
-                                color: Colors.black, // Set icon color to black
-                              ),
+                    TextFormField(
+                      onTap: () {
+                        setState(() {
+                          isTyping = true;
+                        });
+                      },
+                      controller: _locationController,
+                      onChanged: _fetchSuggestions,
+                      textInputAction: TextInputAction.search,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Your Location',
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                          child: SizedBox(
+                            width: 12.0,
+                            height: 24.0,
+                            child: SvgPicture.asset(
+                              'assets/icons/location.svg',
+                              color: Colors.black, // Set icon color to black
                             ),
                           ),
-                          fillColor:
-                          Colors.grey[150], // Set light grey background
-                          filled: true,
-                          contentPadding: const EdgeInsets.symmetric(vertical: 4.0), // Adjust the vertical height
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide.none,
-                          ),
+                        ),
+                        fillColor:
+                            Colors.grey[150], // Set light grey background
+                        filled: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 4.0), // Adjust the vertical height
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide.none,
                         ),
                       ),
                     ),
                     const SizedBox(height: 10.0),
-                    Container(
-                      child: TextFormField(
-                        onTap: () {
-                          setState(() {
-                            isTyping = false;
-                          });
-                        },
-                        controller: _destinationController,
-                        onChanged: _fetchSuggestions,
-                        textInputAction: TextInputAction.search,
-                        decoration: InputDecoration(
-                          hintText: 'Enter destination',
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12.0),
-                            child: SizedBox(
-                              width: 12.0,
-                              height: 24.0,
-                              child: SvgPicture.asset(
-                                'assets/icons/location.svg',
-                                color: Colors.black, // Set icon color to black
-                              ),
+                    TextFormField(
+                      onTap: () {
+                        setState(() {
+                          isTyping = false;
+                        });
+                      },
+                      controller: _destinationController,
+                      onChanged: _fetchSuggestions,
+                      textInputAction: TextInputAction.search,
+                      decoration: InputDecoration(
+                        hintText: 'Enter destination',
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                          child: SizedBox(
+                            width: 12.0,
+                            height: 24.0,
+                            child: SvgPicture.asset(
+                              'assets/icons/location.svg',
+                              color: Colors.black, // Set icon color to black
                             ),
                           ),
-                          fillColor:
-                          Colors.grey[150], // Set light grey background
-                          filled: true,
-                          contentPadding: const EdgeInsets.symmetric(vertical: 4.0), // Adjust the vertical height
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide.none,
-                          ),
+                        ),
+                        fillColor:
+                            Colors.grey[150], // Set light grey background
+                        filled: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 4.0), // Adjust the vertical height
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide.none,
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 26), // Adjust the vertical padding
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4.0,
+                          horizontal: 26), // Adjust the vertical padding
                       child: Container(
                         width: double.infinity, // Expand width to the end
                         decoration: BoxDecoration(
@@ -241,14 +242,15 @@ class TripSearchPageState extends State<TripSearchPage> {
                         ),
                       ),
                     ),
-
                   ],
                 ),
               ),
             ),
             Expanded(
               child: Container(
-                constraints: BoxConstraints(maxHeight: 200), // Set a maximum height for the suggestion list
+                constraints: const BoxConstraints(
+                    maxHeight:
+                        200), // Set a maximum height for the suggestion list
                 child: ListView.builder(
                   itemCount: _suggestions.length,
                   itemBuilder: (context, index) {
@@ -277,7 +279,6 @@ class TripSearchPageState extends State<TripSearchPage> {
                 ),
               ),
             ),
-
             SizedBox(
               width: 260.0,
               height: 40.0,
@@ -303,12 +304,8 @@ class TripSearchPageState extends State<TripSearchPage> {
 
                   moveback();
                 },
-                child: Text('OK',  style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),),
                 style: ElevatedButton.styleFrom(
-                  primary: customPurple,
+                  backgroundColor: customPurple,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
@@ -316,14 +313,22 @@ class TripSearchPageState extends State<TripSearchPage> {
                     ),
                   ),
                 ),
+                child: const Text(
+                  'OK',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),      SizedBox(height: 12),
+            ),
+            const SizedBox(height: 12),
           ],
         ),
       ),
     );
-  }}
-
+  }
+}
 
 class PassedBackData {
   final String locationAdress;

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waya/api/auth.dart';
 import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/newpassword.dart';
 import 'package:waya/screens/resetpasswordcode.dart';
-import '../constants/design_constants.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -144,7 +142,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           ),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         'I have a code',
                         style: TextStyle(
                           color: Colors.black,
@@ -163,7 +161,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: customPurple,
+                      backgroundColor: customPurple,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),

@@ -5,17 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waya/screens/editprofile.dart';
 import 'package:waya/screens/helpcenter.dart';
-import 'package:waya/screens/addresssettings.dart';
 import 'package:waya/screens/passwordsettings.dart';
 import 'package:waya/screens/privacypolicy.dart';
-import '../../../api/auth.dart';
-import '../../welcomepage.dart';
-import 'profile_menu.dart';
-import 'profile_pic.dart';
+import 'package:waya/api/auth.dart';
+import 'package:waya/screens/welcomepage.dart';
+import 'package:waya/screens/profile/components/profile_menu.dart';
+import 'package:waya/screens/profile/components/profile_pic.dart';
 
 class Body extends StatefulWidget {
-  dynamic data;
-  Body({Key? key, this.data}) : super(key: key);
+  final dynamic data;
+  const Body({Key? key, required this.data}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -26,7 +25,6 @@ class _BodyState extends State<Body> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     data = widget.data;
   }

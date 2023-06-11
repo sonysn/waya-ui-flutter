@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:waya/api/actions.dart';
-import '../../../colorscheme.dart';
+import 'package:waya/colorscheme.dart';
 
 class BookingPage extends StatefulWidget {
   final dynamic data;
@@ -28,7 +28,8 @@ class _BookingPageState extends State<BookingPage>
       case 'Completed':
         return Colors.orangeAccent;
       default:
-        return Colors.transparent; // Default color if status doesn't match any case
+        return Colors
+            .transparent; // Default color if status doesn't match any case
     }
   }
 
@@ -82,8 +83,8 @@ class _BookingPageState extends State<BookingPage>
                 const SizedBox(height: 20),
                 Container(
                   height: 45,
-                  decoration: BoxDecoration(),
-                  child: TabBar(
+                  decoration: const BoxDecoration(),
+                  child: const TabBar(
                     indicator: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(width: 3.0, color: customPurple),
@@ -104,119 +105,136 @@ class _BookingPageState extends State<BookingPage>
                     children: [
                       ridesArray.isEmpty
                           ? SingleChildScrollView(
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/images/cp.png"),
-                              const SizedBox(height: 20),
-                              const Text(
-                                'You have no Completed Bookings',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset("assets/images/cp.png"),
+                                    const SizedBox(height: 20),
+                                    const Text(
+                                      'You have no Completed Bookings',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      )
-          : ListView.builder(
-          itemCount: ridesArray.length,
-          itemBuilder: (context, index) {
-            Map<String, dynamic> rideData = ridesArray[index];
+                            )
+                          : ListView.builder(
+                              itemCount: ridesArray.length,
+                              itemBuilder: (context, index) {
+                                Map<String, dynamic> rideData =
+                                    ridesArray[index];
 
-            // Extract the data from the rideData map
-            String requestDate = rideData['REQUEST_DATE'];
-            String pickupLocation = rideData['PICKUP_LOCATION'];
-            String dropoffLocation = rideData['DROPOFF_LOCATION'];
-            int fare = rideData['FARE'];
-            String status = rideData['STATUS'];
+                                // Extract the data from the rideData map
+                                String requestDate = rideData['REQUEST_DATE'];
+                                String pickupLocation =
+                                    rideData['PICKUP_LOCATION'];
+                                String dropoffLocation =
+                                    rideData['DROPOFF_LOCATION'];
+                                int fare = rideData['FARE'];
+                                String status = rideData['STATUS'];
 
-            // Format the date
-            DateTime date = DateTime.parse(requestDate);
-            String formattedDate = DateFormat('MMM dd, yyyy').format(date);
+                                // Format the date
+                                DateTime date = DateTime.parse(requestDate);
+                                String formattedDate =
+                                    DateFormat('MMM dd, yyyy').format(date);
 
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              padding: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Ride Details',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  SizedBox(height: 3),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      'Request Date',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      formattedDate,
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      'Pickup Location',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      pickupLocation,
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      'Dropoff Location',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      dropoffLocation,
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      'Fare',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      '₦$fare',
-                      style: TextStyle(color: Colors.green),
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      'Status',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      status,
-                      style: TextStyle(
-                        color: getStatusColor(status),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        )
-
-        ],
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border:
+                                        Border.all(color: Colors.grey.shade300),
+                                  ),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Ride Details',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      const SizedBox(height: 3),
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        title: const Text(
+                                          'Request Date',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        subtitle: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              color: Colors.grey),
+                                        ),
+                                      ),
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        title: const Text(
+                                          'Pickup Location',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        subtitle: Text(
+                                          pickupLocation,
+                                          style: const TextStyle(
+                                              color: Colors.grey),
+                                        ),
+                                      ),
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        title: const Text(
+                                          'Dropoff Location',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        subtitle: Text(
+                                          dropoffLocation,
+                                          style: const TextStyle(
+                                              color: Colors.grey),
+                                        ),
+                                      ),
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        title: const Text(
+                                          'Fare',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        subtitle: Text(
+                                          '₦$fare',
+                                          style: const TextStyle(
+                                              color: Colors.green),
+                                        ),
+                                      ),
+                                      ListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        title: const Text(
+                                          'Status',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        subtitle: Text(
+                                          status,
+                                          style: TextStyle(
+                                            color: getStatusColor(status),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            )
+                    ],
                   ),
                 ),
               ],
@@ -233,7 +251,7 @@ class CompletedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<dynamic> bookings = []; // TODO: Replace this with the actual booking data
+    final List<dynamic> bookings = [];
 
     if (bookings.isEmpty) {
       return SingleChildScrollView(

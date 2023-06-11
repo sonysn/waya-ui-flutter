@@ -45,7 +45,7 @@ class _DebitCardState extends State<DebitCard> {
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
             blurRadius: 6,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -63,7 +63,7 @@ class _DebitCardState extends State<DebitCard> {
                       shape: BoxShape.circle,
                       color: Colors.green.withOpacity(0.2),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_circle_down,
                       color: Colors.green,
                       size: 24,
@@ -82,7 +82,7 @@ class _DebitCardState extends State<DebitCard> {
               const SizedBox(height: 8),
               Text(
                 "₦${widget.amountTransferred.toString()}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -100,7 +100,7 @@ class _DebitCardState extends State<DebitCard> {
                       shape: BoxShape.circle,
                       color: Colors.blue.withOpacity(0.2),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.calendar_today,
                       color: Colors.blue,
                       size: 24,
@@ -119,7 +119,7 @@ class _DebitCardState extends State<DebitCard> {
               const SizedBox(height: 8),
               Text(
                 depositTransferredFormatted!,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),

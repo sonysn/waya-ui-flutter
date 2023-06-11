@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:waya/api/payments.dart';
@@ -17,6 +16,7 @@ class CashDepositPage extends StatefulWidget {
 }
 
 class _CashDepositPageState extends State<CashDepositPage> {
+  // ignore: unused_field
   bool _isLoading = false;
   String? _authorizationUrl;
 
@@ -30,6 +30,7 @@ class _CashDepositPageState extends State<CashDepositPage> {
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+  // ignore: unused_element
   void _navigateToDepositWebView(authorizationUrl) {
     navigatorKey.currentState?.push(MaterialPageRoute(
       builder: (context) => DepositWebView(authorizationUrl: authorizationUrl),
@@ -57,6 +58,7 @@ class _CashDepositPageState extends State<CashDepositPage> {
       });
       // Open the authorization URL in a webview to complete the payment
       //_navigateToDepositWebView(_authorizationUrl);
+      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -77,6 +79,7 @@ class _CashDepositPageState extends State<CashDepositPage> {
     }
   }
 
+  // ignore: unused_element
   void _deleteLastCharacter() {
     final text = _cashDepositController.text;
     if (text.isNotEmpty) {
@@ -104,23 +107,24 @@ class _CashDepositPageState extends State<CashDepositPage> {
             TextFormField(
               controller: _cashDepositController,
               keyboardType: TextInputType.number,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black, // Set text color to black
               ),
               cursorColor: Colors.black, // Set cursor color to black
               decoration: InputDecoration(
                 labelText: 'Deposit Amount',
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.black, // Set label color to black
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.black, // Set border color to black when focused
+                  borderSide: const BorderSide(
+                    color:
+                        Colors.black, // Set border color to black when focused
                   ),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.black, // Set border color to black
                   ),
                   borderRadius: BorderRadius.circular(8.0),
@@ -140,7 +144,7 @@ class _CashDepositPageState extends State<CashDepositPage> {
                 // Handle deposit button press
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.black,
+                backgroundColor: Colors.black,
                 textStyle: const TextStyle(fontSize: 20.0),
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 shape: RoundedRectangleBorder(
@@ -155,6 +159,7 @@ class _CashDepositPageState extends State<CashDepositPage> {
     );
   }
 
+  // ignore: unused_element
   Widget _buildNumberButton(String label) {
     return ElevatedButton(
       onPressed: () {
@@ -165,7 +170,7 @@ class _CashDepositPageState extends State<CashDepositPage> {
             TextSelection.fromPosition(TextPosition(offset: newText.length));
       },
       style: ElevatedButton.styleFrom(
-        primary: Colors.black,
+        backgroundColor: Colors.black,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(60.0)),
         ),

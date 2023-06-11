@@ -11,7 +11,6 @@ class ApiConstants {
   static String logoutEndpoint = '/logoutuser';
   static String chargeEndpoint = '/charge';
   static String driverCountEndpoint = '/driverCount';
-  //TODO: IMPLEMENT THIS
   static String transferToDriversEndpoint = '/transferToDrivers';
   static String transferToUsersEndpoint = '/transferToUsers';
   static String getRiderPaystackDepositTransactions =

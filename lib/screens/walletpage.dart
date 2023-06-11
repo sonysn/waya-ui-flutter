@@ -5,11 +5,9 @@ import 'package:waya/api/actions.dart';
 import 'package:waya/api/payments.dart';
 import 'package:waya/screens/cash_deposit_page.dart';
 import 'package:waya/screens/transfers.dart';
-import '../../../colorscheme.dart';
+import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/widgets/transaction_card.dart';
 import 'package:waya/screens/transactionhistory.dart';
-import 'package:waya/screens/widgets/debit_card.dart';
-import 'package:waya/screens/debithistory.dart';
 import 'package:waya/screens/widgets/my_card.dart';
 
 class WalletPage extends StatefulWidget {

@@ -124,7 +124,7 @@ class TransferPageState extends State<TransferPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.black,
           ),
@@ -132,7 +132,7 @@ class TransferPageState extends State<TransferPage> {
             Navigator.of(context).pop();
           },
         ),
-        title: Text(
+        title: const Text(
           'Transfer Funds',
           style: TextStyle(
             color: Colors.black,
@@ -142,18 +142,18 @@ class TransferPageState extends State<TransferPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 16.0),
-              Text(
+              const SizedBox(height: 16.0),
+              const Text(
                 'Transfer Amount',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               TextField(
                 controller: _amountController,
                 keyboardType: TextInputType.number,
@@ -167,14 +167,14 @@ class TransferPageState extends State<TransferPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 16.0),
-              Text(
+              const SizedBox(height: 16.0),
+              const Text(
                 'Recipient',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               TextField(
                 controller: _recipientController,
                 decoration: InputDecoration(
@@ -187,8 +187,8 @@ class TransferPageState extends State<TransferPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 16.0),
-              Text(
+              const SizedBox(height: 16.0),
+              const Text(
                 'Transfer To:',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -198,7 +198,7 @@ class TransferPageState extends State<TransferPage> {
                 children: [
                   Expanded(
                     child: ListTile(
-                      title: Text('Driver'),
+                      title: const Text('Driver'),
                       leading: Radio(
                         activeColor: Colors.orangeAccent,
                         value: true,
@@ -213,7 +213,7 @@ class TransferPageState extends State<TransferPage> {
                   ),
                   Expanded(
                     child: ListTile(
-                      title: Text('User'),
+                      title: const Text('User'),
                       leading: Radio(
                         activeColor: Colors.orangeAccent,
                         value: false,
@@ -229,11 +229,17 @@ class TransferPageState extends State<TransferPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 32.0),
+              const SizedBox(height: 32.0),
               Center(
                 child: ElevatedButton(
                   onPressed: _transferFunds,
-                  child: Padding(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
+                  child: const Padding(
                     padding: EdgeInsets.symmetric(
                       vertical: 16.0,
                       horizontal: 32.0,
@@ -244,12 +250,6 @@ class TransferPageState extends State<TransferPage> {
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
                       ),
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32.0),
                     ),
                   ),
                 ),

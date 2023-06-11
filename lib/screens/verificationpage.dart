@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/signup.dart';
-import '../constants/design_constants.dart';
 
 class VerificationPage extends StatefulWidget {
   final dynamic phoneNumber;
@@ -51,21 +50,21 @@ class _VerificationPageState extends State<VerificationPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   size: 25,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 10),
-              Icon(
+              const SizedBox(height: 10),
+              const Icon(
                 Icons.lock,
                 size: 50,
                 color: customPurple,
               ),
 
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 'Verification',
                 style: TextStyle(
                   fontSize: 20,
@@ -74,23 +73,23 @@ class _VerificationPageState extends State<VerificationPage> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.phone,
                       color: customPurple,
                     ),
                     Text(
                       '${widget.phoneNumber}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: customPurple,
@@ -99,7 +98,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               TextField(
                 readOnly: true,
                 showCursor: false,
@@ -107,25 +106,25 @@ class _VerificationPageState extends State<VerificationPage> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.grey[200],
-                  contentPadding: EdgeInsets.symmetric(vertical: 10),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 10),
                   border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   hintText: 'Verification Code',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.grey,
                   ),
                 ),
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 controller: verificationCode,
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Expanded(
                 child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     childAspectRatio: 2.5,
                     crossAxisSpacing: 10,
@@ -146,7 +145,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   },
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
         SizedBox(
           width: 250,
           height: 45,
@@ -169,7 +168,7 @@ class _VerificationPageState extends State<VerificationPage> {
                         bottom: Radius.circular(20),
                       ),
                     )),
-                child: Text(
+                child: const Text(
                   'Verify',
                   style: TextStyle(
                     fontSize: 18,
@@ -178,7 +177,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   ),
                 ),
               ),
-        ),  SizedBox(height: 15),
+        ),  const SizedBox(height: 15),
             ],
           ),
         ),
@@ -197,7 +196,7 @@ class _VerificationPageState extends State<VerificationPage> {
         ),
         child: Text(
           digit,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: customPurple,
@@ -216,7 +215,7 @@ class _VerificationPageState extends State<VerificationPage> {
 
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Icon(
+        child: const Icon(
           Icons.backspace,
           size: 24,
           color: customPurple,

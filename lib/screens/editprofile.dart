@@ -3,8 +3,8 @@ import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/profile/profilepage.dart';
 
 class EditProfile extends StatefulWidget {
-  dynamic data;
-  EditProfile({Key? key, this.data}) : super(key: key);
+  final dynamic data;
+  const EditProfile({Key? key, required this.data}) : super(key: key);
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -19,7 +19,6 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       email = TextEditingController(text: widget.data.email);
@@ -33,9 +32,10 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      children: [const SizedBox(
-        height: 20,
-      ),
+      children: [
+        const SizedBox(
+          height: 20,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -217,11 +217,11 @@ class _EditProfileState extends State<EditProfile> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return ProfilePage();
+                        return const ProfilePage();
                       }));
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: customPurple,
+                        backgroundColor: customPurple,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(20),
@@ -231,10 +231,11 @@ class _EditProfileState extends State<EditProfile> {
                     child: const SizedBox(
                       width: 260,
                       height: 50,
-                      child: Center(child: Text('Update', style: TextStyle(
-
-                          color: Colors.white),)
-                      ),
+                      child: Center(
+                          child: Text(
+                        'Update',
+                        style: TextStyle(color: Colors.white),
+                      )),
                     )),
               ),
               const SizedBox(height: 10)

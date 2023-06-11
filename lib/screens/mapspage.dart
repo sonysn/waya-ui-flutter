@@ -1,16 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:geocode/geocode.dart';
-import 'package:geocode/src/model/address.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:waya/api/actions.dart';
-import 'package:geocoding/geocoding.dart' as locationGeocodingPackage;
 import 'package:waya/screens/trip_search_page.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import '../colorscheme.dart';
-import '../sockets/sockets.dart';
+import 'package:waya/colorscheme.dart';
+import 'package:waya/sockets/sockets.dart';
 
 class MapsPage extends StatefulWidget {
   final dynamic data;
@@ -246,7 +243,7 @@ class _MapsPageState extends State<MapsPage> {
                       moveToSearchTripPage();
                     },
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 12.0),
+                      padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 12.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
@@ -257,7 +254,7 @@ class _MapsPageState extends State<MapsPage> {
                           ),
                         ),
                         child: Row(
-                          children: [
+                          children: const [
                             Padding(
                               padding: EdgeInsets.only(left: 8.0),
                               child: Icon(
@@ -339,6 +336,7 @@ class _MapsPageState extends State<MapsPage> {
                                       }
 
                                       try {
+                                        // ignore: use_build_context_synchronously
                                         showModalBottomSheet<void>(
                                           context: context,
                                           builder: (BuildContext context) {
@@ -361,7 +359,7 @@ class _MapsPageState extends State<MapsPage> {
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(
-                                      primary: customPurple,
+                                      backgroundColor: customPurple,
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.vertical(
                                           top: Radius.circular(20),
@@ -540,7 +538,6 @@ class _MapsPageState extends State<MapsPage> {
 //   }
 // }
 
-//TODO DESIGN THIS
 class CheckPrice extends StatelessWidget {
   final int price;
   final String startLocation;
@@ -669,7 +666,7 @@ class CheckPrice extends StatelessWidget {
                       //    );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: customPurple,
+                      backgroundColor: customPurple,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -689,7 +686,7 @@ class CheckPrice extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[300],
+                      backgroundColor: Colors.grey[300],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -744,7 +741,7 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
                   dismissCustomDialog(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: customPurple,
+                  backgroundColor: customPurple,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -777,7 +774,7 @@ void showCustomDialog(BuildContext context) {
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     barrierColor: Colors.black54.withOpacity(0.8),
     builder: (context) {
-      return CustomDialogWidget();
+      return const CustomDialogWidget();
     },
   ).then((_) {
     // Do something when the dialog is dismissed

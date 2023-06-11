@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'components/body.dart';
-
+import 'package:waya/screens/profile/components/body.dart';
 
 class ProfilePage extends StatefulWidget {
   final dynamic data;
@@ -14,10 +13,9 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   dynamic data;
 
-  static String routeName = "/profile";
+  // static String routeName = "/profile";
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     data = widget.data;
   }
@@ -25,12 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-
-      body: Body(
-        data: data
-      ),
-
+      body: Body(data: data),
     );
   }
 }

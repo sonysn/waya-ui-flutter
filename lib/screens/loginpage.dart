@@ -7,11 +7,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waya/screens/bottom_nav.dart';
 import 'package:waya/screens/forgotpassword.dart';
-import '../api/auth.dart';
-import '../colorscheme.dart';
-import 'homepage.dart';
-import '../constants/design_constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:waya/api/auth.dart';
+import 'package:waya/colorscheme.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -155,15 +152,15 @@ class _LoginPageState extends State<LoginPage> {
                           contentPadding: const EdgeInsets.all(15),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Colors.white),
+                            borderSide: const BorderSide(color: Colors.white),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Colors.orangeAccent),
+                            borderSide: const BorderSide(color: Colors.orangeAccent),
                           ),
                           filled: true,
                           fillColor: Colors.white,
-                          prefixIcon: Icon(
+                          prefixIcon: const Icon(
                             Icons.account_circle_outlined,
                             color: Colors.black87,
                           ),
@@ -180,15 +177,15 @@ class _LoginPageState extends State<LoginPage> {
                           contentPadding: const EdgeInsets.all(15),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Colors.white),
+                            borderSide: const BorderSide(color: Colors.white),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Colors.orangeAccent),
+                            borderSide: const BorderSide(color: Colors.orangeAccent),
                           ),
                           filled: true,
                           fillColor: Colors.white,
-                          prefixIcon: Icon(
+                          prefixIcon: const Icon(
                             Icons.lock,
                             color: Colors.black87,
                           ),
@@ -217,12 +214,12 @@ class _LoginPageState extends State<LoginPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (BuildContext context) {
-                                  return ForgotPasswordPage();
+                                  return const ForgotPasswordPage();
                                 },
                               ),
                             );
                           },
-                          child: Text(
+                          child: const Text(
                             'Forgot Password?',
                             style: TextStyle(
                               color: Colors.black,
@@ -249,13 +246,13 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: customPurple,
+                          backgroundColor: customPurple,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          minimumSize: Size(double.infinity, 50),
+                          minimumSize: const Size(double.infinity, 50),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Sign In',
                           style: TextStyle(
                             fontSize: 18,

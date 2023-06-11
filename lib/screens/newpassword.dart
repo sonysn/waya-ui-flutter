@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waya/api/auth.dart';
 import 'package:waya/colorscheme.dart';
-import '../constants/design_constants.dart';
 import 'package:waya/screens/loginpage.dart';
 
 class NewPasswordPage extends StatefulWidget {
@@ -88,7 +87,7 @@ class NewPasswordPageState extends State<NewPasswordPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 40),
-              Text(
+              const Text(
                 'Set New Password',
                 style: TextStyle(
                   fontSize: 24,
@@ -97,7 +96,7 @@ class NewPasswordPageState extends State<NewPasswordPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Divider(
+              const Divider(
                 thickness: 2,
                 color: Colors.black,
               ),
@@ -106,7 +105,7 @@ class NewPasswordPageState extends State<NewPasswordPage> {
               TextField(
                 controller: newPasswordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'New Password',
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
@@ -122,7 +121,7 @@ class NewPasswordPageState extends State<NewPasswordPage> {
               TextField(
                 controller: confirmPasswordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Confirm Password',
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
@@ -143,12 +142,12 @@ class NewPasswordPageState extends State<NewPasswordPage> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return LoginPage();
+                          return const LoginPage();
                         },
                       ),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     'Login',
                     style: TextStyle(
                       color: Colors.black,
@@ -161,7 +160,7 @@ class NewPasswordPageState extends State<NewPasswordPage> {
               ElevatedButton(
                 onPressed: _resetPassword,
                 style: ElevatedButton.styleFrom(
-                  primary: customPurple,
+                  backgroundColor: customPurple,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),

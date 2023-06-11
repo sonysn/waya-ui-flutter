@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waya/constants/mapbox_constant.dart';
-import '../colorscheme.dart';
+import 'package:waya/colorscheme.dart';
 import 'package:mapbox_search/mapbox_search.dart';
 
 class SearchLocationPage extends StatefulWidget {
@@ -11,12 +11,10 @@ class SearchLocationPage extends StatefulWidget {
 }
 
 class _SearchLocationPageState extends State<SearchLocationPage> {
-  var placesSearch = PlacesSearch(
-    apiKey: AppConstants.mapBoxAccessToken,
-    limit: 5
-  );
+  var placesSearch =
+      PlacesSearch(apiKey: AppConstants.mapBoxAccessToken, limit: 5);
 
-  void getPlaces() async{
+  void getPlaces() async {
     var f = await placesSearch.getPlaces("nnamdi azikwe international airport");
     print(f);
   }
@@ -24,40 +22,36 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            Container(
-                padding: const EdgeInsets.only(top: 40),
-                margin: const EdgeInsets.symmetric(horizontal: 17),
-                child: Column(
-                  children: [
-                    //TextField for name
-                    TextField(
-                      onTap: (){
-                        getPlaces();
-                      },
-                      //controller: firstname,
-                      cursorColor: customPurple,
-                      keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
-                          hintText: 'Search here',
-                          contentPadding: EdgeInsets.all(15),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(25)),
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(25)),
-                            borderSide: BorderSide(color: customPurple),
-                          )),
-                    ),
-                  ],
-                ))
-          ],
-        ),
+      body: Column(
+        children: [
+          Container(
+              padding: const EdgeInsets.only(top: 40),
+              margin: const EdgeInsets.symmetric(horizontal: 17),
+              child: Column(
+                children: [
+                  //TextField for name
+                  TextField(
+                    onTap: () {
+                      getPlaces();
+                    },
+                    //controller: firstname,
+                    cursorColor: customPurple,
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                        hintText: 'Search here',
+                        contentPadding: EdgeInsets.all(15),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          borderSide: BorderSide(color: customPurple),
+                        )),
+                  ),
+                ],
+              ))
+        ],
       ),
     );
   }

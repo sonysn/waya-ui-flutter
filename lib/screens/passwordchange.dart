@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waya/api/auth.dart';
-import '../../../colorscheme.dart';
+import 'package:waya/colorscheme.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   final int id;
@@ -135,15 +135,15 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                 ),
                 obscureText: true,
                 cursorColor: Colors.orangeAccent,
-                style: TextStyle(color: Colors.orangeAccent),
+                style: const TextStyle(color: Colors.orangeAccent),
                 onTap: () {
                   setState(() {
                     _confirmPasswordController.text = '';
                   });
                 },
               ),
-              SizedBox(height: 32.0),
-              Container(
+              const SizedBox(height: 32.0),
+              SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
@@ -162,14 +162,13 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: customPurple,
-                    onPrimary: Colors.white,
-                    padding: EdgeInsets.all(16.0),
+                    foregroundColor: Colors.white, backgroundColor: customPurple,
+                    padding: const EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Change Password',
                     style: TextStyle(
                       fontSize: 16.0,

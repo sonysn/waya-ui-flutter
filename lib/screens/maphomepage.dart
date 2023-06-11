@@ -1,21 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:waya/api/actions.dart';
 
 import 'package:waya/functions/map_logic.dart';
-import 'package:waya/screens/search_locationpage.dart';
-import '../constants/mapbox_constant.dart';
+import 'package:waya/constants/mapbox_constant.dart';
 import 'package:geocode/geocode.dart';
-import 'package:socket_io_client/socket_io_client.dart';
 
-import 'homepage.dart';
+import 'package:waya/screens/homepage.dart';
 
 dynamic driverFound;
 
+// ignore: must_be_immutable
 class MapHomePage extends StatefulWidget {
   dynamic myLocationHome;
   Address? addressLoc;
@@ -147,7 +146,6 @@ class _MapHomePageState extends State<MapHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     //print(widget.myLocationHome);
     //findLoc();
@@ -264,7 +262,7 @@ class _MapHomePageState extends State<MapHomePage> {
                   onPressed: () {
                     Navigator.pop(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return HomePage();
+                      return const HomePage();
                     }));
                   },
                   style: ElevatedButton.styleFrom(
@@ -276,33 +274,32 @@ class _MapHomePageState extends State<MapHomePage> {
             ),
           ),
           Positioned(
-           
             height: MediaQuery.of(context).size.width / 5,
             child: ElevatedButton(
                 onPressed: () {
                   setState(() {
-                void _state() async{
-                  //driverFound = await requestRide("${widget.addressLoc?.streetNumber}, ${widget.addressLoc?.streetAddress}, \n${widget.addressLoc?.region}.", "6.501871, 3.373521", tappedLocationD);
-                }
-                _state();
-              });
-              //
-              showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const BottomDialog();
+                    void state() async {
+                      //driverFound = await requestRide("${widget.addressLoc?.streetNumber}, ${widget.addressLoc?.streetAddress}, \n${widget.addressLoc?.region}.", "6.501871, 3.373521", tappedLocationD);
+                    }
+                    state();
                   });
-              //
-              print(driverFound);
-            },
+                  //
+                  showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const BottomDialog();
+                      });
+                  //
+                  print(driverFound);
+                },
                 //style: ElevatedButton.styleFrom(
-               //     backgroundColor: customPurple,
+                //     backgroundColor: customPurple,
                 //    shape: const RoundedRectangleBorder(
                 //      borderRadius: BorderRadius.vertical(
-                 //       top: Radius.circular(10),
-                   //     bottom: Radius.circular(10),
-                  //    ),
-                  //  )),
+                //       top: Radius.circular(10),
+                //     bottom: Radius.circular(10),
+                //    ),
+                //  )),
                 child: const Text("Request ride")),
 
             // child: GestureDetector(
@@ -367,7 +364,7 @@ class _BottomDialogState extends State<BottomDialog> {
   Widget build(BuildContext context) {
     double mWidth = MediaQuery.of(context).size.width;
     double mHeight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       height: mHeight * 0.5,
       width: mWidth,
       child: Column(

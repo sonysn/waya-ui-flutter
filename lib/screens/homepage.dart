@@ -5,17 +5,12 @@ import 'package:time_greeting/time_greeting.dart';
 import 'package:waya/functions/notification_service.dart';
 import 'package:waya/screens/widgets/activeride.dart';
 import 'package:location/location.dart';
+// ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:geocode/geocode.dart';
 import 'package:waya/api/actions.dart';
 import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/maphomepage.dart';
 import 'package:waya/screens/mapspage.dart';
-import 'package:waya/screens/search_locationpage.dart';
-import 'dart:io';
-import 'package:socket_io_client/socket_io_client.dart';
-import 'package:waya/size_config.dart';
+// ignore: library_prefixes
 import 'package:geocoding/geocoding.dart' as locationGeocodingPackage;
 
 class HomePage extends StatefulWidget {
@@ -184,6 +179,7 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context, BoxConstraints constraints) {
         final double width = constraints.maxWidth;
         final double height = constraints.maxHeight;
+        // ignore: unused_local_variable
         final double padding = width > 600 ? 40 : 20;
 
         return RefreshIndicator(
@@ -339,9 +335,6 @@ class _HomePageState extends State<HomePage> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                //TODO PLEASE READ TODOS THANKS!
-                                // TODO try not to use fitted box unnecessarily, especially with things with no solid dimensions. ALSO ask when that issue with overflowing screen arises
-
                                 FittedBox(
                                   fit: BoxFit.fitWidth,
                                   child: SizedBox(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:waya/screens/welcomepage.dart';
 import 'package:waya/constants/content_model.dart';
 import 'package:waya/colorscheme.dart';
@@ -8,10 +7,10 @@ class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);
 
   @override
-  _OnboardingState createState() => _OnboardingState();
+  OnboardingState createState() => OnboardingState();
 }
 
-class _OnboardingState extends State<Onboarding> {
+class OnboardingState extends State<Onboarding> {
   int currentIndex = 0;
   late PageController _controller;
 

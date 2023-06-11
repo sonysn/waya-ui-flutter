@@ -1,4 +1,4 @@
-
+// ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -8,7 +8,7 @@ Future findLoc() async {
 
   bool serviceEnabled;
   PermissionStatus permissionGranted;
-  LocationData _locationData;
+  LocationData locationData;
 
   serviceEnabled = await location.serviceEnabled();
   if (!serviceEnabled) {
@@ -26,11 +26,11 @@ Future findLoc() async {
     }
   }
 
-  _locationData = await location.getLocation();
-  myLocationHome = LatLng(double.parse(_locationData.latitude.toString()),
-      double.parse(_locationData.longitude.toString()));
+  locationData = await location.getLocation();
+  myLocationHome = LatLng(double.parse(locationData.latitude.toString()),
+      double.parse(locationData.longitude.toString()));
   mapController.move(myLocationHome, 17);
-  print(_locationData.latitude);
+  print(locationData.latitude);
 }
 
 locationService() {

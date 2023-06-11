@@ -82,7 +82,7 @@ class _ActiveRideState extends State<ActiveRide> {
                 riderCancelTrip();
               },
               style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 backgroundColor: Colors.orangeAccent,
               ),
               child: const Text(
@@ -100,7 +100,7 @@ class _ActiveRideState extends State<ActiveRide> {
                 _refreshItems();
               },
               style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 backgroundColor: Colors.grey,
               ),
               child: const Text(
@@ -148,6 +148,7 @@ class _ActiveRideState extends State<ActiveRide> {
     // Implement the logic for finding location here
   }
 
+  // ignore: unused_element
   void _submitRating() {
     // Implement the logic to submit the rating
     print('Rating: $rating');
@@ -230,6 +231,7 @@ class _ActiveRideState extends State<ActiveRide> {
                         ),
                       ),
                       onPressed: () {
+                        // ignore: deprecated_member_use
                         launch("tel:$driverPhoneNumber");
                       },
                     ),
@@ -355,7 +357,7 @@ class _ActiveRideState extends State<ActiveRide> {
                 }),
               ),
               const SizedBox(height: 15),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 45,
                 child: ElevatedButton(
@@ -364,7 +366,7 @@ class _ActiveRideState extends State<ActiveRide> {
                     dialog();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: customPurple,
+                    backgroundColor: customPurple,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),

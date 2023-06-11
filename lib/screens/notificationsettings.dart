@@ -157,11 +157,11 @@ class _NotificationSettingsState extends State<NotificationSettings> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
-                      return ProfilePage();
+                      return const ProfilePage();
                     }));
               },
               style: ElevatedButton.styleFrom(
-                  primary: Colors.yellow,
+                  backgroundColor: Colors.yellow,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),

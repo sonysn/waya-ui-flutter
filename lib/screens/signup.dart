@@ -6,10 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:waya/api/auth.dart';
 import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/bottom_nav.dart';
-import 'package:waya/screens/homepage.dart';
 import 'package:waya/screens/loginpage.dart';
-import '../constants/design_constants.dart';
+import 'package:waya/constants/design_constants.dart';
 
 class SignUp extends StatefulWidget {
   final dynamic phoneNumber;
@@ -466,7 +464,7 @@ class _SignUpState extends State<SignUp> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                            primary: customPurple,
+                            backgroundColor: customPurple,
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
                                 top: Radius.circular(20),

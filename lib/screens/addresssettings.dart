@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waya/screens/profile/profilepage.dart';
-import '../../../colorscheme.dart';
+import 'package:waya/colorscheme.dart';
 class AddressSettings extends StatefulWidget {
   const AddressSettings({Key? key}) : super(key: key);
 
@@ -187,11 +187,11 @@ class _AddressSettingsState extends State<AddressSettings> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
-                      return ProfilePage();
+                      return const ProfilePage();
                     }));
               },
               style: ElevatedButton.styleFrom(
-                  primary: customPurple,
+                  backgroundColor: customPurple,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),

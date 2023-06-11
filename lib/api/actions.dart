@@ -3,7 +3,7 @@ import 'dart:convert';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
-import '../constants/api_constants.dart';
+import 'package:waya/constants/api_constants.dart';
 
 //todo base uri value here
 // var baseUri = 'http://192.168.100.43:3000';

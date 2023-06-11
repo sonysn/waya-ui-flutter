@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:waya/screens/widgets/my_card.dart';
-import '../constants/design_constants.dart';
+import 'package:waya/constants/design_constants.dart';
 
   class CardScreen extends StatefulWidget {
   const CardScreen({Key? key}) : super(key: key);
@@ -18,15 +18,15 @@ import '../constants/design_constants.dart';
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "My Cards",
           style: TextStyle(
             fontFamily: "Poppins",
             color: kPrimaryColor,
           ),
         ),
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
           child: CircleAvatar(
             backgroundImage:
                 NetworkImage("https://placeimg.com/640/480/people"),
@@ -34,7 +34,7 @@ import '../constants/design_constants.dart';
         ),
         actions: [
           IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications_active_outlined,
                 color: Colors.black,
                 size: 27,
@@ -46,27 +46,27 @@ import '../constants/design_constants.dart';
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: ListView.separated(
                 shrinkWrap: true,
                 itemCount: 6,
                 separatorBuilder: (context, index) {
-                  return SizedBox(
+                  return const SizedBox(
                     height: 20,
                   );
                 },
                 itemBuilder: (context, index) {
-                  return MyCard(
+                  return const MyCard(
 
                   );
                 }),
           ),
-          CircleAvatar(
+          const CircleAvatar(
             radius: 40,
             child: Icon(Icons.add, size: 50),
           ),
-          SizedBox(height: 10),
-          Text(
+          const SizedBox(height: 10),
+          const Text(
             "Add Card",
           )
         ],

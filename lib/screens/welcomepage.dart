@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/loginpage.dart';
 import 'package:waya/screens/verificationpage.dart';
-import '../constants/design_constants.dart';
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -112,7 +111,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         //print(dropdownValue + phoneInput.text);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return LoginPage();
+                              return const LoginPage();
                             }));
                       },
                       style: ElevatedButton.styleFrom(

@@ -6,7 +6,7 @@ import 'package:waya/screens/splash_screen.dart';
 import 'package:waya/screens/homepage.dart';
 import 'package:flutter/services.dart';
 import 'package:waya/screens/WalletPage.dart';
-import 'firebase_options.dart';
+import 'package:waya/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

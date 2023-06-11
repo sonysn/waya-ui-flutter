@@ -13,7 +13,6 @@ class MyCard extends StatefulWidget {
 }
 
 class _MyCardState extends State<MyCard> {
-
   dynamic accountBalance;
 
   @override
@@ -24,6 +23,7 @@ class _MyCardState extends State<MyCard> {
     // If the event is a string, it checks whether it can be parsed as an int or a double, and formats it accordingly with commas or decimals.
     // Otherwise, it sets the account balance to the event string as
     widget.stream?.listen((event) {
+      // ignore: unnecessary_type_check
       if (event is String) {
         if (int.tryParse(event) != null) {
           setState(() {

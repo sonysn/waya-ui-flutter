@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waya/screens/passwordchange.dart';
-import '../../../colorscheme.dart';
-import '../constants/design_constants.dart';
+import 'package:waya/colorscheme.dart';
+import 'package:waya/constants/design_constants.dart';
 
 class PasswordSettings extends StatefulWidget {
   final int userId;
@@ -50,7 +50,7 @@ class _PasswordSettingsState extends State<PasswordSettings> {
                 }));
               },
               style: ElevatedButton.styleFrom(
-                  primary: customPurple,
+                  backgroundColor: customPurple,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),

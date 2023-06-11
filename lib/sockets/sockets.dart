@@ -1,11 +1,9 @@
-import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+// ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
 import 'package:waya/constants/api_constants.dart';
 import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/bottom_nav.dart';
 
 class ConnectToServer {
   // configure socket transport
@@ -135,7 +133,7 @@ class AcceptedRideCard extends StatelessWidget {
                   color: Colors.grey[600],
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               const Text(
                 'Vehicle Information',
                 style: TextStyle(
@@ -144,7 +142,7 @@ class AcceptedRideCard extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 '$vehicleName - $vehiclePlateNumber',
                 style: TextStyle(
@@ -153,7 +151,7 @@ class AcceptedRideCard extends StatelessWidget {
                   color: Colors.grey[600],
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 'Color: $vehicleColour',
                 style: TextStyle(
@@ -176,7 +174,7 @@ class AcceptedRideCard extends StatelessWidget {
                     //TODO: IMPLEMENT THE HOMEPAGE NAVIGATION
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: customPurple,
+                    backgroundColor: customPurple,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(20),
