@@ -24,6 +24,17 @@ linter:
   rules:
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    always_use_package_imports: true  # Uncomment to enable the `always_use_package_imports` rule
+    cancel_subscriptions: true  # Uncomment to enable the `cancel_subscriptions` rule
+    empty_statements: true  # Uncomment to enable the `empty_statements` rule
+    use_key_in_widget_constructors: true  # Uncomment to enable the `use_key_in_widget_constructors` rule
+    unnecessary_string_interpolations: true  # Uncomment to enable the `unnecessary_string_interpolations` rule
+    #style rules
+    always_put_required_named_parameters_first: true  # Uncomment to enable the `always_put_required_named_parameters_first` rule
+    avoid_multiple_declarations_per_line: true  # Uncomment to enable the `avoid_multiple_declarations_per_line` rule
+    camel_case_types: true  # Uncomment to enable the `camel_case_types` rule
+    eol_at_end_of_file: true  # Uncomment to enable the `eol_at_end_of_file` rule
+
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
