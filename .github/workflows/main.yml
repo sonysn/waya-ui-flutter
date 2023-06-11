@@ -24,19 +24,32 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
         
-      - name: Run Flutter analyze
-        run: flutter analyze
+      - name: Run Dart analyze
+        id: analyze
+        run: dart analyze
         
       - name: Comment lint results
         uses: actions/github-script@v4
         with:
           script: |
-            const results = `$(flutter analyze)`;
+            const results = `$(dart analyze)`;
             const octokit = github.getOctokit({ secrets.Token });
             const context = github.context;
             await octokit.rest.repos.createCommitComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: context.sha,
-              body: output
+              body: results
             });
+
+      - name: Set exit code
+        id: set-exit-code
+        run: |
+          if [ ${{ steps.analyze.outcome }} == "No issues found!" ]; then
+            echo "::set-output name=exit_code::0"
+          else
+            echo "::set-output name=exit_code::1"
+          fi
+          
+      - name: Return exit code
+        run: exit ${{ needs.set-exit-code.outputs.exit_code }}
