@@ -27,7 +27,7 @@ jobs:
       - name: Run Flutter analyze
         id: analyze
         run: |
-          output=$(flutter analyze --format=compact)
+          output=$(flutter analyze)
           echo "::set-output name=analysis_result::$output"
 
       - name: Comment lint results
