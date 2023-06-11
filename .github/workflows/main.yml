@@ -23,14 +23,16 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-
+        
       - name: Run Flutter analyze
-        id: analyze
-        run: |
-          output=$(flutter analyze) || echo "::set-output name=analysis_result::error"
-          if [[ $output != "No issues found" ]]; then
-            const output = `${output}`;
-            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+        run: flutter analyze
+        
+      - name: Comment lint results
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const results = `$(flutter analyze)`;
+            const octokit = github.getOctokit({ secrets.Token });
             const context = github.context;
             await octokit.rest.repos.createCommitComment({
               owner: context.repo.owner,
@@ -38,8 +40,3 @@ jobs:
               commit_sha: context.sha,
               body: output
             });
-            exit 1
-          else
-            echo "::set-output name=analysis_result::$output"
-            exit 0
-          fi
