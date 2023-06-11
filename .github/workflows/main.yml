@@ -28,23 +28,8 @@ jobs:
         id: analyze
         run: |
           output=$(flutter analyze) || echo "::set-output name=analysis_result::error"
-          if [[ $output != "No issues Found!" ]]; then
-            exit 1
-          else
-            echo "::set-output name=analysis_result::$output"
-          fi
-
-  comment_on_commit:
-    needs: analyze
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Comment on lint result on commit
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.TOKEN }}
-          script: |
-            const output = `${{ needs.analyze.outputs.analysis_result }}`;
+          if [[ $output != "No issues found" ]]; then
+            const output = `${output}`;
             const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
             const context = github.context;
             await octokit.rest.repos.createCommitComment({
@@ -53,3 +38,8 @@ jobs:
               commit_sha: context.sha,
               body: output
             });
+            exit 1
+          else
+            echo "::set-output name=analysis_result::$output"
+            exit 0
+          fi
