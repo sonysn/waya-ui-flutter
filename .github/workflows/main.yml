@@ -1,0 +1,46 @@
+name: Flutter Lint Check
+
+on:
+  pull_request:
+    branches:
+      - homepage
+  push:
+    branches:
+      - homepage
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.10' # Replace with the desired Flutter version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run Flutter analyze
+        id: analyze
+        run: |
+          output=$(flutter analyze --format=compact)
+          echo "::set-output name=analysis_result::$output"
+
+      - name: Comment lint results
+        uses: actions/github-script@v4
+        if: ${{ steps.analyze.outputs.analysis_result != 'No issues found!' }}
+        with:
+          script: |
+            const results = `${{ steps.analyze.outputs.analysis_result }}`;
+            github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              commit_id: context.sha,
+              body: results,
+              event: 'COMMENT'
+            });
