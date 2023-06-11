@@ -16,7 +16,7 @@ class TransactionCard extends StatefulWidget {
 class _TransactionCardState extends State<TransactionCard> {
   void formatDate(String dateString) {
     DateTime date = DateTime.parse(dateString);
-    DateFormat formatter = DateFormat('dd-MM-yyyy');
+    DateFormat formatter = DateFormat('MMM dd, yyyy');
     setState(() {
       depositDateFormatted = formatter.format(date);
     });
@@ -29,7 +29,6 @@ class _TransactionCardState extends State<TransactionCard> {
     super.initState();
     formatDate(widget.depositDate);
   }
-
 
   @override
   Widget build(BuildContext context) {
