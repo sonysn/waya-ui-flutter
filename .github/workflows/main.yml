@@ -32,7 +32,7 @@ jobs:
 
       - name: Comment lint results
         uses: actions/github-script@v4
-        if: ${{ steps.analyze.outputs.analysis_result != 'No issues found!' }}
+        if: ${{ steps.analyze.outputs.analysis_result != '' }}
         with:
           script: |
             const results = `${{ steps.analyze.outputs.analysis_result }}`;
