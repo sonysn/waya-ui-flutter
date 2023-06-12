@@ -21,7 +21,7 @@ jobs:
         with:
           flutter-version: '3.7.10' # Replace with the desired Flutter version
           channel: 'stable'
-          cache: true // 1
+          cache: true
 
       - name: Install dependencies
         run: flutter pub get
