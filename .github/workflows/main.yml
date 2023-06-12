@@ -15,24 +15,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.7.10' # Replace with the desired Flutter version
-    
-      - name: Cache Flutter SDK
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.HOME }}/sdks/flutter
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-
-
-      - name: Check Flutter
-        run: |
-          export PATH="${{ env.HOME }}/sdks/flutter/bin:${{ env.PATH }}"
-          flutter doctor
 
       - name: Install dependencies
         run: flutter pub get
