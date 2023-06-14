@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:waya/api/actions.dart';
 import 'package:waya/colorscheme.dart';
+import 'package:waya/models/requested_rides.dart';
 
 class BookingPage extends StatefulWidget {
   final dynamic data;
@@ -36,10 +37,22 @@ class _BookingPageState extends State<BookingPage>
   Future<void> getRides() async {
     final response = await getRideHistory(riderID: widget.data.id);
 
+    // if (response.statusCode == 200) {
+    //   final data = json.decode(response.body);
+    //   setState(() {
+    //     ridesArray = data.reversed.toList();
+    //   });
+    // }
     if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+      final data = json.decode(response.body) as List<dynamic>;
+      final reversedBookingList = data.reversed.toList();
+      final bookingList = reversedBookingList.asMap().entries.map((entry) {
+        //final index = entry.key;
+        final booking = entry.value;
+        return RequestedRides.fromJson(booking);
+      }).toList();
       setState(() {
-        ridesArray = data.reversed.toList();
+        ridesArray = bookingList.toList();
       });
     }
   }
@@ -125,17 +138,18 @@ class _BookingPageState extends State<BookingPage>
                           : ListView.builder(
                               itemCount: ridesArray.length,
                               itemBuilder: (context, index) {
-                                Map<String, dynamic> rideData =
-                                    ridesArray[index];
+                                // Map<String, dynamic> rideData =
+                                //     ridesArray[index];
 
                                 // Extract the data from the rideData map
-                                String requestDate = rideData['REQUEST_DATE'];
+                                String requestDate =
+                                    ridesArray[index].requestDate;
                                 String pickupLocation =
-                                    rideData['PICKUP_LOCATION'];
+                                    ridesArray[index].pickupAddress;
                                 String dropoffLocation =
-                                    rideData['DROPOFF_LOCATION'];
-                                int fare = rideData['FARE'];
-                                String status = rideData['STATUS'];
+                                    ridesArray[index].dropOffAddress;
+                                int fare = ridesArray[index].fare;
+                                String status = ridesArray[index].status;
 
                                 // Format the date
                                 DateTime date = DateTime.parse(requestDate);
