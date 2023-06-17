@@ -132,198 +132,201 @@ class TripSearchPageState extends State<TripSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.only(top: 20),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            Form(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      onTap: () {
-                        setState(() {
-                          isTyping = true;
-                        });
-                      },
-                      controller: _locationController,
-                      onChanged: _fetchSuggestions,
-                      textInputAction: TextInputAction.search,
-                      decoration: InputDecoration(
-                        hintText: 'Enter Your Location',
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12.0),
-                          child: SizedBox(
-                            width: 12.0,
-                            height: 24.0,
-                            child: SvgPicture.asset(
-                              'assets/icons/location.svg',
-                              color: Colors.black, // Set icon color to black
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              Form(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        onTap: () {
+                          setState(() {
+                            isTyping = true;
+                          });
+                        },
+                        controller: _locationController,
+                        onChanged: _fetchSuggestions,
+                        textInputAction: TextInputAction.search,
+                        decoration: InputDecoration(
+                          hintText: 'Enter Your Location',
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12.0),
+                            child: SizedBox(
+                              width: 12.0,
+                              height: 24.0,
+                              child: SvgPicture.asset(
+                                'assets/icons/location.svg',
+                                color: Colors.black, // Set icon color to black
+                              ),
                             ),
                           ),
-                        ),
-                        fillColor:
-                            Colors.grey[150], // Set light grey background
-                        filled: true,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 4.0), // Adjust the vertical height
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    TextFormField(
-                      onTap: () {
-                        setState(() {
-                          isTyping = false;
-                        });
-                      },
-                      controller: _destinationController,
-                      onChanged: _fetchSuggestions,
-                      textInputAction: TextInputAction.search,
-                      decoration: InputDecoration(
-                        hintText: 'Enter destination',
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12.0),
-                          child: SizedBox(
-                            width: 12.0,
-                            height: 24.0,
-                            child: SvgPicture.asset(
-                              'assets/icons/location.svg',
-                              color: Colors.black, // Set icon color to black
-                            ),
-                          ),
-                        ),
-                        fillColor:
-                            Colors.grey[150], // Set light grey background
-                        filled: true,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 4.0), // Adjust the vertical height
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4.0,
-                          horizontal: 26), // Adjust the vertical padding
-                      child: Container(
-                        width: double.infinity, // Expand width to the end
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300], // Set light grey background
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: TextButton.icon(
-                          onPressed: () {
-                            _findMyLocation();
-                          },
-                          icon: SizedBox(
-                            width: 20.0, // Adjust the width of the icon
-                            height: 20.0, // Adjust the height of the icon
-                            child: SvgPicture.asset(
-                              'assets/icons/share.svg',
-                              color: Colors.black, // Set icon color to black
-                            ),
-                          ),
-                          label: const Text(
-                            'Use My Current Location',
-                            style: TextStyle(
-                              fontSize: 14.0, // Adjust the font size
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                          fillColor:
+                              Colors.grey[150], // Set light grey background
+                          filled: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 4.0), // Adjust the vertical height
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide.none,
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 10.0),
+                      TextFormField(
+                        onTap: () {
+                          setState(() {
+                            isTyping = false;
+                          });
+                        },
+                        controller: _destinationController,
+                        onChanged: _fetchSuggestions,
+                        textInputAction: TextInputAction.search,
+                        decoration: InputDecoration(
+                          hintText: 'Enter destination',
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12.0),
+                            child: SizedBox(
+                              width: 12.0,
+                              height: 24.0,
+                              child: SvgPicture.asset(
+                                'assets/icons/location.svg',
+                                color: Colors.black, // Set icon color to black
+                              ),
+                            ),
+                          ),
+                          fillColor:
+                              Colors.grey[150], // Set light grey background
+                          filled: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 4.0), // Adjust the vertical height
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4.0,
+                            horizontal: 26), // Adjust the vertical padding
+                        child: Container(
+                          width: double.infinity, // Expand width to the end
+                          decoration: BoxDecoration(
+                            color:
+                                Colors.grey[300], // Set light grey background
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: TextButton.icon(
+                            onPressed: () {
+                              _findMyLocation();
+                            },
+                            icon: SizedBox(
+                              width: 20.0, // Adjust the width of the icon
+                              height: 20.0, // Adjust the height of the icon
+                              child: SvgPicture.asset(
+                                'assets/icons/share.svg',
+                                color: Colors.black, // Set icon color to black
+                              ),
+                            ),
+                            label: const Text(
+                              'Use My Current Location',
+                              style: TextStyle(
+                                fontSize: 14.0, // Adjust the font size
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Container(
-                constraints: const BoxConstraints(
-                    maxHeight:
-                        200), // Set a maximum height for the suggestion list
-                child: ListView.builder(
-                  itemCount: _suggestions.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: SizedBox(
-                        width: 24.0,
-                        height: 24.0,
-                        child: SvgPicture.asset(
-                          'assets/icons/location.svg',
-                          color: Colors.black, // Set icon color to black
+              Expanded(
+                child: Container(
+                  constraints: const BoxConstraints(
+                      maxHeight:
+                          200), // Set a maximum height for the suggestion list
+                  child: ListView.builder(
+                    itemCount: _suggestions.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: SizedBox(
+                          width: 24.0,
+                          height: 24.0,
+                          child: SvgPicture.asset(
+                            'assets/icons/location.svg',
+                            color: Colors.black, // Set icon color to black
+                          ),
                         ),
-                      ),
-                      title: Text(_suggestions[index]),
-                      onTap: () {
-                        if (isTyping == true) {
-                          _locationController.text = _suggestions[index];
-                        } else {
-                          _destinationController.text = _suggestions[index];
-                        }
-                        setState(() {
-                          _suggestions = []; // Clear suggestions
-                        });
-                      },
-                    );
+                        title: Text(_suggestions[index]),
+                        onTap: () {
+                          if (isTyping == true) {
+                            _locationController.text = _suggestions[index];
+                          } else {
+                            _destinationController.text = _suggestions[index];
+                          }
+                          setState(() {
+                            _suggestions = []; // Clear suggestions
+                          });
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 260.0,
+                height: 40.0,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final locData = await getDestinationAddress(
+                        addressData: _locationController.text);
+                    final desData = await getDestinationAddress(
+                        addressData: _destinationController.text);
+
+                    void moveback() {
+                      Navigator.pop(
+                        context,
+                        PassedBackData(
+                          _locationController.text,
+                          _destinationController.text,
+                          locData,
+                          desData,
+                          true,
+                        ),
+                      );
+                    }
+
+                    moveback();
                   },
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 260.0,
-              height: 40.0,
-              child: ElevatedButton(
-                onPressed: () async {
-                  final locData = await getDestinationAddress(
-                      addressData: _locationController.text);
-                  final desData = await getDestinationAddress(
-                      addressData: _destinationController.text);
-
-                  void moveback() {
-                    Navigator.pop(
-                      context,
-                      PassedBackData(
-                        _locationController.text,
-                        _destinationController.text,
-                        locData,
-                        desData,
-                        true,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: customPurple,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                        bottom: Radius.circular(20),
                       ),
-                    );
-                  }
-
-                  moveback();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: customPurple,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                      bottom: Radius.circular(20),
+                    ),
+                  ),
+                  child: const Text(
+                    'OK',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                child: const Text(
-                  'OK',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
               ),
-            ),
-            const SizedBox(height: 12),
-          ],
+              const SizedBox(height: 12),
+            ],
+          ),
         ),
       ),
     );

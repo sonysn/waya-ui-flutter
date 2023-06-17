@@ -41,10 +41,10 @@ class _WalletPageState extends State<WalletPage> {
       reversedTransactions = transactions.reversed.toList();
     });
   }
+
   Future _getUserToDriverTransactions() async {
     final response = await getUserToDriverTransactions(userID: widget.data.id);
     print(response);
-
   }
 
   @override
@@ -67,166 +67,171 @@ class _WalletPageState extends State<WalletPage> {
       body: RefreshIndicator(
         color: Colors.orangeAccent,
         backgroundColor: customPurple,
-
         onRefresh: () async {
           await _getAccountBalance();
           await _getDepositTransactions();
         },
-        child: SingleChildScrollView(
-          physics: const ClampingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                SizedBox(
-                  height: 180,
-                  child: ListView.separated(
-                    physics: const ClampingScrollPhysics(),
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        width: 8,
-                      );
-                    },
-                    itemCount: 1,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return MyCard(data: widget.data, stream: stream);
-                    },
+        child: Container(
+          padding: const EdgeInsets.only(top: 15),
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 30,
                   ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          // navigate to deposit page or function
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return CashDepositPage(
-                                  id: widget.data.id,
-                                  phone: widget.data.phoneNumber,
-                                  email: widget.data.email,
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        child: Column(
-                          children: const [
-                            Icon(Icons.account_balance_wallet, size: 40),
-                            SizedBox(height: 10),
-                            Text("Deposit", style: TextStyle(fontSize: 16)),
-                          ],
-                        ),
-                      ),
+                  SizedBox(
+                    height: 180,
+                    child: ListView.separated(
+                      physics: const ClampingScrollPhysics(),
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          width: 8,
+                        );
+                      },
+                      itemCount: 1,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return MyCard(data: widget.data, stream: stream);
+                      },
                     ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          // navigate to transfer page or function
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return TransferPage(
-                                  phoneNumber: widget.data.phoneNumber,
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        child: Column(
-                          children: const [
-                            Icon(Icons.send, size: 40),
-                            SizedBox(height: 10),
-                            Text("Transfer", style: TextStyle(fontSize: 16)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                const SizedBox(
-                  height: 0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text("Recent Transactions"),
-                    Flexible(
-                      child: Container(
-                        alignment: Alignment.centerRight,
-                        child: InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return TransactionHistory(
-                                  data: widget.data,
-                                  transactions: transactions,debits: debits,
-                                );
-                              },
-                            ),
-                          ),
-                          child: const Text(
-                            "View all",
-                            style: TextStyle(color: customPurple),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            // navigate to deposit page or function
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return CashDepositPage(
+                                    id: widget.data.id,
+                                    phone: widget.data.phoneNumber,
+                                    email: widget.data.email,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: Column(
+                            children: const [
+                              Icon(Icons.account_balance_wallet, size: 40),
+                              SizedBox(height: 10),
+                              Text("Deposit", style: TextStyle(fontSize: 16)),
+                            ],
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 0,
-                ),
-                transactions.isNotEmpty
-                    ? ListView.separated(
-                  itemCount: transactions.length > 3 ? 3 : transactions.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(
-                      height: 10,
-                    );
-                  },
-                  itemBuilder: (context, index) {
-                    return TransactionCard(
-                      data: widget.data,
-                      depositAmount:
-                      reversedTransactions[index]['data']['amount'] / 100,
-                      depositDate: reversedTransactions[index]['data']['paid_at'],
-                    );
-                  },
-                )
-                    : Center(
-                  child: Container(
-                    margin: const EdgeInsets.all(45),
-                    child: const Text(
-                      'No Transactions Yet',
-                      style: TextStyle(fontSize: 15),
-                    ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            // navigate to transfer page or function
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return TransferPage(
+                                    phoneNumber: widget.data.phoneNumber,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: Column(
+                            children: const [
+                              Icon(Icons.send, size: 40),
+                              SizedBox(height: 10),
+                              Text("Transfer", style: TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const SizedBox(
+                    height: 0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text("Recent Transactions"),
+                      Flexible(
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return TransactionHistory(
+                                    data: widget.data,
+                                    transactions: transactions,
+                                    debits: debits,
+                                  );
+                                },
+                              ),
+                            ),
+                            child: const Text(
+                              "View all",
+                              style: TextStyle(color: customPurple),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 0,
+                  ),
+                  transactions.isNotEmpty
+                      ? ListView.separated(
+                          itemCount:
+                              transactions.length > 3 ? 3 : transactions.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 10,
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            return TransactionCard(
+                              data: widget.data,
+                              depositAmount: reversedTransactions[index]['data']
+                                      ['amount'] /
+                                  100,
+                              depositDate: reversedTransactions[index]['data']
+                                  ['paid_at'],
+                            );
+                          },
+                        )
+                      : Center(
+                          child: Container(
+                            margin: const EdgeInsets.all(45),
+                            child: const Text(
+                              'No Transactions Yet',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                        ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

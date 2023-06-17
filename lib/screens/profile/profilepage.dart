@@ -23,7 +23,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Body(data: data),
+      body: Container(
+          padding: const EdgeInsets.only(top: 20), child: Body(data: data)),
     );
   }
 }
