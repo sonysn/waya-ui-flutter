@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:time_greeting/time_greeting.dart';
+import 'package:waya/functions/miscellaneous.dart';
 import 'package:waya/functions/notification_service.dart';
 import 'package:waya/screens/widgets/activeride.dart';
 import 'package:location/location.dart';
@@ -57,8 +58,6 @@ class _HomePageState extends State<HomePage> {
             double.parse(locationDataSpot.longitude.toString()));
         //mapController.move(myLocationHome, 17);
       });
-    } else {
-      super.dispose();
     }
     print(myLocationHome?.latitude);
 
@@ -71,7 +70,7 @@ class _HomePageState extends State<HomePage> {
         locationGeocodingPackage.Placemark place = placeMarks[0];
         setState(() {
           addressLoc =
-              "${place.street}, ${place.subAdministrativeArea}, ${place.administrativeArea}";
+              "${capitalizeFirstLetter(place.street)}, ${place.subAdministrativeArea}, ${place.administrativeArea}";
         });
         print(addressLoc);
       } catch (e) {
@@ -233,12 +232,12 @@ class _HomePageState extends State<HomePage> {
                                         child: SizedBox(
                                           height: 60,
                                           width: width / 1.1,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: const [
+                                              children: [
                                                 Icon(Icons.location_on_rounded),
                                                 Text('Enter pickup point')
                                               ],

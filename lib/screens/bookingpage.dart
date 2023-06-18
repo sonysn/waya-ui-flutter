@@ -83,175 +83,178 @@ class _BookingPageState extends State<BookingPage>
       child: DefaultTabController(
         length: 1,
         child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 40),
-                const Text(
-                  "My Bookings",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  height: 45,
-                  decoration: const BoxDecoration(),
-                  child: const TabBar(
-                    indicator: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(width: 3.0, color: customPurple),
-                      ),
-                    ),
-                    labelColor: customPurple,
-                    unselectedLabelColor: Colors.black,
-                    tabs: [
-                      Tab(
-                        text: 'Ride History',
-                      ),
-                    ],
+          body: Container(
+            padding: const EdgeInsets.only(top: 15),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 40),
+                  const Text(
+                    "My Bookings",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: TabBarView(
-                    children: [
-                      ridesArray.isEmpty
-                          ? SingleChildScrollView(
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset("assets/images/cp.png"),
-                                    const SizedBox(height: 20),
-                                    const Text(
-                                      'You have no Completed Bookings',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          : ListView.builder(
-                              itemCount: ridesArray.length,
-                              itemBuilder: (context, index) {
-                                // Map<String, dynamic> rideData =
-                                //     ridesArray[index];
-
-                                // Extract the data from the rideData map
-                                String requestDate =
-                                    ridesArray[index].requestDate;
-                                String pickupLocation =
-                                    ridesArray[index].pickupAddress;
-                                String dropoffLocation =
-                                    ridesArray[index].dropOffAddress;
-                                int fare = ridesArray[index].fare;
-                                String status = ridesArray[index].status;
-
-                                // Format the date
-                                DateTime date = DateTime.parse(requestDate);
-                                String formattedDate =
-                                    DateFormat('MMM dd, yyyy').format(date);
-
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border:
-                                        Border.all(color: Colors.grey.shade300),
-                                  ),
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  padding: const EdgeInsets.all(16),
+                  const SizedBox(height: 20),
+                  Container(
+                    height: 45,
+                    decoration: const BoxDecoration(),
+                    child: const TabBar(
+                      indicator: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 3.0, color: customPurple),
+                        ),
+                      ),
+                      labelColor: customPurple,
+                      unselectedLabelColor: Colors.black,
+                      tabs: [
+                        Tab(
+                          text: 'Ride History',
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        ridesArray.isEmpty
+                            ? SingleChildScrollView(
+                                child: Center(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                      Image.asset("assets/images/cp.png"),
+                                      const SizedBox(height: 20),
                                       const Text(
-                                        'Ride Details',
+                                        'You have no Completed Bookings',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                      const SizedBox(height: 3),
-                                      ListTile(
-                                        contentPadding: EdgeInsets.zero,
-                                        title: const Text(
-                                          'Request Date',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        subtitle: Text(
-                                          formattedDate,
-                                          style: const TextStyle(
-                                              color: Colors.grey),
-                                        ),
-                                      ),
-                                      ListTile(
-                                        contentPadding: EdgeInsets.zero,
-                                        title: const Text(
-                                          'Pickup Location',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        subtitle: Text(
-                                          pickupLocation,
-                                          style: const TextStyle(
-                                              color: Colors.grey),
-                                        ),
-                                      ),
-                                      ListTile(
-                                        contentPadding: EdgeInsets.zero,
-                                        title: const Text(
-                                          'Dropoff Location',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        subtitle: Text(
-                                          dropoffLocation,
-                                          style: const TextStyle(
-                                              color: Colors.grey),
-                                        ),
-                                      ),
-                                      ListTile(
-                                        contentPadding: EdgeInsets.zero,
-                                        title: const Text(
-                                          'Fare',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        subtitle: Text(
-                                          '₦$fare',
-                                          style: const TextStyle(
-                                              color: Colors.green),
-                                        ),
-                                      ),
-                                      ListTile(
-                                        contentPadding: EdgeInsets.zero,
-                                        title: const Text(
-                                          'Status',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        subtitle: Text(
-                                          status,
-                                          style: TextStyle(
-                                            color: getStatusColor(status),
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ],
                                   ),
-                                );
-                              },
-                            )
-                    ],
+                                ),
+                              )
+                            : ListView.builder(
+                                itemCount: ridesArray.length,
+                                itemBuilder: (context, index) {
+                                  // Map<String, dynamic> rideData =
+                                  //     ridesArray[index];
+
+                                  // Extract the data from the rideData map
+                                  String requestDate =
+                                      ridesArray[index].requestDate;
+                                  String pickupLocation =
+                                      ridesArray[index].pickupAddress;
+                                  String dropoffLocation =
+                                      ridesArray[index].dropOffAddress;
+                                  int fare = ridesArray[index].fare;
+                                  String status = ridesArray[index].status;
+
+                                  // Format the date
+                                  DateTime date = DateTime.parse(requestDate);
+                                  String formattedDate =
+                                      DateFormat('MMM dd, yyyy').format(date);
+
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300),
+                                    ),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 5),
+                                    padding: const EdgeInsets.all(16),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Ride Details',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
+                                        const SizedBox(height: 3),
+                                        ListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          title: const Text(
+                                            'Request Date',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          subtitle: Text(
+                                            formattedDate,
+                                            style: const TextStyle(
+                                                color: Colors.grey),
+                                          ),
+                                        ),
+                                        ListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          title: const Text(
+                                            'Pickup Location',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          subtitle: Text(
+                                            pickupLocation,
+                                            style: const TextStyle(
+                                                color: Colors.grey),
+                                          ),
+                                        ),
+                                        ListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          title: const Text(
+                                            'Dropoff Location',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          subtitle: Text(
+                                            dropoffLocation,
+                                            style: const TextStyle(
+                                                color: Colors.grey),
+                                          ),
+                                        ),
+                                        ListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          title: const Text(
+                                            'Fare',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          subtitle: Text(
+                                            '₦$fare',
+                                            style: const TextStyle(
+                                                color: Colors.green),
+                                          ),
+                                        ),
+                                        ListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          title: const Text(
+                                            'Status',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          subtitle: Text(
+                                            status,
+                                            style: TextStyle(
+                                              color: getStatusColor(status),
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              )
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
