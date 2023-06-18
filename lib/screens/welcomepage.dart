@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/loginpage.dart';
 import 'package:waya/screens/verificationpage.dart';
+
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -29,13 +30,14 @@ class _WelcomePageState extends State<WelcomePage> {
         Center(
           child: Container(
             //margin: const EdgeInsets.only(top: 350),
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 1.7),
+            margin:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height / 1.7),
 
             child: Column(
               children: [
                 const Text(
-                  "Welcome to Waya",
-                  style: TextStyle(fontSize: 30,color: customPurple),
+                  "Welcome to QuNot",
+                  style: TextStyle(fontSize: 30, color: customPurple),
                 ),
                 const SizedBox(
                   height: 10,
@@ -85,10 +87,9 @@ class _WelcomePageState extends State<WelcomePage> {
                         print(dropdownValue + phoneInput.text);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return VerificationPage(
-                                  phoneNumber: dropdownValue + phoneInput.text
-                              );
-                            }));
+                          return VerificationPage(
+                              phoneNumber: dropdownValue + phoneInput.text);
+                        }));
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: customPurple,
@@ -111,8 +112,8 @@ class _WelcomePageState extends State<WelcomePage> {
                         //print(dropdownValue + phoneInput.text);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return const LoginPage();
-                            }));
+                          return const LoginPage();
+                        }));
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: customPurple,
