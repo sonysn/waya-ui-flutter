@@ -232,12 +232,12 @@ class _HomePageState extends State<HomePage> {
                                         child: SizedBox(
                                           height: 60,
                                           width: width / 1.1,
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: [
+                                              children: const [
                                                 Icon(Icons.location_on_rounded),
                                                 Text('Enter pickup point')
                                               ],
