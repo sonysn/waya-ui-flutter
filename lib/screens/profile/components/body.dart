@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waya/screens/editprofile.dart';
@@ -105,7 +104,7 @@ class _BodyState extends State<Body> {
 
               logout() async {
                 try {
-                  final response = await logOut(widget.data.id);
+                  final response = await logOut(id: widget.data.id);
                   if (response == 'logout success') {
                     // Remove the content of emailOrPhone and password
                     prefs.remove('emailOrPhone');
