@@ -28,7 +28,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
         _showSnackBar('Password changed successfully!');
         break;
       case 401:
-        _showSnackBar('Incorrect current password!');
+        _showSnackBar('Your current password is incorrect!');
         break;
       case 500:
         _showSnackBar('Something went wrong!');
@@ -162,7 +162,8 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white, backgroundColor: customPurple,
+                    foregroundColor: Colors.white,
+                    backgroundColor: customPurple,
                     padding: const EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),

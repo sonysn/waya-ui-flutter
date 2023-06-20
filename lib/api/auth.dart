@@ -68,7 +68,7 @@ Future signIn(emailOrPhone, password, deviceID) async {
   }
 }
 
-Future logOut(id) async {
+Future logOut({required int id}) async {
   final http.Response response = await http.post(
       Uri.parse('$baseUri${ApiConstants.logoutEndpoint}'),
       headers: {"Content-Type": "application/json"},
@@ -80,16 +80,6 @@ Future logOut(id) async {
   }
 }
 
-Future forgotPassword({required String emailOrphoneNumber}) async {
-  final http.Response response = await http.post(
-    Uri.parse('$baseUri${ApiConstants.forgotPasswordEndpoint}'),
-    headers: {"Content-Type": "application/json"},
-    body: jsonEncode(
-        {"email": emailOrphoneNumber, "phoneNumber": emailOrphoneNumber}),
-  );
-  return response;
-}
-
 Future changePassword(
     {required int id,
     required String newPassword,
@@ -99,6 +89,16 @@ Future changePassword(
     headers: {"Content-Type": "application/json"},
     body: jsonEncode(
         {"userId": id, "newPassword": newPassword, "oldPassword": oldPassword}),
+  );
+  return response;
+}
+
+Future forgotPassword({required String emailOrphoneNumber}) async {
+  final http.Response response = await http.post(
+    Uri.parse('$baseUri${ApiConstants.forgotPasswordEndpoint}'),
+    headers: {"Content-Type": "application/json"},
+    body: jsonEncode(
+        {"email": emailOrphoneNumber, "phoneNumber": emailOrphoneNumber}),
   );
   return response;
 }

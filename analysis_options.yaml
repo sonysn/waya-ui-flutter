@@ -32,6 +32,8 @@ linter:
     #style rules
     avoid_multiple_declarations_per_line: true  # Uncomment to enable the `avoid_multiple_declarations_per_line` rule
     camel_case_types: true  # Uncomment to enable the `camel_case_types` rule
+    depend_on_referenced_packages: false # Uncomment to enable the `depend_on_referenced_packages` rule
+    use_build_context_synchronously: false # Uncomment to enable the `use_build_context_synchronously` rule
 
 
 # Additional information about this file can be found at
