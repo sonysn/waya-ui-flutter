@@ -5,7 +5,9 @@ import 'package:waya/colorscheme.dart';
 
 class ActiveRide extends StatefulWidget {
   final dynamic userID;
-  const ActiveRide({Key? key, this.userID}) : super(key: key);
+  final dynamic authToken;
+  const ActiveRide({Key? key, required this.userID, required this.authToken})
+      : super(key: key);
 
   @override
   State<ActiveRide> createState() => _ActiveRideState();
@@ -13,7 +15,8 @@ class ActiveRide extends StatefulWidget {
 
 class _ActiveRideState extends State<ActiveRide> {
   Future getCurrentTripDetails() async {
-    final response = await getCurrentRide(userID: widget.userID);
+    final response = await getCurrentRide(
+        userID: widget.userID, authBearer: widget.authToken);
     //print(response);
     if (response == null) {
       setState(() {
@@ -46,7 +49,10 @@ class _ActiveRideState extends State<ActiveRide> {
 
   Future riderCancelTrip() async {
     final response = await onRiderCancelRide(
-        riderID: widget.userID, driverID: driverID!, dbObjectID: dbObjectID!);
+        riderID: widget.userID,
+        driverID: driverID!,
+        dbObjectID: dbObjectID!,
+        authBearer: widget.authToken);
     if (response == 200) {
       setState(() {
         driverPhoto = null;

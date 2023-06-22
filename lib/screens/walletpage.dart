@@ -28,13 +28,17 @@ class _WalletPageState extends State<WalletPage> {
   List reversedTransactions = [];
 
   Future<void> _getAccountBalance() async {
-    final response = await getBalance(widget.data.id, widget.data.phoneNumber);
+    final response = await getBalance(
+        id: widget.data.id,
+        phone: widget.data.phoneNumber,
+        authBearer: widget.data.authToken);
     debugPrint(response);
     _streamController.add(response);
   }
 
   Future _getDepositTransactions() async {
-    final response = await getDepositHistory(userID: widget.data.id);
+    final response = await getDepositHistory(
+        userID: widget.data.id, authBearer: widget.data.authToken);
     //print(response);
     setState(() {
       transactions.addAll(response);
@@ -43,7 +47,8 @@ class _WalletPageState extends State<WalletPage> {
   }
 
   Future _getUserToDriverTransactions() async {
-    final response = await getUserToDriverTransactions(userID: widget.data.id);
+    final response = await getUserToDriverTransactions(
+        userID: widget.data.id, authBearer: widget.data.authToken);
     print(response);
   }
 
@@ -58,6 +63,8 @@ class _WalletPageState extends State<WalletPage> {
   @override
   void dispose() {
     _streamController.close();
+    transactions.clear();
+    reversedTransactions.clear();
     super.dispose();
   }
 
@@ -118,13 +125,14 @@ class _WalletPageState extends State<WalletPage> {
                                     id: widget.data.id,
                                     phone: widget.data.phoneNumber,
                                     email: widget.data.email,
+                                    authToken: widget.data.authToken,
                                   );
                                 },
                               ),
                             );
                           },
-                          child: Column(
-                            children: const [
+                          child: const Column(
+                            children: [
                               Icon(Icons.account_balance_wallet, size: 40),
                               SizedBox(height: 10),
                               Text("Deposit", style: TextStyle(fontSize: 16)),
@@ -142,6 +150,7 @@ class _WalletPageState extends State<WalletPage> {
                                 builder: (BuildContext context) {
                                   return TransferPage(
                                     phoneNumber: widget.data.phoneNumber,
+                                    authToken: widget.data.authToken,
                                   );
                                 },
                               ),

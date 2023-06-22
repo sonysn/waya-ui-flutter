@@ -4,7 +4,9 @@ import 'package:waya/colorscheme.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   final int id;
-  const ChangePasswordPage({super.key, required this.id});
+  final String authToken;
+  const ChangePasswordPage(
+      {super.key, required this.id, required this.authToken});
 
   @override
   ChangePasswordPageState createState() => ChangePasswordPageState();
@@ -21,7 +23,8 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
     final response = await changePassword(
         id: widget.id,
         newPassword: _newPasswordController.text,
-        oldPassword: _currentPasswordController.text);
+        oldPassword: _currentPasswordController.text,
+        authBearer: widget.authToken);
 
     switch (response.statusCode) {
       case 200:
