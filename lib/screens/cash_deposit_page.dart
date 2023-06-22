@@ -7,8 +7,13 @@ class CashDepositPage extends StatefulWidget {
   final int id;
   final dynamic phone;
   final String email;
+  final String authToken;
   const CashDepositPage(
-      {Key? key, required this.email, required this.id, this.phone})
+      {Key? key,
+      required this.email,
+      required this.id,
+      required this.phone,
+      required this.authToken})
       : super(key: key);
 
   @override
@@ -51,7 +56,8 @@ class _CashDepositPageState extends State<CashDepositPage> {
           email: email,
           amount: int.parse('${_removeComma(amount)}00'),
           id: userID,
-          phone: phone);
+          phone: phone,
+          authBearer: widget.authToken);
       setState(() {
         _authorizationUrl = response['authorization_url'];
         _isLoading = false;

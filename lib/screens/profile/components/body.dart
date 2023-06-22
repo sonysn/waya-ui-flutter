@@ -61,7 +61,8 @@ class _BodyState extends State<Body> {
             icon: "assets/icons/password.svg",
             press: () => Navigator.push(context,
                 MaterialPageRoute(builder: (BuildContext context) {
-              return PasswordSettings(userId: widget.data.id);
+              return PasswordSettings(
+                  userId: widget.data.id, authToken: widget.data.authToken);
             })),
           ),
           ProfileMenu(
@@ -104,7 +105,8 @@ class _BodyState extends State<Body> {
 
               logout() async {
                 try {
-                  final response = await logOut(id: widget.data.id);
+                  final response = await logOut(
+                      id: widget.data.id, authBearer: widget.data.authToken);
                   if (response == 'logout success') {
                     // Remove the content of emailOrPhone and password
                     prefs.remove('emailOrPhone');

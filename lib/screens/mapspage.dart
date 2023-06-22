@@ -332,7 +332,7 @@ class _MapsPageState extends State<MapsPage> {
                                                 currentLocationPointRequest,
                                             dropOffLocationPoint:
                                                 destinationLocationPointRequest,
-                                            authBearer: widget.data.token);
+                                            authBearer: widget.data.authToken);
                                       }
 
                                       try {

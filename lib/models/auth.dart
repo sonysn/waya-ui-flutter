@@ -1,7 +1,7 @@
 /// A class representing user data.
 class Data {
   /// The authentication token for the user.
-  final String token;
+  final String authToken;
 
   /// The ID of the user.
   final int id;
@@ -32,7 +32,7 @@ class Data {
 
   /// Creates a new instance of the [Data] class.
   Data(
-      {required this.token,
+      {required this.authToken,
       required this.id,
       required this.firstName,
       required this.lastName,
@@ -60,7 +60,7 @@ class Data {
   ///   - `ACCOUNT_BALANCE`: A number representing the user's account balance.
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      token: json['token'],
+      authToken: json['token'],
       id: json['result'][0]['ID'],
       firstName: json['result'][0]['FIRST_NAME'],
       lastName: json['result'][0]['LAST_NAME'],

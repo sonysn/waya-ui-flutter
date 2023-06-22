@@ -5,7 +5,10 @@ import 'package:waya/constants/design_constants.dart';
 
 class PasswordSettings extends StatefulWidget {
   final int userId;
-  const PasswordSettings({Key? key, required this.userId}) : super(key: key);
+  final String authToken;
+  const PasswordSettings(
+      {Key? key, required this.userId, required this.authToken})
+      : super(key: key);
 
   @override
   State<PasswordSettings> createState() => _PasswordSettingsState();
@@ -46,7 +49,8 @@ class _PasswordSettingsState extends State<PasswordSettings> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
-                  return ChangePasswordPage(id: widget.userId);
+                  return ChangePasswordPage(
+                      id: widget.userId, authToken: widget.authToken);
                 }));
               },
               style: ElevatedButton.styleFrom(

@@ -11,11 +11,15 @@ Future paystackDeposit(
     {required int id,
     required dynamic phone,
     required String email,
-    required int amount}) async {
+    required int amount,
+    required String authBearer}) async {
   try {
     final http.Response response = await http.post(
       Uri.parse('$baseUri${ApiConstants.chargeEndpoint}'),
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": 'Bearer $authBearer'
+      },
       body: jsonEncode({
         'userID': id,
         'phone': phone,
@@ -38,11 +42,15 @@ Future paystackDeposit(
 Future transferToDrivers(
     {required double amountToBeTransferred,
     required String driverPhoneNumber,
-    required String userPhoneNumber}) async {
+    required String userPhoneNumber,
+    required String authBearer}) async {
   try {
     final http.Response response = await http.post(
         Uri.parse('$baseUri${ApiConstants.transferToDriversEndpoint}'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": 'Bearer $authBearer'
+        },
         body: jsonEncode({
           'amountToBeTransferred': amountToBeTransferred,
           'driverPhoneNumber': driverPhoneNumber,
@@ -57,11 +65,15 @@ Future transferToDrivers(
 Future transferToUsers(
     {required double amountToBeTransferred,
     required String userReceivingPhoneNumber,
-    required String userSendingPhoneNumber}) async {
+    required String userSendingPhoneNumber,
+    required String authBearer}) async {
   try {
     final http.Response response = await http.post(
         Uri.parse('$baseUri${ApiConstants.transferToUsersEndpoint}'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": 'Bearer $authBearer'
+        },
         body: jsonEncode({
           'amountToBeTransferred': amountToBeTransferred,
           'userReceivingPhoneNumber': userReceivingPhoneNumber,
@@ -73,50 +85,79 @@ Future transferToUsers(
   }
 }
 
-Future getRiderPaystackDepositTransactions({required int userID}) async {
+Future getRiderPaystackDepositTransactions(
+    {required int userID, required String authBearer}) async {
   try {
-    final http.Response response = await http.get(Uri.parse(
-        '$baseUri/$userID${ApiConstants.getRiderPaystackDepositTransactions}'));
+    final http.Response response = await http.get(
+        Uri.parse(
+            '$baseUri/$userID${ApiConstants.getRiderPaystackDepositTransactions}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer $authBearer'
+        });
     return json.decode(response.body);
   } catch (e) {
     throw Exception('An error occurred');
   }
 }
 
-Future getUserToUserTransactions({required int userID}) async {
+Future getUserToUserTransactions(
+    {required int userID, required String authBearer}) async {
   try {
     final http.Response response = await http.get(
-        Uri.parse('$baseUri/$userID${ApiConstants.getUserToUserTransactions}'));
+        Uri.parse('$baseUri/$userID${ApiConstants.getUserToUserTransactions}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer $authBearer'
+        });
     return jsonEncode(response.body);
   } catch (e) {
     throw Exception('An error occurred');
   }
 }
 
-Future getUserToDriverTransactions({required int userID}) async {
+Future getUserToDriverTransactions(
+    {required int userID, required String authBearer}) async {
   try {
-    final http.Response response = await http.get(Uri.parse(
-        '$baseUri/$userID${ApiConstants.getUserToDriverTransactions}'));
+    final http.Response response = await http.get(
+        Uri.parse(
+            '$baseUri/$userID${ApiConstants.getUserToDriverTransactions}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer $authBearer'
+        });
     return json.decode(response.body);
   } catch (e) {
     throw Exception('An error occurred');
   }
 }
 
-Future getUserToUserTransactionsForReceiver({required int userID}) async {
+Future getUserToUserTransactionsForReceiver(
+    {required int userID, required String authBearer}) async {
   try {
-    final http.Response response = await http.get(Uri.parse(
-        '$baseUri/$userID${ApiConstants.getUserToUserTransactionsForReceiver}'));
+    final http.Response response = await http.get(
+        Uri.parse(
+            '$baseUri/$userID${ApiConstants.getUserToUserTransactionsForReceiver}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer $authBearer'
+        });
     return json.decode(response.body);
   } catch (e) {
     throw Exception('An error occurred');
   }
 }
 
-Future getDepositHistory({required int userID}) async {
+Future getDepositHistory(
+    {required int userID, required String authBearer}) async {
   try {
-    final http.Response response = await http.get(Uri.parse(
-        '$baseUri/$userID${ApiConstants.getRiderPaystackDepositTransactions}'));
+    final http.Response response = await http.get(
+        Uri.parse(
+            '$baseUri/$userID${ApiConstants.getRiderPaystackDepositTransactions}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer $authBearer'
+        });
     return json.decode(response.body);
   } catch (e) {
     throw Exception('An error occurred');

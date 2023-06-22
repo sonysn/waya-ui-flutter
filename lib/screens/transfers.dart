@@ -5,8 +5,10 @@ import 'package:waya/api/payments.dart';
 
 class TransferPage extends StatefulWidget {
   final dynamic phoneNumber;
-
-  const TransferPage({Key? key, required this.phoneNumber}) : super(key: key);
+  final String authToken;
+  const TransferPage(
+      {Key? key, required this.phoneNumber, required this.authToken})
+      : super(key: key);
 
   @override
   TransferPageState createState() => TransferPageState();
@@ -51,7 +53,8 @@ class TransferPageState extends State<TransferPage> {
       final response = await transferToDrivers(
           amountToBeTransferred: amountDouble,
           driverPhoneNumber: recipient,
-          userPhoneNumber: widget.phoneNumber);
+          userPhoneNumber: widget.phoneNumber,
+          authBearer: widget.authToken);
 
       if (response.statusCode == 200) {
         var message = json.decode(response.body);
@@ -66,7 +69,8 @@ class TransferPageState extends State<TransferPage> {
       final response = await transferToUsers(
           amountToBeTransferred: amountDouble,
           userReceivingPhoneNumber: recipient,
-          userSendingPhoneNumber: widget.phoneNumber);
+          userSendingPhoneNumber: widget.phoneNumber,
+          authBearer: widget.authToken);
 
       if (response.statusCode == 200) {
         var message = json.decode(response.body);

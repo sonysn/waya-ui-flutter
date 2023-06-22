@@ -94,7 +94,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future getCurrentTripDetails() async {
-    final response = await getCurrentRide(userID: widget.data.id);
+    final response = await getCurrentRide(
+        userID: widget.data.id, authBearer: widget.data.authToken);
     //print(response);
     if (response == null) {
       setState(() {
@@ -232,12 +233,12 @@ class _HomePageState extends State<HomePage> {
                                         child: SizedBox(
                                           height: 60,
                                           width: width / 1.1,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: const [
+                                              children: [
                                                 Icon(Icons.location_on_rounded),
                                                 Text('Enter pickup point')
                                               ],
@@ -426,10 +427,10 @@ class _HomePageState extends State<HomePage> {
                                   child: SizedBox(
                                       height: 120,
                                       width: width,
-                                      child: Card(
+                                      child: const Card(
                                         color: Colors.white,
                                         elevation: 5,
-                                        shape: const RoundedRectangleBorder(
+                                        shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.vertical(
                                             top: Radius.circular(15),
                                             bottom: Radius.circular(15),
@@ -437,18 +438,18 @@ class _HomePageState extends State<HomePage> {
                                           //      side: BorderSide(color: Colors.yellow, width: 1),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: EdgeInsets.all(8.0),
                                           child: Row(
                                             children: [
-                                              const SizedBox(
+                                              SizedBox(
                                                 width: 5,
                                               ),
-                                              const CircleAvatar(
+                                              CircleAvatar(
                                                 radius: 30,
                                                 backgroundImage: AssetImage(
                                                     "assets/images/h.jpeg"),
                                               ),
-                                              const SizedBox(
+                                              SizedBox(
                                                 width: 15,
                                               ),
                                               Column(
@@ -456,7 +457,7 @@ class _HomePageState extends State<HomePage> {
                                                     MainAxisAlignment.center,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
-                                                children: const [
+                                                children: [
                                                   Text(
                                                     "Your previous ride with Stephen",
                                                     style:
@@ -483,6 +484,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         ActiveRide(
                           userID: widget.data.id,
+                          authToken: widget.data.authToken,
                         ),
                       ],
                     )

@@ -35,7 +35,8 @@ class _BookingPageState extends State<BookingPage>
   }
 
   Future<void> getRides() async {
-    final response = await getRideHistory(riderID: widget.data.id);
+    final response = await getRideHistory(
+        riderID: widget.data.id, authBearer: widget.data.authToken);
 
     // if (response.statusCode == 200) {
     //   final data = json.decode(response.body);
@@ -138,6 +139,7 @@ class _BookingPageState extends State<BookingPage>
                                 ),
                               )
                             : ListView.builder(
+                                physics: const BouncingScrollPhysics(),
                                 itemCount: ridesArray.length,
                                 itemBuilder: (context, index) {
                                   // Map<String, dynamic> rideData =
