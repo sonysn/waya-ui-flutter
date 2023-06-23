@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -13,6 +15,11 @@ import 'package:waya/colorscheme.dart';
 import 'package:waya/screens/mapspage.dart';
 // ignore: library_prefixes
 import 'package:geocoding/geocoding.dart' as locationGeocodingPackage;
+//TODO: WORK ON THESE
+import 'package:package_info_plus/package_info_plus.dart';
+// ignore: unused_import
+import 'package:local_auth/local_auth.dart';
+import 'package:crypto/crypto.dart';
 
 class HomePage extends StatefulWidget {
   final dynamic data;
@@ -122,6 +129,26 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void packageInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+    print("App details are $appName, $packageName, $version, $buildNumber");
+  }
+
+  void crypto() {
+    var key = utf8.encode('p@ssw0rd');
+    var bytes = utf8.encode("foobar");
+
+    var hmacSha256 = Hmac(sha256, key); // HMAC-SHA256
+    var digest = hmacSha256.convert(bytes);
+
+    print("HMAC digest as bytes: ${digest.bytes}");
+    print("HMAC digest as hex string: $digest");
+  }
+
   String? greeting;
   dynamic myLocationHome;
   String? addressLoc;
@@ -143,6 +170,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       greeting = getTimeString();
     });
+    packageInfo();
+    crypto();
     findLoc();
     getCurrentTripDetails();
 
