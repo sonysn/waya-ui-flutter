@@ -24,8 +24,11 @@ class _WalletPageState extends State<WalletPage> {
   Stream<String> get stream => _streamController.stream;
   List debits = [];
   List reversedDebits = [];
-  List transactions = [];
-  List reversedTransactions = [];
+  List deposits = [];
+  List reversedDeposits = [];
+  List userToDriverTransactions = [];
+  List userToUserTransactions = [];
+  List userCredits = [];
 
   Future<void> _getAccountBalance() async {
     final response = await getBalance(
@@ -40,16 +43,45 @@ class _WalletPageState extends State<WalletPage> {
     final response = await getDepositHistory(
         userID: widget.data.id, authBearer: widget.data.authToken);
     //print(response);
-    setState(() {
-      transactions.addAll(response);
-      reversedTransactions = transactions.reversed.toList();
-    });
+    if (response != "[]") {
+      setState(() {
+        deposits.addAll(response);
+        reversedDeposits = deposits.reversed.toList();
+      });
+    }
   }
 
   Future _getUserToDriverTransactions() async {
     final response = await getUserToDriverTransactions(
         userID: widget.data.id, authBearer: widget.data.authToken);
-    print(response);
+    //!print(response);
+    if (response != "[]") {
+      setState(() {
+        userToDriverTransactions.addAll(response);
+      });
+    }
+  }
+
+  Future _getUserToUserTransactions() async {
+    final response = await getUserToUserTransactions(
+        userID: widget.data.id, authBearer: widget.data.authToken);
+    //!print(response);
+    if (response != "[]") {
+      setState(() {
+        userToUserTransactions.addAll(response);
+      });
+    }
+  }
+
+  Future _getUserReceivedTransactions() async {
+    final response = await getUserToUserTransactionsForReceiver(
+        userID: widget.data.id, authBearer: widget.data.authToken);
+    //!print(response);
+    if (response != "[]") {
+      setState(() {
+        userCredits.addAll(response);
+      });
+    }
   }
 
   @override
@@ -58,13 +90,18 @@ class _WalletPageState extends State<WalletPage> {
     _getAccountBalance();
     _getDepositTransactions();
     _getUserToDriverTransactions();
+    _getUserToUserTransactions();
+    _getUserReceivedTransactions();
   }
 
   @override
   void dispose() {
     _streamController.close();
-    transactions.clear();
-    reversedTransactions.clear();
+    deposits.clear();
+    reversedDeposits.clear();
+    userToDriverTransactions.clear();
+    userToUserTransactions.clear();
+    userCredits.clear();
     super.dispose();
   }
 
@@ -156,8 +193,8 @@ class _WalletPageState extends State<WalletPage> {
                               ),
                             );
                           },
-                          child: Column(
-                            children: const [
+                          child: const Column(
+                            children: [
                               Icon(Icons.send, size: 40),
                               SizedBox(height: 10),
                               Text("Transfer", style: TextStyle(fontSize: 16)),
@@ -187,8 +224,13 @@ class _WalletPageState extends State<WalletPage> {
                                 builder: (BuildContext context) {
                                   return TransactionHistory(
                                     data: widget.data,
-                                    transactions: transactions,
+                                    deposits: deposits,
                                     debits: debits,
+                                    userToDriverTransactions:
+                                        userToDriverTransactions,
+                                    userToUserTransactions:
+                                        userToUserTransactions,
+                                    userCredits: userCredits,
                                   );
                                 },
                               ),
@@ -205,10 +247,9 @@ class _WalletPageState extends State<WalletPage> {
                   const SizedBox(
                     height: 0,
                   ),
-                  transactions.isNotEmpty
+                  deposits.isNotEmpty
                       ? ListView.separated(
-                          itemCount:
-                              transactions.length > 3 ? 3 : transactions.length,
+                          itemCount: deposits.length > 3 ? 3 : deposits.length,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           separatorBuilder: (context, index) {
@@ -218,11 +259,10 @@ class _WalletPageState extends State<WalletPage> {
                           },
                           itemBuilder: (context, index) {
                             return TransactionCard(
-                              data: widget.data,
-                              depositAmount: reversedTransactions[index]['data']
+                              depositAmount: reversedDeposits[index]['data']
                                       ['amount'] /
                                   100,
-                              depositDate: reversedTransactions[index]['data']
+                              depositDate: reversedDeposits[index]['data']
                                   ['paid_at'],
                             );
                           },

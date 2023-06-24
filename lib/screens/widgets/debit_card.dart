@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DebitCard extends StatefulWidget {
-  final dynamic data;
   final dynamic amountTransferred;
   final dynamic dateTransferred;
   const DebitCard(
       {Key? key,
-      this.data,
       required this.amountTransferred,
       required this.dateTransferred})
       : super(key: key);
@@ -19,19 +17,19 @@ class DebitCard extends StatefulWidget {
 class _DebitCardState extends State<DebitCard> {
   void formatDate(String dateString) {
     DateFormat originalFormat = DateFormat('dd-M-yyyy');
-    DateFormat targetFormat = DateFormat('dd-MM-yyyy');
+    DateFormat targetFormat = DateFormat('MMM dd, yyyy');
     DateTime date = originalFormat.parse(dateString);
     setState(() {
-      depositTransferredFormatted = targetFormat.format(date);
+      formattedDate = targetFormat.format(date);
     });
   }
 
-  String? depositTransferredFormatted;
+  String? formattedDate;
 
   @override
   void initState() {
     super.initState();
-
+    formatDate(widget.dateTransferred);
   }
 
   @override
@@ -71,7 +69,7 @@ class _DebitCardState extends State<DebitCard> {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    "Received",
+                    "Sent",
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[600],
@@ -118,7 +116,7 @@ class _DebitCardState extends State<DebitCard> {
               ),
               const SizedBox(height: 8),
               Text(
-                depositTransferredFormatted!,
+                formattedDate!,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

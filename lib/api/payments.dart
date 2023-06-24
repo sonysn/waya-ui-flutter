@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:waya/constants/api_constants.dart';
 
 //todo base uri value here
-//var baseUri = 'http://192.168.100.43:3000';
+// var baseUri = 'http://192.168.100.43:3000';
 var baseUri = 'https://waya-api.onrender.com';
 // var baseUri = 'https://789d-102-216-201-31.ngrok-free.app';
 
@@ -85,21 +85,21 @@ Future transferToUsers(
   }
 }
 
-Future getRiderPaystackDepositTransactions(
-    {required int userID, required String authBearer}) async {
-  try {
-    final http.Response response = await http.get(
-        Uri.parse(
-            '$baseUri/$userID${ApiConstants.getRiderPaystackDepositTransactions}'),
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": 'Bearer $authBearer'
-        });
-    return json.decode(response.body);
-  } catch (e) {
-    throw Exception('An error occurred');
-  }
-}
+// Future getRiderPaystackDepositTransactions(
+//     {required int userID, required String authBearer}) async {
+//   try {
+//     final http.Response response = await http.get(
+//         Uri.parse(
+//             '$baseUri/$userID${ApiConstants.getRiderPaystackDepositTransactions}'),
+//         headers: {
+//           "Content-Type": "application/json",
+//           "Authorization": 'Bearer $authBearer'
+//         });
+//     return json.decode(response.body);
+//   } catch (e) {
+//     throw Exception('An error occurred');
+//   }
+// }
 
 Future getUserToUserTransactions(
     {required int userID, required String authBearer}) async {
@@ -110,7 +110,7 @@ Future getUserToUserTransactions(
           "Content-Type": "application/json",
           "Authorization": 'Bearer $authBearer'
         });
-    return jsonEncode(response.body);
+    return json.decode(response.body);
   } catch (e) {
     throw Exception('An error occurred');
   }
