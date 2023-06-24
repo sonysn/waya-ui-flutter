@@ -8,13 +8,15 @@ class TransactionHistory extends StatefulWidget {
   final List debits;
   final List userToDriverTransactions;
   final List userToUserTransactions;
+  final List userCredits;
   const TransactionHistory(
       {Key? key,
       this.data,
       required this.deposits,
       required this.debits,
       required this.userToDriverTransactions,
-      required this.userToUserTransactions})
+      required this.userToUserTransactions,
+      required this.userCredits})
       : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class _TransactionHistoryState extends State<TransactionHistory>
   List reversedDeposits = [];
   List reversedUserToDriverTransactions = [];
   List reversedUserToUserTransactions = [];
+  List reversedUserCredits = [];
 
   @override
   void initState() {
@@ -38,6 +41,7 @@ class _TransactionHistoryState extends State<TransactionHistory>
           widget.userToDriverTransactions.reversed.toList();
       reversedUserToUserTransactions =
           widget.userToUserTransactions.reversed.toList();
+      reversedUserCredits = widget.userCredits.reversed.toList();
     });
   }
 
@@ -47,6 +51,7 @@ class _TransactionHistoryState extends State<TransactionHistory>
     reversedDeposits.clear();
     reversedUserToDriverTransactions.clear();
     reversedUserToUserTransactions.clear();
+    reversedUserCredits.clear();
     super.dispose();
   }
 
@@ -232,15 +237,30 @@ class _TransactionHistoryState extends State<TransactionHistory>
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      // TODO: Implement the UI for Money Received History tab
-                      // Replace the following placeholder widget
-                      Center(
-                        child: Text(
-                          'Money Received History',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
+                    children: [
+                      widget.userCredits.isEmpty
+                          ? const Center(
+                              child: Text(
+                              'No transactions',
+                              style: TextStyle(fontSize: 20),
+                            ))
+                          : ListView.separated(
+                              itemCount: widget.userCredits.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(
+                                  height: 10,
+                                );
+                              },
+                              itemBuilder: (context, index) {
+                                return DebitCard(
+                                  amountTransferred: reversedUserCredits[index]
+                                      ['amountTransferred'],
+                                  dateTransferred: reversedUserCredits[index]
+                                      ['datePaid'],
+                                );
+                              })
                     ],
                   ),
                 ),

@@ -132,7 +132,6 @@ Future getUserToDriverTransactions(
   }
 }
 
-//TODO ADD TO WALLET PAGE
 Future getUserToUserTransactionsForReceiver(
     {required int userID, required String authBearer}) async {
   try {

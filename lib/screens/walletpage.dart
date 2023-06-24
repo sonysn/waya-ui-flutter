@@ -28,6 +28,7 @@ class _WalletPageState extends State<WalletPage> {
   List reversedDeposits = [];
   List userToDriverTransactions = [];
   List userToUserTransactions = [];
+  List userCredits = [];
 
   Future<void> _getAccountBalance() async {
     final response = await getBalance(
@@ -72,6 +73,17 @@ class _WalletPageState extends State<WalletPage> {
     }
   }
 
+  Future _getUserReceivedTransactions() async {
+    final response = await getUserToUserTransactionsForReceiver(
+        userID: widget.data.id, authBearer: widget.data.authToken);
+    //!print(response);
+    if (response != "[]") {
+      setState(() {
+        userCredits.addAll(response);
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -79,6 +91,7 @@ class _WalletPageState extends State<WalletPage> {
     _getDepositTransactions();
     _getUserToDriverTransactions();
     _getUserToUserTransactions();
+    _getUserReceivedTransactions();
   }
 
   @override
@@ -88,6 +101,7 @@ class _WalletPageState extends State<WalletPage> {
     reversedDeposits.clear();
     userToDriverTransactions.clear();
     userToUserTransactions.clear();
+    userCredits.clear();
     super.dispose();
   }
 
@@ -216,6 +230,7 @@ class _WalletPageState extends State<WalletPage> {
                                         userToDriverTransactions,
                                     userToUserTransactions:
                                         userToUserTransactions,
+                                    userCredits: userCredits,
                                   );
                                 },
                               ),
