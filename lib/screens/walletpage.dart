@@ -27,6 +27,7 @@ class _WalletPageState extends State<WalletPage> {
   List deposits = [];
   List reversedDeposits = [];
   List userToDriverTransactions = [];
+  List userToUserTransactions = [];
 
   Future<void> _getAccountBalance() async {
     final response = await getBalance(
@@ -41,19 +42,34 @@ class _WalletPageState extends State<WalletPage> {
     final response = await getDepositHistory(
         userID: widget.data.id, authBearer: widget.data.authToken);
     //print(response);
-    setState(() {
-      deposits.addAll(response);
-      reversedDeposits = deposits.reversed.toList();
-    });
+    if (response != "[]") {
+      setState(() {
+        deposits.addAll(response);
+        reversedDeposits = deposits.reversed.toList();
+      });
+    }
   }
 
   Future _getUserToDriverTransactions() async {
     final response = await getUserToDriverTransactions(
         userID: widget.data.id, authBearer: widget.data.authToken);
     //!print(response);
-    setState(() {
-      userToDriverTransactions.addAll(response);
-    });
+    if (response != "[]") {
+      setState(() {
+        userToDriverTransactions.addAll(response);
+      });
+    }
+  }
+
+  Future _getUserToUserTransactions() async {
+    final response = await getUserToUserTransactions(
+        userID: widget.data.id, authBearer: widget.data.authToken);
+    //!print(response);
+    if (response != "[]") {
+      setState(() {
+        userToUserTransactions.addAll(response);
+      });
+    }
   }
 
   @override
@@ -62,6 +78,7 @@ class _WalletPageState extends State<WalletPage> {
     _getAccountBalance();
     _getDepositTransactions();
     _getUserToDriverTransactions();
+    _getUserToUserTransactions();
   }
 
   @override
@@ -70,6 +87,7 @@ class _WalletPageState extends State<WalletPage> {
     deposits.clear();
     reversedDeposits.clear();
     userToDriverTransactions.clear();
+    userToUserTransactions.clear();
     super.dispose();
   }
 
@@ -196,6 +214,8 @@ class _WalletPageState extends State<WalletPage> {
                                     debits: debits,
                                     userToDriverTransactions:
                                         userToDriverTransactions,
+                                    userToUserTransactions:
+                                        userToUserTransactions,
                                   );
                                 },
                               ),

@@ -7,12 +7,14 @@ class TransactionHistory extends StatefulWidget {
   final List deposits;
   final List debits;
   final List userToDriverTransactions;
+  final List userToUserTransactions;
   const TransactionHistory(
       {Key? key,
       this.data,
       required this.deposits,
       required this.debits,
-      required this.userToDriverTransactions})
+      required this.userToDriverTransactions,
+      required this.userToUserTransactions})
       : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class _TransactionHistoryState extends State<TransactionHistory>
   late TabController _tabController;
   List reversedDeposits = [];
   List reversedUserToDriverTransactions = [];
+  List reversedUserToUserTransactions = [];
 
   @override
   void initState() {
@@ -33,12 +36,17 @@ class _TransactionHistoryState extends State<TransactionHistory>
       reversedDeposits = widget.deposits.reversed.toList();
       reversedUserToDriverTransactions =
           widget.userToDriverTransactions.reversed.toList();
+      reversedUserToUserTransactions =
+          widget.userToUserTransactions.reversed.toList();
     });
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    reversedDeposits.clear();
+    reversedUserToDriverTransactions.clear();
+    reversedUserToUserTransactions.clear();
     super.dispose();
   }
 
@@ -149,7 +157,7 @@ class _TransactionHistoryState extends State<TransactionHistory>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      widget.debits.isEmpty
+                      widget.userToUserTransactions.isEmpty
                           ? const Center(
                               child: Text(
                                 'No transactions',
@@ -157,7 +165,7 @@ class _TransactionHistoryState extends State<TransactionHistory>
                               ),
                             )
                           : ListView.separated(
-                              itemCount: widget.debits.length,
+                              itemCount: widget.userToUserTransactions.length,
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               separatorBuilder: (context, index) {
@@ -167,10 +175,12 @@ class _TransactionHistoryState extends State<TransactionHistory>
                               },
                               itemBuilder: (context, index) {
                                 return DebitCard(
-                                  amountTransferred: reversedDeposits[index]
-                                      ['amountTransferred'],
-                                  dateTransferred: reversedDeposits[index]
-                                      ['datePaid'],
+                                  amountTransferred:
+                                      reversedUserToUserTransactions[index]
+                                          ['amountTransferred'],
+                                  dateTransferred:
+                                      reversedUserToUserTransactions[index]
+                                          ['datePaid'],
                                 );
                               },
                             ),
