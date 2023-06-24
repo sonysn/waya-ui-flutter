@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionCard extends StatefulWidget {
-  final dynamic data;
   final double depositAmount;
   final dynamic depositDate;
   const TransactionCard(
-      {Key? key, this.data, required this.depositAmount, this.depositDate})
+      {Key? key, required this.depositAmount, this.depositDate})
       : super(key: key);
 
   @override

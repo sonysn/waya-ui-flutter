@@ -4,10 +4,15 @@ import 'package:waya/screens/widgets/debit_card.dart';
 
 class TransactionHistory extends StatefulWidget {
   final dynamic data;
-  final List transactions;
+  final List deposits;
   final List debits;
+  final List userToDriverTransactions;
   const TransactionHistory(
-      {Key? key, this.data, required this.transactions, required this.debits})
+      {Key? key,
+      this.data,
+      required this.deposits,
+      required this.debits,
+      required this.userToDriverTransactions})
       : super(key: key);
 
   @override
@@ -17,14 +22,17 @@ class TransactionHistory extends StatefulWidget {
 class _TransactionHistoryState extends State<TransactionHistory>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  List reversedTransactions = [];
+  List reversedDeposits = [];
+  List reversedUserToDriverTransactions = [];
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
     setState(() {
-      reversedTransactions = widget.transactions.reversed.toList();
+      reversedDeposits = widget.deposits.reversed.toList();
+      reversedUserToDriverTransactions =
+          widget.userToDriverTransactions.reversed.toList();
     });
   }
 
@@ -73,10 +81,10 @@ class _TransactionHistoryState extends State<TransactionHistory>
           bottom: TabBar(
             controller: _tabController,
             tabs: const [
-              Tab(text: 'Deposit History'),
-              Tab(text: 'User Transfer History'),
-              Tab(text: 'Driver Transfer History'),
-              Tab(text: 'Money Received History'),
+              Tab(text: 'Deposits'),
+              Tab(text: 'Rider Transfers'),
+              Tab(text: 'Driver Transfers'),
+              Tab(text: 'Credits'),
             ],
           ),
         ),
@@ -89,7 +97,7 @@ class _TransactionHistoryState extends State<TransactionHistory>
                 const Duration(seconds: 2)); // Simulating a delay
 
             setState(() {
-              reversedTransactions = widget.transactions.reversed.toList();
+              reversedDeposits = widget.deposits.reversed.toList();
             });
           },
           color: Colors.orange, // Set the refresh indicator color to orange
@@ -103,7 +111,7 @@ class _TransactionHistoryState extends State<TransactionHistory>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      widget.transactions.isEmpty
+                      widget.deposits.isEmpty
                           ? const Center(
                               child: Text(
                                 'No transactions',
@@ -111,7 +119,7 @@ class _TransactionHistoryState extends State<TransactionHistory>
                               ),
                             )
                           : ListView.separated(
-                              itemCount: widget.transactions.length,
+                              itemCount: widget.deposits.length,
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               separatorBuilder: (context, index) {
@@ -121,12 +129,11 @@ class _TransactionHistoryState extends State<TransactionHistory>
                               },
                               itemBuilder: (context, index) {
                                 return TransactionCard(
-                                  data: widget.data,
-                                  depositAmount: reversedTransactions[index]
-                                          ['data']['amount'] /
+                                  depositAmount: reversedDeposits[index]['data']
+                                          ['amount'] /
                                       100,
-                                  depositDate: reversedTransactions[index]
-                                      ['data']['paid_at'],
+                                  depositDate: reversedDeposits[index]['data']
+                                      ['paid_at'],
                                 );
                               },
                             ),
@@ -160,9 +167,9 @@ class _TransactionHistoryState extends State<TransactionHistory>
                               },
                               itemBuilder: (context, index) {
                                 return DebitCard(
-                                  amountTransferred: reversedTransactions[index]
+                                  amountTransferred: reversedDeposits[index]
                                       ['amountTransferred'],
-                                  dateTransferred: reversedTransactions[index]
+                                  dateTransferred: reversedDeposits[index]
                                       ['datePaid'],
                                 );
                               },
@@ -178,15 +185,32 @@ class _TransactionHistoryState extends State<TransactionHistory>
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      // TODO: Implement the UI for Driver Transfer History tab
-                      // Replace the following placeholder widget
-                      Center(
-                        child: Text(
-                          'Driver Transfer History',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
+                    children: [
+                      widget.userToDriverTransactions.isEmpty
+                          ? const Center(
+                              child: Text(
+                              'No transactions',
+                              style: TextStyle(fontSize: 20),
+                            ))
+                          : ListView.separated(
+                              itemCount: widget.userToDriverTransactions.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(
+                                  height: 10,
+                                );
+                              },
+                              itemBuilder: (context, index) {
+                                return DebitCard(
+                                  amountTransferred:
+                                      reversedUserToDriverTransactions[index]
+                                          ['amountTransferred'],
+                                  dateTransferred:
+                                      reversedUserToDriverTransactions[index]
+                                          ['datePaid'],
+                                );
+                              })
                     ],
                   ),
                 ),
