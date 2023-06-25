@@ -33,23 +33,23 @@ class _MessagesNotificationPageState extends State<MessagesNotificationPage> {
                     color: Colors.blueGrey,
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
-                child: SizedBox(
+                child: const SizedBox(
                   height: 70,
                   width: 350,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.info,
                         size: 25.0,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 10,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             'Message Head',
                             style: TextStyle(fontSize: 25),

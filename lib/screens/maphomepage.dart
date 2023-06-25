@@ -367,8 +367,8 @@ class _BottomDialogState extends State<BottomDialog> {
     return SizedBox(
       height: mHeight * 0.5,
       width: mWidth,
-      child: Column(
-        children: const [
+      child: const Column(
+        children: [
           LinearProgressIndicator(),
           Text('Searching for a driver')
         ],

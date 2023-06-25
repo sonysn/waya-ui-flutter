@@ -161,6 +161,7 @@ class TripSearchPageState extends State<TripSearchPage> {
                               height: 24.0,
                               child: SvgPicture.asset(
                                 'assets/icons/location.svg',
+                                // ignore: deprecated_member_use
                                 color: Colors.black, // Set icon color to black
                               ),
                             ),
@@ -195,6 +196,7 @@ class TripSearchPageState extends State<TripSearchPage> {
                               height: 24.0,
                               child: SvgPicture.asset(
                                 'assets/icons/location.svg',
+                                // ignore: deprecated_member_use
                                 color: Colors.black, // Set icon color to black
                               ),
                             ),
@@ -230,6 +232,7 @@ class TripSearchPageState extends State<TripSearchPage> {
                               height: 20.0, // Adjust the height of the icon
                               child: SvgPicture.asset(
                                 'assets/icons/share.svg',
+                                // ignore: deprecated_member_use
                                 color: Colors.black, // Set icon color to black
                               ),
                             ),
@@ -262,6 +265,7 @@ class TripSearchPageState extends State<TripSearchPage> {
                           height: 24.0,
                           child: SvgPicture.asset(
                             'assets/icons/location.svg',
+                            // ignore: deprecated_member_use
                             color: Colors.black, // Set icon color to black
                           ),
                         ),

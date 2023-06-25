@@ -253,8 +253,8 @@ class _MapsPageState extends State<MapsPage> {
                             width: 2.0,
                           ),
                         ),
-                        child: Row(
-                          children: const [
+                        child: const Row(
+                          children: [
                             Padding(
                               padding: EdgeInsets.only(left: 8.0),
                               child: Icon(
