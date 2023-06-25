@@ -268,7 +268,7 @@ class _MapsPageState extends State<MapsPage> {
                                 style: TextStyle(fontSize: 16.0),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Enter location',
+                                  hintText: '',
                                   hintStyle: TextStyle(color: Colors.grey),
                                 ),
                               ),
