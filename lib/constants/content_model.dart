@@ -12,18 +12,15 @@ class OnboardingContent {
 
 List<OnboardingContent> contents = [
   OnboardingContent(
-    title: 'Qunot',
+    title: "Welcome to QuNot!",
     image: 'assets/images/onboard1.jpg',
-    description: "Welcome to Waya, the smart transportation app that simplifies your travel experience. With Waya, you can enjoy convenient and reliable rides at your fingertips, making commuting a breeze.",
-  ),
+    description:  "Commute made easier! QuNot connects you with drivers heading in the same direction, making your daily journey convenient and cost-effective. Experience hassle-free commuting today!"),
   OnboardingContent(
-    title: 'What we do',
+    title: "Effortless Rides to Your Destination",
     image: 'assets/images/image1.jpg',
-    description: "Discover the world of Waya, where we connect you to a wide range of transportation options. From taxis and rideshares to bikes and scooters, we have it all. Say goodbye to waiting and hello to efficient journeys with Waya.",
-  ),
+    description: "Book a ride effortlessly and get matched with drivers traveling in your direction. Save time and money on your daily commute. Enjoy a comfortable and reliable ride to your workplace with QuNot."),
   OnboardingContent(
-    title: 'How we work',
+    title: "Seamless and Secure Experience",
     image: 'assets/images/img.png',
-    description: "Experience the innovative approach of Waya. Our advanced technology seamlessly matches you with nearby drivers, ensuring quick and hassle-free rides. Join the Waya community and revolutionize the way you move around.",
-  ),
+    description: "Experience a seamless ride booking process with QuNot. Our platform ensures secure transactions and provides real-time tracking of your trip. Sit back, relax, and reach your destination conveniently."),
 ];

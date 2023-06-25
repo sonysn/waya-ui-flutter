@@ -120,26 +120,37 @@ class _BookingPageState extends State<BookingPage>
                     child: TabBarView(
                       children: [
                         ridesArray.isEmpty
-                            ? SingleChildScrollView(
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset("assets/images/cp.png"),
-                                      const SizedBox(height: 20),
-                                      const Text(
-                                        'You have no Completed Bookings',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            : ListView.builder(
-                                physics: const BouncingScrollPhysics(),
+
+
+                            ? LayoutBuilder(
+                    builder: (BuildContext context, BoxConstraints constraints) {
+                  return SingleChildScrollView(
+                  child: Center(
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FractionallySizedBox(
+                      widthFactor: 0.9,
+                      child: Image.asset("assets/images/cp.png"),
+                    ),
+                  const SizedBox(height: 20),
+                  Text(
+                  'You have no Completed Bookings',
+                  style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.05,
+                  fontWeight: FontWeight.bold,
+                  ),
+                  ),
+                  ],
+                  ),
+                  ),
+                  );
+                  },
+                  )
+
+
+                  : ListView.builder(
+          physics: const BouncingScrollPhysics(),
                                 itemCount: ridesArray.length,
                                 itemBuilder: (context, index) {
                                   // Map<String, dynamic> rideData =

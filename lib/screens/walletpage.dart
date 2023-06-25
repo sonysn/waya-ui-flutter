@@ -213,7 +213,11 @@ class _WalletPageState extends State<WalletPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Text("Recent Transactions"),
+                      const Text("Recent Transactions",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),),
                       Flexible(
                         child: Container(
                           alignment: Alignment.centerRight,
@@ -237,7 +241,8 @@ class _WalletPageState extends State<WalletPage> {
                             ),
                             child: const Text(
                               "View all",
-                              style: TextStyle(color: customPurple),
+                              style: TextStyle(color: customPurple,fontSize: 20,
+                                fontWeight: FontWeight.bold,),
                             ),
                           ),
                         ),

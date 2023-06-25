@@ -43,20 +43,20 @@ class _NotificationSettingsState extends State<NotificationSettings> {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20))
             ),
-            child: SizedBox(
+            child: const SizedBox(
               height: 70,
               width: 350,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 10,
                   ),
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'Home',
                         style: TextStyle(fontSize: 20),
@@ -93,27 +93,27 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(20))
             ),
-            child: SizedBox(
+            child: const SizedBox(
               height: 70,
               width: 350,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.location_on_outlined,
                     size: 25.0,
                     color: Colors.yellow,
                   ),
 
 
-                  const SizedBox(
+                  SizedBox(
                     width: 10,
                   ),
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'Office',
                         style: TextStyle(fontSize: 20),
@@ -131,7 +131,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
 
 
 
-                    children: const [
+                    children: [
                       Icon(
                         Icons.edit_location_sharp,
                         size: 25.0,
