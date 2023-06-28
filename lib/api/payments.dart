@@ -4,8 +4,9 @@ import 'package:waya/constants/api_constants.dart';
 
 //todo base uri value here
 // var baseUri = 'http://192.168.100.43:3000';
-var baseUri = 'https://waya-api.onrender.com';
+// var baseUri = 'https://waya-api.onrender.com';
 // var baseUri = 'https://789d-102-216-201-31.ngrok-free.app';
+var baseUri = ApiConstants.baseUrl;
 
 Future paystackDeposit(
     {required int id,
