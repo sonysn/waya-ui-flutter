@@ -57,6 +57,9 @@ dependencies:
   geocoding: ^2.0.0
   pin_code_fields: ^7.4.0
   flutter_polyline_points: ^1.0.0
+  package_info_plus: ^4.0.2
+  local_auth: ^2.1.6
+  crypto: ^3.0.3
   loading_animation_widget:
   flutter_svg:
 
