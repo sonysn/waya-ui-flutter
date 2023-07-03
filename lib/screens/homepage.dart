@@ -22,6 +22,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+//TODO: ValueNotifier<bool> fetchHomepageNotifier = ValueNotifier<bool>(false);
+
 class _HomePageState extends State<HomePage> {
   String? profileImageUrl;
 
@@ -122,6 +124,13 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  // TODO: void _fetchDataValueNotifier() {
+  //   if (fetchHomepageNotifier.value) {
+  //     getCurrentTripDetails();
+  //     fetchHomepageNotifier.value = false;
+  //   }
+  // }
+
   String? greeting;
   dynamic myLocationHome;
   String? addressLoc;
@@ -140,6 +149,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    //TODO: fetchHomepageNotifier.addListener(_fetchDataValueNotifier);
     setState(() {
       greeting = getTimeString();
     });
@@ -173,11 +183,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   // //disposing of mylocationhome variable
-  // @override
-  // void dispose() {
-  //   myLocationHome.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    //TODO: fetchHomepageNotifier.removeListener(_fetchDataValueNotifier);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -43,7 +43,7 @@ class _ActiveRideState extends State<ActiveRide> {
         fare = response['fare'];
         driverID = response['driverID'];
         dbObjectID = response['objectId'];
-      }); //TODO: YOUR ERROR CAUSING LINE OF CODE_refreshItems(); // Refresh the page
+      });
     }
   }
 

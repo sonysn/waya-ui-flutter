@@ -4,6 +4,7 @@ import 'package:socket_io_client/socket_io_client.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:waya/constants/api_constants.dart';
 import 'package:waya/colorscheme.dart';
+import 'package:waya/functions/navigation_logic.dart';
 
 class ConnectToServer {
   // configure socket transport
@@ -163,15 +164,8 @@ class AcceptedRideCard extends StatelessWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigator.pushReplacement(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) {
-                    //       return BottomNavPage();
-                    //     },
-                    //   ),
-                    // );
-                    //TODO: IMPLEMENT THE HOMEPAGE NAVIGATION
+                    //IMPLEMENT THE HOMEPAGE NAVIGATION
+                    navigateBackThreePages(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: customPurple,

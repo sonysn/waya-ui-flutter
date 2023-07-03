@@ -654,16 +654,8 @@ class CheckPrice extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () async {
                       buttonPress();
-                      //TODO stephen WATCH THIS1
                       Navigator.pop(context);
                       showCustomDialog(context);
-                      //    await Future.delayed(Duration(seconds: 5));
-
-                      //   dismissCustomDialog(context);
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (BuildContext context) => ()),
-                      //    );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: customPurple,
@@ -719,6 +711,11 @@ class CustomDialogWidget extends StatefulWidget {
 }
 
 class _CustomDialogWidgetState extends State<CustomDialogWidget> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -776,9 +773,5 @@ void showCustomDialog(BuildContext context) {
     builder: (context) {
       return const CustomDialogWidget();
     },
-  ).then((_) {
-    // Do something when the dialog is dismissed
-    // For example, close the current screen
-    Navigator.of(context).pop();
-  });
+  );
 }
