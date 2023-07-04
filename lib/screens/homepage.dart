@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-//TODO: ValueNotifier<bool> fetchHomepageNotifier = ValueNotifier<bool>(false);
+ValueNotifier<bool> fetchHomepageNotifier = ValueNotifier<bool>(false);
 
 class _HomePageState extends State<HomePage> {
   String? profileImageUrl;
@@ -124,12 +124,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  // TODO: void _fetchDataValueNotifier() {
-  //   if (fetchHomepageNotifier.value) {
-  //     getCurrentTripDetails();
-  //     fetchHomepageNotifier.value = false;
-  //   }
-  // }
+  void _fetchDataValueNotifier() {
+    if (fetchHomepageNotifier.value) {
+      refreshHomePage();
+      fetchHomepageNotifier.value = false;
+    }
+  }
 
   String? greeting;
   dynamic myLocationHome;
@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    //TODO: fetchHomepageNotifier.addListener(_fetchDataValueNotifier);
+    fetchHomepageNotifier.addListener(_fetchDataValueNotifier);
     setState(() {
       greeting = getTimeString();
     });
@@ -174,18 +174,22 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Future _refreshItems() async {
-    setState(() {
-      greeting = getTimeString();
-    });
+  int refreshCount = 0;
+
+  Future<void> refreshHomePage() async {
+    // Simulate an asynchronous operation
     findLoc();
-    getCurrentTripDetails();
+    await Future.delayed(const Duration(seconds: 1));
+
+    setState(() {
+      refreshCount++;
+    });
   }
 
   // //disposing of mylocationhome variable
   @override
   void dispose() {
-    //TODO: fetchHomepageNotifier.removeListener(_fetchDataValueNotifier);
+    fetchHomepageNotifier.removeListener(_fetchDataValueNotifier);
     super.dispose();
   }
 
@@ -201,7 +205,7 @@ class _HomePageState extends State<HomePage> {
         return RefreshIndicator(
           color: Colors.orangeAccent,
           backgroundColor: customPurple,
-          onRefresh: _refreshItems,
+          onRefresh: refreshHomePage,
           child: Scaffold(
               body: addressLoc != null
                   ? ListView(
@@ -468,6 +472,8 @@ class _HomePageState extends State<HomePage> {
                         ActiveRide(
                           userID: widget.data.id,
                           authToken: widget.data.authToken,
+                          refreshCount: refreshCount,
+                          onRefreshHomePage: refreshHomePage,
                         ),
                       ],
                     )
