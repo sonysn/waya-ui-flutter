@@ -173,14 +173,17 @@ class _HomePageState extends State<HomePage> {
           dataBody: '${message.notification?.body}');
     });
   }
+  int refreshCount = 0;
 
-  Future _refreshItems() async {
+  Future<void> refreshHomePage() async {
+    // Simulate an asynchronous operation
+    await Future.delayed(const Duration(seconds: 1));
+
     setState(() {
-      greeting = getTimeString();
+      refreshCount++;
     });
-    findLoc();
-    getCurrentTripDetails();
   }
+
 
   // //disposing of mylocationhome variable
   @override
@@ -201,7 +204,7 @@ class _HomePageState extends State<HomePage> {
         return RefreshIndicator(
           color: Colors.orangeAccent,
           backgroundColor: customPurple,
-          onRefresh: _refreshItems,
+          onRefresh: refreshHomePage,
           child: Scaffold(
               body: addressLoc != null
                   ? ListView(
@@ -468,6 +471,8 @@ class _HomePageState extends State<HomePage> {
                         ActiveRide(
                           userID: widget.data.id,
                           authToken: widget.data.authToken,
+                          refreshCount: refreshCount,
+                          onRefreshHomePage: refreshHomePage,
                         ),
                       ],
                     )

@@ -6,7 +6,10 @@ import 'package:waya/colorscheme.dart';
 class ActiveRide extends StatefulWidget {
   final dynamic userID;
   final dynamic authToken;
-  const ActiveRide({Key? key, required this.userID, required this.authToken})
+  final int refreshCount;
+  final VoidCallback? onRefreshHomePage;
+
+  const ActiveRide({Key? key, required this.userID, required this.authToken, required this.refreshCount,  this.onRefreshHomePage,})
       : super(key: key);
 
   @override
@@ -66,6 +69,12 @@ class _ActiveRideState extends State<ActiveRide> {
         driverID = null;
       });
     }
+  }  @override
+  void didUpdateWidget(covariant ActiveRide oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.refreshCount != oldWidget.refreshCount) {
+      getCurrentTripDetails();
+    }
   }
 
   void dialog() {
@@ -85,7 +94,7 @@ class _ActiveRideState extends State<ActiveRide> {
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
                 // Perform the cancel trip action
-                riderCancelTrip();
+                riderCancelTrip(); widget.onRefreshHomePage?.call();
               },
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -103,7 +112,7 @@ class _ActiveRideState extends State<ActiveRide> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
-                _refreshItems();
+
               },
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -145,10 +154,6 @@ class _ActiveRideState extends State<ActiveRide> {
     rating = 0;
   }
 
-  Future _refreshItems() async {
-    findLoc();
-    getCurrentTripDetails();
-  }
 
   void findLoc() {
     // Implement the logic for finding location here
