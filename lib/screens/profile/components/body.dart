@@ -37,7 +37,11 @@ class _BodyState extends State<Body> {
           const SizedBox(
             height: 15,
           ),
-          const ProfilePic(),
+          ProfilePic(
+            userID: widget.data.id,
+            userToken: widget.data.authToken,
+            profilePhotoLink: widget.data.profilePhoto,
+          ),
           const SizedBox(height: 10),
           ProfileMenu(
               text: "Edit Profile",

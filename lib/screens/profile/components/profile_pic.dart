@@ -3,9 +3,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:waya/api/auth.dart';
+import 'package:waya/functions/miscellaneous.dart';
 
 class ProfilePic extends StatefulWidget {
-  const ProfilePic({Key? key}) : super(key: key);
+  final int userID;
+  final String userToken;
+  final String profilePhotoLink;
+  const ProfilePic(
+      {Key? key,
+      required this.userID,
+      required this.userToken,
+      required this.profilePhotoLink})
+      : super(key: key);
 
   @override
   State<ProfilePic> createState() => _ProfilePicState();
@@ -15,12 +25,62 @@ class _ProfilePicState extends State<ProfilePic> {
   void pickProfilePic() async {
     final ImagePicker picker = ImagePicker();
     // Pick an image
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    final image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      confirmPickedImage();
+    }
     setState(() {
       imageFile = image;
-      file = File(imageFile.path);
+      file = File(imageFile!.path);
     });
     print(file);
+  }
+
+  Future<void> confirmPickedImage() async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Save Image?"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    imageFile = null;
+                  });
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  savePickedImage();
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Save',
+                  style: TextStyle(color: Colors.black),
+                ),
+              )
+            ],
+          );
+        });
+  }
+
+  Future savePickedImage() async {
+    final response = await uploadProfileImage(
+        userID: widget.userID,
+        profilePhoto: file!,
+        userToken: widget.userToken);
+    // ignore: unrelated_type_equality_checks
+    if (response == 200) {
+      showSnackBar(message: 'Image saved successfully!', context: context);
+    } else {
+      showSnackBar(message: 'Error saving image!', context: context);
+    }
   }
 
   dynamic imageFile;
@@ -35,12 +95,19 @@ class _ProfilePicState extends State<ProfilePic> {
         fit: StackFit.expand,
         clipBehavior: Clip.none,
         children: [
-          imageFile == null
-              ? const CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/h.jpeg"))
-              : CircleAvatar(
-                  backgroundImage: FileImage(file!),
-                ),
+          if (widget.profilePhotoLink != '[NULL]' &&
+              widget.profilePhotoLink != 'null' &&
+              widget.profilePhotoLink != '')
+            CircleAvatar(
+              backgroundImage: NetworkImage(widget.profilePhotoLink),
+            )
+          else
+            imageFile == null
+                ? const CircleAvatar(
+                    backgroundImage: AssetImage("assets/images/h.jpeg"))
+                : CircleAvatar(
+                    backgroundImage: FileImage(file!),
+                  ),
           Positioned(
             right: -16,
             bottom: 0,

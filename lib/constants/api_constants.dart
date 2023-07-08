@@ -26,4 +26,5 @@ class ApiConstants {
   static String changePasswordEndpoint = '/userchangepassword';
   static String verifyForgotPasswordChangeEndpoint =
       '/verifyForgotPasswordChange';
+  static String uploadProfileImageEndpoint = '/userUploadProfilePicture';
 }

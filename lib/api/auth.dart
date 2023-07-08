@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:waya/constants/api_constants.dart';
@@ -126,4 +127,44 @@ Future resetPasswordFromForgotPassword(
     }),
   );
   return response;
+}
+
+/// Uploads a profile image for a user.
+///
+/// Parameters:
+///   - userID: The ID of the user.
+///   - profilePhoto: The file containing the profile photo.
+///   - userToken: The token used for authorization.
+///
+/// Returns:
+///   A Future that completes with the HTTP status code of the upload request.
+Future<int> uploadProfileImage({
+  required int userID,
+  required File profilePhoto,
+  required String userToken,
+}) async {
+  final formData = http.MultipartRequest(
+    'POST',
+    Uri.parse('$baseUri${ApiConstants.uploadProfileImageEndpoint}'),
+  );
+
+  formData.headers['Authorization'] = 'Bearer $userToken';
+  formData.fields['userID'] = userID.toString();
+
+  var profilePhotoFile = await http.MultipartFile.fromPath(
+    'profilePhoto',
+    profilePhoto.path,
+  );
+
+  formData.files.add(profilePhotoFile);
+
+  http.StreamedResponse response;
+  try {
+    response = await formData.send();
+  } catch (e) {
+    print('Error sending form data: $e');
+    rethrow;
+  }
+
+  return response.statusCode;
 }
