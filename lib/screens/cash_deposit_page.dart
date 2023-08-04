@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:waya/api/payments.dart';
-import 'package:waya/screens/paystack_deposit_webview.dart';
+import 'package:qunot/api/payments.dart';
+import 'package:qunot/screens/paystack_deposit_webview.dart';
 
 class CashDepositPage extends StatefulWidget {
   final int id;

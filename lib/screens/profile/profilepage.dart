@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:waya/screens/profile/components/body.dart';
+import 'package:qunot/screens/profile/components/body.dart';
 
 class ProfilePage extends StatefulWidget {
   final dynamic data;

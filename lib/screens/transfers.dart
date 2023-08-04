@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:waya/api/payments.dart';
+import 'package:qunot/api/payments.dart';
 
 class TransferPage extends StatefulWidget {
   final dynamic phoneNumber;

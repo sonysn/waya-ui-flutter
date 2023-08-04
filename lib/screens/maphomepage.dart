@@ -6,11 +6,11 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import 'package:waya/functions/map_logic.dart';
-import 'package:waya/constants/mapbox_constant.dart';
+import 'package:qunot/functions/map_logic.dart';
+import 'package:qunot/constants/mapbox_constant.dart';
 import 'package:geocode/geocode.dart';
 
-import 'package:waya/screens/homepage.dart';
+import 'package:qunot/screens/homepage.dart';
 
 dynamic driverFound;
 
@@ -368,10 +368,7 @@ class _BottomDialogState extends State<BottomDialog> {
       height: mHeight * 0.5,
       width: mWidth,
       child: const Column(
-        children: [
-          LinearProgressIndicator(),
-          Text('Searching for a driver')
-        ],
+        children: [LinearProgressIndicator(), Text('Searching for a driver')],
       ),
     );
   }

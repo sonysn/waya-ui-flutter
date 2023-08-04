@@ -2,15 +2,15 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:time_greeting/time_greeting.dart';
-import 'package:waya/functions/miscellaneous.dart';
-import 'package:waya/functions/notification_service.dart';
-import 'package:waya/screens/widgets/activeride.dart';
+import 'package:qunot/functions/miscellaneous.dart';
+import 'package:qunot/functions/notification_service.dart';
+import 'package:qunot/screens/widgets/activeride.dart';
 import 'package:location/location.dart';
 // ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
-import 'package:waya/api/actions.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/mapspage.dart';
+import 'package:qunot/api/actions.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/screens/mapspage.dart';
 // ignore: library_prefixes
 import 'package:geocoding/geocoding.dart' as locationGeocodingPackage;
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 // ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
-import 'package:waya/constants/api_constants.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/functions/navigation_logic.dart';
+import 'package:qunot/constants/api_constants.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/functions/navigation_logic.dart';
 
 class ConnectToServer {
   // configure socket transport

@@ -1,6 +1,6 @@
 // !Navigate back three pages
 import 'package:flutter/material.dart';
-import 'package:waya/screens/homepage.dart';
+import 'package:qunot/screens/homepage.dart';
 
 void navigateBackThreePages(BuildContext context) async {
   // Get the current Navigator state

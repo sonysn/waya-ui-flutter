@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waya/screens/editprofile.dart';
-import 'package:waya/screens/helpcenter.dart';
-import 'package:waya/screens/passwordsettings.dart';
-import 'package:waya/screens/privacypolicy.dart';
-import 'package:waya/api/auth.dart';
-import 'package:waya/screens/welcomepage.dart';
-import 'package:waya/screens/profile/components/profile_menu.dart';
-import 'package:waya/screens/profile/components/profile_pic.dart';
+import 'package:qunot/screens/editprofile.dart';
+import 'package:qunot/screens/helpcenter.dart';
+import 'package:qunot/screens/passwordsettings.dart';
+import 'package:qunot/screens/privacypolicy.dart';
+import 'package:qunot/api/auth.dart';
+import 'package:qunot/screens/welcomepage.dart';
+import 'package:qunot/screens/profile/components/profile_menu.dart';
+import 'package:qunot/screens/profile/components/profile_pic.dart';
 
 class Body extends StatefulWidget {
   final dynamic data;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:waya/api/auth.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/loginpage.dart';
+import 'package:qunot/api/auth.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/screens/loginpage.dart';
 
 class NewPasswordPage extends StatefulWidget {
   final String code;

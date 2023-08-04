@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:waya/constants/mapbox_constant.dart';
-import 'package:waya/colorscheme.dart';
+import 'package:qunot/constants/mapbox_constant.dart';
+import 'package:qunot/colorscheme.dart';
 import 'package:mapbox_search/mapbox_search.dart';
 
 class SearchLocationPage extends StatefulWidget {

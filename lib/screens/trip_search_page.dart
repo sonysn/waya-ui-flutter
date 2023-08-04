@@ -6,7 +6,7 @@ import 'package:geocoding/geocoding.dart' as locationGeocodingPackage;
 import 'package:location/location.dart';
 import 'dart:convert';
 
-import 'package:waya/colorscheme.dart';
+import 'package:qunot/colorscheme.dart';
 
 class TripSearchPage extends StatefulWidget {
   const TripSearchPage({Key? key}) : super(key: key);

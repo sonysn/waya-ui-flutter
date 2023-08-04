@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:waya/api/actions.dart';
-import 'package:waya/api/payments.dart';
-import 'package:waya/screens/cash_deposit_page.dart';
-import 'package:waya/screens/transfers.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/widgets/transaction_card.dart';
-import 'package:waya/screens/transactionhistory.dart';
-import 'package:waya/screens/widgets/my_card.dart';
+import 'package:qunot/api/actions.dart';
+import 'package:qunot/api/payments.dart';
+import 'package:qunot/screens/cash_deposit_page.dart';
+import 'package:qunot/screens/transfers.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/screens/widgets/transaction_card.dart';
+import 'package:qunot/screens/transactionhistory.dart';
+import 'package:qunot/screens/widgets/my_card.dart';
 
 class WalletPage extends StatefulWidget {
   final dynamic data;
@@ -213,11 +213,13 @@ class _WalletPageState extends State<WalletPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Text("Recent Transactions",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),),
+                      const Text(
+                        "Recent Transactions",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       Flexible(
                         child: Container(
                           alignment: Alignment.centerRight,
@@ -241,8 +243,11 @@ class _WalletPageState extends State<WalletPage> {
                             ),
                             child: const Text(
                               "View all",
-                              style: TextStyle(color: customPurple,fontSize: 20,
-                                fontWeight: FontWeight.bold,),
+                              style: TextStyle(
+                                color: customPurple,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),

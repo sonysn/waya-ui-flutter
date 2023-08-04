@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:waya/colorscheme.dart';
+import 'package:qunot/colorscheme.dart';
+
 class PrivacyPolicyPage extends StatelessWidget {
-  const PrivacyPolicyPage({Key? key,}) : super(key: key);
+  const PrivacyPolicyPage({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Privacy Policy'),
-          backgroundColor: customPurple,
+        backgroundColor: customPurple,
       ),
       body: const SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -125,7 +128,8 @@ class PrivacyPolicySection extends StatelessWidget {
   final String title;
   final List<String> content;
 
-  const PrivacyPolicySection({super.key, 
+  const PrivacyPolicySection({
+    super.key,
     required this.title,
     required this.content,
   });
@@ -153,5 +157,3 @@ class PrivacyPolicySection extends StatelessWidget {
     );
   }
 }
-
-

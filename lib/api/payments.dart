@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:waya/constants/api_constants.dart';
+import 'package:qunot/constants/api_constants.dart';
 
 //todo base uri value here
 // var baseUri = 'http://192.168.100.43:3000';

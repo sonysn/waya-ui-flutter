@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:waya/functions/notification_service.dart';
-import 'package:waya/screens/splash_screen.dart';
-import 'package:waya/screens/homepage.dart';
+import 'package:qunot/functions/notification_service.dart';
+import 'package:qunot/screens/splash_screen.dart';
+import 'package:qunot/screens/homepage.dart';
 import 'package:flutter/services.dart';
-import 'package:waya/screens/walletpage.dart';
-import 'package:waya/firebase_options.dart';
+import 'package:qunot/screens/walletpage.dart';
+import 'package:qunot/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'package:waya/screens/widgets/my_card.dart';
-import 'package:waya/constants/design_constants.dart';
+import 'package:qunot/screens/widgets/my_card.dart';
+import 'package:qunot/constants/design_constants.dart';
 
-  class CardScreen extends StatefulWidget {
+class CardScreen extends StatefulWidget {
   const CardScreen({Key? key}) : super(key: key);
 
   @override
   State<CardScreen> createState() => _CardScreenState();
-  }
+}
 
-  class _CardScreenState extends State<CardScreen> {
-
-
+class _CardScreenState extends State<CardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,9 +54,7 @@ import 'package:waya/constants/design_constants.dart';
                   );
                 },
                 itemBuilder: (context, index) {
-                  return const MyCard(
-
-                  );
+                  return const MyCard();
                 }),
           ),
           const CircleAvatar(

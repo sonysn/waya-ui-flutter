@@ -3,11 +3,11 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:waya/api/actions.dart';
-import 'package:waya/screens/trip_search_page.dart';
+import 'package:qunot/api/actions.dart';
+import 'package:qunot/screens/trip_search_page.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/sockets/sockets.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/sockets/sockets.dart';
 
 class MapsPage extends StatefulWidget {
   final dynamic data;

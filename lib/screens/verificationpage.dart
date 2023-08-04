@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/signup.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/screens/signup.dart';
 
 class VerificationPage extends StatefulWidget {
   final dynamic phoneNumber;
 
-  const VerificationPage({Key? key, required this.phoneNumber}) : super(key: key);
+  const VerificationPage({Key? key, required this.phoneNumber})
+      : super(key: key);
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
@@ -24,7 +25,8 @@ class _VerificationPageState extends State<VerificationPage> {
     setState(() {
       String currentText = verificationCode.text;
       if (currentText.isNotEmpty) {
-        verificationCode.text = currentText.substring(0, currentText.length - 1);
+        verificationCode.text =
+            currentText.substring(0, currentText.length - 1);
       }
     });
   }
@@ -62,7 +64,6 @@ class _VerificationPageState extends State<VerificationPage> {
                 size: 50,
                 color: customPurple,
               ),
-
               const SizedBox(height: 10),
               const Text(
                 'Verification',
@@ -79,7 +80,8 @@ class _VerificationPageState extends State<VerificationPage> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -118,7 +120,8 @@ class _VerificationPageState extends State<VerificationPage> {
                     color: Colors.grey,
                   ),
                 ),
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 controller: verificationCode,
               ),
               const SizedBox(height: 30),
@@ -146,38 +149,39 @@ class _VerificationPageState extends State<VerificationPage> {
                 ),
               ),
               const SizedBox(height: 15),
-        SizedBox(
-          width: 250,
-          height: 45,
-          child:ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return SignUp(phoneNumber: widget.phoneNumber);
-                      },
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: customPurple,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                        bottom: Radius.circular(20),
+              SizedBox(
+                width: 250,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return SignUp(phoneNumber: widget.phoneNumber);
+                        },
                       ),
-                    )),
-                child: const Text(
-                  'Verify',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: customPurple,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
+                          bottom: Radius.circular(20),
+                        ),
+                      )),
+                  child: const Text(
+                    'Verify',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
-        ),  const SizedBox(height: 15),
+              const SizedBox(height: 15),
             ],
           ),
         ),
@@ -212,7 +216,6 @@ class _VerificationPageState extends State<VerificationPage> {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-
           borderRadius: BorderRadius.circular(10),
         ),
         child: const Icon(

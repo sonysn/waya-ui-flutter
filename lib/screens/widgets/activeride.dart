@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:waya/api/actions.dart';
-import 'package:waya/colorscheme.dart';
+import 'package:qunot/api/actions.dart';
+import 'package:qunot/colorscheme.dart';
 
 class ActiveRide extends StatefulWidget {
   final dynamic userID;
@@ -9,8 +9,13 @@ class ActiveRide extends StatefulWidget {
   final int refreshCount;
   final VoidCallback? onRefreshHomePage;
 
-  const ActiveRide({Key? key, required this.userID, required this.authToken, required this.refreshCount,  this.onRefreshHomePage,})
-      : super(key: key);
+  const ActiveRide({
+    Key? key,
+    required this.userID,
+    required this.authToken,
+    required this.refreshCount,
+    this.onRefreshHomePage,
+  }) : super(key: key);
 
   @override
   State<ActiveRide> createState() => _ActiveRideState();
@@ -69,7 +74,9 @@ class _ActiveRideState extends State<ActiveRide> {
         driverID = null;
       });
     }
-  }  @override
+  }
+
+  @override
   void didUpdateWidget(covariant ActiveRide oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.refreshCount != oldWidget.refreshCount) {
@@ -94,7 +101,8 @@ class _ActiveRideState extends State<ActiveRide> {
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
                 // Perform the cancel trip action
-                riderCancelTrip(); widget.onRefreshHomePage?.call();
+                riderCancelTrip();
+                widget.onRefreshHomePage?.call();
               },
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -112,7 +120,6 @@ class _ActiveRideState extends State<ActiveRide> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
-
               },
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -153,7 +160,6 @@ class _ActiveRideState extends State<ActiveRide> {
     getCurrentTripDetails();
     rating = 0;
   }
-
 
   void findLoc() {
     // Implement the logic for finding location here

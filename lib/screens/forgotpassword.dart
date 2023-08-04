@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:waya/api/auth.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/resetpasswordcode.dart';
+import 'package:qunot/api/auth.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/screens/resetpasswordcode.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);

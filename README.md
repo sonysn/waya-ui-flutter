@@ -1,4 +1,4 @@
-# waya
+# QuNot
 
 A new Flutter project.
 

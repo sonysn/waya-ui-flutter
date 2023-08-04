@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:waya/screens/passwordchange.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/constants/design_constants.dart';
+import 'package:qunot/screens/passwordchange.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/constants/design_constants.dart';
 
 class PasswordSettings extends StatefulWidget {
   final int userId;

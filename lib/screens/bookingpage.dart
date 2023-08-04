@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:waya/api/actions.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/models/requested_rides.dart';
+import 'package:qunot/api/actions.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/models/requested_rides.dart';
 
 class BookingPage extends StatefulWidget {
   final dynamic data;
@@ -120,37 +120,39 @@ class _BookingPageState extends State<BookingPage>
                     child: TabBarView(
                       children: [
                         ridesArray.isEmpty
-
-
                             ? LayoutBuilder(
-                    builder: (BuildContext context, BoxConstraints constraints) {
-                  return SingleChildScrollView(
-                  child: Center(
-                  child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FractionallySizedBox(
-                      widthFactor: 0.9,
-                      child: Image.asset("assets/images/cp.png"),
-                    ),
-                  const SizedBox(height: 20),
-                  Text(
-                  'You have no Completed Bookings',
-                  style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.05,
-                  fontWeight: FontWeight.bold,
-                  ),
-                  ),
-                  ],
-                  ),
-                  ),
-                  );
-                  },
-                  )
-
-
-                  : ListView.builder(
-          physics: const BouncingScrollPhysics(),
+                                builder: (BuildContext context,
+                                    BoxConstraints constraints) {
+                                  return SingleChildScrollView(
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          FractionallySizedBox(
+                                            widthFactor: 0.9,
+                                            child: Image.asset(
+                                                "assets/images/cp.png"),
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Text(
+                                            'You have no Completed Bookings',
+                                            style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.05,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
+                            : ListView.builder(
+                                physics: const BouncingScrollPhysics(),
                                 itemCount: ridesArray.length,
                                 itemBuilder: (context, index) {
                                   // Map<String, dynamic> rideData =

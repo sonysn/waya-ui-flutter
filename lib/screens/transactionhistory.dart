@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:waya/screens/widgets/transaction_card.dart';
-import 'package:waya/screens/widgets/debit_card.dart';
+import 'package:qunot/screens/widgets/transaction_card.dart';
+import 'package:qunot/screens/widgets/debit_card.dart';
 
 class TransactionHistory extends StatefulWidget {
   final dynamic data;

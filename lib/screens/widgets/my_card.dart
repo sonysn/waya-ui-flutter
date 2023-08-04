@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:waya/colorscheme.dart';
+import 'package:qunot/colorscheme.dart';
 
 class MyCard extends StatefulWidget {
   final dynamic data;

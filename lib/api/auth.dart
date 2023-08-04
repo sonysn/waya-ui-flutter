@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:waya/constants/api_constants.dart';
-import 'package:waya/models/auth.dart';
+import 'package:qunot/constants/api_constants.dart';
+import 'package:qunot/models/auth.dart';
 
 //todo base uri value here
 // var baseUri = 'http://192.168.100.43:3000';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/newpassword.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/screens/newpassword.dart';
 
 class ResetPasswordCodePage extends StatefulWidget {
   final String emailorPhone;
@@ -210,7 +210,8 @@ class VerificationCodeBox extends StatelessWidget {
   final ValueChanged<String> onDigitEntered;
   final VoidCallback onDeletePressed;
 
-  const VerificationCodeBox({super.key, 
+  const VerificationCodeBox({
+    super.key,
     required this.value,
     required this.onDigitEntered,
     required this.onDeletePressed,

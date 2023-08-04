@@ -1,184 +1,163 @@
 import 'package:flutter/material.dart';
-import 'package:waya/screens/profile/profilepage.dart';
+import 'package:qunot/screens/profile/profilepage.dart';
 
 class NotificationSettings extends StatefulWidget {
   const NotificationSettings({Key? key}) : super(key: key);
 
   @override
-  State<NotificationSettings> createState() =>
-      _NotificationSettingsState();
+  State<NotificationSettings> createState() => _NotificationSettingsState();
 }
 
 class _NotificationSettingsState extends State<NotificationSettings> {
   bool isSelected = false;
 
-  void toggleSwitch(bool value){
+  void toggleSwitch(bool value) {
     setState(() {
-      isSelected=!isSelected;
+      isSelected = !isSelected;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-            children: [
-              Container(
-      padding: const EdgeInsets.only(top: 40),
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const Text(
-          "Address",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        FittedBox(
-          fit: BoxFit.fitWidth,
-          child: Container(
-            height: 70,
-            //width: 350,
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(20))
+      children: [
+        Container(
+          padding: const EdgeInsets.only(top: 40),
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Text(
+              "Address",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
-            child: const SizedBox(
-              height: 70,
-              width: 350,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 10,
-                  ),
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+            const SizedBox(
+              height: 20,
+            ),
+            FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Container(
+                height: 70,
+                //width: 350,
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: const SizedBox(
+                  height: 70,
+                  width: 350,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        'Home',
-                        style: TextStyle(fontSize: 20),
+                      SizedBox(
+                        width: 10,
                       ),
-                      Text(
-                        '30, ilesanya street ifako lagos',
-                        style: TextStyle(fontSize: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Home',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Text(
+                            '30, ilesanya street ifako lagos',
+                            style: TextStyle(fontSize: 10),
+                          ),
+                        ],
                       ),
-
                     ],
                   ),
-
-
-
-
-
-                ],
+                ),
               ),
             ),
-
-          ),
-
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        FittedBox(
-          fit: BoxFit.fitWidth,
-          child: Container(
-            height: 70,
-            //width: 350,
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20))
+            const SizedBox(
+              height: 20,
             ),
-            child: const SizedBox(
-              height: 70,
-              width: 350,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.location_on_outlined,
-                    size: 25.0,
-                    color: Colors.yellow,
-                  ),
-
-
-                  SizedBox(
-                    width: 10,
-                  ),
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Office',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Text(
-                        '30, ilesanya street ifako lagos',
-                        style: TextStyle(fontSize: 10),
-                      ),
-
-                    ],
-                  ),
-
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-
-
-
+            FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Container(
+                height: 70,
+                //width: 350,
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: const SizedBox(
+                  height: 70,
+                  width: 350,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(
-                        Icons.edit_location_sharp,
+                        Icons.location_on_outlined,
                         size: 25.0,
                         color: Colors.yellow,
-
                       ),
-
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Office',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Text(
+                            '30, ilesanya street ifako lagos',
+                            style: TextStyle(fontSize: 10),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.edit_location_sharp,
+                            size: 25.0,
+                            color: Colors.yellow,
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
             ),
-
-          ),
-
-        ),
-
-        const SizedBox(
-          height: 350,
-        ),
-        Center(
-          child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
+            const SizedBox(
+              height: 350,
+            ),
+            Center(
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
                       return const ProfilePage();
                     }));
-              },
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                      bottom: Radius.circular(20),
-                    ),
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.yellow,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
+                          bottom: Radius.circular(20),
+                        ),
+                      )),
+                  child: const SizedBox(
+                    width: 260,
+                    height: 50,
+                    child: Center(
+                        child: Text(
+                      'Update',
+                      style: TextStyle(color: Colors.black),
+                    )),
                   )),
-              child: const SizedBox(
-                width: 260,
-                height: 50,
-                child: Center(child: Text('Update', style: TextStyle(
-
-                    color: Colors.black),)
-                ),
-              )),
-        ),
-      ]),
-    )
-    ],));
+            ),
+          ]),
+        )
+      ],
+    ));
   }
 }

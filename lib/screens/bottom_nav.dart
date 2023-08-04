@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:waya/colorscheme.dart';
-import 'package:waya/screens/homepage.dart';
-import 'package:waya/screens/walletpage.dart';
-import 'package:waya/screens/profile/profilepage.dart';
-import 'package:waya/screens/bookingpage.dart';
+import 'package:qunot/colorscheme.dart';
+import 'package:qunot/screens/homepage.dart';
+import 'package:qunot/screens/walletpage.dart';
+import 'package:qunot/screens/profile/profilepage.dart';
+import 'package:qunot/screens/bookingpage.dart';
 
 class BottomNavPage extends StatefulWidget {
   final dynamic data;

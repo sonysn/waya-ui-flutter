@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waya/screens/bottom_nav.dart';
-import 'package:waya/screens/forgotpassword.dart';
-import 'package:waya/api/auth.dart';
-import 'package:waya/colorscheme.dart';
+import 'package:qunot/screens/bottom_nav.dart';
+import 'package:qunot/screens/forgotpassword.dart';
+import 'package:qunot/api/auth.dart';
+import 'package:qunot/colorscheme.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -156,7 +156,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(color: Colors.orangeAccent),
+                            borderSide:
+                                const BorderSide(color: Colors.orangeAccent),
                           ),
                           filled: true,
                           fillColor: Colors.white,
@@ -181,7 +182,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(color: Colors.orangeAccent),
+                            borderSide:
+                                const BorderSide(color: Colors.orangeAccent),
                           ),
                           filled: true,
                           fillColor: Colors.white,

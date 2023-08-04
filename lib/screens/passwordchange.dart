@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:waya/api/auth.dart';
-import 'package:waya/colorscheme.dart';
+import 'package:qunot/api/auth.dart';
+import 'package:qunot/colorscheme.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   final int id;
